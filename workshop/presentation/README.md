@@ -41,7 +41,8 @@ Referenz für Menschen und Agenten.
 | `settings.yaml` | feste Einstellungen und die Fragen, die im Chat gestellt werden | Rolle 4 |
 | `build_deck.py` | baut die `.pptx`, füllt Zahlen, prüft Vollständigkeit, NDA und Review | Rolle 4 |
 | `results/presentation/answers.yaml` | gespeicherte Antworten dieses Workspaces (nicht committet) | automatisch |
-| `results/presentation/praesentation-<datum>.pptx` | die erzeugte Präsentation (nicht committet) | automatisch |
+| `results/presentation/praesentation-<datum>.pptx` | die erzeugte Präsentation, Arbeitsstand (nicht committet) | automatisch |
+| `workshop/presentation/praesentation.pptx` | **geteilter Stand** der Präsentation im Repo, zum direkten Öffnen | Rolle 4, nach Prüfung |
 
 ## User Guide
 
@@ -180,6 +181,25 @@ So kommen sie in die Präsentation:
 
 Englische Übergaben: `{{md|…|en}}` setzt Zahlen ins deutsche Format.
 Anmerkungen in Klammern in einer Tabellenzelle ("(lowest)") werden weggelassen.
+
+### Geteilter Stand im Repo
+
+`workshop/presentation/praesentation.pptx` ist ein Schnappschuss für alle, die
+nur öffnen wollen. Er wird nie von Hand bearbeitet, sondern so erneuert:
+
+```bash
+$B --out workshop/presentation/praesentation.pptx
+```
+
+Vor jedem Commit dieser Datei:
+
+1. Der Builder meldet keine offenen NDA-Treffer.
+2. Jedes eingebettete Bild stammt aus einer öffentlichen Abbildung der Pipeline
+   oder einer Rolle (Skill `presentation`, Prüfschritt „Bilder“); Bilder aus
+   GADM- oder WDPA-Karten kommen nicht in den geteilten Stand.
+3. Der Hook `workshop/hooks/check_confidential.py staged` ist sauber.
+
+Die Lizenzangabe steht in `praesentation.pptx.license` (REUSE).
 
 ### Von Entwurf zur fertigen Präsentation
 

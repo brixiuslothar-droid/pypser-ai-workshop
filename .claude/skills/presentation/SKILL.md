@@ -85,6 +85,15 @@ B="uv run --no-project --with python-pptx --with pandas --with pyyaml --with mat
    or the newest review report has blockers. Remind them that role 5 reviews
    the draft first (E8).
 
+## Sharing the deck in the repo
+
+Only when the person asks: build with
+`$B --out workshop/presentation/praesentation.pptx`, then before committing
+(1) no open NDA scan hit, (2) every embedded image matches a public figure of
+the pipeline or a role by checksum (none of unknown origin, none based on GADM
+or WDPA), (3) `python workshop/hooks/check_confidential.py staged` is clean.
+Commit the `.pptx` together with its `.license` file. Never edit it by hand.
+
 ## Rules
 
 - **Decisions with effect.** The deck shows every decision with the step in
