@@ -1,0 +1,24 @@
+# SPDX-FileCopyrightText: Contributors to PyPSA-Eur <https://github.com/pypsa/pypsa-eur>
+#
+# SPDX-License-Identifier: CC0-1.0
+#
+# Role 3 sensitivity: like config.role3-reference.yaml, but the 2050 CO2 price
+# is 750 EUR/t, about the IPCC AR6 WGIII median for 1.5 C pathways in 2050
+# (630 USD2015/t, Ch. 3, C1 category, converted ~0.9 EUR/USD and ~30 % inflation
+# 2015-2025). Only 2050 differs, so reuse the reference run's 2025-2045 results:
+#   mkdir -p results/de10-nb9-co2-750/networks resources/de10-nb9-co2-750
+#   cp -a resources/de10-nb9-ref/. resources/de10-nb9-co2-750/
+#   cp results/de10-nb9-ref/networks/solved_20{25,30,35,40,45}.nc results/de10-nb9-co2-750/networks/
+#   rm resources/de10-nb9-co2-750/networks/composed_2050.nc
+#   pixi run snakemake results/de10-nb9-co2-750/networks/solved_2050.nc -c4 \
+#     --configfile config/config.workshop.yaml config/config.role3-neighbours.yaml \
+#       config/config.role3-reference.yaml config/config.role3-co2-750.yaml \
+#     --allowed-rules process_cost_data compose_network solve_network
+
+run:
+  name: de10-nb9-co2-750
+
+costs:
+  emission_prices:
+    co2:
+      2050: 750

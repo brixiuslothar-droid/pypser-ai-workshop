@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: Contributors to PyPSA-Eur <https://github.com/pypsa/pypsa-eur>
+#
+# SPDX-License-Identifier: CC0-1.0
+#
+# Role 3: the CABLE run of decisions.md (E4) on the E3 reference. Only the run
+# name; the cable itself is config.role3-cable.yaml. Load it LAST: that file
+# sets run.name de10-nb9-cable (the exploratory cable on the NTC-only
+# reference), and two definitions must not share a name.
+#
+#   pixi run snakemake results/de10-cable/networks/solved_2050.nc -c4 \
+#     --configfile config/config.workshop.yaml config/config.role3-neighbours.yaml \
+#       config/config.role3-reference.yaml config/config.role3-e3.yaml \
+#       config/config.role3-cable.yaml config/config.role3-e3-cable.yaml \
+#     --allowed-rules process_cost_data compose_network solve_network \
+#       build_brazil_import_profile
+#
+# Start from the REF inputs and its 2025 result only (no cable before 2035, but
+# the import limit changes the solved 2030 network, so 2030 is solved again):
+#   mkdir -p resources/de10-cable results/de10-cable/networks
+#   cp -a resources/de10-ref/. resources/de10-cable/
+#   rm -f resources/de10-cable/networks/composed_20{35,40,45,50}.nc
+#   cp results/de10-ref/networks/solved_2025.nc results/de10-cable/networks/
+
+run:
+  name: de10-cable
+
+brazil_import:
+  # The default landing_de (Wilhelmshaven) is 0.5 km nearer to the Weser-Ems
+  # node (DE0 5) than to Schleswig-Holstein (DE0 9), so a small change of
+  # clustering could move the cable. Conneforde, the other site in role 1's
+  # first row, is 28 km nearer to DE0 5 and gives the same node today. Position
+  # approximate (from memory, not sourced); it only has to lie well inside the
+  # DE0 5 region. The cable length is measured to the bus, so it does not change.
+  # Role 1 decides the site; change this line, not the code.
+  landing_de: [8.0, 53.4]
