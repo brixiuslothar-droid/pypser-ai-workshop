@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: Contributors to PyPSA-Eur <https://github.com/pypsa/pypsa-eur>
+#
+# SPDX-License-Identifier: CC0-1.0
+#
+# Role 3: Germany with its nine direct neighbours, one node each, so that trade
+# replaces the island assumption of the baseline. Germany keeps 10 nodes.
+# Use after the workshop config:
+#   pixi run snakemake results/de10-nb9/networks/solved_2030.nc -c4 \
+#     --configfile config/config.workshop.yaml config/config.role3-neighbours.yaml
+#
+# Everything else (demand growth, CO2 price and cap, lifetimes, grid volume
+# limit, renewable classes, 2-hour steps) is unchanged from the baseline and
+# now applies to all ten countries.
+
+run:
+  name: de10-nb9
+
+countries: [DE, AT, BE, CH, CZ, DK, FR, LU, NL, PL]
+
+clustering:
+  # 20 nodes: DE 10 (as in the baseline), DK 2 (east/west), the other eight
+  # neighbours 1 each. Checked with distribute_n_clusters_to_countries: DE 0.5
+  # gives DE 7 / FR 3; 0.6 gives exactly the split above.
+  focus_weights:
+    DE: 0.6
+  cluster_network:
+    n_clusters: 20
+  temporal:
+    # 4-hour steps instead of the baseline's 2 hours: with ten countries the
+    # problem is about twice the baseline's size. At 2 hours the 2025 solve and
+    # at 3 hours the 2030 solve (3.8 M rows) were killed at the 10 GB workspace
+    # limit. 4 hours halves the problem against 2 hours.
+    averaging: 4h
+
+solving:
+  options:
+    # 2025 is dispatch-only with today's fleet; western Denmark (DK1) is then
+    # ~0.3 GW short in a few winter hours (tested with a 3-month run), which
+    # makes the problem infeasible. Allow load shedding on AC buses at the
+    # PyPSA-Eur default value of lost load so the run stays feasible; check
+    # shed energy in the results (it should be ~0).
+    load_shedding:
+      enable: true
+      all_carriers: false
+      carriers:
+        AC: 100000
+

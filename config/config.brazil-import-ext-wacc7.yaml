@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: Contributors to PyPSA-Eur <https://github.com/pypsa/pypsa-eur>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# Sensitivity to de10-br-ext: WACC 7 % real for Brazilian generation and the
+# cable (decisions E4 "WACC7"). Layer it after config.brazil-import-ext.yaml.
+#
+#   pixi run snakemake results/de10-br-ext-wacc7/networks/solved_2050.nc -c4 \
+#     --configfile config/config.workshop.yaml config/config.brazil-import-ext.yaml \
+#       config/config.brazil-import-ext-wacc7.yaml \
+#     --allowed-rules process_cost_data build_brazil_import_profile compose_network solve_network
+
+run:
+  name: de10-br-ext-wacc7
+
+brazil_import:
+  discount_rate:
+    generation: 0.07
+    cable: 0.07

@@ -1,0 +1,5 @@
+| Site                           | For Arguments | Contra Arguments |
+| :----------------------------- | :-------: | ---: |
+| Wilhelmshaven / Conneforde     | Deep-water port and a strong 380 kV node. It's already an energy hub (LNG and hydrogen terminals, offshore wind). It's the westernmost of the German hubs, so the route out toward the Channel and Atlantic is shortest. | Imported power lands in the north-west, which is already congested toward the load centres in the south and west. |
+| Brunsbüttel / Büttel / Wilster | It's the start of SuedLink and close to NordLink, so it has strong HVDC corridors south. It also has a lot of wind and industrial load nearby. | It's the farthest from the Channel. The route out of the Elbe estuary is longer and passes through busy shipping lanes. |
+| Emden / Borssum                | It's closest to the Channel route. It already has HVDC landings and is near NorNed at Eemshaven in the Netherlands. | The surrounding grid is more crowded with offshore wind connections, and there are fewer deep-water options. |

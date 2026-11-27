@@ -1359,6 +1359,45 @@ clustering:
     segmentation: false
     representative: false
 
+# Workshop: imports from a dedicated Brazilian export site over an HVDC cable.
+# Brazil is one bus with an import generator whose hourly price follows the
+# wind and solar capacity factor at the landing region (no Brazilian system).
+# Code: scripts/build_brazil_import_profile.py, scripts/add_brazil_import.py
+brazil_import:
+  enable: false
+  cutout: data-brazil/weather/brazil-2013-era5.nc
+  region:                     # box of the export site, land cells only (lon/lat, EPSG:4326)
+    x: [-39.5, -38.0]         # default: around the port of Pecem, Ceara
+    y: [-4.5, -3.0]
+  best_share: 1.0             # share of the region's land cells used, best annual wind CF first
+  mix:                        # capacity shares of the export site
+    onwind: 0.7
+    solar: 0.3
+  capex_factor:               # Brazilian investment relative to the cost table, for the import price;
+    onwind: 1.0               #   sensitivity: IRENA 2023, Brazil vs global average,
+    solar: 1.0                #   onwind 1079/1154 = 0.93, utility PV 727/758 = 0.96 (USD/kW)
+  turbine: Vestas_V112_3MW    # same as renewable.onwind
+  panel: CSi                  # same as renewable.solar
+  landing_br: [-38.80, -3.53] # Pecem (lon, lat)
+  landing_de: [8.13, 53.53]   # Wilhelmshaven; the cable connects to the nearest German AC bus
+  length_km:                  # empty: great circle x length_factor
+  length_factor: 1.25         # as lines.length_factor; role 1 replaces this with a route
+  p_nom: 2000                 # MW at the Brazilian end
+  build_year: 2035            # first horizon with the cable
+  extendable: false           # false: CBA of a given cable; true: model sizes it (p_nom = minimum)
+  p_nom_max: 10000
+  cable_cost: HVDC submarine          # cost-table entries, EUR/MW/km and EUR/MW
+  converter_cost: HVDC inverter pair
+  cost_factor: 1.0            # sensitivity on cable and converter investment
+  discount_rate:              # real; empty: the cost table's rate (7%)
+    generation: 0.10          # Brazilian generation, workshop/decisions.md E2
+    cable: 0.10               # cable and converters, E2
+  price:                      # import price_t = p_max - (p_max - p_min) * CF_t, EUR/MWh
+    p_min:                    # empty: derived so the mean price equals the LCOE of the mix
+    p_max:                    #   from the cost table of the horizon (as for European renewables)
+    spread: 1.0               # if derived: p_max - p_min = spread x LCOE
+    adder: 0.0                # EUR/MWh on top, e.g. margin or Brazilian grid fee
+
 # docs in https://pypsa-eur.readthedocs.io/en/latest/configuration.html#adjustments
 adjustments:
   electricity: false

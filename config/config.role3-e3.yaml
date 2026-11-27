@@ -1,0 +1,41 @@
+# SPDX-FileCopyrightText: Contributors to PyPSA-Eur <https://github.com/pypsa/pypsa-eur>
+#
+# SPDX-License-Identifier: CC0-1.0
+#
+# Role 3: the REF run of decisions.md (E3, E4): the neighbours reference
+# (config.role3-reference.yaml, NTC limits) plus
+#   - an annual net-import limit for Germany (role3.net_import_limit), and
+#   - the soft CO2 cap in 2050, as in 2045 (co2_budget.upper.2050: 0.05),
+#     on top of the 2,600 EUR/t price the reference already sets.
+# Own layer so that de10-nb9-ref keeps the definition it was solved with.
+#
+#   pixi run snakemake results/de10-ref/networks/solved_2050.nc -c4 \
+#     --configfile config/config.workshop.yaml config/config.role3-neighbours.yaml \
+#       config/config.role3-reference.yaml config/config.role3-e3.yaml \
+#     --allowed-rules process_cost_data compose_network solve_network
+#
+# Reuse the reference's inputs (the composed 2025-2045 networks are identical,
+# the limit is added at solve time; 2050 differs by the cap, so compose it again):
+#   mkdir -p resources/de10-ref results/de10-ref/networks
+#   cp -a resources/de10-nb9-ref/. resources/de10-ref/
+#   rm -f resources/de10-ref/networks/composed_2050.nc
+# Do not copy solved networks: the limit changes every year from 2030.
+# Changes under `role3:` are not tracked by Snakemake (new run name = no
+# results yet, so every year is solved); with an existing run add
+# --forcerun solve_network.
+#
+# Source of the 25 TWh: see workshop/role3/integration-status.md (E3 / O2).
+
+run:
+  name: de10-ref
+
+role3:
+  net_import_limit:
+    enable: true
+    country: DE
+    twh: 25          # E3: "about today's level" (DE 2024); counts AC lines and DC links to
+                     # the nine neighbours, not the Brazil cable
+
+co2_budget:
+  upper:
+    2050: 0.05       # E3: as in 2045
