@@ -672,7 +672,7 @@ def main():
                        "ausstehend" if problems else ("Layout" if problems_layout else "ok"),
                        txt.count("TODO"), "; ".join(dict.fromkeys(problems + problems_layout))))
 
-    out = a.out or OUT / f"praesentation-{date.today().isoformat()}.pptx"
+    out = (a.out or OUT / f"praesentation-{date.today().isoformat()}.pptx").resolve()
     hits = nda_scan(texts)
     rep_name, n_block = blockers()
 
