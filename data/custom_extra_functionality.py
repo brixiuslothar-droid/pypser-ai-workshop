@@ -67,3 +67,11 @@ def custom_extra_functionality(n, snapshots, snakemake):
         m._solver_dir = solver_dir
 
     # Your own constraints go here, e.g. m.add_constraints(...).
+
+    # Role 3: trade limits for the run with neighbours (config block `role3:`,
+    # see data/role3_constraints.py). Does nothing without that block.
+    role3 = (snakemake.config.get("role3") if snakemake is not None else None) or {}
+    if role3:
+        from role3_constraints import add_role3_constraints
+
+        add_role3_constraints(n, role3, snakemake.wildcards.get("horizon"))
