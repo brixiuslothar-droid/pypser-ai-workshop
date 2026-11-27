@@ -23,6 +23,16 @@ bus nearest to ``landing_de``. Its cost is ``cable_cost`` per MW and km plus
 so that ``add_brownfield`` does not copy them; they are added afresh in every
 horizon from ``build_year`` on.
 
+With ``generation: investment`` (role 3) the price-based import generator is
+replaced by one extendable generator per technology in ``mix`` (e.g.
+``BR0 Brazil onwind``) with the hourly capacity factor of the export site as
+``p_max_pu``; the model optimises their capacity together with the cable.
+Investment comes from the horizon's cost table (``COST_TECH``), scaled by
+``capex_factor`` and annualised at ``discount_rate.generation``; capacity built
+in an earlier horizon is kept as a lower bound. The profile is the CSV of
+``build_brazil_import_profile.py`` or, if set, ``profile_file`` (hourly, one
+column per technology in ``mix``, values 0-1), e.g. delivered by role 2.
+
 Called from ``compose_network.py`` after the brownfield step.
 """
 
@@ -124,6 +134,55 @@ def import_price(cf_mix: pd.Series, weights: pd.Series, lcoe: float, cfg: dict):
     return price.clip(lower=0.0), float(p_min), float(p_max)
 
 
+def add_brazil_generation(
+    n: pypsa.Network,
+    cf: pd.DataFrame,
+    cfg: dict,
+    costs: pd.DataFrame,
+    rate: float | None,
+    nyears: float,
+    horizon: int,
+    n_previous: pypsa.Network | None = None,
+) -> None:
+    """Extendable wind/solar generators at the Brazilian bus (generation: investment)."""
+    factor = cfg.get("capex_factor") or {}
+    p_max = cfg.get("generation_p_nom_max") or {}
+    for tech in cfg["mix"]:
+        if tech not in cf.columns:
+            raise ValueError(f"brazil_import: profile has no column '{tech}'")
+        name = f"{BUS} Brazil {tech}"
+        carrier = f"Brazil {tech}"
+        if carrier not in n.carriers.index:
+            n.add("Carrier", carrier, co2_emissions=0.0, nice_name=carrier, color=COLOR)
+        cost_tech = COST_TECH.get(tech, tech)
+        capital_cost = (
+            factor.get(tech, 1.0) * annualised(costs, cost_tech, rate) * nyears
+        )
+        p_min = 0.0
+        if n_previous is not None and name in n_previous.generators.index:
+            p_min = float(n_previous.generators.at[name, "p_nom_opt"])
+        n.add(
+            "Generator",
+            name,
+            bus=BUS,
+            carrier=carrier,
+            p_nom=p_min,
+            p_nom_min=p_min,
+            p_nom_max=float(p_max.get(tech, np.inf)),
+            p_nom_extendable=True,
+            p_max_pu=cf[tech].clip(0.0, 1.0),
+            capital_cost=capital_cost,
+            marginal_cost=float(costs.at[cost_tech, "marginal_cost"]),
+            lifetime=np.inf,
+            build_year=horizon,
+        )
+        logger.info(
+            f"Brazil {tech}: capital cost {capital_cost:,.0f} EUR/MW per period, "
+            f"mean CF {np.average(cf[tech], weights=n.snapshot_weightings.generators):.3f}, "
+            f"existing {p_min:,.0f} MW"
+        )
+
+
 def add_brazil_import(
     n: pypsa.Network,
     profile_path: str,
@@ -164,10 +223,9 @@ def add_brazil_import(
         + annualised(costs, cfg["converter_cost"], rates.get("cable"))
     )
 
-    lcoe = mix_lcoe(
-        costs, hourly, cfg["mix"], cfg.get("capex_factor"), rates.get("generation")
-    )
-    price, p_min, p_max = import_price(cf["mix"], weights, lcoe, cfg)
+    mode = cfg.get("generation", "import")
+    if mode not in ("import", "investment"):
+        raise ValueError("brazil_import.generation must be 'import' or 'investment'")
 
     p_nom = float(cfg["p_nom"])
     extendable = bool(cfg["extendable"])
@@ -180,16 +238,25 @@ def add_brazil_import(
             n.add("Carrier", carrier, co2_emissions=0.0, nice_name=nice, color=COLOR)
 
     n.add("Bus", BUS, carrier="AC", x=lon_br, y=lat_br, country="BR")
-    n.add(
-        "Generator",
-        GEN,
-        bus=BUS,
-        carrier="Brazil import",
-        p_nom=float(cfg["p_nom_max"]) if extendable else p_nom,
-        marginal_cost=price,
-        lifetime=np.inf,
-        build_year=horizon,
-    )
+
+    if mode == "import":
+        lcoe = mix_lcoe(
+            costs, hourly, cfg["mix"], cfg.get("capex_factor"), rates.get("generation")
+        )
+        price, p_min, p_max = import_price(cf["mix"], weights, lcoe, cfg)
+        n.add(
+            "Generator",
+            GEN,
+            bus=BUS,
+            carrier="Brazil import",
+            p_nom=float(cfg["p_nom_max"]) if extendable else p_nom,
+            marginal_cost=price,
+            lifetime=np.inf,
+            build_year=horizon,
+        )
+    else:
+        lcoe = p_min = p_max = float("nan")
+        add_brazil_generation(n, cf, cfg, costs, rates.get("generation"), nyears, horizon, n_previous)
     n.add(
         "Link",
         LINK,

@@ -176,7 +176,10 @@ def get_compose_inputs(w):
             raise ValueError(f"Invalid foresight type: {foresight}")
 
     if cfg["brazil_import"]["enable"]:
-        inputs["brazil_import_profile"] = resources("brazil_import_profile.csv")
+        # role 2 can hand over its own site profile (hourly CSV, one column per tech)
+        inputs["brazil_import_profile"] = cfg["brazil_import"].get(
+            "profile_file"
+        ) or resources("brazil_import_profile.csv")
 
     # imported by compose_network.py; listed so code changes trigger reruns
     inputs["code_dependencies"] = code_dependencies(
