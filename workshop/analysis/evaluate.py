@@ -48,6 +48,8 @@ VRE = ("solar", "onwind", "offwind", "ror")
 CABLE_TAG = "brazil hvdc"          # carrier of the cable link (role 1/2: "Brazil HVDC")
 PRICE_SPIKE = 1000.0               # EUR/MWh: a price above counts as a spike
 CAP_FLAG = 1000.0                  # EUR/t: a cap shadow price above is flagged as cap-driven
+NET_IMPORT_LIMIT = 25.0           # TWh/a, E3 (role3.net_import_limit)
+SHED = "load"                     # carrier of load-shedding generators (solving.options.load_shedding)
 
 # --------------------------------------------------------------------------- config
 
@@ -122,6 +124,8 @@ def actor(row) -> str:
     """Who carries the costs and revenues of a component (E6)."""
     if row.cable:
         return "Kabelbetreiber"
+    if row.carrier == SHED:
+        return f"Verbraucher {row.country}" + ("" if row.country == HOME else " (Ausland)")
     if row.component == "Load":
         return f"Verbraucher {HOME}" if row.country == HOME else f"Verbraucher {row.country}"
     if row.country == "BR":
@@ -164,9 +168,17 @@ def metrics(n: pypsa.Network, year: int, cfg: dict) -> list[tuple]:
     sup = sup[sup.index.isin(loc.index)]
     gen = loc.loc[sup.index].assign(v=sup.values).reset_index()
     gen = gen[(gen.country == HOME) & gen.component.isin(["Generator", "StorageUnit", "Link"])
-              & ~gen.carrier.isin(["DC", "AC"]) & ~gen.cable]
+              & ~gen.carrier.isin(["DC", "AC", SHED]) & ~gen.cable]
     for g, v in st.by_group(gen.groupby("carrier").v.sum()).items():
         add("Erzeugung", g, "TWh", v / 1e6)
+
+    # load shedding (allowed at 100,000 EUR/MWh in runs with neighbours, E3): must be ~0
+    shed = n.generators[(n.generators.carrier == SHED)]
+    if not shed.empty:
+        p_shed = n.generators_t.p[shed.index].mul(w, axis=0).sum()
+        add("Versorgung", "Lastabwurf DE", "GWh",
+            p_shed[shed.bus.map(n.buses.country) == HOME].sum() / 1e3)
+        add("Versorgung", "Lastabwurf alle Länder", "GWh", p_shed.sum() / 1e3)
 
     cap = []
     for c, attr in [("Generator", "p_nom_opt"), ("StorageUnit", "p_nom_opt"), ("Link", "p_nom_opt")]:
@@ -174,6 +186,7 @@ def metrics(n: pypsa.Network, year: int, cfg: dict) -> list[tuple]:
         df = df[df.bus.isin(home_ac)] if c != "Link" else df[df.bus1.isin(home_ac) & df.carrier.isin(
             ["battery discharger", "H2 Fuel Cell"])]
         eff = df.efficiency if c == "Link" else 1.0
+        df = df[df.carrier != SHED] if c == "Generator" else df
         cap.append((df[attr] * eff).groupby(df.carrier).sum())
     for g, v in st.by_group(pd.concat(cap).groupby(level=0).sum()).items():
         add("Kapazität", g, "GW", v / 1e3)
@@ -245,6 +258,10 @@ def metrics(n: pypsa.Network, year: int, cfg: dict) -> list[tuple]:
         rev = s.revenue(groupby=False).reindex([("Link", i) for i in cab.index]).sum()
         ccost = (cab.p_nom_opt * cab.capital_cost).sum()
         add("Kabel", "Kapazität", "GW", pn / 1e3)
+        br = n.generators[(n.generators.bus.map(n.buses.country) == "BR") & (n.generators.carrier != SHED)]
+        if not br.empty:
+            add("Kabel", "Erzeugung BR Kapazität", "GW", br.p_nom_opt.sum() / 1e3)
+            add("Kabel", "Erzeugung BR", "TWh", n.generators_t.p[br.index].mul(w, axis=0).sum().sum() / 1e6)
         add("Kabel", "Lieferung nach DE", "TWh", delivered / 1e6)
         add("Kabel", "Auslastung", "%", 100 * p0.mul(w).sum() / (pn * w.sum()) if pn > 0 else 0)
         add("Kabel", "Engpasserlös", "Mrd EUR/a", rev / 1e9)
@@ -395,6 +412,74 @@ def comparison_figures(cmp: pd.DataFrame, m: pd.DataFrame, out: Path) -> dict:
     return figs
 
 
+# --------------------------------------------------------------------------- grid (role 6)
+
+GRID_CSV = "grid.csv"
+WEEKS = {"max_wind": "Woche max. Wind", "max_import": "Woche max. Brasilien-Import", "max_load": "Woche max. Last"}
+
+
+def grid_metrics(run_name: str, horizon: int) -> pd.DataFrame:
+    """
+    Full-grid loading and redispatch of one solved run (role 6, workshop/network/full_grid.py).
+
+    The 10-node market result is spread onto the simplified German grid (470 buses), a DC load flow
+    runs over three stress weeks and a PTDF redispatch clears the overloads. Absolute values are a
+    reconstruction (order of magnitude); the comparison with/without cable is the robust part.
+    Weights each snapshot with its duration (2 h baseline, 4 h runs with neighbours).
+    """
+    import os
+    cwd = os.getcwd()
+    os.chdir(ROOT)                       # full_grid.py uses paths relative to the repo root
+    try:
+        sys.path.insert(0, str(ROOT))
+        import workshop.network.full_grid as fg
+        b2c = fg.read_cluster_map(run_name)
+        grid = fg.base_grid(run_name)
+        inj = fg.reconstruct_injections(run_name, horizon, b2c, fg.population_weights(grid, run_name),
+                                         fg.area_weights(grid, run_name, b2c), fg.plant_weights(grid, run_name, b2c))
+        n = fg.build_network(run_name, inj)
+        weeks = fg.select_weeks(inj)
+        snaps = pd.DatetimeIndex(sorted(set().union(*weeks.values())))
+        loading = fg.line_loading(n, snaps).abs()
+        rd = fg.redispatch(n, inj, snaps)
+        hours = inj["market"].snapshot_weightings.generators
+    finally:
+        os.chdir(cwd)
+    rows = []
+    for key, w in weeks.items():
+        ld = loading.reindex(w)
+        label = WEEKS.get(key, key)
+        r = rd.set_index("snapshot") if "snapshot" in rd.columns else rd
+        r = r.reindex(w)
+        rows += [
+            ("Netz", f"{label}: überlastete Leitungsstunden", "%", 100 * float(ld.gt(1).to_numpy().mean())),
+            ("Netz", f"{label}: Leitungen über 2x Grenze", "Anzahl", float(ld.max().gt(2).sum())),
+            ("Netz", f"{label}: Redispatch (abregeln)", "GWh/Woche",
+             float((r["down"] * hours.reindex(w)).sum() / 1e3)),
+        ]
+    return pd.DataFrame(rows, columns=["section", "metric", "unit", "value"])
+
+
+def run_grid(spec: dict, jobs: list[str], out: Path) -> None:
+    """--grid LABEL:YEAR ...: compute and store in grid.csv (kept between pipeline runs)."""
+    f = out / GRID_CSV
+    old = pd.read_csv(f) if f.exists() else pd.DataFrame(columns=["run", "horizon", "section", "metric", "unit", "value"])
+    for job in jobs:
+        label, year = job.split(":")
+        year = int(year)
+        r = spec["runs"][label]
+        if not (ROOT / "results" / r["run_name"] / "networks" / f"solved_{year}.nc").exists():
+            print(f"grid {label} {year}: no solved network, skipped")
+            continue
+        if not (ROOT / "resources" / r["run_name"] / "networks" / "simplified.nc").exists():
+            print(f"grid {label} {year}: resources/{r['run_name']}/networks/simplified.nc missing, skipped")
+            continue
+        print(f"grid {label} {year} (several minutes)", flush=True)
+        g = grid_metrics(r["run_name"], year).assign(run=label, horizon=year)
+        old = pd.concat([old[~((old.run == label) & (old.horizon == year))], g])
+    old[["run", "horizon", "section", "metric", "unit", "value"]].to_csv(f, index=False)
+
+
 # --------------------------------------------------------------------------- report
 
 
@@ -442,8 +527,11 @@ def checks(m: pd.DataFrame, status: pd.DataFrame) -> list[str]:
             if abs(val + sc) > 0.01 * abs(sc):
                 out.append(f"- {run} {y}: Akteure schließen nicht: Summe {val:,.1f} gegen "
                            f"−(Systemkosten − CO2-Transfer) {-sc:,.1f} Mrd EUR/a")
-        if sec == "Handel" and met == "Netto-Import" and val > 25.5:
-            out.append(f"- {run} {y}: Netto-Import {val:,.1f} TWh über dem Ziel von E3 (~25 TWh)")
+        if sec == "Handel" and met == "Netto-Import" and val > NET_IMPORT_LIMIT * 1.02:
+            out.append(f"- {run} {y}: Netto-Import {val:,.1f} TWh über der Grenze von E3 "
+                       f"({NET_IMPORT_LIMIT:.0f} TWh/a); nur zulässig in Läufen ohne E3-Grenze")
+        if sec == "Versorgung" and met == "Lastabwurf alle Länder" and val > 1.0:
+            out.append(f"- {run} {y}: Lastabwurf {val:,.1f} GWh (zugelassen zu 100.000 EUR/MWh, sollte ~0 sein)")
         if sec == "Kabel" and met == "Kapazität" and val > 19.9:
             out.append(f"- {run} {y}: Kabel an der Obergrenze von 20 GW (E1)")
     return out or ["- keine Auffälligkeiten"]
@@ -482,7 +570,8 @@ def report(spec: dict, m: pd.DataFrame, cmp: pd.DataFrame, status: pd.DataFrame,
                      "Jahre": ", ".join(map(str, done)) or "–",
                      "Solver": ", ".join(sorted(set(st_.status))) or "–",
                      "Spitzenspeicher (GB)": f"{st_.peak_gb.max():.1f}" if len(st_) and st_.peak_gb.notna().any() else "–",
-                     "Beschreibung": r.get("description", "")})
+                     "Beschreibung": r.get("description", "")
+                     + (f" — **fehlt:** {'; '.join(r['missing'])}" if r.get("missing") and not done else "")})
     L += [md_table(pd.DataFrame(rows).set_index("Lauf")), ""]
 
     notes = out / "notes.md"
@@ -512,7 +601,8 @@ def report(spec: dict, m: pd.DataFrame, cmp: pd.DataFrame, status: pd.DataFrame,
         L += [md_table(pd.DataFrame(rows).set_index("Zusammenfassung"), "{:+,.2f}"),
               "", "Negativ = der Lauf ist billiger als die Referenz. Jedes Jahr ist ein Stichjahr "
               "(ein Jahr Betrieb), kein Barwert.", ""]
-        key = d[d.section.isin(["Systemkosten", "Preise", "CO2", "Handel", "Kabel", "Akteure"])]
+        key = d[d.section.isin(["Systemkosten", "Preise", "CO2", "Handel", "Versorgung", "Kabel", "Netz",
+                                "Akteure"])]
         t = key.pivot_table(index=["section", "metric", "unit"], columns="horizon", values="value", sort=False)
         t.index = [f"{s}: {a} ({u})" for s, a, u in t.index]
         t.index.name = "Differenz"
@@ -548,12 +638,19 @@ def report(spec: dict, m: pd.DataFrame, cmp: pd.DataFrame, status: pd.DataFrame,
           "Zertifikate versteigert würden). CO2-Zahlungen sind Transfers zwischen Akteuren: Die Summe aller "
           "Akteure = −(Systemkosten − CO2-Preis-Zahlungen). In Differenzen zweier Läufe ist das der "
           "Wohlfahrtsgewinn ohne CO2-Bewertung; die Emissionsänderung steht getrennt unter CO2.",
+          "- **Lastabwurf**: in Läufen mit Nachbarn zu 100.000 EUR/MWh zugelassen (E3); zählt als Kosten der "
+          "Verbraucher, nicht als Erzeugung.",
+          "- **Netz** (Rolle 6, `workshop/network/`, nur auf Anforderung mit `--grid`): Marktergebnis auf das "
+          "vereinfachte deutsche Netz (470 Knoten) verteilt, DC-Lastfluss in drei Stresswochen, Redispatch über "
+          "PTDF. **Rekonstruktion**: absolute Werte sind eine Größenordnung, belastbar ist der Vergleich mit/ohne "
+          "Kabel. Heutige Leitungskapazitäten, kein N-1. Von Rolle 5 noch nicht geprüft.",
           ""]
     L += ["## 7. Dateien", "",
           "| Datei | Inhalt |", "|---|---|",
           "| `metrics.csv` | alle Kennzahlen, lang: run, horizon, section, metric, unit, value |",
           "| `comparisons.csv` | Differenzen run − reference, gleiche Spalten + reference |",
           "| `status.csv` | Solverstatus, Lösezeit und Spitzenspeicher je Lauf und Jahr |",
+          "| `grid.csv` | Netzanalyse (Rolle 6) je Lauf und Jahr, bleibt zwischen Läufen erhalten |",
           "| `figures/` | Abbildungen als PNG (300 dpi) und PDF |",
           "| `notes.md` | Befunde und Deutung, von Hand gepflegt |", ""]
     (out / "RESULTS.md").write_text("\n".join(L))
@@ -567,13 +664,20 @@ def main():
     ap.add_argument("--spec", type=Path, default=ROOT / "workshop/analysis/runs.yaml")
     ap.add_argument("--out", type=Path, default=ROOT / "workshop/results")
     ap.add_argument("--runs", nargs="*", help="only these runs (default: all with results)")
+    ap.add_argument("--grid", nargs="*", default=[], metavar="LABEL:YEAR",
+                    help="also run the full-grid analysis (role 6) for these runs and years, e.g. BASE:2040 "
+                         "BRIMP:2040; several minutes each; stored in grid.csv and kept")
     ap.add_argument("--force", action="store_true",
                     help="evaluate even while a solve is running (risks killing the solve, see skill)")
     a = ap.parse_args()
 
     # The workspace's memory limit is shared: a solve needs up to ~7 GB, loading a network ~1-2 GB.
     # Running both at once has already got a solve killed (OOM). Do not evaluate during a solve.
-    busy = subprocess.run(["pgrep", "-f", "solve_network.py"], capture_output=True, text=True).stdout.split()
+    # match the solve's python process only; "pgrep -f" alone also matches shells whose command line
+    # merely mentions the pattern (e.g. a wrapper that calls this script)
+    busy = [line for line in subprocess.run(["pgrep", "-af", "solve_network"], capture_output=True,
+                                             text=True).stdout.splitlines()
+            if "python" in line.split(maxsplit=2)[1] and "solve_network.py" in line]
     if busy and not a.force:
         sys.exit("A solve is running (solve_network.py). Wait until it has finished, "
                  "or pass --force if you accept the risk of an out-of-memory kill.")
@@ -598,6 +702,21 @@ def main():
             del n
     m = pd.DataFrame(rows, columns=["run", "horizon", "section", "metric", "unit", "value"])
     status = pd.DataFrame(status, columns=["run", "horizon", "status", "solve_min", "peak_gb"])
+    if a.runs:  # keep the other runs' results from the last full evaluation
+        for df_name in ("metrics", "status"):
+            f = a.out / f"{df_name}.csv"
+            if f.exists():
+                old = pd.read_csv(f)
+                old = old[~old.run.isin(a.runs) & old.run.isin(spec["runs"])]
+                if df_name == "metrics":
+                    m = pd.concat([old[old.section != "Netz"], m], ignore_index=True)
+                else:
+                    status = pd.concat([old, status], ignore_index=True)
+    if a.grid:
+        run_grid(spec, a.grid, a.out)
+    if (a.out / GRID_CSV).exists():
+        g = pd.read_csv(a.out / GRID_CSV)
+        m = pd.concat([m, g[g.run.isin(m.run.unique())][m.columns]], ignore_index=True)
 
     cmp = []
     for run, ref in spec.get("comparisons", []):
@@ -606,6 +725,8 @@ def main():
             continue
         j = x.merge(y_, on=["horizon", "section", "metric", "unit"], how="outer", suffixes=("", "_ref"))
         j = j[j.horizon.isin(set(x.horizon) & set(y_.horizon))]
+        # grid metrics exist only where --grid was run: compare only where both runs have them
+        j = j[~((j.section == "Netz") & (j.value.isna() | j.value_ref.isna()))]
         j["value"] = j.value.fillna(0) - j.value_ref.fillna(0)
         j["run"], j["reference"] = run, ref
         cmp.append(j[["run", "reference", "horizon", "section", "metric", "unit", "value"]])

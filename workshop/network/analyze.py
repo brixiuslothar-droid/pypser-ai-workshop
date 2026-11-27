@@ -101,6 +101,12 @@ def analyze(run: str, horizon: int) -> dict:
     loading.abs().max(axis=0).sort_values(ascending=False).rename("max_loading").to_csv(
         outdir / "line_worst.csv"
     )
+    try:
+        import workshop.network.plot_map as pm
+
+        pm.plot_map(run, horizon, 5)
+    except Exception as exc:  # map is a bonus, never fail the analysis
+        logger.warning("map skipped: %s", exc)
 
     rd_week = pd.DataFrame(
         {

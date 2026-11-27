@@ -20,6 +20,26 @@
 #   entscheidungen id, wann (Phase), wer, entscheidung, warum, schritt (Zwischenschritt:
 #                  Lauf, Datei oder Befund), wirkung (was es im Schritt bewirkt hat),
 #                  quelle, requires (Läufe für die Platzhalter in `wirkung`)
+#   uebergaben:    pfad, rolle, eingearbeitet (Datum), sha (erste 12 Zeichen sha256);
+#                  build_deck.py meldet jede Übergabe, die sich seither geändert hat
+#
+# Platzhalter auf Übergaben (README "Platzhalter"):
+#   {{md|DATEI|ÜBERSCHRIFT|ZEILE|SPALTE[|TEIL]}}  Zelle einer Markdown-Tabelle; TEIL wählt
+#                                                einen Wert aus "a → b → c" (0, 1, -1)
+#   {{cfg|DATEI|schlüssel.pfad}}                 Wert aus einer Config
+#   {{src|DATEI|wörtlicher Text}}                Text, der in der Übergabe stehen muss
+
+uebergaben:
+  - {pfad: workshop/role3/handover.md, rolle: 3, eingearbeitet: 2026-11-27, sha: 3e1964741ebb}
+  - {pfad: workshop/role3/neighbours.md, rolle: 3, eingearbeitet: 2026-11-27, sha: 16a92ef5e2b7}
+  - {pfad: workshop/role3/baseline-check.md, rolle: 3, eingearbeitet: 2026-11-27, sha: 06d87ae0b231}
+  - {pfad: workshop/role3/integration-status.md, rolle: 3, eingearbeitet: 2026-11-27, sha: 0b768a74a62b}
+  - {pfad: config/config.role3-neighbours.yaml, rolle: 3, eingearbeitet: 2026-11-27, sha: 3550d3ebe0fe}
+  - {pfad: config/config.role3-reference.yaml, rolle: 3, eingearbeitet: 2026-11-27, sha: 081f762c3785}
+  - {pfad: config/config.role3-e3.yaml, rolle: 3, eingearbeitet: 2026-11-27, sha: 6308ad1932c8}
+  - {pfad: config/config.role3-e3-cable.yaml, rolle: 3, eingearbeitet: 2026-11-27, sha: 8a0de87f7a84}
+  - {pfad: config/config.role3-cable.yaml, rolle: 3, eingearbeitet: 2026-11-27, sha: 60f1a213da6a}
+  - {pfad: workshop/role3/export_handoff.py, rolle: 3, eingearbeitet: 2026-11-27, sha: ee0c7effbfa0}
 
 daten:
   - id: D1
@@ -73,10 +93,38 @@ daten:
     rolle: 3
   - id: D8
     name: Netto-Import Deutschland heute
-    quelle: "TODO Rolle 3: Energy-Charts / ENTSO-E (O2)"
+    quelle: "Energy-Charts, grenzüberschreitender Handel DE (API cbet), abgefragt 2026-11-27"
     jahr: 2024
-    verarbeitung: Grenze für den Netto-Import (E3)
-    ergebnis: TODO
+    verarbeitung: Summe der 15-min-Werte; Anteil der neun Modell-Nachbarn (workshop/role3/handover.md)
+    ergebnis: "28,3 TWh gesamt, 19,9 TWh aus den Modell-Nachbarn → Grenze {{cfg|config/config.role3-e3.yaml|role3.net_import_limit.twh}} TWh/a (role3.net_import_limit)"
+    rolle: 3
+  - id: D10
+    name: Grenzkuppelkapazitäten (NTC) Deutschland
+    quelle: "ENTSO-E/ENTSOG TYNDP 2024, Reference Grid & Investment Candidates (2023-11-03), CC BY 4.0"
+    jahr: 2023
+    verarbeitung: role3.crossborder.ntc in config/config.role3-reference.yaml, data/role3_constraints.py
+    ergebnis: "Summe der Flüsse je Grenze ≤ NTC, z. B. AT {{cfg|config/config.role3-reference.yaml|role3.crossborder.ntc.values.AT}} GW (Export, Import)"
+    rolle: 3
+  - id: D11
+    name: Nachbarländer AT, BE, CH, CZ, DK, FR, LU, NL, PL
+    quelle: PyPSA-Eur (OSM-Netz, powerplantmatching, ENTSO-E-Last, ERA5)
+    jahr: 2013
+    verarbeitung: config/config.role3-neighbours.yaml (20 Knoten, davon DE 10)
+    ergebnis: Läufe de10-nb9, de10-nb9-ref
+    rolle: 3
+  - id: D12
+    name: CO₂-Preis 2050 aus der Literatur
+    quelle: "IPCC AR6 WGIII Kap. 3 (C1-Pfade); IEA NZE 2023; UBA Methodenkonvention 4.0; Sievert et al., Joule 2024"
+    jahr: 2023
+    verarbeitung: workshop/role3/neighbours.md (eigene Umrechnung nach EUR)
+    ergebnis: "750 EUR/t zentral, Spanne 250–1.250 EUR/t (E3)"
+    rolle: 3
+  - id: D13
+    name: Übergabe gelöster Läufe an Rolle 4 (Hand-off)
+    quelle: gelöste Netze results/<run>/networks/ (Rolle 3)
+    jahr: 2026
+    verarbeitung: workshop/role3/export_handoff.py (nur Aggregate je Land und Carrier)
+    ergebnis: "results/<run>/handoff/: manifest.yaml, system_costs, prices, trade, co2, cable"
     rolle: 3
   - id: D9
     name: Kabelsystem und Finanzierung (Validierung)
@@ -131,16 +179,40 @@ annahmen:
     wirkung: ignoriert Wasserkraft-Flexibilität, eher unterschätzt
   - id: A8
     name: CO₂-Pfad
-    wert: "80 EUR/t (2025) bis 260 EUR/t (2045), 2050: 2.600 EUR/t, Cap 2050 = 5 %"
-    quelle: Baseline, E3
+    wert: "80 EUR/t (2025) bis 260 EUR/t (2045), 2050: 750 EUR/t, Cap 2050 = 5 %"
+    quelle: "Baseline; E3 (750 EUR/t nach IPCC AR6, D12)"
     rolle: 4
     wirkung: hoher CO₂-Preis erhöht den Kabelwert
   - id: A9
     name: Wetterjahr und Auflösung
-    wert: "2013, 2-h-Schritte, 10 Knoten in Deutschland"
-    quelle: BASELINE.md
+    wert: "2013; {{cfg|config/config.role3-neighbours.yaml|clustering.temporal.averaging}}-Schritte mit Nachbarn (Baseline 2 h); 10 Knoten in DE"
+    quelle: "BASELINE.md; workshop/role3/neighbours.md (4 h wegen Speicher)"
     rolle: 3
     wirkung: Knappheitsstunden eher unterschätzt
+  - id: A10
+    name: Gemeinsame CO₂-Grenze bis 2045
+    wert: für alle zehn Länder zusammen (co2_budget.relative)
+    quelle: workshop/role3/neighbours.md
+    rolle: 3
+    wirkung: Nachbarn tragen Dekarbonisierung mit; senkt Knappheit in DE
+  - id: A11
+    name: Kuppelleitungen nicht ausbaubar
+    wert: "heutige NTC, freeze_expansion = {{cfg|config/config.role3-reference.yaml|role3.crossborder.freeze_expansion}}"
+    quelle: "TYNDP 2024 (D10); Rolle 3"
+    rolle: 3
+    wirkung: begrenzt Handel; erhöht den Kabelwert gegenüber freiem Handel
+  - id: A12
+    name: Lastabwurf zugelassen
+    wert: "AC-Knoten, {{cfg|config/config.role3-neighbours.yaml|solving.options.load_shedding.carriers.AC}} EUR/MWh"
+    quelle: config/config.role3-neighbours.yaml
+    rolle: 3
+    wirkung: "neutral, solange ~0; mehr als 0 ist ein Befund (E3)"
+  - id: A13
+    name: Anschlussknoten des Kabels
+    wert: "nächster DE-Bus zu landing_de; de10-cable: Conneforde {{cfg|config/config.role3-e3-cable.yaml|brazil_import.landing_de}} → Weser-Ems ({{md|workshop/role3/handover.md|Rolle 1 und 2|Weser-Ems|de10-nb9}})"
+    quelle: "workshop/role3/handover.md, integration-status.md; Standort entscheidet Rolle 1 (O11)"
+    rolle: 3
+    wirkung: "schwach: Knotenpreise in DE unterscheiden sich 2045 um höchstens 7–8 EUR/MWh"
 
 entscheidungen:
   - id: B0
@@ -155,7 +227,7 @@ entscheidungen:
   - id: E3
     wann: "2 Studiendesign"
     wer: Rolle 4 mit Rolle 3
-    entscheidung: "2050 entschärfen: Cap wie 2045, CO₂-Preis 2.600 EUR/t, Handel mit Nachbarn"
+    entscheidung: "2050 entschärfen: Cap wie 2045, CO₂-Preis 750 EUR/t (IPCC AR6), Handel mit Nachbarn, Netto-Import ≤ 25 TWh/a"
     warum: "Mit Nullcap sähe jede saubere Quelle wertvoll aus"
     schritt: "Befund BASE → alle Studienläufe ab REF"
     wirkung: "Vergleich gegen REF statt BASE; 2050 überall getrennt"
@@ -208,6 +280,63 @@ entscheidungen:
     schritt: "results/brazil-validation/wind_validation.csv"
     wirkung: "CF gemessen {{csv|results/brazil-validation/wind_validation.csv|all|cf_measured|2}} vs. modelliert {{csv|results/brazil-validation/wind_validation.csv|all|cf_modelled|2}}, Tageskorrelation {{csv|results/brazil-validation/wind_validation.csv|all|corr_daily|2}}"
     quelle: workshop/brazil/validate_wind.py
+  - id: R3a
+    wann: "3 Inputs"
+    wer: Rolle 3
+    entscheidung: "Baseline geprüft, Insellage als größte Schwäche bestätigt"
+    warum: "Ohne Handel entstehen die Preisspitzen, die jedes Kabel wertvoll machen"
+    schritt: "workshop/role3/baseline-check.md (BASE)"
+    wirkung: "2045: {{md|workshop/role3/baseline-check.md|Kennzahlen je Jahr|Stunden > 300|2045}} h über 300 EUR/MWh und {{md|workshop/role3/baseline-check.md|Kennzahlen je Jahr|Stunden < 1|2045}} h unter 1 EUR/MWh → Priorität: Nachbarländer"
+    quelle: workshop/role3/baseline-check.md
+  - id: R3b
+    wann: "3 Inputs"
+    wer: Rolle 3
+    entscheidung: "Neun Nachbarländer, 4-h-Schritte wegen Speicher"
+    warum: "Mit 2 h bzw. 3 h brach der Solve am 10-GB-Limit ab"
+    schritt: "Lauf de10-nb9 (freier Handel)"
+    wirkung: "Nettoimport DE 2035: {{md|workshop/role3/neighbours.md|Ergebnisse Deutschland: Baseline vs. Nachbarn|Nettoimport DE (TWh)|2035}} TWh = {{md|workshop/role3/neighbours.md|Ergebnisse Deutschland: Baseline vs. Nachbarn|Anteil Import an Nachfrage DE|2035}} der Nachfrage; Spitzenspeicher 2045: {{md|workshop/role3/neighbours.md|Rechenaufwand|Spitzenspeicher Solve (GB)|2045}} GB → Importe unplausibel hoch"
+    quelle: workshop/role3/neighbours.md
+  - id: R3c
+    wann: "3 Inputs"
+    wer: Rolle 3
+    entscheidung: "Heutige NTC je Grenze, Kuppelleitungen eingefroren"
+    warum: "Freier Handel würde das Kabel unterbewerten (Import 31–37 % der Nachfrage)"
+    schritt: "Lauf de10-nb9-ref"
+    wirkung: "Nettoimport DE 2035: {{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Nettoimport DE (TWh)|2035|-1}} statt {{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Nettoimport DE (TWh)|2035|1}} TWh ({{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Anteil Import an Nachfrage|2035|-1}} der Nachfrage); Preis 2045 {{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Preis DE (€/MWh)|2045|-1}} EUR/MWh; Stunden > 300 EUR/MWh 2045: {{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Stunden > 300 €/MWh|2045|-1}} (Baseline {{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Stunden > 300 €/MWh|2045|0}})"
+    quelle: workshop/role3/neighbours.md
+  - id: R3d
+    wann: "3 Inputs"
+    wer: Rolle 3 mit Rolle 4
+    entscheidung: "E3 umgesetzt: Netto-Import ≤ 25 TWh/a, Cap 2050 = 0,05 (de10-ref)"
+    warum: "de10-nb9-ref importiert rund viermal so viel wie E3 erlaubt"
+    schritt: "config/config.role3-e3.yaml, data/role3_constraints.py"
+    wirkung: "Grenze {{cfg|config/config.role3-e3.yaml|role3.net_import_limit.twh}} TWh/a, Brasilien-Kabel zählt nicht; nur im Testnetz geprüft, de10-ref noch nicht gelöst"
+    quelle: workshop/role3/handover.md
+  - id: R3e
+    wann: "3 Inputs"
+    wer: Rolle 3
+    entscheidung: "CO₂-Preis 2050: 750 EUR/t statt 2.600 EUR/t vorgeschlagen, von Rolle 4 übernommen"
+    warum: "Keine Quelle stützt 2.600 EUR/t; Literatur 250–1.250 EUR/t"
+    schritt: "decisions.md E3; config/config.role3-co2-750.yaml"
+    wirkung: "E3-Kette setzt {{cfg|config/config.role3-e3.yaml|costs.emission_prices.co2.2050}} EUR/t (de10-nb9-ref: {{cfg|config/config.role3-reference.yaml|costs.emission_prices.co2.2050}}); TODO Rolle 3: handover.md nennt für de10-ref noch 2.600 EUR/t – klären, womit de10-ref gerechnet wurde"
+    quelle: workshop/role3/neighbours.md
+  - id: R3f
+    wann: "3 Inputs"
+    wer: Rolle 3
+    entscheidung: "Kabel landet in Weser-Ems (Conneforde statt Wilhelmshaven-Koordinate)"
+    warum: "Wilhelmshaven liegt nur 0,5 km näher an Weser-Ems als an Schleswig-Holstein"
+    schritt: "config/config.role3-e3-cable.yaml"
+    wirkung: "Weser-Ems 2045: Ø-Preis {{md|workshop/role3/integration-status.md|Update after role 1's second push|Mean price 2045|DE0 5 (Weser-Ems, Wilhelmshaven/Emden)|en}} EUR/MWh, Engpass auf angeschlossenen Leitungen {{md|workshop/role3/integration-status.md|Update after role 1's second push|Congested share|DE0 5 (Weser-Ems, Wilhelmshaven/Emden)|en}} der Stunden; Schleswig-Holstein {{md|workshop/role3/integration-status.md|Update after role 1's second push|Congested share|DE0 9 (Schleswig-Holstein, Brunsbuettel)|en}}"
+    quelle: workshop/role3/integration-status.md
+  - id: T2
+    wann: "4 Zwischenschritt"
+    wer: Rolle 3
+    entscheidung: "Explorativer Kabellauf auf der NTC-Referenz (kein E4-Lauf)"
+    warum: "Erster Test des Kabels mit Nachbarn und Investition in Brasilien"
+    schritt: "de10-nb9-cable 2035"
+    wirkung: "{{src|workshop/role3/handover.md|Erstes Ergebnis 2035 (vor E3-Anpassung): Kabel 0 GW}}; Annuität ca. 3,8 Mio. EUR/MW/a"
+    quelle: workshop/role3/handover.md
+    test: true
   - id: T1
     wann: "4 Zwischenschritt"
     wer: Rolle 4
@@ -224,7 +353,7 @@ entscheidungen:
     entscheidung: "Läufe nacheinander, nie Auswertung während eines Solves"
     warum: "Solve abgebrochen (Speicher) am 2026-11-27"
     schritt: "results/scenario-runs.md"
-    wirkung: "Rechenzeit ca. 2,5–3 h für sieben Läufe"
+    wirkung: "Rechenzeit ca. 3,5 h für sieben Läufe (7 × ~30 min, de10-nb9-ref gemessen)"
     quelle: decisions.md O7
   - id: E7
     wann: "2 Studiendesign"

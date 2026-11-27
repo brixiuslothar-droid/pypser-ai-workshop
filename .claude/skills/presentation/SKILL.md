@@ -35,12 +35,19 @@ B="uv run --no-project --with python-pptx --with pandas --with pyyaml --with mat
 1. **Role.** The deck is role 4's. If the person has another role, they own
    only their slides in `deck.yaml` (part A) and their entries in
    `register.yaml`; help with those and leave the rest.
-2. **Results up to date?** Compare `workshop/results/status.csv` with
+2. **Handovers up to date?** Pull or merge the group's work first if the
+   person wants that (never force). Then look for new or changed role
+   handovers: the builder lists every registered handover whose checksum
+   changed ("Übergaben geändert"); also check for new files in the roles'
+   folders (e.g. `workshop/role3/`, `workshop/brazil/`, `workshop/cable/`,
+   `config/config.role*-*.yaml`). Work each one in as README "Übergaben der
+   Rollen einarbeiten" says, then update its `sha` in `register.yaml`.
+3. **Results up to date?** Compare `workshop/results/status.csv` with
    `results/<run>/networks/`. If a run finished since the last evaluation,
    evaluate it first with the skill `results-pipeline` – but **never while a
    solve runs** (`pgrep -af solve_network`; O7). If a solve runs, build from the
    existing results and say so.
-3. **Ask only open questions.** Run `$B --questions`. It prints only the
+4. **Ask only open questions.** Run `$B --questions`. It prints only the
    questions whose condition holds and that have no valid stored answer
    (a stored answer goes stale only where `neu_fragen_wenn` says so, e.g. when
    the set of finished runs changed). If it prints "keine offenen Fragen",
@@ -50,25 +57,28 @@ B="uv run --no-project --with python-pptx --with pandas --with pyyaml --with mat
    missing). Never ask the fixed settings (`fest:` in `settings.yaml`) or
    anything already answered. If the person states a setting unprompted, store
    it.
-4. **Build.** `$B --set key=value ...` with the answers (stores them and
+5. **Build.** `$B --set key=value ...` with the answers (stores them and
    builds), or `$B` if nothing was asked.
-5. **Read the report** the builder prints and tell the person, briefly:
+6. **Read the report** the builder prints and tell the person, briefly:
    - slides "ausstehend" and which runs or files they wait for;
    - `TODO`s grouped by owning role (column "Rolle"), so each role knows its gap;
    - "Layout" warnings (table too long: split it or shorten text);
    - NDA scan hits (see below), review blockers.
-6. **Fill gaps the right way** (only if asked to):
+7. **Fill gaps the right way** (only if asked to):
    - a number: a placeholder in `deck.yaml` or `register.yaml`, never typed;
    - an interpretation: first into `workshop/results/notes.md`, then onto the
      slide; result slide titles are statements taken from `notes.md`;
    - a decision: a new entry in `register.yaml` with phase, who, why, the
      intermediate step (run, file or finding) and its effect as a placeholder;
    - a data source or assumption: a `D…`/`A…` entry with source and year;
+   - a number from a role's handover: `{{md|…}}` on its Markdown table,
+     `{{cfg|…}}` on its config, `{{src|…}}` for a quoted key sentence – never
+     copy the number;
    - a missing figure: a function in `evaluate.py` (skill `results-pipeline`),
      in the plot style – no one-off script for a slide.
    Content of roles 1–3 comes from their deliveries; do not invent it. Leave a
    `TODO Rolle n:` instead.
-7. **Final.** Only when the person wants the final deck: `$B --final`. It
+8. **Final.** Only when the person wants the final deck: `$B --final`. It
    writes nothing while slides are pending, `TODO`s remain, the NDA scan hits
    or the newest review report has blockers. Remind them that role 5 reviews
    the draft first (E8).
@@ -77,7 +87,10 @@ B="uv run --no-project --with python-pptx --with pandas --with pyyaml --with mat
 
 - **Decisions with effect.** The deck shows every decision with the step in
   which it acted and what it did there (slides "Entscheidungspfad" and
-  "Zwischenschritte", from `register.yaml`). Test runs (BRIMP) are
+  "Zwischenschritte", from `register.yaml`). Intermediate runs of a role
+  (e.g. role 3's `de10-nb9`, `de10-nb9-ref`) are steps, not E4 results.
+- **Contradictions stay visible.** If a handover, a config and `decisions.md`
+  disagree, write a `TODO Rolle n:` naming both; do not pick one silently. Test runs (BRIMP) are
   intermediate steps, marked as tests, never study results.
 - **Finished runs only.** A run counts when all horizons are solved. Slides of
   missing runs are pending or dropped (answer `ausstehend`); never fill them
@@ -97,10 +110,11 @@ B="uv run --no-project --with python-pptx --with pandas --with pyyaml --with mat
   builder refuses anything else; do not work around it.
 - Never read `workshop/inputs/` for slide content. The builder reads it only to
   scan the finished text at runtime and prints only slide ids and hit counts.
-- On a scan hit: open the slide text (not the input file), decide whether the
-  number is public (e.g. from a cost table) and comes from a public source; if
-  in doubt remove it. Never print or quote the suspected confidential value,
-  and never compare it with the input in the chat.
+- On a scan hit: find which placeholder produced it and whether the same
+  number stands in a public handover or pipeline file (count and file names
+  only, never the number). If it does and the source is public, acknowledge
+  with `--nda-ok SLIDE`; otherwise remove it. Never print or quote the
+  suspected confidential value, and never compare it with the input in the chat.
 - The NDA may be mentioned only qualitatively, only with
   `nda_hinweis=qualitativ`, and only if `validate_against_nda.py` has run.
 - Do not send the deck or its text to outside services before the scan is clean.

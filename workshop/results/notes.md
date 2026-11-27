@@ -55,3 +55,20 @@ Nullcap 2050) und gehört nicht zu E4. Er testet Pipeline und Regeln.
   erwarten, dass das Modell das Kabel nicht baut. Der Abstand zum Break-even
   liegt hier bei rund 2,1–2,7 Tsd. EUR/kW/a; MV und CAPEX50 (E5) messen ihn mit
   Handel genauer.
+
+### Netzanalyse (Rolle 6) im Test: BRIMP − BASE, 2040
+
+Stand 2026-11-27. Mit `evaluate.py --grid BASE:2040 BRIMP:2040` gerechnet.
+Rekonstruktion: absolute Werte sind eine Größenordnung; belastbar ist nur der
+Vergleich mit/ohne Kabel. Von Rolle 5 noch nicht geprüft.
+
+- **Ein 2-GW-Kabel ändert die innere Netzbelastung kaum.** In der Woche mit dem
+  meisten Wind sind 20,1 % der Leitungsstunden überlastet, mit Kabel 20,1 %;
+  Redispatch 2,8 TWh/Woche ohne, 2,7 mit Kabel. Engpass ist der Nord-Süd-Transport.
+- **Abweichung zur Übergabe von Rolle 6:** Dort stehen 8–9 % überlastete
+  Leitungsstunden, hier 18–20 %. `analyze.py` zählt nur Überlast in
+  Leitungsrichtung (`loading.gt(1)` ohne Betrag); die Pipeline zählt beide
+  Richtungen. Der Redispatch (≈ 2,8 TWh/Woche) stimmt überein. Rolle 6
+  informieren.
+- **Speicher:** Die Netzanalyse brachte den Workspace auf 10,0 von 10 GB.
+  Nur ohne laufenden Solve und nur auf Anforderung rechnen (O7).

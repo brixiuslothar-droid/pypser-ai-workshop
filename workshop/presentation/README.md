@@ -120,10 +120,49 @@ Eine Zeile je Folie: Rolle, Stand (`ok`, `ausstehend`, `Layout`), Zahl der
 
 - **NDA-Scan**: vergleicht Folientext und Notizen zur Laufzeit mit
   `workshop/inputs/`; meldet nur Folie und Anzahl möglicher Treffer, nie den
-  Wert. Jeder Treffer wird von Hand geprüft.
+  Wert. Jeder Treffer wird von Hand geprüft: Steht die Zahl in einer
+  öffentlichen Übergabe oder Pipeline-Datei und stammt sie aus einer
+  öffentlichen Quelle, ist sie ein Zufallstreffer. Dann `--nda-ok FOLIE`; die
+  Quittung gilt, solange sich der Text der Folie nicht ändert.
+- **Übergaben**: jede registrierte Übergabe, die sich seit dem Einarbeiten
+  geändert hat.
 - **Review**: Zahl der Blocker im neuesten `results/review/report-*.md` (E8).
 - `--final` bricht ab bei ausstehenden Folien, `TODO`, NDA-Treffern oder
   Blockern.
+
+### Übergaben der Rollen einarbeiten
+
+Die Rollen 1–3 liefern in eigenen Unterordnern oder Dateien, z. B. Rolle 3 in
+`workshop/role3/` (`handover.md`, `neighbours.md`, `baseline-check.md`,
+`integration-status.md`, Abbildungen) und in `config/config.role3-*.yaml`.
+So kommen sie in die Präsentation:
+
+1. **Registrieren.** Jede eingearbeitete Übergabe steht unter `uebergaben:` in
+   `register.yaml` mit Rolle, Datum und Prüfsumme. Ändert die Rolle die Datei,
+   meldet der Builder das ("Übergaben geändert"), und `--final` bricht ab, bis
+   jemand die Änderung gelesen, Register und Deck angepasst und die Prüfsumme
+   erneuert hat.
+2. **Entscheidungen mit Wirkung** ins Register: was die Rolle entschieden hat,
+   in welchem Zwischenschritt (Lauf, Datei) es wirkte und was es dort bewirkt
+   hat – die Wirkung als Platzhalter auf die Tabelle der Übergabe. Beispiel
+   Rolle 3: Insel → freier Handel → NTC → E3-Grenze, je mit Import, Preis und
+   Preisspitzen.
+3. **Daten und Annahmen** der Rolle mit Quelle und Jahr (z. B. TYNDP 2024 für
+   die NTC, Energy-Charts 2024 für die 25 TWh).
+4. **Folien der Rolle** in Teil A: Zahlen aus den Tabellen der Übergabe
+   (`{{md|…}}`), Config-Werte (`{{cfg|…}}`), Kernsätze wörtlich belegt
+   (`{{src|…}}`). Steht eine Zahl nicht mehr in der Übergabe, wird die Folie
+   "ausstehend" statt falsch.
+5. **Zwischenläufe** einer Rolle, die keine E4-Läufe sind (z. B. `de10-nb9`,
+   `de10-nb9-ref`, `de10-nb9-cable`), erscheinen als Zwischenschritt mit
+   Hinweis, nie als Studienergebnis. Sobald der E4-Lauf (z. B. REF) fertig ist,
+   ersetzen Pipeline-Zahlen die Zahlen der Übergabe.
+6. **Widersprüche** zwischen Übergabe, Config und `decisions.md` werden nicht
+   geglättet, sondern als `TODO Rolle n:` sichtbar gemacht (Beispiel: CO₂-Preis
+   2050 in `handover.md` gegenüber `config.role3-e3.yaml`).
+
+Englische Übergaben: `{{md|…|en}}` setzt Zahlen ins deutsche Format.
+Anmerkungen in Klammern in einer Tabellenzelle ("(lowest)") werden weggelassen.
 
 ### Von Entwurf zur fertigen Präsentation
 
@@ -166,8 +205,12 @@ unbezahlbares Kabel ist ein gültiges Ergebnis). Drei Grundsätze:
 | A | Kabelkosten als Spanne | niedrig/zentral/hoch, WACC, Lebensdauer, Verluste | Kostentabelle (DEA), Rolle 1 | 1 |
 | A | Exportstandort Brasilien | Region, Mix, CF, LCOE | `results/brazil-validation/` | 2 |
 | A | Profile gegen Messung (optional) | Windvalidierung ONS | `wind_validation*` | 2 |
-| A | Das deutsche System | Annahmen, Handel, Netto-Importgrenze, Anschlussknoten | `BASELINE.md`, Rolle 3 | 3 |
-| A | **Zwischenschritte** | Entscheidungen der Rollen und Testläufe mit Wirkung | `register.yaml` Phasen 3–4 | alle |
+| A | Insel überschätzt jede saubere Quelle | Baseline-Prüfung: Preisspreizung, CO₂-Grenze 2045 | `workshop/role3/baseline-check.md` | 3 |
+| A | Zwischen Insel und freiem Handel | Insel → freier Handel → NTC, 2045 | `workshop/role3/neighbours.md` | 3 |
+| A | Import mit Grenzkapazitäten (optional) | Abbildung Nettoimport | `workshop/role3/figures/` | 3 |
+| A | Anschlussknoten trägt das Ergebnis nicht | Weser-Ems gegen Schleswig-Holstein | `workshop/role3/integration-status.md` | 3 |
+| A | **Zwischenschritte** Kabel/Brasilien | Entscheidungen der Rollen 1, 2, 4 und Testläufe mit Wirkung | `register.yaml` | 1, 2, 4 |
+| A | **Zwischenschritte** Deutschland (2 Folien) | Insel → Nachbarn → NTC → E3 → erster Kabellauf | `register.yaml` | 3 |
 | B Methodik | E1 Studientyp, E2 Parameter, E3 2050, E4 Szenarien, E5/E6 Messung | je eine Folie | `decisions.md` | 4 |
 | C Ergebnisse | Baut das Modell das Kabel? | Kapazität je Jahr | CABLE | 4 |
 | C | Systemkosten | Δ CABLE − REF, Mittel 2035–2045, 2050 getrennt | `comparisons.csv` | 4 |
@@ -257,6 +300,9 @@ Studie eingeht und warum. Es erzeugt die Folien "Entscheidungspfad",
 | `{{m\|RUN\|JAHRE\|Sektion/Kennzahl\|DEZ}}` | Kennzahl aus `metrics.csv` |
 | `{{c\|RUN\|REF\|JAHRE\|Sektion/Kennzahl\|DEZ}}` | Differenz aus `comparisons.csv`, mit Vorzeichen |
 | `{{csv\|PFAD\|ZEILE\|SPALTE\|DEZ}}` | Zelle einer Lieferung; `ZEILE` = Wert der ersten Spalte oder `spalte=wert;spalte=wert` |
+| `{{md\|PFAD\|ÜBERSCHRIFT\|ZEILE\|SPALTE[\|TEIL][\|en]}}` | Zelle der ersten Markdown-Tabelle unter einer Überschrift in einer Übergabe; `ZEILE` = Anfang der ersten Zelle; `TEIL` wählt aus „a → b → c“ (0, 1, −1) |
+| `{{cfg\|PFAD\|schlüssel.pfad}}` | Wert aus einer Config, z. B. `role3.net_import_limit.twh` |
+| `{{src\|PFAD\|Text}}` | Text, der wörtlich in der Übergabe stehen muss |
 | `{{date}}`, `{{status}}` | Datum, Kurzstatus der Läufe |
 
 `JAHRE`: `2040` oder `2035-2045` (Mittel der vorhandenen Jahre). Deutsches
@@ -264,7 +310,9 @@ Zahlenformat. Ein Platzhalter ohne Wert macht die Folie "ausstehend". `TODO` im
 Text markiert, was eine Rolle noch liefern muss.
 
 Automatische Tabellen: `table: {auto: status | daten | annahmen | entscheidungen}`,
-bei Entscheidungen optional `phasen: ["3", "4"]`.
+gefiltert mit `phasen: ["3", "4"]`, `rollen: ["3"]` oder `ids: [R3a, R3b]`.
+Mehr als etwa fünf Zeilen mit langem Text passen nicht auf eine Folie; der
+Builder meldet "Layout", dann auf zwei Folien mit `ids` aufteilen.
 
 ## Design
 

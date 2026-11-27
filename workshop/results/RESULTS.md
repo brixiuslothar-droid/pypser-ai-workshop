@@ -6,7 +6,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Ergebnisse der Studie: Kabel Brasilien–Deutschland
 
-Erzeugt von `workshop/analysis/evaluate.py` am 2026-11-27 11:08, Commit 86e70ef6. Nicht von Hand ändern: Die Datei wird bei jedem Lauf neu geschrieben. Befunde und Deutung stehen in `workshop/results/notes.md` und werden unten eingebunden.
+Erzeugt von `workshop/analysis/evaluate.py` am 2026-11-27 14:01, Commit e0cb56cb. Nicht von Hand ändern: Die Datei wird bei jedem Lauf neu geschrieben. Befunde und Deutung stehen in `workshop/results/notes.md` und werden unten eingebunden.
 
 Studiendesign, Parameter und Szenarien: `workshop/decisions.md`. Nur öffentliche Modellergebnisse; keine Daten aus `workshop/inputs/` (E7).
 
@@ -24,15 +24,16 @@ Studiendesign, Parameter und Szenarien: `workshop/decisions.md`. Nur öffentlich
 
 | Lauf | Run-Name | Status | Jahre | Solver | Spitzenspeicher (GB) | Beschreibung |
 |---|---|---|---|---|---|---|
-| BASE | `de10-myopic` | fertig | 2025, 2030, 2035, 2040, 2045, 2050 | Imprecise, Optimal | 6.7 | Workshop baseline, Germany as an island, hard zero CO2 cap in 2050 |
-| BRIMP | `de10-br-import` | fertig | 2025, 2030, 2035, 2040, 2045, 2050 | Optimal | 6.6 | Test run, not in E4: BASE + fixed 2 GW Brazil cable from 2035 (CBA of a given cable) |
-| REF | `de10-ref` | geplant | – | – | – | Trade with neighbours, soft CO2 cap 2050, no cable |
-| CABLE | `de10-cable` | geplant | – | – | – | REF + Brazil cable extendable from 2035, WACC per E2 (main run) |
-| MV | `de10-mv` | geplant | – | – | – | CABLE with the cable forced to 0.1 GW (marginal value) |
-| CAPEX50 | `de10-capex50` | geplant | – | – | – | CABLE with 50 % cable investment cost |
-| WACC7 | `de10-wacc7` | geplant | – | – | – | CABLE with 7 % WACC for Brazil and the cable |
-| REF-ISL | `de10-ref-isl` | geplant | – | – | – | REF without trade |
-| CABLE-ISL | `de10-cable-isl` | geplant | – | – | – | CABLE without trade |
+| REF | `de10-ref` | geplant | – | – | – | Neighbours (NTC, 4 h), net import <= 25 TWh/a, cap 2050 = 0.05, no cable |
+| CABLE | `de10-cable` | geplant | – | – | – | REF + Brazil cable extendable 0-20 GW from 2035, BR generation by investment, WACC 10 % (main run) |
+| MV | `de10-mv` | geplant | – | – | – | CABLE with the cable forced to 0.1 GW (marginal value) — **fehlt:** config with run.name de10-mv and brazil_import p_nom = p_nom_max = 100 (MW) |
+| CAPEX50 | `de10-capex50` | geplant | – | – | – | CABLE with 50 % cable investment cost — **fehlt:** config with run.name de10-capex50 and brazil_import.cost_factor: 0.5 |
+| WACC7 | `de10-wacc7` | geplant | – | – | – | CABLE with 7 % WACC for Brazil and the cable — **fehlt:** config with run.name de10-wacc7 and brazil_import.discount_rate {generation: 0.07, cable: 0.07} |
+| REF-ISL | `de10-ref-isl` | geplant | – | – | – | REF without trade — **fehlt:** config with run.name de10-ref-isl and countries [DE] on the E3 chain (own inputs, 2 h?) - to agree with role 3 |
+| CABLE-ISL | `de10-cable-isl` | geplant | – | – | – | CABLE without trade — **fehlt:** as REF-ISL, on the cable chain |
+| BASE | `de10-myopic` | fertig | 2025, 2030, 2035, 2040, 2045, 2050 | Imprecise, Optimal | 6.7 | Workshop baseline: Germany as an island, 2 h, hard zero CO2 cap in 2050 |
+| NB9REF | `de10-nb9-ref` | geplant | – | – | – | Role 3 reference before E3: neighbours (NTC, 4 h), no annual import limit, no cap 2050, 2,600 EUR/t |
+| BRIMP | `de10-br-import` | fertig | 2025, 2030, 2035, 2040, 2045, 2050 | Optimal | 6.6 | Test run: BASE + fixed 2 GW Brazil cable from 2035 (CBA of a given cable) |
 
 ## 2. Befunde
 
@@ -94,26 +95,43 @@ Nullcap 2050) und gehört nicht zu E4. Er testet Pipeline und Regeln.
   liegt hier bei rund 2,1–2,7 Tsd. EUR/kW/a; MV und CAPEX50 (E5) messen ihn mit
   Handel genauer.
 
+### Netzanalyse (Rolle 6) im Test: BRIMP − BASE, 2040
+
+Stand 2026-11-27. Mit `evaluate.py --grid BASE:2040 BRIMP:2040` gerechnet.
+Rekonstruktion: absolute Werte sind eine Größenordnung; belastbar ist nur der
+Vergleich mit/ohne Kabel. Von Rolle 5 noch nicht geprüft.
+
+- **Ein 2-GW-Kabel ändert die innere Netzbelastung kaum.** In der Woche mit dem
+  meisten Wind sind 20,1 % der Leitungsstunden überlastet, mit Kabel 20,1 %;
+  Redispatch 2,8 TWh/Woche ohne, 2,7 mit Kabel. Engpass ist der Nord-Süd-Transport.
+- **Abweichung zur Übergabe von Rolle 6:** Dort stehen 8–9 % überlastete
+  Leitungsstunden, hier 18–20 %. `analyze.py` zählt nur Überlast in
+  Leitungsrichtung (`loading.gt(1)` ohne Betrag); die Pipeline zählt beide
+  Richtungen. Der Redispatch (≈ 2,8 TWh/Woche) stimmt überein. Rolle 6
+  informieren.
+- **Speicher:** Die Netzanalyse brachte den Workspace auf 10,0 von 10 GB.
+  Nur ohne laufenden Solve und nur auf Anforderung rechnen (O7).
+
 ## 3. Auffälligkeiten
 
 Automatisch geprüft (Schwellen in `evaluate.py`).
 
 - BASE 2045: Solverstatus **Imprecise** (BASELINE.md: imprecise ist nutzbar)
-- BASE 2035: Höchster Strompreis 1,040 EUR/MWh
-- BASE 2040: Höchster Strompreis 1,427 EUR/MWh
-- BASE 2050: Höchster Strompreis 2,959 EUR/MWh
-- BASE 2050: Die CO2-Obergrenze kostet 24,354 EUR/t zusätzlich: Ergebnis ist cap-getrieben (README, E3)
 - BRIMP 2035: Höchster Strompreis 1,040 EUR/MWh
 - BRIMP 2040: Höchster Strompreis 1,319 EUR/MWh
 - BRIMP 2050: Höchster Strompreis 2,929 EUR/MWh
 - BRIMP 2050: Die CO2-Obergrenze kostet 24,111 EUR/t zusätzlich: Ergebnis ist cap-getrieben (README, E3)
+- BASE 2035: Höchster Strompreis 1,040 EUR/MWh
+- BASE 2040: Höchster Strompreis 1,427 EUR/MWh
+- BASE 2050: Höchster Strompreis 2,959 EUR/MWh
+- BASE 2050: Die CO2-Obergrenze kostet 24,354 EUR/t zusätzlich: Ergebnis ist cap-getrieben (README, E3)
 
 ## 4. Vergleiche
 
 ### BRIMP − BASE
 
-- **BRIMP**: Test run, not in E4: BASE + fixed 2 GW Brazil cable from 2035 (CBA of a given cable)
-- **BASE**: Workshop baseline, Germany as an island, hard zero CO2 cap in 2050
+- **BRIMP**: Test run: BASE + fixed 2 GW Brazil cable from 2035 (CBA of a given cable)
+- **BASE**: Workshop baseline: Germany as an island, 2 h, hard zero CO2 cap in 2050
 
 | Zusammenfassung | Δ Systemkosten, Mittel (Mrd EUR/a) | Δ Systemkosten, Summe der Jahre (Mrd EUR/a) |
 |---|---|---|
@@ -164,14 +182,22 @@ Negativ = der Lauf ist billiger als die Referenz. Jedes Jahr ist ein Stichjahr (
 | Kabel: Auslastung (%) |  |  | +64.95 | +55.61 | +34.10 | +33.53 |
 | Kabel: Engpasserlös (Mrd EUR/a) |  |  | +0.70 | +0.77 | +1.13 | +1.05 |
 | Kabel: Engpasserlös pro kW (EUR/kW/a) |  |  | +347.92 | +382.97 | +565.20 | +525.39 |
+| Kabel: Erzeugung BR (TWh) |  |  | +11.38 | +9.74 | +5.97 | +5.87 |
+| Kabel: Erzeugung BR Kapazität (GW) |  |  | +2.00 | +2.00 | +2.00 | +2.00 |
 | Kabel: Kapazität (GW) |  |  | +2.00 | +2.00 | +2.00 | +2.00 |
 | Kabel: Lieferung nach DE (TWh) |  |  | +8.93 | +7.65 | +4.69 | +4.61 |
+| Netz: Woche max. Last: Leitungen über 2x Grenze (Anzahl) |  |  |  | +0.00 |  |  |
+| Netz: Woche max. Last: Redispatch (abregeln) (GWh/Woche) |  |  |  | -83.04 |  |  |
+| Netz: Woche max. Last: überlastete Leitungsstunden (%) |  |  |  | +0.12 |  |  |
+| Netz: Woche max. Wind: Leitungen über 2x Grenze (Anzahl) |  |  |  | -3.00 |  |  |
+| Netz: Woche max. Wind: Redispatch (abregeln) (GWh/Woche) |  |  |  | -65.82 |  |  |
+| Netz: Woche max. Wind: überlastete Leitungsstunden (%) |  |  |  | -0.07 |  |  |
 
 ![BRIMP − BASE](figures/diff_BRIMP_vs_BASE.png)
 
 ## 5. Ergebnisse je Lauf
 
-### BASE: Workshop baseline, Germany as an island, hard zero CO2 cap in 2050
+### BASE: Workshop baseline: Germany as an island, 2 h, hard zero CO2 cap in 2050
 
 ![Electricity generation in Germany (TWh)](figures/BASE_erzeugung.png)
 
@@ -303,7 +329,18 @@ Negativ = der Lauf ist billiger als die Referenz. Jedes Jahr ist ein Stichjahr (
 | Staat DE (CO2) (Mrd EUR/a) | 12.9 | 8.3 | 7.5 | 8.9 | 12.7 | 0.0 |
 | Summe aller Akteure (Mrd EUR/a) | -58.2 | -59.2 | -54.5 | -57.1 | -69.7 | -93.3 |
 
-### BRIMP: Test run, not in E4: BASE + fixed 2 GW Brazil cable from 2035 (CBA of a given cable)
+#### Netz
+
+| Netz | 2040 |
+|---|---|
+| Woche max. Wind: überlastete Leitungsstunden (%) | 20.1 |
+| Woche max. Wind: Leitungen über 2x Grenze (Anzahl) | 66.0 |
+| Woche max. Wind: Redispatch (abregeln) (GWh/Woche) | 2,786.9 |
+| Woche max. Last: überlastete Leitungsstunden (%) | 18.4 |
+| Woche max. Last: Leitungen über 2x Grenze (Anzahl) | 84.0 |
+| Woche max. Last: Redispatch (abregeln) (GWh/Woche) | 2,836.9 |
+
+### BRIMP: Test run: BASE + fixed 2 GW Brazil cable from 2035 (CBA of a given cable)
 
 ![Electricity generation in Germany (TWh)](figures/BRIMP_erzeugung.png)
 
@@ -443,6 +480,8 @@ Negativ = der Lauf ist billiger als die Referenz. Jedes Jahr ist ein Stichjahr (
 | Kabel | 2035 | 2040 | 2045 | 2050 |
 |---|---|---|---|---|
 | Kapazität (GW) | 2.0 | 2.0 | 2.0 | 2.0 |
+| Erzeugung BR Kapazität (GW) | 2.0 | 2.0 | 2.0 | 2.0 |
+| Erzeugung BR (TWh) | 11.4 | 9.7 | 6.0 | 5.9 |
 | Lieferung nach DE (TWh) | 8.9 | 7.6 | 4.7 | 4.6 |
 | Auslastung (%) | 65.0 | 55.6 | 34.1 | 33.5 |
 | Engpasserlös (Mrd EUR/a) | 0.7 | 0.8 | 1.1 | 1.1 |
@@ -450,6 +489,20 @@ Negativ = der Lauf ist billiger als die Referenz. Jedes Jahr ist ein Stichjahr (
 | Engpasserlös pro kW (EUR/kW/a) | 347.9 | 383.0 | 565.2 | 525.4 |
 | Annuität pro kW (EUR/kW/a) | 3,000.6 | 2,865.4 | 2,739.7 | 2,604.5 |
 | Abstand zum Break-even pro kW (EUR/kW/a) | -2,652.7 | -2,482.5 | -2,174.5 | -2,079.1 |
+
+#### Netz
+
+| Netz | 2040 |
+|---|---|
+| Woche max. Wind: überlastete Leitungsstunden (%) | 20.1 |
+| Woche max. Wind: Leitungen über 2x Grenze (Anzahl) | 63.0 |
+| Woche max. Wind: Redispatch (abregeln) (GWh/Woche) | 2,721.0 |
+| Woche max. Brasilien-Import: überlastete Leitungsstunden (%) | 7.1 |
+| Woche max. Brasilien-Import: Leitungen über 2x Grenze (Anzahl) | 40.0 |
+| Woche max. Brasilien-Import: Redispatch (abregeln) (GWh/Woche) | 1,500.7 |
+| Woche max. Last: überlastete Leitungsstunden (%) | 18.5 |
+| Woche max. Last: Leitungen über 2x Grenze (Anzahl) | 84.0 |
+| Woche max. Last: Redispatch (abregeln) (GWh/Woche) | 2,753.8 |
 
 ## 6. Definitionen
 
@@ -461,6 +514,8 @@ Negativ = der Lauf ist billiger als die Referenz. Jedes Jahr ist ein Stichjahr (
 - **Netto-Import**: Fluss über grenzüberschreitende Leitungen nach Deutschland, ohne das Kabel.
 - **Kabel**: Link mit Carrier „Brazil HVDC“. Engpasserlös = Σ (Preis DE × Lieferung − Preis BR × Einspeisung); Abstand zum Break-even = Engpasserlös pro kW − Annuität pro kW (E5).
 - **Akteure** (E6): je Akteur Erlöse − Kapitalkosten − Betriebskosten. Verbraucher: −Zahlungen. Emittenten zahlen den CO2-Preis und den Schattenpreis der Obergrenze an den Staat (als ob Zertifikate versteigert würden). CO2-Zahlungen sind Transfers zwischen Akteuren: Die Summe aller Akteure = −(Systemkosten − CO2-Preis-Zahlungen). In Differenzen zweier Läufe ist das der Wohlfahrtsgewinn ohne CO2-Bewertung; die Emissionsänderung steht getrennt unter CO2.
+- **Lastabwurf**: in Läufen mit Nachbarn zu 100.000 EUR/MWh zugelassen (E3); zählt als Kosten der Verbraucher, nicht als Erzeugung.
+- **Netz** (Rolle 6, `workshop/network/`, nur auf Anforderung mit `--grid`): Marktergebnis auf das vereinfachte deutsche Netz (470 Knoten) verteilt, DC-Lastfluss in drei Stresswochen, Redispatch über PTDF. **Rekonstruktion**: absolute Werte sind eine Größenordnung, belastbar ist der Vergleich mit/ohne Kabel. Heutige Leitungskapazitäten, kein N-1. Von Rolle 5 noch nicht geprüft.
 
 ## 7. Dateien
 
@@ -469,5 +524,6 @@ Negativ = der Lauf ist billiger als die Referenz. Jedes Jahr ist ein Stichjahr (
 | `metrics.csv` | alle Kennzahlen, lang: run, horizon, section, metric, unit, value |
 | `comparisons.csv` | Differenzen run − reference, gleiche Spalten + reference |
 | `status.csv` | Solverstatus, Lösezeit und Spitzenspeicher je Lauf und Jahr |
+| `grid.csv` | Netzanalyse (Rolle 6) je Lauf und Jahr, bleibt zwischen Läufen erhalten |
 | `figures/` | Abbildungen als PNG (300 dpi) und PDF |
 | `notes.md` | Befunde und Deutung, von Hand gepflegt |

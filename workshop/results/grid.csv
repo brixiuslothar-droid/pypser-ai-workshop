@@ -1,0 +1,16 @@
+run,horizon,section,metric,unit,value
+BASE,2040,Netz,Woche max. Wind: überlastete Leitungsstunden,%,20.123488625293678
+BASE,2040,Netz,Woche max. Wind: Leitungen über 2x Grenze,Anzahl,66.0
+BASE,2040,Netz,Woche max. Wind: Redispatch (abregeln),GWh/Woche,2786.858166598975
+BASE,2040,Netz,Woche max. Last: überlastete Leitungsstunden,%,18.385765858690046
+BASE,2040,Netz,Woche max. Last: Leitungen über 2x Grenze,Anzahl,84.0
+BASE,2040,Netz,Woche max. Last: Redispatch (abregeln),GWh/Woche,2836.864562337879
+BRIMP,2040,Netz,Woche max. Wind: überlastete Leitungsstunden,%,20.050426909632684
+BRIMP,2040,Netz,Woche max. Wind: Leitungen über 2x Grenze,Anzahl,63.0
+BRIMP,2040,Netz,Woche max. Wind: Redispatch (abregeln),GWh/Woche,2721.034138376436
+BRIMP,2040,Netz,Woche max. Brasilien-Import: überlastete Leitungsstunden,%,7.1285313162569475
+BRIMP,2040,Netz,Woche max. Brasilien-Import: Leitungen über 2x Grenze,Anzahl,40.0
+BRIMP,2040,Netz,Woche max. Brasilien-Import: Redispatch (abregeln),GWh/Woche,1500.7125390933784
+BRIMP,2040,Netz,Woche max. Last: überlastete Leitungsstunden,%,18.506102802131682
+BRIMP,2040,Netz,Woche max. Last: Leitungen über 2x Grenze,Anzahl,84.0
+BRIMP,2040,Netz,Woche max. Last: Redispatch (abregeln),GWh/Woche,2753.8207705964396
