@@ -25,3 +25,22 @@ group's figures fit together: before you write plotting code, read
 
 The role file sets guardrails for a sensible contribution; stay within them.
 Other people and their agents change the same workflow.
+
+The group's binding design decisions are in `workshop/decisions.md`
+(study design, economic parameters, scenarios). Follow them in every role.
+
+## Confidential data (NDA)
+
+Everything in `workshop/inputs/` is under NDA, in particular every term of the
+financing term sheet: above all the offtake price and the guarantee terms of
+the deal named there. Rule E7 in `workshop/decisions.md` applies:
+
+- Read these files only at runtime, to validate public assumptions, and report
+  only coarse bands (as `workshop/cba/validate_against_nda.py` does). Never use
+  them as model input.
+- Never write a confidential value, an exact ratio or difference that reveals
+  one, the deal code or the guarantee terms into code, config, comments,
+  commits, file names, logs, figures, slides or documentation, and never pass
+  them to outside services.
+- Never commit or push `workshop/inputs/`. Before sharing any output, check it
+  holds no confidential value.
