@@ -4,10 +4,12 @@ SPDX-FileCopyrightText: Contributors to PyPSA-Eur <https://github.com/pypsa/pyps
 SPDX-License-Identifier: CC-BY-4.0
 -->
 
-# Entscheidungen Rolle 4: Studiendesign und ökonomische Parameter
+# Entscheidungen der Gruppe: Studiendesign und ökonomische Parameter
 
-Verbindlich für alle Rollen der Gruppe. Änderungen nur in Absprache mit Rolle 4;
-jede Änderung unten im Änderungsprotokoll eintragen.
+Verbindlich für alle Rollen der Gruppe. Verantwortlich: Rolle 4. Änderungen nur
+in Absprache mit Rolle 4; jede Änderung unten im Änderungsprotokoll eintragen.
+
+Ergebnisse der Studie: [`results/RESULTS.md`](results/RESULTS.md) (siehe E6).
 
 Stand: 2026-11-27
 
@@ -130,6 +132,33 @@ Abbildungen im Workshop-Stil (`workshop/plotstyle`, siehe
 `.claude/skills/plot-style/SKILL.md`). Das Kabel hat die Farbe "Brazil cable",
 der Lauf ohne Kabel neutrales Grau.
 
+### Umsetzung
+
+| Datei | Inhalt |
+|---|---|
+| `workshop/analysis/runs.yaml` | Läufe (Kürzel, Run-Name, Configs, Ausgangslauf) und Vergleichspaare nach E4 |
+| `workshop/analysis/evaluate.py` | die Pipeline: liest alle gelösten Netze, schreibt alles unter `workshop/results/` |
+| `workshop/results/RESULTS.md` | **der Ergebnisbericht**, generiert: Status, Befunde, Auffälligkeiten, Vergleiche, Tabellen und Abbildungen je Lauf, Definitionen |
+| `workshop/results/notes.md` | Befunde und Deutung, von Hand gepflegt, in Abschnitt 2 des Berichts eingebunden |
+| `workshop/results/metrics.csv`, `comparisons.csv`, `status.csv` | Kennzahlen, Differenzen, Solverstatus und Speicher |
+| `workshop/results/figures/` | Abbildungen als PNG und PDF |
+| `workshop/presentation/` | Abschlusspräsentation: Gliederung `deck.yaml`, Register der Daten, Annahmen und Entscheidungen `register.yaml`, Builder; Skill `.claude/skills/presentation/SKILL.md` |
+
+Aufruf: `pixi run python workshop/analysis/evaluate.py`. Ablauf und Regeln:
+Skill `.claude/skills/results-pipeline/SKILL.md`. Die Läufe selbst steuert der
+Skill `.claude/skills/scenario-runs/SKILL.md`; wie ein einzelner Lauf gerechnet
+wird, steht im Skill `run-model` von Rolle 3.
+
+Festlegungen der Auswertung:
+
+- Deutschland = alle AC-Knoten mit `country == DE`.
+- Systemkosten = Annuitäten aller aktiven Anlagen (inkl. Bestand) + Betriebskosten.
+- Akteure: Erlöse − Kapitalkosten − Betriebskosten. CO₂-Zahlungen (Preis und
+  Schattenpreis der Obergrenze) gehen an den Staat. Summe aller Akteure =
+  −(Systemkosten − CO₂-Preis-Zahlungen); die Pipeline prüft das.
+- Jahre, in denen die CO₂-Obergrenze mehr als 1.000 EUR/t zusätzlich kostet,
+  werden als cap-getrieben gekennzeichnet (E3).
+
 ## Aufträge an die anderen Rollen
 
 | Rolle | Braucht von Rolle 4 | Liefert an Rolle 4 |
@@ -224,6 +253,8 @@ ein NDA-Verstoß wiegt schwerer als jeder Modell- oder Auswertungsfehler.
 | O2 | Genauer Wert des Netto-Imports 2024 mit Quelle | Rolle 3 | offen |
 | O3 | Ist ein Kabel bis 20 GW technisch machbar, mit wie vielen Bipolen? | Rolle 1 | offen |
 | O4 | Passen Handel mit den Nachbarn und 7 Läufe in Speicher und Rechenzeit des Tages? | Rolle 3 | offen |
+| O6 | Die vorhandenen Kabel-Configs (`config.brazil-import*.yaml`, Läufe `de10-br-*`) bauen auf der Baseline auf: Insel, harter Nullcap 2050. Sie erfüllen E3 nicht und taugen nur als Test, bis REF (Handel, weicher Cap) existiert. | Rolle 3 | offen |
+| O7 | Alle Rollen teilen sich einen Workspace mit 10 GB Speichergrenze. Ein Solve und eine Auswertung gleichzeitig haben am 2026-11-27 einen Solve (`de10-br-ext` 2045) abgebrochen (OOM). Regel: während eines Solves läuft nichts Speicherintensives; `evaluate.py` prüft das. | alle | Regel gilt |
 | O5 | Schattenpreis von `p_nom_min` im MV-Lauf verfügbar? `data/custom_extra_functionality.py` macht Grenzen fester Kapazitäten zu Variablengrenzen; das Kabel ist ausbaubar und deshalb nicht betroffen. Prüfen. | Rolle 4 | offen |
 
 ## Änderungsprotokoll
@@ -233,3 +264,6 @@ ein NDA-Verstoß wiegt schwerer als jeder Modell- oder Auswertungsfehler.
 | 2026-11-27 | Erste Fassung, Entscheidungen E1–E6 | Rolle 4 |
 | 2026-11-27 | E7 Vertraulichkeit (NDA) ergänzt | Rolle 4 |
 | 2026-11-27 | E8 Review eingeführt: Rolle 5 prüft R1 Workflow, R2 Auswertung, R3 NDA | Rolle 4 |
+| 2026-11-27 | Datei von `decisions-role4.md` in `decisions.md` umbenannt; E6 Umsetzung (Pipeline, Ergebnisbericht, Skills) ergänzt; erste Auswertung der Baseline | Rolle 4 |
+| 2026-11-27 | Testauswertung `de10-br-import` (BRIMP − BASE); offene Punkte O6, O7 | Rolle 4 |
+| 2026-11-27 | Abschlusspräsentation: `workshop/presentation/` (Aufbau, Register, Builder) und Skill `presentation` | Rolle 4 |

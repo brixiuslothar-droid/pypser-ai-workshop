@@ -1,0 +1,236 @@
+# SPDX-FileCopyrightText: Contributors to PyPSA-Eur <https://github.com/pypsa/pypsa-eur>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# Register der Studie: Daten, Annahmen und Entscheidungen mit ihrer Wirkung.
+# Quelle für die Dokumentationsfolien der Präsentation (build_deck.py, Folien mit
+# `register:`) und für den Anhang. Jede Rolle pflegt ihre Einträge; Rolle 4
+# pflegt E1–E8. Zahlen nur als Platzhalter (README Abschnitt 5).
+#
+# NDA (decisions.md E7): Einträge mit `nda: true` beschreiben Daten aus
+# workshop/inputs/ oder Größen, die daraus berechnet werden. Für sie gilt:
+#   - `quelle` nennt nur die Art der Quelle VOR der Verarbeitung
+#     ("vertrauliche Projektdaten (NDA)"), nie Dateiname, Deal, Partner oder Wert;
+#   - `wert`, `ergebnis` und Platzhalter sind verboten; build_deck.py bricht ab;
+#   - `verarbeitung` nennt das Skript, `verwendung` sagt, wofür (nur Validierung).
+#
+# Felder
+#   daten:         id, name, quelle, jahr, verarbeitung, ergebnis, rolle, nda
+#   annahmen:      id, name, wert, quelle, rolle, wirkung (Richtung für den Kabelwert)
+#   entscheidungen id, wann (Phase), wer, entscheidung, warum, schritt (Zwischenschritt:
+#                  Lauf, Datei oder Befund), wirkung (was es im Schritt bewirkt hat),
+#                  quelle, requires (Läufe für die Platzhalter in `wirkung`)
+
+daten:
+  - id: D1
+    name: Bathymetrie Atlantik
+    quelle: GEBCO 2025 (data-brazil/bathymetry_atlantic)
+    jahr: 2025
+    verarbeitung: workshop/cable/route.py
+    ergebnis: results/cable-route/summary.csv
+    rolle: 1
+  - id: D2
+    name: Kostendaten HVDC-Kabel und Konverter
+    quelle: Danish Energy Agency, Technology Data for Energy Transport
+    jahr: 2025
+    verarbeitung: data/costs/archive/v0.15.0 → process_cost_data
+    ergebnis: resources/<run>/costs_<jahr>_processed.csv
+    rolle: 1
+  - id: D3
+    name: Wetter Brasilien (Wind, Solar)
+    quelle: ERA5 über atlite-Cutout (data-brazil/weather)
+    jahr: 2013
+    verarbeitung: workshop/brazil/scan_regions.py, build_brazil_import_profile
+    ergebnis: results/brazil-validation/region_scan_2035.csv
+    rolle: 2
+  - id: D4
+    name: Gemessene Windeinspeisung Brasilien
+    quelle: ONS open data (data-brazil/raw/ons)
+    jahr: 2013
+    verarbeitung: workshop/brazil/validate_wind.py
+    ergebnis: results/brazil-validation/wind_validation.csv
+    rolle: 2
+  - id: D5
+    name: Investitionskosten Brasilien
+    quelle: IRENA, Renewable Power Generation Costs in 2023; Kostentabellen v0.15.0
+    jahr: 2023
+    verarbeitung: workshop/brazil/brazil_costs.py
+    ergebnis: results/brazil-validation/brazil_costs.csv
+    rolle: 2
+  - id: D6
+    name: Deutsches Stromsystem (Netz, Kraftwerke, Last, Profile)
+    quelle: PyPSA-Eur Baseline (OSM-Netz, powerplantmatching, ENTSO-E-Last, ERA5)
+    jahr: 2013
+    verarbeitung: Workflow bis compose_network (BASELINE.md)
+    ergebnis: results/de10-myopic/networks/
+    rolle: 3
+  - id: D7
+    name: Nachfrageentwicklung
+    quelle: TYNDP 2024 Distributed Energy (ohne Elektrolyse)
+    jahr: 2024
+    verarbeitung: load.scaling_factor in config/config.workshop.yaml
+    ergebnis: Faktor 1,0 bis 1,5 bis 2050
+    rolle: 3
+  - id: D8
+    name: Netto-Import Deutschland heute
+    quelle: "TODO Rolle 3: Energy-Charts / ENTSO-E (O2)"
+    jahr: 2024
+    verarbeitung: Grenze für den Netto-Import (E3)
+    ergebnis: TODO
+    rolle: 3
+  - id: D9
+    name: Kabelsystem und Finanzierung (Validierung)
+    quelle: vertrauliche Projektdaten (NDA), vor der Verarbeitung
+    verarbeitung: workshop/cba/validate_against_nda.py, nur zur Laufzeit
+    verwendung: Plausibilisierung der öffentlichen Annahmen D2 und A3; kein Modellinput
+    rolle: 4
+    nda: true
+
+annahmen:
+  - id: A1
+    name: WACC Deutschland
+    wert: "7 % real"
+    quelle: Baseline (costs.fill_values), E2
+    rolle: 4
+    wirkung: neutral für den Vergleich
+  - id: A2
+    name: WACC Erzeugung Brasilien
+    wert: "10 % real"
+    quelle: "E2; Beleg TODO Rolle 2 (IRENA/IEA)"
+    rolle: 2
+    wirkung: senkt den Kabelwert (WACC7 prüft)
+  - id: A3
+    name: WACC Kabel und Konverter
+    wert: "10 % real"
+    quelle: "E2; Beleg TODO Rolle 1"
+    rolle: 1
+    wirkung: senkt den Kabelwert (WACC7 prüft)
+  - id: A4
+    name: Lebensdauer Kabel und Konverter
+    wert: "40 Jahre"
+    quelle: DEA (D2), E2
+    rolle: 1
+    wirkung: neutral
+  - id: A5
+    name: Kabellänge im Modell
+    wert: "Großkreis × 1,25 = {{csv|results/cable-route/summary.csv|shortest|model_default_km|0}} km"
+    quelle: brazil_import.length_factor; Route D1 kürzer
+    rolle: 1
+    wirkung: macht das Kabel teurer als die Route nahelegt
+  - id: A6
+    name: Kabelkosten pro MW und km
+    wert: "{{csv|data/costs/archive/v0.15.0/costs_2035.csv|technology=HVDC submarine;parameter=investment|value|0}} EUR/MW/km (zentral)"
+    quelle: DEA (D2) – europäische Seekabel, nicht Tiefsee
+    rolle: 1
+    wirkung: Richtung unklar; CAPEX50 prüft die Schwelle
+  - id: A7
+    name: Brasilien als reiner Exportstandort
+    wert: keine Nachfrage, kein Netz, nur Anlagen am Landepunkt
+    quelle: Rolle 2 (Default der Studie)
+    rolle: 2
+    wirkung: ignoriert Wasserkraft-Flexibilität, eher unterschätzt
+  - id: A8
+    name: CO₂-Pfad
+    wert: "80 EUR/t (2025) bis 260 EUR/t (2045), 2050: 2.600 EUR/t, Cap 2050 = 5 %"
+    quelle: Baseline, E3
+    rolle: 4
+    wirkung: hoher CO₂-Preis erhöht den Kabelwert
+  - id: A9
+    name: Wetterjahr und Auflösung
+    wert: "2013, 2-h-Schritte, 10 Knoten in Deutschland"
+    quelle: BASELINE.md
+    rolle: 3
+    wirkung: Knappheitsstunden eher unterschätzt
+
+entscheidungen:
+  - id: B0
+    wann: "1 Ausgangslage"
+    wer: Organisation
+    entscheidung: "Baseline: Deutschland als Insel, harter Nullcap 2050"
+    warum: "Startpunkt aller Gruppen (BASELINE.md)"
+    schritt: "Lauf BASE (de10-myopic)"
+    wirkung: "Cap-Aufschlag 2050 {{m|BASE|2050|CO2/Schattenpreis der Obergrenze|0}} EUR/t, Preisspitze {{m|BASE|2050|Preise/Strompreis Maximum|0}} EUR/MWh"
+    requires: [BASE]
+    quelle: workshop/results/notes.md
+  - id: E3
+    wann: "2 Studiendesign"
+    wer: Rolle 4 mit Rolle 3
+    entscheidung: "2050 entschärfen: Cap wie 2045, CO₂-Preis 2.600 EUR/t, Handel mit Nachbarn"
+    warum: "Mit Nullcap sähe jede saubere Quelle wertvoll aus"
+    schritt: "Befund BASE → alle Studienläufe ab REF"
+    wirkung: "Vergleich gegen REF statt BASE; 2050 überall getrennt"
+    quelle: decisions.md E3
+  - id: E1
+    wann: "2 Studiendesign"
+    wer: Rolle 4
+    entscheidung: "Kapazitätsausbau: das Modell wählt 0–20 GW, ab 2035"
+    warum: "Beantwortet 'lohnt es sich?' direkt"
+    schritt: "Läufe CABLE, MV, CAPEX50, WACC7"
+    wirkung: "TODO Rolle 4 nach CABLE: gebaute Kapazität"
+    quelle: decisions.md E1
+  - id: E2
+    wann: "2 Studiendesign"
+    wer: Rolle 4
+    entscheidung: "Ein Parametersatz: EUR_2020, WACC 7 % DE / 10 % BR und Kabel, 40 a"
+    warum: "Kostenvorteile aus gemischten Annahmen sind kein Ergebnis"
+    schritt: "brazil_costs.py, Kostentabellen, Config"
+    wirkung: "Brasilien-Faktor IRENA, gleiche Lernkurven"
+    quelle: decisions.md E2
+  - id: E4
+    wann: "2 Studiendesign"
+    wer: Rolle 4
+    entscheidung: "Sieben Läufe, jeder ändert genau eine Sache"
+    warum: "Jede Differenz hat genau eine Ursache"
+    schritt: "workshop/analysis/runs.yaml"
+    wirkung: "fünf Vergleichspaare"
+    quelle: decisions.md E4
+  - id: R1a
+    wann: "3 Inputs"
+    wer: Rolle 1
+    entscheidung: "Zwei Routenvarianten: kürzeste und Tiefe meidend"
+    warum: "Kabel sind bis 3.000 m qualifiziert, die Route erreicht 6.000 m"
+    schritt: "results/cable-route/summary.csv"
+    wirkung: "{{csv|results/cable-route/summary.csv|shortest|length_km|0}} km vs. {{csv|results/cable-route/summary.csv|avoid-deep|length_km|0}} km; jenseits 3.000 m: {{csv|results/cable-route/summary.csv|shortest|beyond_qualified_km|0}} vs. {{csv|results/cable-route/summary.csv|avoid-deep|beyond_qualified_km|0}} km"
+    quelle: workshop/cable/route.py
+  - id: R2a
+    wann: "3 Inputs"
+    wer: Rolle 2
+    entscheidung: "Exportstandort an der Küste von Ceará, Wind statt Solar"
+    warum: "Niedrigste Kosten im Regionsvergleich"
+    schritt: "results/brazil-validation/region_scan_2035.csv"
+    wirkung: "CE east: Wind-CF {{csv|results/brazil-validation/region_scan_2035.csv|CE east (Aracati)|cf_onwind|2}}, LCOE {{csv|results/brazil-validation/region_scan_2035.csv|CE east (Aracati)|lcoe_site|0}} EUR/MWh; Modell nutzt Pecém: {{csv|results/brazil-validation/region_scan_2035.csv|CE Pecem|lcoe_site|0}} EUR/MWh"
+    quelle: workshop/brazil/scan_regions.py
+  - id: R2b
+    wann: "3 Inputs"
+    wer: Rolle 2
+    entscheidung: "Windprofile gegen ONS-Messung geprüft"
+    warum: "Profile bestimmen Kabelauslastung"
+    schritt: "results/brazil-validation/wind_validation.csv"
+    wirkung: "CF gemessen {{csv|results/brazil-validation/wind_validation.csv|all|cf_measured|2}} vs. modelliert {{csv|results/brazil-validation/wind_validation.csv|all|cf_modelled|2}}, Tageskorrelation {{csv|results/brazil-validation/wind_validation.csv|all|corr_daily|2}}"
+    quelle: workshop/brazil/validate_wind.py
+  - id: T1
+    wann: "4 Zwischenschritt"
+    wer: Rolle 4
+    entscheidung: "Test: festes 2-GW-Kabel auf der Baseline (kein E4-Lauf)"
+    warum: "Pipeline und Regeln vor den Studienläufen testen"
+    schritt: "BRIMP − BASE"
+    wirkung: "Δ Systemkosten {{c|BRIMP|BASE|2035-2045|Systemkosten/Systemkosten gesamt|1}} Mrd EUR/a; Erlös {{m|BRIMP|2035-2045|Kabel/Engpasserlös pro kW|0}} vs. Annuität {{m|BRIMP|2035-2045|Kabel/Annuität pro kW|0}} EUR/kW/a → MV und CAPEX50 messen den Abstand"
+    requires: [BASE, BRIMP]
+    quelle: workshop/results/notes.md
+    test: true
+  - id: O7
+    wann: "4 Zwischenschritt"
+    wer: alle
+    entscheidung: "Läufe nacheinander, nie Auswertung während eines Solves"
+    warum: "Solve abgebrochen (Speicher) am 2026-11-27"
+    schritt: "results/scenario-runs.md"
+    wirkung: "Rechenzeit ca. 2,5–3 h für sieben Läufe"
+    quelle: decisions.md O7
+  - id: E7
+    wann: "2 Studiendesign"
+    wer: Rolle 4
+    entscheidung: "Vertrauliche Projektdaten nur zur Validierung, nie als Input"
+    warum: "NDA"
+    schritt: "workshop/cba/validate_against_nda.py"
+    wirkung: "alle Zahlen der Studie aus öffentlichen Quellen"
+    quelle: decisions.md E7

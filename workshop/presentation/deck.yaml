@@ -1,0 +1,494 @@
+# SPDX-FileCopyrightText: Contributors to PyPSA-Eur <https://github.com/pypsa/pypsa-eur>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# Gliederung der Abschlusspräsentation (workshop/presentation/README.md).
+# build_deck.py baut daraus results/presentation/praesentation-<datum>.pptx.
+#
+# Keine Zahl abtippen: Platzhalter verwenden (README Abschnitt 5).
+#   {{m|RUN|JAHRE|Sektion/Kennzahl|DEZ}}        metrics.csv
+#   {{c|RUN|REF|JAHRE|Sektion/Kennzahl|DEZ}}    comparisons.csv (mit Vorzeichen)
+#   {{csv|PFAD|ZEILE|SPALTE|DEZ}}               Zelle einer Lieferung; ZEILE = Indexwert
+#                                               oder spalte=wert;spalte=wert
+#   {{date}}  {{status}}
+# JAHRE: 2040 oder 2035-2045 (Mittel der vorhandenen Jahre).
+# TODO im Text = eine Rolle muss noch liefern; --final bricht dann ab.
+#
+# NIE einen Wert, ein Verhältnis, den Deal-Code oder Garantiebedingungen aus
+# workshop/inputs/ hier eintragen (decisions.md E7).
+#
+# Felder je Folie:
+#   id, part, layout (title | section | bullets | figure | table | kpi),
+#   title (Aussage, nicht Thema), subtitle (Frage, E-Nummer oder Vergleichspaar),
+#   bullets, figure, table {header, rows}, kpis [{value, label, group}],
+#   requires (Läufe, die fertig sein müssen), source (Fußzeile), owner (Rolle),
+#   notes (Sprechernotizen), optional (true: entfällt bei umfang=kurz),
+#   test (true: entfällt bei testlaeufe=weglassen), nda_hinweis (true: nur bei nda_hinweis=qualitativ)
+# Automatische Tabellen: table: {auto: status | daten | annahmen | entscheidungen, phasen: ["1", "2"]}
+#   daten/annahmen/entscheidungen kommen aus register.yaml (Daten, Annahmen, Entscheidungen mit Wirkung).
+
+meta:
+  title: "Ein Kabel von Brasilien nach Deutschland: lohnt es sich?"
+  subtitle: "PyPSA x AI Workshop – Studie der Gruppe"
+  authors: "Rolle 1 Kabel · Rolle 2 Brasilien · Rolle 3 PyPSA-Eur · Rolle 4 Ökonomie · Rolle 5 Review"
+  font: "Libre Franklin"
+
+slides:
+  # ------------------------------------------------------------------ Einstieg
+  - id: titel
+    layout: title
+    owner: 4
+    bullets:
+      - "Stand {{date}} · {{status}}"
+
+  - id: kernaussage
+    layout: bullets
+    owner: 4
+    title: "Kernaussage"
+    subtitle: "Die Antwort vorweg – Begründung auf den folgenden Folien"
+    requires: [REF, CABLE, MV]
+    bullets:
+      - "TODO Rolle 4: Baut das Modell das Kabel? Kapazität 2035–2045 aus CABLE: {{m|CABLE|2045|Kabel/Kapazität|1}} GW (2045)"
+      - "TODO Rolle 4: Abstand zum Break-even (MV): {{m|MV|2035-2045|Kabel/Abstand zum Break-even pro kW|0}} EUR/kW/a"
+      - "TODO Rolle 4: Wovon es abhängt (CAPEX50, WACC7, Handel) – ein Satz"
+      - "TODO Rolle 4: Wer gewinnt, wer verliert – ein Satz"
+    source: "workshop/results/notes.md, metrics.csv, comparisons.csv"
+    notes: "Aussagen wörtlich aus notes.md übernehmen; keine neue Deutung auf der Folie."
+
+  - id: frage-2050
+    layout: figure
+    owner: 4
+    title: "Mit dem Nullcap 2050 sähe jede saubere Quelle wertvoll aus"
+    subtitle: "Der Auftrag lautet 'amazing solution' – wir prüfen, unter welchen Bedingungen"
+    figure: workshop/results/figures/BASE_co2.png
+    requires: [BASE]
+    bullets:
+      - "Baseline 2050: die Obergrenze legt {{m|BASE|2050|CO2/Schattenpreis der Obergrenze|0}} EUR/t auf den CO₂-Preis"
+      - "Höchster Strompreis 2050: {{m|BASE|2050|Preise/Strompreis Maximum|0}} EUR/MWh"
+      - "Deshalb: weicher Cap 2050 und Handel in allen Studienläufen (E3)"
+    source: "Lauf BASE (de10-myopic); workshop/README.md; decisions.md E3"
+
+  - id: entscheidungspfad
+    layout: table
+    owner: 4
+    title: "Wie wir zur Studie kamen: Entscheidungen und ihre Wirkung"
+    subtitle: "Ausgangslage und Studiendesign – jede Entscheidung mit dem Schritt, in dem sie gewirkt hat"
+    table: {auto: entscheidungen, phasen: ["1", "2"]}
+    source: "workshop/presentation/register.yaml; workshop/decisions.md"
+    notes: "Von oben nach unten erzählen: Befund der Baseline → Designentscheidung → wo sie greift."
+
+  # ------------------------------------------------------------------ A Inputs
+  - id: teil-a
+    layout: section
+    title: "A  Was eingeht"
+    subtitle: "Kabel · Brasilien · Deutschland – dem Weg des Stroms entlang"
+
+  - id: route
+    layout: figure
+    part: A
+    owner: 1
+    title: "Die kürzeste Route führt über 6.000 m tiefe Tiefsee"
+    subtitle: "Route und Tiefenprofil Brasilien–Deutschland (Screening, keine Vermessung)"
+    figure: results/cable-route/route.png
+    bullets:
+      - "Kürzeste Route: {{csv|results/cable-route/summary.csv|shortest|length_km|0}} km, max. {{csv|results/cable-route/summary.csv|shortest|max_depth_m|0}} m tief"
+      - "Tiefe meidend: {{csv|results/cable-route/summary.csv|avoid-deep|length_km|0}} km, max. {{csv|results/cable-route/summary.csv|avoid-deep|max_depth_m|0}} m"
+      - "Jenseits der qualifizierten 3.000 m: {{csv|results/cable-route/summary.csv|shortest|beyond_qualified_km|0}} km bzw. {{csv|results/cable-route/summary.csv|avoid-deep|beyond_qualified_km|0}} km – ohne Vorbild"
+      - "Im Modell: Großkreis × 1,25 = {{csv|results/cable-route/summary.csv|shortest|model_default_km|0}} km (TODO Rolle 1/3: Route ins Modell übernehmen oder Abweichung begründen)"
+    source: "GEBCO 2025 (data-brazil/bathymetry_atlantic), workshop/cable/route.py; Tiefenrekord 2.150 m, qualifiziert 3.000 m"
+
+  - id: kabelkosten
+    layout: table
+    part: A
+    owner: 1
+    title: "Was das Kabel kostet: eine Spanne ohne Vorbild"
+    subtitle: "Investitionskosten in EUR_2020 (E2), Annuität rechnet das Modell"
+    table:
+      header: ["", "niedrig", "zentral (Modell)", "hoch", "Quelle"]
+      rows:
+        - ["Kabel, EUR/MW/km", "TODO", "{{csv|data/costs/archive/v0.15.0/costs_2035.csv|technology=HVDC submarine;parameter=investment|value|0}}", "TODO", "DEA 2025 (Kostentabelle) / TODO Rolle 1"]
+        - ["Konverterpaar, EUR/kW", "TODO", "{{csv|data/costs/archive/v0.15.0/costs_2035.csv|technology=HVDC inverter pair;parameter=investment|value|0}}", "TODO", "DEA 2025 / TODO Rolle 1"]
+        - ["Lebensdauer, a", "", "40", "", "DEA, E2"]
+        - ["WACC, real", "", "10 %", "", "E2; Begründung TODO Rolle 1"]
+        - ["Verluste über die Strecke", "", "TODO", "", "TODO Rolle 1"]
+    bullets:
+      - "TODO Rolle 1: Machbarkeit bis 20 GW (Anzahl Bipole, O3)"
+    source: "data/costs/archive/v0.15.0 (Danish Energy Agency 2025); Lieferung Rolle 1"
+    notes: "Preisbasis prüfen: die Kostentabelle führt currency_year; E2 verlangt EUR_2020."
+
+  - id: standort-brasilien
+    layout: figure
+    part: A
+    owner: 2
+    title: "Der beste Exportstandort liegt an der Küste von Ceará"
+    subtitle: "Regionen im Vergleich, Planungsjahr 2035"
+    figure: results/brazil-validation/region_scan_2035.png
+    bullets:
+      - "CE east (Aracati): Wind-Kapazitätsfaktor {{csv|results/brazil-validation/region_scan_2035.csv|CE east (Aracati)|cf_onwind|2}}, LCOE {{csv|results/brazil-validation/region_scan_2035.csv|CE east (Aracati)|lcoe_site|0}} EUR/MWh"
+      - "Wind schlägt Solar am Standort (optimaler Windanteil {{csv|results/brazil-validation/region_scan_2035.csv|CE east (Aracati)|wind_share_opt|1}})"
+      - "Brasilien ist reiner Exportstandort: keine Nachfrage, kein Netz in Brasilien"
+      - "Kosten nach E2 abgeleitet: Kostentabelle × Brasilien-Faktor (IRENA 2023), WACC 10 %"
+    source: "ERA5 2013 (data-brazil), IRENA Renewable Power Generation Costs 2023; workshop/brazil/scan_regions.py, brazil_costs.py"
+
+  - id: profile-validierung
+    layout: figure
+    part: A
+    owner: 2
+    optional: true
+    title: "Die Windprofile treffen die Messung im Mittel"
+    subtitle: "Modellierte vs. gemessene Windeinspeisung (ONS 2013)"
+    figure: results/brazil-validation/wind_validation.png
+    bullets:
+      - "Alle Anlagen: gemessen {{csv|results/brazil-validation/wind_validation.csv|all|cf_measured|2}}, modelliert {{csv|results/brazil-validation/wind_validation.csv|all|cf_modelled|2}}"
+      - "Korrelation täglich {{csv|results/brazil-validation/wind_validation.csv|all|corr_daily|2}}, stündlich {{csv|results/brazil-validation/wind_validation.csv|all|corr_hourly|2}}"
+    source: "ONS open data 2013 (data-brazil/raw/ons), workshop/brazil/validate_wind.py"
+
+  - id: system-de
+    layout: bullets
+    part: A
+    owner: 3
+    title: "TODO Rolle 3: Aussage zum deutschen System"
+    subtitle: "Das System, an das das Kabel anschließt"
+    bullets:
+      - "Baseline: 10 Knoten, 2-h-Auflösung, Wetterjahr 2013, myopic 2025–2050"
+      - "TODO Rolle 3: Nachbarländer und Handel, Netto-Importgrenze ≈ 25 TWh/a (Quelle, O2)"
+      - "TODO Rolle 3: Anschlussknoten des Kabels"
+      - "TODO Rolle 3: weitere Verbesserungen, je mit Quelle und Wirkung"
+    source: "workshop/BASELINE.md; Lieferung Rolle 3"
+
+  - id: zwischenschritte
+    layout: table
+    part: A
+    owner: alle
+    title: "Was die Entscheidungen der Rollen unterwegs bewirkt haben"
+    subtitle: "Inputs und Zwischenschritte (Rollen 1–4), Zahlen aus den Lieferungen und Testläufen"
+    table: {auto: entscheidungen, phasen: ["3", "4"]}
+    source: "workshop/presentation/register.yaml; Lieferungen unter results/"
+
+  # ------------------------------------------------------------------ B Methodik
+  - id: teil-b
+    layout: section
+    title: "B  Wie gerechnet wird"
+    subtitle: "Die verbindlichen Entscheidungen der Gruppe (workshop/decisions.md)"
+
+  - id: e1-studientyp
+    layout: table
+    part: B
+    owner: 4
+    title: "Das Modell entscheidet selbst, ob es das Kabel baut"
+    subtitle: "E1 Studientyp: Kapazitätsausbau"
+    table:
+      header: ["", "Entscheidung"]
+      rows:
+        - ["Typ", "Kapazitätsausbau: das Modell wählt die Kabelgröße"]
+        - ["Foresight", "myopic, wie die Baseline"]
+        - ["Planungsjahre", "2025 bis 2050 in 5-Jahres-Schritten"]
+        - ["Kabel baubar ab", "2035 (Vorlaufzeit)"]
+        - ["Kabel maximal", "20 GW"]
+    source: "workshop/decisions.md E1"
+
+  - id: e2-parameter
+    layout: table
+    part: B
+    owner: 4
+    title: "Ein Satz Parameter für Deutschland, Brasilien und das Kabel"
+    subtitle: "E2 Harmonisierte ökonomische Parameter"
+    table:
+      header: ["Parameter", "Wert"]
+      rows:
+        - ["Währung, Preisbasis", "EUR, EUR_2020"]
+        - ["Kostenprojektion", "Kostentabellen v0.15.0 je Planungsjahr, gleiche Lernkurven für Brasilien"]
+        - ["WACC Deutschland", "7 % real"]
+        - ["WACC Erzeugung Brasilien", "10 % real (Länderrisiko)"]
+        - ["WACC Kabel und Konverter", "10 % real (Projektrisiko)"]
+        - ["Lebensdauer Kabel", "40 Jahre"]
+    bullets:
+      - "Kosten als Spanne geliefert, gerechnet mit dem zentralen Wert"
+    source: "workshop/decisions.md E2"
+
+  - id: e3-2050
+    layout: table
+    part: B
+    owner: 4
+    title: "2050 ohne Verzerrung durch den Nullcap"
+    subtitle: "E3 Umgang mit 2050 (Umsetzung Rolle 3)"
+    table:
+      header: ["", "Entscheidung"]
+      rows:
+        - ["CO₂-Obergrenze 2050", "wie 2045: 5 % von 1990"]
+        - ["CO₂-Preis 2050", "2.600 EUR/t (10 × 2045)"]
+        - ["Handel mit Nachbarn", "in allen Planungsjahren"]
+        - ["Netto-Import", "≤ heutiges Niveau, ca. 25 TWh/a (Quelle: TODO O2)"]
+    bullets:
+      - "Ergebnisse für 2050 sind überall getrennt markiert; Zusammenfassungen = Mittel 2035–2045"
+    source: "workshop/decisions.md E3"
+
+  - id: e4-szenarien
+    layout: table
+    part: B
+    owner: 4
+    title: "Sieben Läufe – jeder ändert genau eine Sache"
+    subtitle: "E4 Szenarien und Vergleichspaare"
+    table:
+      header: ["Lauf", "abgeleitet von", "einzige Änderung", "Zweck"]
+      rows:
+        - ["REF", "Baseline", "Handel, weicher Cap 2050, kein Kabel", "Vergleichsfall"]
+        - ["CABLE", "REF", "Kabel ausbaubar, WACC nach E2", "Hauptlauf"]
+        - ["MV", "CABLE", "Kabel auf 0,1 GW gezwungen", "Marginalwert"]
+        - ["CAPEX50", "CABLE", "Kabelinvestition 50 %", "Break-even"]
+        - ["WACC7", "CABLE", "WACC BR und Kabel 7 %", "Finanzierung"]
+        - ["REF-ISL", "REF", "ohne Handel", "Vergleich Insel"]
+        - ["CABLE-ISL", "CABLE", "ohne Handel", "Wert ohne Handel"]
+    bullets:
+      - "Vergleiche: CABLE−REF, MV−REF, CAPEX50−REF, WACC7−REF, CABLE-ISL−REF-ISL"
+    source: "workshop/decisions.md E4; workshop/analysis/runs.yaml"
+
+  - id: e5-e6-messung
+    layout: bullets
+    part: B
+    owner: 4
+    title: "Wie wir den Wert des Kabels messen"
+    subtitle: "E5 Break-even, E6 Auswertung"
+    bullets:
+      - "Systemkosten = Annuitäten aller aktiven Anlagen + Betriebskosten; Differenz zu REF"
+      - "Break-even: Schattenpreis von p_nom_min (MV) gegen Kabelannuität; Kontrolle Preisdifferenz × Fluss"
+      - "CAPEX50 bestätigt die Schwelle unabhängig"
+      - "Akteure: Erlöse − Kapital- − Betriebskosten; CO₂-Zahlungen an den Staat; Summe geprüft"
+      - "Jahre mit Cap-Aufschlag > 1.000 EUR/t gelten als cap-getrieben"
+    source: "workshop/decisions.md E5, E6; workshop/analysis/evaluate.py"
+
+  # ------------------------------------------------------------------ C Ergebnisse
+  - id: teil-c
+    layout: section
+    title: "C  Was herauskommt"
+    subtitle: "Nur fertige Läufe nach E4; 2050 getrennt (E3)"
+
+  - id: kabel-gebaut
+    layout: kpi
+    part: C
+    owner: 4
+    title: "TODO Rolle 4: Baut das Modell das Kabel? (Aussage)"
+    subtitle: "Lauf CABLE, Kabelkapazität je Planungsjahr"
+    requires: [CABLE]
+    kpis:
+      - {value: "{{m|CABLE|2035|Kabel/Kapazität|1}} GW", label: "2035", group: "Brazil cable"}
+      - {value: "{{m|CABLE|2040|Kabel/Kapazität|1}} GW", label: "2040", group: "Brazil cable"}
+      - {value: "{{m|CABLE|2045|Kabel/Kapazität|1}} GW", label: "2045", group: "Brazil cable"}
+      - {value: "{{m|CABLE|2050|Kabel/Kapazität|1}} GW", label: "2050 (getrennt, E3)", group: "Other"}
+    source: "Lauf CABLE (de10-cable), metrics.csv"
+
+  - id: systemkosten
+    layout: figure
+    part: C
+    owner: 4
+    title: "TODO Rolle 4: Was das Kabel das System kostet oder spart (Aussage)"
+    subtitle: "CABLE − REF"
+    requires: [REF, CABLE]
+    figure: workshop/results/figures/diff_CABLE_vs_REF.png
+    bullets:
+      - "Δ Systemkosten, Mittel 2035–2045: {{c|CABLE|REF|2035-2045|Systemkosten/Systemkosten gesamt|2}} Mrd EUR/a"
+      - "2050 (getrennt): {{c|CABLE|REF|2050|Systemkosten/Systemkosten gesamt|2}} Mrd EUR/a"
+      - "Ändert Kabel und WACC BR/Kabel zusammen (E4)"
+    source: "Läufe CABLE, REF; comparisons.csv"
+
+  - id: break-even
+    layout: table
+    part: C
+    owner: 4
+    title: "TODO Rolle 4: Abstand zum Break-even (Aussage)"
+    subtitle: "Lauf MV: Wert eines zusätzlichen MW Kabel gegen seine Kosten (E5)"
+    requires: [MV, CAPEX50]
+    table:
+      header: ["EUR/kW/a", "2035", "2040", "2045"]
+      rows:
+        - ["Engpasserlös pro kW", "{{m|MV|2035|Kabel/Engpasserlös pro kW|0}}", "{{m|MV|2040|Kabel/Engpasserlös pro kW|0}}", "{{m|MV|2045|Kabel/Engpasserlös pro kW|0}}"]
+        - ["Annuität pro kW", "{{m|MV|2035|Kabel/Annuität pro kW|0}}", "{{m|MV|2040|Kabel/Annuität pro kW|0}}", "{{m|MV|2045|Kabel/Annuität pro kW|0}}"]
+        - ["Abstand zum Break-even", "{{m|MV|2035|Kabel/Abstand zum Break-even pro kW|0}}", "{{m|MV|2040|Kabel/Abstand zum Break-even pro kW|0}}", "{{m|MV|2045|Kabel/Abstand zum Break-even pro kW|0}}"]
+    bullets:
+      - "TODO Rolle 4: Break-even-Investitionskosten (EUR/MW/km) gegen die Spanne von Rolle 1"
+      - "TODO Rolle 4: Schattenpreis von p_nom_min verfügbar? (O5) – sonst Engpasserlös als Näherung kennzeichnen"
+      - "CAPEX50 als Bestätigung: Kabel bei halben Kosten {{m|CAPEX50|2045|Kabel/Kapazität|1}} GW (2045)"
+    source: "Läufe MV, CAPEX50; Lieferung Rolle 1; decisions.md E5"
+
+  - id: sensitivitaeten
+    layout: table
+    part: C
+    owner: 4
+    title: "TODO Rolle 4: Was das Ergebnis bewegt (Aussage)"
+    subtitle: "Δ Systemkosten gegen den jeweiligen Vergleichsfall, Mittel 2035–2045, Mrd EUR/a"
+    requires: [REF, CABLE, CAPEX50, WACC7, REF-ISL, CABLE-ISL]
+    table:
+      header: ["Vergleich", "eine Änderung", "Δ Systemkosten", "Kabel 2045, GW"]
+      rows:
+        - ["CABLE − REF", "Kabeloption", "{{c|CABLE|REF|2035-2045|Systemkosten/Systemkosten gesamt|2}}", "{{m|CABLE|2045|Kabel/Kapazität|1}}"]
+        - ["CAPEX50 − REF", "Kabel zu halben Kosten", "{{c|CAPEX50|REF|2035-2045|Systemkosten/Systemkosten gesamt|2}}", "{{m|CAPEX50|2045|Kabel/Kapazität|1}}"]
+        - ["WACC7 − REF", "WACC 7 % statt 10 %", "{{c|WACC7|REF|2035-2045|Systemkosten/Systemkosten gesamt|2}}", "{{m|WACC7|2045|Kabel/Kapazität|1}}"]
+        - ["CABLE-ISL − REF-ISL", "ohne Handel", "{{c|CABLE-ISL|REF-ISL|2035-2045|Systemkosten/Systemkosten gesamt|2}}", "{{m|CABLE-ISL|2045|Kabel/Kapazität|1}}"]
+    source: "comparisons.csv, metrics.csv; decisions.md E4"
+
+  - id: gewinner-verlierer
+    layout: table
+    part: C
+    owner: 4
+    title: "TODO Rolle 4: Gewinner und Verlierer (Aussage)"
+    subtitle: "Δ Überschuss CABLE − REF, Mittel 2035–2045, Mrd EUR/a (E6)"
+    requires: [REF, CABLE]
+    table:
+      header: ["Akteur", "Δ Mrd EUR/a"]
+      rows:
+        - ["Verbraucher DE", "{{c|CABLE|REF|2035-2045|Akteure/Verbraucher DE|2}}"]
+        - ["Kabelbetreiber", "{{c|CABLE|REF|2035-2045|Akteure/Kabelbetreiber|2}}"]
+        - ["Erzeuger BR", "{{c|CABLE|REF|2035-2045|Akteure/Erzeuger BR|2}}"]
+        - ["Erzeuger DE: Onshore wind", "{{c|CABLE|REF|2035-2045|Akteure/Erzeuger DE: Onshore wind|2}}"]
+        - ["Erzeuger DE: Solar", "{{c|CABLE|REF|2035-2045|Akteure/Erzeuger DE: Solar|2}}"]
+        - ["Erzeuger DE: Gas", "{{c|CABLE|REF|2035-2045|Akteure/Erzeuger DE: Gas|2}}"]
+        - ["Erzeuger DE: Storage", "{{c|CABLE|REF|2035-2045|Akteure/Erzeuger DE: Storage|2}}"]
+        - ["Staat DE (CO₂)", "{{c|CABLE|REF|2035-2045|Akteure/Staat DE (CO2)|2}}"]
+    source: "comparisons.csv; Definitionen RESULTS.md Abschnitt 6"
+
+  - id: verdraengung
+    layout: figure
+    part: C
+    owner: 4
+    optional: true
+    title: "TODO Rolle 4: Was das Kabel im System verdrängt (Aussage)"
+    subtitle: "Lauf CABLE: Erzeugung in Deutschland"
+    requires: [CABLE]
+    figure: workshop/results/figures/CABLE_erzeugung.png
+    source: "Lauf CABLE, metrics.csv"
+
+  # ------------------------------------------------------------------ D Einordnung
+  - id: teil-d
+    layout: section
+    title: "D  Wie belastbar das ist"
+    subtitle: "Grenzen des Modells und was sich ändern müsste"
+
+  - id: grenzen
+    layout: table
+    part: D
+    owner: 4
+    title: "Wovon das Ergebnis abhängt"
+    subtitle: "Grenzen und ihre vermutete Richtung für den Kabelwert"
+    table:
+      header: ["Grenze", "Richtung", "von"]
+      rows:
+        - ["Myopic: jedes Jahr sieht nur sich selbst", "TODO", "BASELINE.md"]
+        - ["Ein Wetterjahr (2013), 2-h-Auflösung", "TODO", "BASELINE.md"]
+        - ["Brasilien nur als Exportstandort, ohne Nachfrage und Wasserkraft", "TODO", "Rolle 2"]
+        - ["Route als Screening, Tiefsee ohne Vorbild", "TODO", "Rolle 1"]
+        - ["Nachbarländer vereinfacht, Netto-Importgrenze", "TODO", "Rolle 3"]
+    source: "workshop/BASELINE.md 'Known limitations'; Rollen 1–3"
+
+  - id: fazit
+    layout: bullets
+    part: D
+    owner: 4
+    title: "TODO Rolle 4: Fazit (Aussage)"
+    subtitle: "Was sich ändern müsste, damit sich das Kabel lohnt"
+    requires: [CABLE, MV]
+    bullets:
+      - "TODO Rolle 4: Bedingung 1 (Kosten, aus Break-even)"
+      - "TODO Rolle 4: Bedingung 2 (Finanzierung, aus WACC7)"
+      - "TODO Rolle 4: Bedingung 3 (Systemumfeld, aus CABLE-ISL)"
+      - "TODO alle: nächste Schritte"
+    source: "Folien Break-even und Sensitivitäten"
+
+  # ------------------------------------------------------------------ Anhang
+  - id: anhang
+    layout: section
+    title: "Anhang"
+
+  - id: a-status
+    layout: table
+    part: Anhang
+    owner: 4
+    title: "Status der Läufe"
+    subtitle: "Solverstatus und Spitzenspeicher je Lauf"
+    table: {auto: status}
+    source: "workshop/results/status.csv"
+
+  - id: a-baseline
+    layout: figure
+    part: Anhang
+    owner: 4
+    title: "Die Baseline taugt nicht als Vergleichsfall für das Kabel"
+    subtitle: "Lauf BASE (de10-myopic): Insel, harter Nullcap 2050"
+    requires: [BASE]
+    figure: workshop/results/figures/BASE_preise.png
+    bullets:
+      - "Preisspitzen schon 2040: max. {{m|BASE|2040|Preise/Strompreis Maximum|0}} EUR/MWh"
+      - "2045 bindet die Obergrenze bereits: +{{m|BASE|2045|CO2/Schattenpreis der Obergrenze|0}} EUR/t"
+      - "Wasserstoffspeicher 2050: {{m|BASE|2050|Speicher/Wasserstoffspeicher Energie|0}} TWh"
+    source: "Lauf BASE; workshop/results/notes.md"
+
+  - id: a-test-brimp
+    layout: figure
+    part: Anhang
+    owner: 4
+    test: true
+    title: "Test: ein festes 2-GW-Kabel rechnet sich auf der Baseline nicht"
+    subtitle: "BRIMP − BASE – Test der Pipeline, kein Studienergebnis (Insel, harter Cap 2050)"
+    requires: [BASE, BRIMP]
+    figure: workshop/results/figures/diff_BRIMP_vs_BASE.png
+    bullets:
+      - "Δ Systemkosten, Mittel 2035–2045: {{c|BRIMP|BASE|2035-2045|Systemkosten/Systemkosten gesamt|1}} Mrd EUR/a"
+      - "Engpasserlös {{m|BRIMP|2035-2045|Kabel/Engpasserlös pro kW|0}} vs. Annuität {{m|BRIMP|2035-2045|Kabel/Annuität pro kW|0}} EUR/kW/a"
+      - "Auslastung {{m|BRIMP|2035|Kabel/Auslastung|0}} % (2035) → {{m|BRIMP|2045|Kabel/Auslastung|0}} % (2045)"
+    source: "Läufe BASE, BRIMP (de10-br-import); workshop/results/notes.md"
+
+  - id: a-daten
+    layout: table
+    part: Anhang
+    owner: alle
+    title: "Daten: Quelle, Jahr, Verarbeitung"
+    subtitle: "Vertrauliche Daten erscheinen nur als Quelle vor der Verarbeitung, ohne Werte (E7)"
+    table: {auto: daten}
+    source: "workshop/presentation/register.yaml"
+
+  - id: a-annahmen
+    layout: table
+    part: Anhang
+    owner: alle
+    title: "Annahmen und ihre Richtung für den Kabelwert"
+    subtitle: "Zentrale Werte der Modellläufe (E2); Spannen in den Lieferungen der Rollen"
+    table: {auto: annahmen}
+    source: "workshop/presentation/register.yaml; workshop/decisions.md E2, E3"
+
+  - id: a-nda
+    layout: bullets
+    part: Anhang
+    owner: 4
+    nda_hinweis: true
+    title: "Öffentliche Annahmen gegen vertrauliche Projektdaten plausibilisiert"
+    subtitle: "Validierung, kein Modellinput (E7)"
+    bullets:
+      - "Alle Zahlen dieser Präsentation stammen aus öffentlichen Quellen"
+      - "Kosten- und Finanzierungsannahmen wurden zur Laufzeit gegen vertrauliche Projektdaten geprüft"
+      - "Vertrauliche Werte erscheinen weder in Modell, Ergebnissen noch Folien"
+    source: "workshop/cba/validate_against_nda.py"
+
+  - id: a-definitionen
+    layout: bullets
+    part: Anhang
+    owner: 4
+    title: "Definitionen"
+    bullets:
+      - "Deutschland = alle AC-Knoten mit country == DE"
+      - "Systemkosten = Annuitäten aller aktiven Anlagen (inkl. Bestand) + Betriebskosten"
+      - "Akteure: Erlöse − Kapitalkosten − Betriebskosten; CO₂-Zahlungen gehen an den Staat"
+      - "Abstand zum Break-even pro kW = Engpasserlös pro kW − Annuität pro kW"
+      - "Netto-Import: grenzüberschreitende Leitungen nach Deutschland, ohne das Kabel"
+    source: "workshop/results/RESULTS.md Abschnitt 6; decisions.md E6"
+
+  - id: a-quellen
+    layout: bullets
+    part: Anhang
+    owner: alle
+    title: "Quellen und Qualitätssicherung"
+    bullets:
+      - "Kosten: Danish Energy Agency, Technology Data (2025), Kostentabellen PyPSA v0.15.0"
+      - "Brasilien: ERA5 2013, ONS open data 2013, IRENA Renewable Power Generation Costs 2023"
+      - "Bathymetrie: GEBCO 2025"
+      - "TODO alle: weitere Quellen mit Jahr"
+      - "Review durch Rolle 5 (Workflow, Auswertung, Vertraulichkeit) vor der Präsentation"
+    source: "Lieferungen der Rollen; results/review/"

@@ -1,0 +1,83 @@
+# SPDX-FileCopyrightText: Contributors to PyPSA-Eur <https://github.com/pypsa/pypsa-eur>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# Einstellungen der Abschlusspräsentation (workshop/presentation/README.md, User Guide).
+#
+# fest:    durch decisions.md oder den Plot-Style festgelegt, wird NIE gefragt.
+# fragen:  Fragen, die der Skill `presentation` im Chat stellt. Eine Frage wird nur
+#          gestellt, wenn (a) ihre Bedingung `wenn` zutrifft und (b) noch keine
+#          Antwort in answers.yaml steht oder sich der Kontext seit der Antwort
+#          geändert hat (`neu_fragen_wenn`). Sonst gilt die gespeicherte Antwort,
+#          und ohne Antwort der Default.
+#
+# Bedingungen (`wenn`), vom Builder ausgewertet:
+#   immer                 jedes Mal, solange keine Antwort gespeichert ist
+#   ausstehende_folien    mindestens eine Folie wäre "ausstehend" (Lauf fehlt)
+#   testlaeufe_fertig     ein fertiger Lauf gehört nicht zu E4 (z. B. BRIMP)
+#   nda_vorhanden         workshop/inputs/ existiert in diesem Workspace
+# Kontext (`neu_fragen_wenn`):
+#   laeufe                die Menge der fertigen Läufe hat sich geändert
+#
+# Antworten setzen:  build_deck.py --set schluessel=wert [...]
+# Offene Fragen:     build_deck.py --questions
+
+fest:
+  sprache: deutsch                    # Nutzerentscheidung 2026-11-27
+  jahre_zusammenfassung: 2035-2045    # E3: 2050 nur getrennt
+  jahr_2050: getrennt                 # E3
+  e4_laeufe: [REF, CABLE, MV, CAPEX50, WACC7, REF-ISL, CABLE-ISL]
+  farben: plot-style                  # st.GROUPS, Kabel #D55E00, Referenz #c4c4c4
+  zahlen: platzhalter                 # nie abtippen (README Abschnitt 5)
+  nda_rohdaten: nie                   # E7: nur Quelle vor der Verarbeitung nennen
+
+fragen:
+  - key: gruppe
+    frage: "Wie soll die Gruppe auf der Titelfolie heißen (Name oder Nummer)?"
+    optionen:
+      - {label: "Gruppe ohne Namen", wert: ""}
+    default: ""
+    wenn: immer
+    frei: true
+
+  - key: umfang
+    frage: "Wie viel Redezeit habt ihr? Danach richtet sich, ob optionale Folien (Profilvalidierung, Verdrängung, Einzelentscheidungen der Rollen) im Hauptteil bleiben."
+    optionen:
+      - {label: "voll (ca. 20 min)", wert: voll, beschreibung: "alle Folien, Entscheidungsfolien je Rolle im Hauptteil"}
+      - {label: "kurz (ca. 10 min)", wert: kurz, beschreibung: "optionale Folien entfallen, Entscheidungen nur als Übersicht"}
+    default: voll
+    wenn: immer
+
+  - key: ausstehend
+    frage: "Einige Läufe sind noch nicht fertig. Sollen ihre Folien als graue Platzhalter 'ausstehend' erscheinen oder weggelassen werden?"
+    optionen:
+      - {label: "zeigen (Entwurf)", wert: zeigen, beschreibung: "Platzhalter mit Grund; gut für die Abstimmung in der Gruppe"}
+      - {label: "weglassen", wert: weglassen, beschreibung: "nur Folien mit fertigen Ergebnissen; für einen Zwischenstand"}
+    default: zeigen
+    wenn: ausstehende_folien
+    neu_fragen_wenn: laeufe
+
+  - key: testlaeufe
+    frage: "Es gibt fertige Testläufe außerhalb von E4 (z. B. BRIMP). Sollen sie als Zwischenschritt im Anhang erscheinen?"
+    optionen:
+      - {label: "Anhang, als Test markiert", wert: anhang, beschreibung: "zeigt, was die Gruppe unterwegs gelernt hat"}
+      - {label: "weglassen", wert: weglassen, beschreibung: "nur Studienläufe nach E4"}
+    default: anhang
+    wenn: testlaeufe_fertig
+    neu_fragen_wenn: laeufe
+
+  - key: nda_hinweis
+    frage: "Wurden öffentliche Annahmen mit workshop/cba/validate_against_nda.py gegen die vertraulichen Projektdaten geprüft? Nur dann darf die Präsentation das qualitativ erwähnen (E7)."
+    optionen:
+      - {label: "ja, qualitativ erwähnen", wert: qualitativ, beschreibung: "'Öffentliche Annahmen gegen vertrauliche Projektdaten plausibilisiert' – ohne Werte, Bänder oder Deal"}
+      - {label: "nein, nicht erwähnen", wert: weglassen, beschreibung: "Validierung nicht gelaufen oder nicht gewollt"}
+    default: weglassen
+    wenn: nda_vorhanden
+
+  - key: schrift
+    frage: "Ist Libre Franklin auf dem Präsentationsrechner installiert (workshop/plotstyle/fonts/)? PowerPoint bettet die Schrift nicht ein."
+    optionen:
+      - {label: "Libre Franklin", wert: "Libre Franklin", beschreibung: "wie die Abbildungen (Plot-Style Regel 1)"}
+      - {label: "Arial", wert: "Arial", beschreibung: "sicher auf jedem Rechner"}
+    default: "Libre Franklin"
+    wenn: immer
