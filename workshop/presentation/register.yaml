@@ -30,16 +30,18 @@
 #   {{src|DATEI|wörtlicher Text}}                Text, der in der Übergabe stehen muss
 
 uebergaben:
-  - {pfad: workshop/role3/handover.md, rolle: 3, eingearbeitet: 2026-11-27, sha: 3e1964741ebb}
+  - {pfad: workshop/role3/handover.md, rolle: 3, eingearbeitet: 2026-11-27, sha: 075a93bd9dfa}
   - {pfad: workshop/role3/neighbours.md, rolle: 3, eingearbeitet: 2026-11-27, sha: 16a92ef5e2b7}
   - {pfad: workshop/role3/baseline-check.md, rolle: 3, eingearbeitet: 2026-11-27, sha: 06d87ae0b231}
-  - {pfad: workshop/role3/integration-status.md, rolle: 3, eingearbeitet: 2026-11-27, sha: 0b768a74a62b}
+  - {pfad: workshop/role3/integration-status.md, rolle: 3, eingearbeitet: 2026-11-27, sha: f81aa76eb66e}
   - {pfad: config/config.role3-neighbours.yaml, rolle: 3, eingearbeitet: 2026-11-27, sha: 3550d3ebe0fe}
   - {pfad: config/config.role3-reference.yaml, rolle: 3, eingearbeitet: 2026-11-27, sha: 081f762c3785}
   - {pfad: config/config.role3-e3.yaml, rolle: 3, eingearbeitet: 2026-11-27, sha: 6308ad1932c8}
   - {pfad: config/config.role3-e3-cable.yaml, rolle: 3, eingearbeitet: 2026-11-27, sha: 8a0de87f7a84}
   - {pfad: config/config.role3-cable.yaml, rolle: 3, eingearbeitet: 2026-11-27, sha: 60f1a213da6a}
-  - {pfad: workshop/role3/export_handoff.py, rolle: 3, eingearbeitet: 2026-11-27, sha: ee0c7effbfa0}
+  - {pfad: workshop/role3/handoff/README.md, rolle: 3, eingearbeitet: 2026-11-27, sha: 7ea37dc24279}
+  - {pfad: workshop/role3/handoff/de10-ref/manifest.yaml, rolle: 3, eingearbeitet: 2026-11-27, sha: 02ea37cff520}
+  - {pfad: workshop/role3/export_handoff.py, rolle: 3, eingearbeitet: 2026-11-27, sha: de9525c2d304}
 
 daten:
   - id: D1
@@ -124,7 +126,7 @@ daten:
     quelle: gelöste Netze results/<run>/networks/ (Rolle 3)
     jahr: 2026
     verarbeitung: workshop/role3/export_handoff.py (nur Aggregate je Land und Carrier)
-    ergebnis: "results/<run>/handoff/: manifest.yaml, system_costs, prices, trade, co2, cable"
+    ergebnis: "workshop/role3/handoff/<run>/ (im Repo): manifest.yaml, system_costs, prices, trade, co2, cable; liest evaluate.py, wenn die Netze fehlen"
     rolle: 3
   - id: D9
     name: Kabelsystem und Finanzierung (Validierung)
@@ -310,7 +312,8 @@ entscheidungen:
     entscheidung: "E3 umgesetzt: Netto-Import ≤ 25 TWh/a, Cap 2050 = 0,05 (de10-ref)"
     warum: "de10-nb9-ref importiert rund viermal so viel wie E3 erlaubt"
     schritt: "config/config.role3-e3.yaml, data/role3_constraints.py"
-    wirkung: "Grenze {{cfg|config/config.role3-e3.yaml|role3.net_import_limit.twh}} TWh/a, Brasilien-Kabel zählt nicht; nur im Testnetz geprüft, de10-ref noch nicht gelöst"
+    wirkung: "REF gelöst, alle Jahre optimal: Netto-Import {{m|REF|2030-2050|Handel/Netto-Import|1}} TWh/a im Mittel ab 2030 (Grenze {{cfg|config/config.role3-e3.yaml|role3.net_import_limit.twh}}), Lastabwurf ~0; Δ Systemkosten gegen NTC-Referenz 2030–2045 nur {{c|REF|NB9REF|2030-2045|Systemkosten/Systemkosten gesamt|2}} Mrd EUR/a"
+    requires: [REF, NB9REF]
     quelle: workshop/role3/handover.md
   - id: R3e
     wann: "3 Inputs"
@@ -318,7 +321,8 @@ entscheidungen:
     entscheidung: "CO₂-Preis 2050: 750 EUR/t statt 2.600 EUR/t vorgeschlagen, von Rolle 4 übernommen"
     warum: "Keine Quelle stützt 2.600 EUR/t; Literatur 250–1.250 EUR/t"
     schritt: "decisions.md E3; config/config.role3-co2-750.yaml"
-    wirkung: "E3-Kette setzt {{cfg|config/config.role3-e3.yaml|costs.emission_prices.co2.2050}} EUR/t (de10-nb9-ref: {{cfg|config/config.role3-reference.yaml|costs.emission_prices.co2.2050}}); TODO Rolle 3: handover.md nennt für de10-ref noch 2.600 EUR/t – klären, womit de10-ref gerechnet wurde"
+    wirkung: "REF 2050 mit {{m|REF|2050|CO2/CO2-Preis effektiv|0}} EUR/t neu gelöst (O8): Systemkosten 2050 {{c|REF|NB9REF|2050|Systemkosten/Systemkosten gesamt|1}} Mrd EUR/a gegenüber der NTC-Referenz mit {{cfg|config/config.role3-reference.yaml|costs.emission_prices.co2.2050}} EUR/t"
+    requires: [REF, NB9REF]
     quelle: workshop/role3/neighbours.md
   - id: R3f
     wann: "3 Inputs"
@@ -328,6 +332,15 @@ entscheidungen:
     schritt: "config/config.role3-e3-cable.yaml"
     wirkung: "Weser-Ems 2045: Ø-Preis {{md|workshop/role3/integration-status.md|Update after role 1's second push|Mean price 2045|DE0 5 (Weser-Ems, Wilhelmshaven/Emden)|en}} EUR/MWh, Engpass auf angeschlossenen Leitungen {{md|workshop/role3/integration-status.md|Update after role 1's second push|Congested share|DE0 5 (Weser-Ems, Wilhelmshaven/Emden)|en}} der Stunden; Schleswig-Holstein {{md|workshop/role3/integration-status.md|Update after role 1's second push|Congested share|DE0 9 (Schleswig-Holstein, Brunsbuettel)|en}}"
     quelle: workshop/role3/integration-status.md
+  - id: R3g
+    wann: "4 Zwischenschritt"
+    wer: Rolle 3 mit Rolle 4
+    entscheidung: "Ergebnisse als Hand-off-CSVs übergeben statt gelöster Netze"
+    warum: "Netze (169 MB je Lauf) sind nicht im Repo, Workspaces teilen kein Dateisystem"
+    schritt: "workshop/role3/handoff/de10-ref, export_handoff.py → evaluate.py"
+    wirkung: "REF und NB9REF in der Pipeline, ohne eigene Rechnung; Systemkosten und Preis DE stimmen mit evaluate.py überein"
+    requires: [REF]
+    quelle: workshop/role3/handover.md, handoff/README.md
   - id: T2
     wann: "4 Zwischenschritt"
     wer: Rolle 3

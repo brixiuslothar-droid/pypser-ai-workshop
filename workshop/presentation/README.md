@@ -303,6 +303,7 @@ Studie eingeht und warum. Es erzeugt die Folien "Entscheidungspfad",
 | `{{md\|PFAD\|ÜBERSCHRIFT\|ZEILE\|SPALTE[\|TEIL][\|en]}}` | Zelle der ersten Markdown-Tabelle unter einer Überschrift in einer Übergabe; `ZEILE` = Anfang der ersten Zelle; `TEIL` wählt aus „a → b → c“ (0, 1, −1) |
 | `{{cfg\|PFAD\|schlüssel.pfad}}` | Wert aus einer Config, z. B. `role3.net_import_limit.twh` |
 | `{{src\|PFAD\|Text}}` | Text, der wörtlich in der Übergabe stehen muss |
+| `{{share\|RUN\|JAHRE\|Sektion/Zähler\|Sektion/Nenner\|DEZ}}` | Anteil zweier Kennzahlen in % (z. B. Netto-Import an Nachfrage) |
 | `{{date}}`, `{{status}}` | Datum, Kurzstatus der Läufe |
 
 `JAHRE`: `2040` oder `2035-2045` (Mittel der vorhandenen Jahre). Deutsches

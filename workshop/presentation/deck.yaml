@@ -171,22 +171,23 @@ slides:
     part: A
     owner: 3
     title: "Mit heutigen Grenzkapazitäten liegt Deutschland zwischen Insel und freiem Handel"
-    subtitle: "2045: Insel (BASE) → freier Handel (de10-nb9) → heutige NTC (de10-nb9-ref), Zwischenschritte Rolle 3"
+    subtitle: "2045: Insel → freier Handel → heutige NTC → REF mit Importgrenze 25 TWh/a (E3)"
+    requires: [REF]
     table:
-      header: ["2045", "Insel", "freier Handel", "NTC (Referenz)"]
+      header: ["2045", "Insel", "freier Handel", "NTC", "REF (E3)"]
       rows:
-        - ["Preis DE, EUR/MWh", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Preis DE (€/MWh)|2045|0}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Preis DE (€/MWh)|2045|1}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Preis DE (€/MWh)|2045|2}}"]
-        - ["Nettoimport DE, TWh", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Nettoimport DE (TWh)|2045|0}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Nettoimport DE (TWh)|2045|1}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Nettoimport DE (TWh)|2045|2}}"]
-        - ["Anteil Import an Nachfrage", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Anteil Import an Nachfrage|2045|0}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Anteil Import an Nachfrage|2045|1}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Anteil Import an Nachfrage|2045|2}}"]
-        - ["Stunden > 300 EUR/MWh", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Stunden > 300 €/MWh|2045|0}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Stunden > 300 €/MWh|2045|1}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Stunden > 300 €/MWh|2045|2}}"]
-        - ["Batterie DE, GWh", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Batterie DE (GWh)|2045|0}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Batterie DE (GWh)|2045|1}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Batterie DE (GWh)|2045|2}}"]
+        - ["Preis DE, EUR/MWh", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Preis DE (€/MWh)|2045|0}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Preis DE (€/MWh)|2045|1}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Preis DE (€/MWh)|2045|2}}", "{{m|REF|2045|Preise/Strompreis lastgewichtet|0}}"]
+        - ["Nettoimport DE, TWh", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Nettoimport DE (TWh)|2045|0}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Nettoimport DE (TWh)|2045|1}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Nettoimport DE (TWh)|2045|2}}", "{{m|REF|2045|Handel/Netto-Import|0}}"]
+        - ["Anteil Import an Nachfrage", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Anteil Import an Nachfrage|2045|0}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Anteil Import an Nachfrage|2045|1}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Anteil Import an Nachfrage|2045|2}}", "{{share|REF|2045|Handel/Netto-Import|Nachfrage/Stromnachfrage|0}}"]
+        - ["Stunden > 300 EUR/MWh", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Stunden > 300 €/MWh|2045|0}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Stunden > 300 €/MWh|2045|1}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Stunden > 300 €/MWh|2045|2}}", "{{m|REF|2045|Preise/Stunden mit Preis > 300 EUR/MWh|0}}"]
+        - ["Batterie DE, GWh", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Batterie DE (GWh)|2045|0}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Batterie DE (GWh)|2045|1}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Batterie DE (GWh)|2045|2}}", "{{m|REF|2045|Speicher/Batteriespeicher Energie|0}}"]
     bullets:
       - "Neun Nachbarn, 20 Knoten, {{cfg|config/config.role3-neighbours.yaml|clustering.temporal.averaging}}-Schritte (Speicher)"
       - "Freier Handel unterbewertet das Kabel, die Insel überbewertet es"
       - "NTC aus TYNDP 2024, Kuppelleitungen nicht ausbaubar"
-      - "E3 begrenzt zusätzlich auf {{cfg|config/config.role3-e3.yaml|role3.net_import_limit.twh}} TWh/a (Energy-Charts 2024); REF noch nicht gelöst"
-    source: "workshop/role3/neighbours.md, handover.md (Rolle 3); ENTSO-E/ENTSOG TYNDP 2024; Energy-Charts 2024"
-    notes: "de10-nb9 und de10-nb9-ref sind Zwischenschritte von Rolle 3, keine E4-Läufe; Zahlen aus neighbours.md. REF (E3) ersetzt diese Folie, sobald gelöst."
+      - "REF: Importgrenze {{cfg|config/config.role3-e3.yaml|role3.net_import_limit.twh}} TWh/a greift ab 2030, Systemkosten ändern sich dadurch kaum ({{c|REF|NB9REF|2030-2045|Systemkosten/Systemkosten gesamt|2}} Mrd EUR/a)"
+    source: "workshop/role3/neighbours.md, handoff/de10-ref (Rolle 3); Pipeline (REF); TYNDP 2024; Energy-Charts 2024"
+    notes: "Insel, freier Handel und NTC sind Zwischenschritte von Rolle 3 (neighbours.md). REF ist der E4-Vergleichsfall, Zahlen aus der Pipeline (metrics.csv, aus dem Hand-off von Rolle 3)."
 
   - id: nachbarn-abb
     layout: figure
@@ -246,9 +247,9 @@ slides:
     layout: table
     part: A
     owner: 3
-    title: "Von der NTC-Referenz zur E3-Referenz und zum ersten Kabellauf"
+    title: "Von der NTC-Referenz zur gelösten E3-Referenz (REF)"
     subtitle: "Entscheidungen der Rolle 3 und ihre Wirkung (2/2)"
-    table: {auto: entscheidungen, ids: [R3d, R3e, R3f, T2]}
+    table: {auto: entscheidungen, ids: [R3d, R3e, R3g, T2]}
     source: "workshop/presentation/register.yaml; workshop/role3/"
 
   # ------------------------------------------------------------------ B Methodik
