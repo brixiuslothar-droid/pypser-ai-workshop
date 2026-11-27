@@ -19,9 +19,34 @@ pixi run snakemake results/de10-nb9-ref/networks/solved_2050.nc -c4 \
 - Die Zeitauflösung beträgt **4 h**, nicht 2 h. Das ist nötig wegen des Speichers.
 - Handel mit den Nachbarn ist auf die heutigen NTC begrenzt (TYNDP 2024), Kuppelleitungen werden nicht ausgebaut.
 - 2050: keine CO₂-Grenze, stattdessen ein CO₂-Preis.
-- Ein Solve braucht bis etwa 7 GB, ein voller Lauf etwa 25 min. **Nur ein Solve gleichzeitig pro Workspace.**
+- Ein Solve braucht bis etwa 7 GB (gemessen max. 6,7 GB in 2045), ein voller Lauf etwa 30 min. **Nur ein Solve gleichzeitig pro Workspace.**
+- **Gelöst für alle sechs Jahre.** Nettoimport DE 13–16 % der Nachfrage ab 2030, Preis DE 79–112 €/MWh. Zahlen: `neighbours.md`.
+- Ein Hinweis zu `scripts/add_brazil_import.py` (Commit `bad8500`): Der Code verbindet das Kabel mit dem DE-Bus, der `landing_de` am nächsten liegt, also nach Koordinaten. Das funktioniert auch mit den neuen Knotennummern. **Aber:** mit den Koordinaten von Wilhelmshaven ist DE0 5 nur 0,5 km näher als DE0 9 (Schleswig-Holstein). Eine kleine Änderung kippt die Wahl. `landing_de` deshalb ein Stück im Inneren der gewünschten Region setzen (Conneforde: 28 km Abstand), nicht auf die Grenze.
 - Eigene Varianten: als zusätzliche Config **nach** diesen drei Dateien laden und einen eigenen `run.name` setzen.
   - Damit die Eingangsdaten nicht neu gebaut werden müssen, `resources/de10-nb9-ref` kopieren (siehe Kopf von `config/config.role3-co2-750.yaml`).
+
+## Neu: Referenz nach `decisions.md` E3 (`de10-ref`), noch nicht gerechnet
+
+`de10-nb9-ref` bleibt, wie es gelöst wurde (nur NTC-Grenzen, 2050 nur CO₂-Preis). E3 verlangt aber zusätzlich:
+
+| E3 | `de10-nb9-ref` | `de10-ref` (neu) |
+|---|---|---|
+| Nettoimport DE pro Jahr ≤ heutiges Niveau (ca. 25 TWh/a) | nicht begrenzt, 90–112 TWh/a ab 2030 | `role3.net_import_limit.twh: 25` |
+| Weiche CO₂-Grenze 2050 wie 2045 (0,05) | keine Grenze, nur Preis 2.600 €/t | `co2_budget.upper.2050: 0.05` plus Preis |
+
+```bash
+mkdir -p resources/de10-ref results/de10-ref/networks
+cp -a resources/de10-nb9-ref/. resources/de10-ref/ && rm -f resources/de10-ref/networks/composed_2050.nc
+pixi run snakemake results/de10-ref/networks/solved_2050.nc -c4 \
+  --configfile config/config.workshop.yaml config/config.role3-neighbours.yaml \
+               config/config.role3-reference.yaml config/config.role3-e3.yaml \
+  --allowed-rules process_cost_data compose_network solve_network
+```
+
+- Neue Config: `config/config.role3-e3.yaml`, neuer Code: `add_net_import_limit` in `data/role3_constraints.py`. Die Grenze zählt Leitungen und DC-Links zwischen DE und den Nachbarn, **nicht** das Brasilien-Kabel (BR-Bus hat `country = "BR"`). Im Spielzeugnetz getestet (Grenze greift, Kabel zählt nicht, Leitungsrichtung egal). Im vollen Modell **noch nicht gelöst**: unklar, ob 25 TWh in allen Jahren lösbar ist und was es kostet (Lastabwurf ist im Netz zugelassen).
+- **Nicht kopieren:** gelöste Netze von `de10-nb9-ref`. Die Grenze ändert jedes Jahr ab 2025. Nur die Eingangsdaten (`resources/`) werden wiederverwendet.
+- Kabellauf auf dieser Referenz: `config/config.role3-cable.yaml` (liegt noch nicht im Repo, siehe `integration-status.md`) plus `config/config.role3-e3-cable.yaml` für den Run-Namen `de10-cable`. Ein Kabellauf auf der NTC-Referenz (`de10-nb9-cable`) ist **explorativ** und nicht der CABLE-Lauf von E4.
+- Die 25 TWh: Energy-Charts (Abfrage 27.11.2026, Kreuzflussdaten 2024, Grenzen von DE): Nettoimport insgesamt 28,3 TWh, davon 19,9 TWh aus den neun Modell-Nachbarn (Norwegen und Schweden sind nicht im Modell). 25 TWh liegt in dieser Spanne. Ob ein Jahreswert so gemessen wird, wie E3 ihn meint, entscheidet Rolle 4.
 
 ## Rolle 1 und 2 (Kabel, Brasilien)
 
@@ -57,3 +82,31 @@ Diese Stellschrauben sind per Config erreichbar (Block `role3:` in `config/confi
 - Bei aktiver Mindesteigenerzeugung (`min_self_generation`) das Kabel über Systemkosten bewerten (Zielfunktion mit und ohne Kabel), nicht über Preise.
 
 Details, Zahlen und Quellen: `workshop/role3/neighbours.md`, `workshop/role3/baseline-check.md`.
+
+## Interconnector Brasilien–Deutschland (`de10-nb9-cable`)
+
+Config `config/config.role3-cable.yaml`, geladen nach den drei Referenz-Configs. Code: `scripts/add_brazil_import.py`, Modus `generation: investment`.
+
+- **Kabel:** `BR0 Brazil HVDC`, Einbahn-Link BR0 → DE-Knoten am nächsten zu `landing_de` (Wilhelmshaven → `DE0 5`).
+  - Ausbaubar von 0 bis 20 GW ab 2035 (E1).
+  - Kosten aus der Kostentabelle (`HVDC submarine` je MW·km + `HVDC inverter pair`), WACC 10 % (E2).
+  - Länge: Großkreis × 1,25 ≈ 9.530 km, bis Rolle 1 eine Route liefert. Verluste gemäß `transmission_efficiency.DC` (≈ 21 %).
+- **Erzeugung in Brasilien:** je Technologie ein ausbaubarer Generator (`BR0 Brazil onwind`, `BR0 Brazil solar`) mit dem Standortprofil als `p_max_pu`. Kosten aus der Kostentabelle × `capex_factor`, WACC 10 %. Bereits gebaute Kapazität bleibt als Untergrenze in späteren Jahren.
+- **Rolle 2 liefert das Profil:**
+  - Format: stündliche CSV mit Index `time` (UTC) und Spalten `onwind`, `solar` (Kapazitätsfaktor 0–1).
+  - Pfad in `brazil_import.profile_file` eintragen.
+  - Optional: Potenzialgrenzen in `generation_p_nom_max` (MW je Technologie).
+  - Ohne eigenes Profil wird es aus dem Brasilien-Cutout für `region` gebaut (Standard: Pecém; Kapazitätsfaktor Wind 0,31, PV 0,19).
+- **Erstes Ergebnis 2035 (vor E3-Anpassung): Kabel 0 GW.**
+  - Die Annuität des Kabels liegt bei etwa 3,8 Mio. €/MW/a.
+  - Selbst bei 100 % Auslastung kostet die Übertragung etwa 555 €/MWh. Mit dem Standortprofil (≈ 27 % Kapazitätsfaktor) sind es etwa 2.000 €/MWh.
+  - → E5: Der Lauf `MV` (Kabel auf 0,1 GW erzwungen) misst den Abstand zum Break-even.
+
+## Angleichung an decisions.md E3 (ab 14:15)
+
+Die Referenz-Config folgt jetzt E3 statt der früheren Absprache in Rolle 3:
+- 2050 gilt die CO₂-Grenze 0,05 **und** ein CO₂-Preis von 2.600 €/t.
+- Der Nettoimport DE ist auf ≤ 25 TWh/a begrenzt (`role3.net_import_limit`, ohne Brasilien-Kabel). Die Quelle für 25 TWh fehlt noch (O2).
+- Die NTC-Grenzen bleiben zusätzlich aktiv.
+
+Die Ergebnisse vor der Anpassung liegen unter `results/de10-nb9-ref-v1` und `results/de10-nb9-cable-v1`.

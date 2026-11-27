@@ -14,6 +14,9 @@ its own switch, so role 4 can vary them in scenarios.
   to a commercial exchange capacity (NTC) in GW, given as
   ``[export from DE, import into DE]`` per neighbour, times ``scale`` (a number
   or a mapping year -> number). Physical line limits still apply on top.
+- ``net_import_limit``: annual net import of ``country`` (all borders, incl.
+  DC links between countries; the Brazil cable is not counted) at most
+  ``twh`` TWh (decisions.md E3). Off unless enabled.
 - ``min_self_generation``: each country generates on average at least
   ``level`` of its own annual demand (logic of PyPSA-Eur's ``EQ<level>c``).
   Note: its shadow price acts like a production subsidy and lowers nodal
@@ -140,3 +143,26 @@ def add_role3_constraints(n, cfg, horizon=None):
         add_ntc_limits(n, xb["ntc"], horizon)
     if cfg.get("min_self_generation", {}).get("enable", False):
         add_min_self_generation(n, cfg["min_self_generation"])
+    if cfg.get("net_import_limit", {}).get("enable", False):
+        add_net_import_limit(n, cfg["net_import_limit"])
+
+
+def add_net_import_limit(n, cfg):
+    """Annual net import of `country` <= `twh` (decisions.md E3)."""
+    m = n.model
+    home = cfg.get("country", "DE")
+    c = n.buses.country
+    w = n.snapshot_weightings.generators
+    expr = None
+    for nb in sorted(set(c.dropna()) - {home}):
+        f = _border_flow(n, nb, home)  # positive = import into home
+        if f is None:
+            continue
+        expr = f if expr is None else expr + f
+    if expr is None:
+        return
+    nyears = w.sum() / 8760.0
+    lhs = (expr * w.to_xarray()).sum("snapshot")
+    rhs = float(cfg["twh"]) * 1e6 * nyears
+    m.add_constraints(lhs <= rhs, name=f"role3-net-import-{home}")
+    _say(f"annual net import of {home} <= {cfg['twh']} TWh")
