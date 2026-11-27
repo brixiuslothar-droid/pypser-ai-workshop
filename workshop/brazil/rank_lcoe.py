@@ -1,18 +1,16 @@
 # SPDX-FileCopyrightText: Contributors to PyPSA-Eur <https://github.com/pypsa/pypsa-eur>
 # SPDX-License-Identifier: MIT
-"""Rank the LCOE of the northern coastal cells (lcoe_cells.csv) and place the shortlist sites in it.
+"""Rank the LCOE of the northern coastal cells (lcoe_cells.csv).
 
 Cells with less than MIN_MW installable capacity are left out: a cell of a few MW is the cheapest by
-chance and does not matter for the cable. Shortlist sites are ranked with the cost table at their measured
-capacity factor (like the cells), so the comparison is on one cost basis; the offered price is shown aside.
-Writes lcoe_ranking_cells.csv and lcoe_ranking_with_shortlist.csv (only ids and technical columns).
+chance and does not matter for the cable. Writes lcoe_ranking_cells and lcoe_ranking_locations.
 """
 import sys
 import pandas as pd
 
-# usage: rank_lcoe.py [year] [rate: wacc|r07]   (default 2030, wacc = 7.62 % of the term sheet)
+# usage: rank_lcoe.py [year] [rate: r07|r10]   (default 2030, 7 %)
 YEAR = int(sys.argv[1]) if len(sys.argv) > 1 else 2030
-RATE = sys.argv[2] if len(sys.argv) > 2 else "wacc"
+RATE = sys.argv[2] if len(sys.argv) > 2 else "r07"
 MIN_MW = 100
 OUT = "results/brazil-potential/"
 c = pd.read_csv(OUT + "lcoe_cells.csv").query("year == @YEAR and rate == @RATE")
@@ -39,20 +37,6 @@ best = n.sort_values("lcoe_eur_mwh").drop_duplicates(["lat", "lon"])
 print("\nCheapest technology per cell: number of cells and GW")
 print(best.groupby("carrier").agg(cells=("lat", "size"), GW=("p_nom_max_mw", lambda x: x.sum() / 1e3),
                                   TWh=("energy_gwh", lambda x: x.sum() / 1e3)).round(1).to_string())
-
-# shortlist in the ranking
-s = pd.read_csv(OUT + "shortlist_ranking.csv")
-tab, off_ = f"lcoe_table_{RATE}_{YEAR}", f"lcoe_offer_{RATE}"
-s = s[["site_id", "technology", "buildable_mw", "capacity_factor_measured", "suitable", tab, off_, "energy_gwh"]].rename(
-    columns={tab: "lcoe_eur_mwh", off_: "lcoe_offer_eur_mwh"})
-s["carrier"] = s.technology.map({"onwind": "onwind", "solar": "solar", "offwind": "offwind-ac"})
-s["rank_among_cells"] = [int((n.lcoe_eur_mwh < v).sum()) + 1 for v in s.lcoe_eur_mwh]
-s["cheaper_cells_same_tech"] = [int(((n.carrier == car) & (n.lcoe_eur_mwh < v)).sum()) for car, v in zip(s.carrier, s.lcoe_eur_mwh)]
-s = s.sort_values("lcoe_eur_mwh")
-s.to_csv(OUT + f"lcoe_ranking_with_shortlist{SUF}.csv", index=False)
-print(f"\nShortlist sites at their measured capacity factor, same year and rate as the cells ({YEAR}, {RATE})")
-print("\nShortlist sites on the cost table basis (ERA5 cells ranked 1 to %d)" % len(n))
-print(s.drop(columns=["technology"]).round(1).to_string(index=False))
 
 # ---- ranking of locations: one row per cell, cheapest technology, all options side by side ----------------
 loc = n.pivot_table(index=["lat", "lon"], columns="carrier", values="lcoe_eur_mwh")
