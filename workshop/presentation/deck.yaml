@@ -144,26 +144,112 @@ slides:
     source: "ONS open data 2013 (data-brazil/raw/ons), workshop/brazil/validate_wind.py"
 
   - id: system-de
-    layout: bullets
+    layout: table
     part: A
     owner: 3
-    title: "TODO Rolle 3: Aussage zum deutschen System"
-    subtitle: "Das System, an das das Kabel anschließt"
+    title: "Als Insel überschätzt das Modell den Wert jeder sauberen Quelle"
+    subtitle: "Baseline geprüft (Rolle 3): Preisspreizung ohne Handel, BASE"
+    requires: [BASE]
+    table:
+      header: ["BASE", "2035", "2040", "2045", "2050"]
+      rows:
+        - ["Preis lastgewichtet, EUR/MWh", "{{md|workshop/role3/baseline-check.md|Kennzahlen je Jahr|Preis, lastgewichtet|2035}}", "{{md|workshop/role3/baseline-check.md|Kennzahlen je Jahr|Preis, lastgewichtet|2040}}", "{{md|workshop/role3/baseline-check.md|Kennzahlen je Jahr|Preis, lastgewichtet|2045}}", "{{md|workshop/role3/baseline-check.md|Kennzahlen je Jahr|Preis, lastgewichtet|2050}}"]
+        - ["Preis max., EUR/MWh", "{{md|workshop/role3/baseline-check.md|Kennzahlen je Jahr|Preis max.|2035}}", "{{md|workshop/role3/baseline-check.md|Kennzahlen je Jahr|Preis max.|2040}}", "{{md|workshop/role3/baseline-check.md|Kennzahlen je Jahr|Preis max.|2045}}", "{{md|workshop/role3/baseline-check.md|Kennzahlen je Jahr|Preis max.|2050}}"]
+        - ["Stunden > 300 EUR/MWh", "{{md|workshop/role3/baseline-check.md|Kennzahlen je Jahr|Stunden > 300|2035}}", "{{md|workshop/role3/baseline-check.md|Kennzahlen je Jahr|Stunden > 300|2040}}", "{{md|workshop/role3/baseline-check.md|Kennzahlen je Jahr|Stunden > 300|2045}}", "{{md|workshop/role3/baseline-check.md|Kennzahlen je Jahr|Stunden > 300|2050}}"]
+        - ["Stunden < 1 EUR/MWh", "{{md|workshop/role3/baseline-check.md|Kennzahlen je Jahr|Stunden < 1|2035}}", "{{md|workshop/role3/baseline-check.md|Kennzahlen je Jahr|Stunden < 1|2040}}", "{{md|workshop/role3/baseline-check.md|Kennzahlen je Jahr|Stunden < 1|2045}}", "{{md|workshop/role3/baseline-check.md|Kennzahlen je Jahr|Stunden < 1|2050}}"]
+        - ["Abregelung Wind+PV, TWh / Anteil", "{{md|workshop/role3/baseline-check.md|Kennzahlen je Jahr|Abregelung|2035}}", "{{md|workshop/role3/baseline-check.md|Kennzahlen je Jahr|Abregelung|2040}}", "{{md|workshop/role3/baseline-check.md|Kennzahlen je Jahr|Abregelung|2045}}", "{{md|workshop/role3/baseline-check.md|Kennzahlen je Jahr|Abregelung|2050}}"]
+        - ["H₂-Speicher TWh / Brennstoffzelle GW", "{{md|workshop/role3/baseline-check.md|Kennzahlen je Jahr|H₂-Speicher|2035}}", "{{md|workshop/role3/baseline-check.md|Kennzahlen je Jahr|H₂-Speicher|2040}}", "{{md|workshop/role3/baseline-check.md|Kennzahlen je Jahr|H₂-Speicher|2045}}", "{{md|workshop/role3/baseline-check.md|Kennzahlen je Jahr|H₂-Speicher|2050}}"]
     bullets:
-      - "Baseline: 10 Knoten, 2-h-Auflösung, Wetterjahr 2013, myopic 2025–2050"
-      - "TODO Rolle 3: Nachbarländer und Handel, Netto-Importgrenze ≈ 25 TWh/a (Quelle, O2)"
-      - "TODO Rolle 3: Anschlussknoten des Kabels"
-      - "TODO Rolle 3: weitere Verbesserungen, je mit Quelle und Wirkung"
-    source: "workshop/BASELINE.md; Lieferung Rolle 3"
+      - "{{src|workshop/role3/baseline-check.md|Ohne Handel entstehen die Preisspitzen.}}"
+      - "2045 kostet die CO₂-Grenze schon {{md|workshop/role3/baseline-check.md|Kennzahlen je Jahr|Schattenpreis CO₂-Grenze (€/t)|2045}} EUR/t"
+      - "Wind an Land sinkt 2030–2040 (myopisch); EEG-Ziel 2030: 115 GW"
+    source: "workshop/role3/baseline-check.md (Rolle 3), Lauf de10-myopic"
+    notes: "Baseline-Zahlen von Rolle 3 und der Pipeline (metrics.csv) stimmen überein."
 
-  - id: zwischenschritte
+  - id: nachbarn
+    layout: table
+    part: A
+    owner: 3
+    title: "Mit heutigen Grenzkapazitäten liegt Deutschland zwischen Insel und freiem Handel"
+    subtitle: "2045: Insel (BASE) → freier Handel (de10-nb9) → heutige NTC (de10-nb9-ref), Zwischenschritte Rolle 3"
+    table:
+      header: ["2045", "Insel", "freier Handel", "NTC (Referenz)"]
+      rows:
+        - ["Preis DE, EUR/MWh", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Preis DE (€/MWh)|2045|0}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Preis DE (€/MWh)|2045|1}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Preis DE (€/MWh)|2045|2}}"]
+        - ["Nettoimport DE, TWh", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Nettoimport DE (TWh)|2045|0}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Nettoimport DE (TWh)|2045|1}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Nettoimport DE (TWh)|2045|2}}"]
+        - ["Anteil Import an Nachfrage", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Anteil Import an Nachfrage|2045|0}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Anteil Import an Nachfrage|2045|1}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Anteil Import an Nachfrage|2045|2}}"]
+        - ["Stunden > 300 EUR/MWh", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Stunden > 300 €/MWh|2045|0}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Stunden > 300 €/MWh|2045|1}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Stunden > 300 €/MWh|2045|2}}"]
+        - ["Batterie DE, GWh", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Batterie DE (GWh)|2045|0}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Batterie DE (GWh)|2045|1}}", "{{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Batterie DE (GWh)|2045|2}}"]
+    bullets:
+      - "Neun Nachbarn, 20 Knoten, {{cfg|config/config.role3-neighbours.yaml|clustering.temporal.averaging}}-Schritte (Speicher)"
+      - "Freier Handel unterbewertet das Kabel, die Insel überbewertet es"
+      - "NTC aus TYNDP 2024, Kuppelleitungen nicht ausbaubar"
+      - "E3 begrenzt zusätzlich auf {{cfg|config/config.role3-e3.yaml|role3.net_import_limit.twh}} TWh/a (Energy-Charts 2024); REF noch nicht gelöst"
+    source: "workshop/role3/neighbours.md, handover.md (Rolle 3); ENTSO-E/ENTSOG TYNDP 2024; Energy-Charts 2024"
+    notes: "de10-nb9 und de10-nb9-ref sind Zwischenschritte von Rolle 3, keine E4-Läufe; Zahlen aus neighbours.md. REF (E3) ersetzt diese Folie, sobald gelöst."
+
+  - id: nachbarn-abb
+    layout: figure
+    part: A
+    owner: 3
+    optional: true
+    title: "Grenzkapazitäten halbieren den Import gegenüber freiem Handel"
+    subtitle: "Nettoimport nach Deutschland: Insel, freier Handel, heutige NTC"
+    figure: workshop/role3/figures/compare_net_import_TWh.png
+    bullets:
+      - "Freier Handel 2050: {{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Nettoimport DE (TWh)|2050|1}} TWh"
+      - "Mit NTC 2050: {{md|workshop/role3/neighbours.md|Referenz `de10-nb9-ref`: Ergebnisse|Nettoimport DE (TWh)|2050|2}} TWh"
+      - "E3-Grenze: {{cfg|config/config.role3-e3.yaml|role3.net_import_limit.twh}} TWh/a"
+    source: "workshop/role3/figures, plot_compare.py (Rolle 3)"
+
+  - id: anschluss
+    layout: table
+    part: A
+    owner: 3
+    title: "Der Anschlussknoten trägt das Ergebnis nicht"
+    subtitle: "Weser-Ems gegen Schleswig-Holstein in der NTC-Referenz, 2045 (Rolle 3 zu Rolle 1)"
+    table:
+      header: ["2045", "Weser-Ems", "Schleswig-Holstein"]
+      rows:
+        - ["Ø-Preis, EUR/MWh", "{{md|workshop/role3/integration-status.md|Update after role 1's second push|Mean price 2045|DE0 5 (Weser-Ems, Wilhelmshaven/Emden)|en}}", "{{md|workshop/role3/integration-status.md|Update after role 1's second push|Mean price 2045|DE0 9 (Schleswig-Holstein, Brunsbuettel)|en}}"]
+        - ["Stunden < 1 EUR/MWh", "{{md|workshop/role3/integration-status.md|Update after role 1's second push|Hours below 1|DE0 5 (Weser-Ems, Wilhelmshaven/Emden)|en}}", "{{md|workshop/role3/integration-status.md|Update after role 1's second push|Hours below 1|DE0 9 (Schleswig-Holstein, Brunsbuettel)|en}}"]
+        - ["Stunden > 300 EUR/MWh", "{{md|workshop/role3/integration-status.md|Update after role 1's second push|Hours above 300|DE0 5 (Weser-Ems, Wilhelmshaven/Emden)|en}}", "{{md|workshop/role3/integration-status.md|Update after role 1's second push|Hours above 300|DE0 9 (Schleswig-Holstein, Brunsbuettel)|en}}"]
+        - ["Wind auf See, GW", "{{md|workshop/role3/integration-status.md|Update after role 1's second push|Offshore wind 2045|DE0 5 (Weser-Ems, Wilhelmshaven/Emden)|en}}", "{{md|workshop/role3/integration-status.md|Update after role 1's second push|Offshore wind 2045|DE0 9 (Schleswig-Holstein, Brunsbuettel)|en}}"]
+        - ["Erzeugung / Nachfrage, TWh", "{{md|workshop/role3/integration-status.md|Update after role 1's second push|Generation / demand|DE0 5 (Weser-Ems, Wilhelmshaven/Emden)|en}}", "{{md|workshop/role3/integration-status.md|Update after role 1's second push|Generation / demand|DE0 9 (Schleswig-Holstein, Brunsbuettel)|en}}"]
+        - ["Engpass auf angeschl. Leitungen", "{{md|workshop/role3/integration-status.md|Update after role 1's second push|Congested share|DE0 5 (Weser-Ems, Wilhelmshaven/Emden)|en}}", "{{md|workshop/role3/integration-status.md|Update after role 1's second push|Congested share|DE0 9 (Schleswig-Holstein, Brunsbuettel)|en}}"]
+    bullets:
+      - "Modell: Conneforde → Weser-Ems; Wilhelmshaven läge nur 0,5 km näher als am Nachbarknoten"
+      - "Knotenpreise unterscheiden sich um höchstens 7–8 EUR/MWh → Sensitivität"
+      - "Standort entscheidet Rolle 1 (O11)"
+    source: "workshop/role3/integration-status.md, handover.md (Rolle 3); Lauf de10-nb9-ref; connection-points.md (Rolle 1)"
+    notes: "10-Knoten-Modell ohne Netz innerhalb eines Knotens. Weser-Ems = Wilhelmshaven/Conneforde/Emden, Schleswig-Holstein = Brunsbüttel."
+
+  - id: zwischenschritte-12
     layout: table
     part: A
     owner: alle
-    title: "Was die Entscheidungen der Rollen unterwegs bewirkt haben"
-    subtitle: "Inputs und Zwischenschritte (Rollen 1–4), Zahlen aus den Lieferungen und Testläufen"
-    table: {auto: entscheidungen, phasen: ["3", "4"]}
+    title: "Was die Entscheidungen zu Kabel und Brasilien bewirkt haben"
+    subtitle: "Inputs und Zwischenschritte der Rollen 1, 2 und 4"
+    table: {auto: entscheidungen, ids: [R1a, R2a, R2b, T1, O7]}
     source: "workshop/presentation/register.yaml; Lieferungen unter results/"
+
+  - id: zwischenschritte-3
+    layout: table
+    part: A
+    owner: 3
+    title: "Vom Insel-Modell zum Handel mit heutigen Grenzkapazitäten"
+    subtitle: "Entscheidungen der Rolle 3 und ihre Wirkung (1/2)"
+    table: {auto: entscheidungen, ids: [R3a, R3b, R3c]}
+    source: "workshop/presentation/register.yaml; workshop/role3/"
+
+  - id: zwischenschritte-3b
+    layout: table
+    part: A
+    owner: 3
+    title: "Von der NTC-Referenz zur E3-Referenz und zum ersten Kabellauf"
+    subtitle: "Entscheidungen der Rolle 3 und ihre Wirkung (2/2)"
+    table: {auto: entscheidungen, ids: [R3d, R3e, R3f, T2]}
+    source: "workshop/presentation/register.yaml; workshop/role3/"
 
   # ------------------------------------------------------------------ B Methodik
   - id: teil-b
@@ -215,13 +301,16 @@ slides:
     table:
       header: ["", "Entscheidung"]
       rows:
-        - ["CO₂-Obergrenze 2050", "wie 2045: 5 % von 1990"]
-        - ["CO₂-Preis 2050", "2.600 EUR/t (10 × 2045)"]
-        - ["Handel mit Nachbarn", "in allen Planungsjahren"]
-        - ["Netto-Import", "≤ heutiges Niveau, ca. 25 TWh/a (Quelle: TODO O2)"]
+        - ["CO₂-Obergrenze 2050", "wie 2045: {{cfg|config/config.role3-e3.yaml|co2_budget.upper.2050}} von 1990"]
+        - ["CO₂-Preis 2050", "{{cfg|config/config.role3-e3.yaml|costs.emission_prices.co2.2050}} EUR/t (IPCC AR6; Literatur 250–1.250), ersetzt 2.600 EUR/t ohne Quelle"]
+        - ["Handel", "AT, BE, CH, CZ, DK, FR, LU, NL, PL in allen Jahren"]
+        - ["Grenze je Grenze", "heutige NTC (TYNDP 2024), nicht ausbaubar"]
+        - ["Netto-Import pro Jahr", "≤ {{cfg|config/config.role3-e3.yaml|role3.net_import_limit.twh}} TWh/a (Energy-Charts 2024: 19,9–28,3 TWh)"]
     bullets:
-      - "Ergebnisse für 2050 sind überall getrennt markiert; Zusammenfassungen = Mittel 2035–2045"
-    source: "workshop/decisions.md E3"
+      - "2050 überall getrennt; Zusammenfassungen = Mittel 2035–2045"
+      - "Folgen: 4-h-Schritte, gemeinsame CO₂-Grenze der zehn Länder, Lastabwurf ausgewiesen"
+      - "E3-Kette (config.role3-e3.yaml) setzt 2050: {{cfg|config/config.role3-e3.yaml|costs.emission_prices.co2.2050}} EUR/t"
+    source: "workshop/decisions.md E3; Umsetzung workshop/role3/handover.md, config/config.role3-e3.yaml"
 
   - id: e4-szenarien
     layout: table
@@ -241,6 +330,8 @@ slides:
         - ["CABLE-ISL", "CABLE", "ohne Handel", "Wert ohne Handel"]
     bullets:
       - "Vergleiche: CABLE−REF, MV−REF, CAPEX50−REF, WACC7−REF, CABLE-ISL−REF-ISL"
+      - "Jeder Lauf ist eine Config-Kette von Rolle 3; Eingangsdaten aus de10-nb9-ref kopiert"
+      - "TODO Rolle 3: Configs für MV, CAPEX50, WACC7, REF-ISL, CABLE-ISL (O9)"
     source: "workshop/decisions.md E4; workshop/analysis/runs.yaml"
 
   - id: e5-e6-messung
@@ -373,10 +464,12 @@ slides:
       header: ["Grenze", "Richtung", "von"]
       rows:
         - ["Myopic: jedes Jahr sieht nur sich selbst", "TODO", "BASELINE.md"]
-        - ["Ein Wetterjahr (2013), 2-h-Auflösung", "TODO", "BASELINE.md"]
+        - ["Ein Wetterjahr (2013), 4-h-Schritte mit Nachbarn", "unterschätzt Knappheit → Kabelwert eher zu niedrig", "BASELINE.md, Rolle 3"]
         - ["Brasilien nur als Exportstandort, ohne Nachfrage und Wasserkraft", "TODO", "Rolle 2"]
         - ["Route als Screening, Tiefsee ohne Vorbild", "TODO", "Rolle 1"]
-        - ["Nachbarländer vereinfacht, Netto-Importgrenze", "TODO", "Rolle 3"]
+        - ["Nachbarn ohne Ausbaugrenzen (viel PV in AT/CH); Importgrenze 25 TWh/a", "Grenze erhöht, billiger Zubau im Ausland senkt den Kabelwert", "Rolle 3"]
+        - ["10 Knoten, kein Netz innerhalb eines Knotens", "Anschlussknoten kaum unterscheidbar", "Rolle 3"]
+        - ["Kabel jedes Jahr neu optimiert (myopisch, O10)", "kein Bauplan; volle Annuität je Jahr", "Rolle 3"]
     source: "workshop/BASELINE.md 'Known limitations'; Rollen 1–3"
 
   - id: fazit
@@ -436,22 +529,49 @@ slides:
       - "Auslastung {{m|BRIMP|2035|Kabel/Auslastung|0}} % (2035) → {{m|BRIMP|2045|Kabel/Auslastung|0}} % (2045)"
     source: "Läufe BASE, BRIMP (de10-br-import); workshop/results/notes.md"
 
-  - id: a-daten
+  - id: a-daten-12
     layout: table
     part: Anhang
     owner: alle
-    title: "Daten: Quelle, Jahr, Verarbeitung"
+    title: "Daten zu Kabel und Brasilien: Quelle, Jahr, Verarbeitung"
     subtitle: "Vertrauliche Daten erscheinen nur als Quelle vor der Verarbeitung, ohne Werte (E7)"
-    table: {auto: daten}
+    table: {auto: daten, rollen: ["1", "2", "4"]}
+    source: "workshop/presentation/register.yaml"
+
+  - id: a-daten-3
+    layout: table
+    part: Anhang
+    owner: 3
+    title: "Daten zum deutschen System: Quelle, Jahr, Verarbeitung (1/2)"
+    subtitle: "Rolle 3"
+    table: {auto: daten, ids: [D6, D7, D8, D11]}
+    source: "workshop/presentation/register.yaml"
+
+  - id: a-daten-3b
+    layout: table
+    part: Anhang
+    owner: 3
+    title: "Daten zum deutschen System: Quelle, Jahr, Verarbeitung (2/2)"
+    subtitle: "Rolle 3"
+    table: {auto: daten, ids: [D10, D12, D13]}
     source: "workshop/presentation/register.yaml"
 
   - id: a-annahmen
     layout: table
     part: Anhang
     owner: alle
-    title: "Annahmen und ihre Richtung für den Kabelwert"
+    title: "Annahmen zu Kabel und Brasilien und ihre Richtung für den Kabelwert"
     subtitle: "Zentrale Werte der Modellläufe (E2); Spannen in den Lieferungen der Rollen"
-    table: {auto: annahmen}
+    table: {auto: annahmen, rollen: ["1", "2", "4"]}
+    source: "workshop/presentation/register.yaml; workshop/decisions.md E2, E3"
+
+  - id: a-annahmen-3
+    layout: table
+    part: Anhang
+    owner: 3
+    title: "Annahmen zum deutschen System und ihre Richtung für den Kabelwert"
+    subtitle: "Rolle 3"
+    table: {auto: annahmen, rollen: ["3"]}
     source: "workshop/presentation/register.yaml; workshop/decisions.md E2, E3"
 
   - id: a-nda

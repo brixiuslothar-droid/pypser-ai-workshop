@@ -88,6 +88,48 @@ class Data:
             return "fertig"
         return "teilweise" if done else "geplant"
 
+    def _safe(self, path):
+        p = (ROOT / path).resolve()
+        if INPUTS.resolve() in p.parents or p == INPUTS.resolve():
+            raise PermissionError(f"{path}: workshop/inputs/ ist unter NDA und keine Quelle für Folien (E7)")
+        if not p.exists():
+            raise FileNotFoundError(f"Datei fehlt: {path}")
+        return p
+
+    def cfg(self, path):
+        p = self._safe(path)
+        if p not in self._csv:
+            self._csv[p] = yaml.safe_load(p.read_text())
+        return self._csv[p]
+
+    def md_cell(self, path, heading, row, col):
+        """Cell of the first Markdown table below a heading (heading text contains HEADING; '' = whole file).
+        ROW matches the first cell (after removing ** and backticks, prefix match); COLUMN the header."""
+        p = self._safe(path)
+        lines = p.read_text().splitlines()
+        if heading:
+            idx = next((i for i, ln in enumerate(lines) if ln.startswith("#") and heading in ln), None)
+            if idx is None:
+                raise LookupError(f"{path}: keine Überschrift '{heading}'")
+            lines = lines[idx + 1:]
+        clean = lambda c: re.sub(r"[*`]", "", c).strip()  # noqa: E731
+        start = next((i for i, ln in enumerate(lines) if ln.lstrip().startswith("|")), None)
+        if start is None:
+            raise LookupError(f"{path}: keine Tabelle unter '{heading}'")
+        tab = []
+        for ln in lines[start:]:
+            if not ln.lstrip().startswith("|"):
+                break
+            tab.append([clean(c) for c in ln.strip().strip("|").split("|")])
+        header, body = tab[0], [r for r in tab[1:] if not set("".join(r)) <= set("-: ")]
+        if col not in header:
+            raise LookupError(f"{path}: keine Spalte '{col}' unter '{heading}'")
+        j = header.index(col)
+        for r in body:
+            if r[0].startswith(row) and j < len(r):
+                return r[j]
+        raise LookupError(f"{path}: keine Zeile '{row}' unter '{heading}'")
+
     def csv(self, path):
         p = (ROOT / path).resolve()
         if INPUTS.resolve() in p.parents or p == INPUTS.resolve():
@@ -137,6 +179,41 @@ def resolve(token, data):
         if d.empty:
             raise LookupError(f"kein Vergleich {run} − {ref} {yrs} {key}")
         return fmt(d.value.mean(), int(dec), sign=True)
+    if kind == "md":
+        # cell of a Markdown table in a role's handover: {{md|PATH|HEADING|ROW|COLUMN[|OPTION...]}}
+        # options: an integer picks one value of a chain "a → b → c" (0, 1, ... or -1 for the last);
+        # "en" marks an English source: numbers are converted to German format (4,400 → 4.400; 96.5 → 96,5).
+        # Remarks in parentheses ("(lowest)") are always dropped: the slide states the value only.
+        path, heading, row, col = parts[1:5]
+        v = data.md_cell(path, heading, row, col)
+        opts = parts[5:]
+        for o in opts:
+            if re.fullmatch(r"-?\d+", o):
+                v = [x.strip() for x in v.split("→")][int(o)]
+        v = re.sub(r"\s*\([^)]*\)", "", v).strip()
+        if "en" in opts:
+            v = re.sub(r"\d[\d,]*\.?\d*", lambda mo: mo.group(0).replace(",", "§").replace(".", ",").replace("§", "."), v)
+        return v
+    if kind == "src":
+        # literal text that must appear in the cited file: {{src|PATH|TEXT}}
+        _, path, txt = parts
+        body = re.sub(r"\s+", " ", data._safe(path).read_text())
+        if re.sub(r"\s+", " ", txt) not in body:
+            raise LookupError(f"{path}: '{txt}' nicht belegt (Übergabe geändert?)")
+        return txt
+    if kind == "cfg":
+        # value from a config file: {{cfg|PATH|key.sub.key}}
+        _, path, key = parts
+        v = data.cfg(path)
+        for k in key.split("."):
+            if not isinstance(v, dict) or (k not in v and (not k.isdigit() or int(k) not in v)):
+                raise LookupError(f"{path}: kein Schlüssel {key}")
+            v = v[k] if k in v else v[int(k)]
+        if isinstance(v, float):
+            return fmt(v, 0 if v.is_integer() else 2)
+        if isinstance(v, int) and not isinstance(v, bool):
+            return fmt(v, 0)
+        return "–" if v is None else str(v)
     if kind == "csv":
         _, path, row, col, dec = parts
         df = data.csv(path)
@@ -249,15 +326,40 @@ def load_register():
     return reg
 
 
-def register_table(kind, data, problems, eff, filt=None):
+def handover_changes():
+    """Handovers listed in register.yaml whose content changed since they were worked in (sha256 prefix)."""
+    import hashlib
+    out = []
+    for h in (load_register().get("uebergaben") or []):
+        p = ROOT / h["pfad"]
+        if not p.exists():
+            out.append(f"{h['pfad']} fehlt")
+            continue
+        sha = hashlib.sha256(p.read_bytes()).hexdigest()[:12]
+        if sha != str(h.get("sha", "")):
+            out.append(f"{h['pfad']} (Rolle {h.get('rolle', '?')}) geändert seit {h.get('eingearbeitet', '?')}, jetzt sha {sha}")
+    return out
+
+
+def _role_ok(entry, rollen):
+    if not rollen:
+        return True
+    who = str(entry.get("rolle", entry.get("wer", "")))
+    return any(str(r) in who for r in rollen)
+
+
+def register_table(kind, data, problems, eff, filt=None, rollen=None, ids=None):
     reg = load_register()
+    reg = {k: [e for e in v if _role_ok(e, rollen)] if k != "uebergaben" else v for k, v in reg.items()}
+    if ids:
+        reg = {k: [e for e in v if e.get("id") in ids] if k != "uebergaben" else v for k, v in reg.items()}
     if kind == "daten":
         header = ["", "Daten", "Quelle (vor der Verarbeitung)", "Jahr", "Verarbeitung → Ergebnis", "Rolle"]
         rows = []
         for d in reg["daten"]:
             res = d.get("verwendung") if d.get("nda") else d.get("ergebnis", "")
             rows.append([d["id"], d["name"], d["quelle"], str(d.get("jahr", "–")),
-                         f"{d.get('verarbeitung', '')} → {res}", str(d.get("rolle", ""))])
+                         fill(f"{d.get('verarbeitung', '')} → {res}", data, problems), str(d.get("rolle", ""))])
         return header, rows
     if kind == "annahmen":
         header = ["", "Annahme", "Wert", "Quelle", "Wirkung auf den Kabelwert"]
@@ -465,7 +567,10 @@ def status_rows(data):
     rows = []
     for name, r in data.spec["runs"].items():
         d = data.status[data.status.run == name]
-        rows.append([name, r["run_name"], data.run_state(name), ", ".join(sorted(set(d.status))) or "–",
+        state = data.run_state(name)
+        if state == "geplant" and r.get("missing"):
+            state = "geplant, Config fehlt"
+        rows.append([name, r["run_name"], state, ", ".join(sorted(set(d.status))) or "–",
                      fmt(d.peak_gb.max(), 1) if len(d) else "–"])
     return ["Lauf", "Run-Name", "Status", "Solver", "Spitzenspeicher GB"], rows
 
@@ -492,7 +597,8 @@ def build_body(slide, s, font, data, problems):
         if t.get("auto") == "status":
             header, rows = status_rows(data)
         elif t.get("auto") in ("daten", "annahmen", "entscheidungen"):
-            header, rows = register_table(t["auto"], data, problems, EFF, t.get("phasen"))
+            header, rows = register_table(t["auto"], data, problems, EFF, t.get("phasen"), t.get("rollen"),
+                                          t.get("ids"))
         else:
             header = [fill(h, data, problems) for h in t["header"]]
             rows = [[fill(v, data, problems) for v in r] for r in t["rows"]]
@@ -593,6 +699,8 @@ def main():
     ap.add_argument("--font", default=None, help="font family (overrides the answer 'schrift')")
     ap.add_argument("--questions", action="store_true",
                     help="print the questions the skill must ask now (YAML) and exit")
+    ap.add_argument("--nda-ok", nargs="+", default=[], metavar="FOLIE",
+                    help="acknowledge checked NDA-scan hits of these slides (valid while their text is unchanged)")
     ap.add_argument("--set", nargs="+", default=[], metavar="KEY=VALUE",
                     help="store answers in results/presentation/answers.yaml, then build")
     a = ap.parse_args()
@@ -674,6 +782,21 @@ def main():
 
     out = (a.out or OUT / f"praesentation-{date.today().isoformat()}.pptx").resolve()
     hits = nda_scan(texts)
+    import hashlib
+    sig = {k: hashlib.sha256(v.encode()).hexdigest()[:12] for k, v in texts.items()}
+    ans = load_answers()
+    acked = ans.get("_nda_geprueft", {})
+    if a.nda_ok:
+        for sid in a.nda_ok:
+            if sid not in sig:
+                sys.exit(f"--nda-ok: keine Folie {sid}")
+            acked[sid] = sig[sid]
+        ans["_nda_geprueft"] = acked
+        ANSWERS.parent.mkdir(parents=True, exist_ok=True)
+        ANSWERS.write_text(yaml.safe_dump(ans, allow_unicode=True, sort_keys=False))
+    quitted = {k: v for k, v in (hits or {}).items() if acked.get(k) == sig[k]}
+    if hits:
+        hits = {k: v for k, v in hits.items() if k not in quitted}
     rep_name, n_block = blockers()
 
     print(f"{'#':>3}  {'Folie':22s} {'Rolle':6s} {'Stand':10s} TODO  Grund")
@@ -686,9 +809,17 @@ def main():
         print("NDA-Scan: workshop/inputs/ nicht vorhanden, nicht geprüft.")
     elif hits:
         print("NDA-Scan: mögliche Treffer (von Hand prüfen, Werte werden nicht angezeigt): "
-              + ", ".join(f"{k} ({v})" for k, v in hits.items()))
+              + ", ".join(f"{k} ({v})" for k, v in hits.items())
+              + "\n  Nach Prüfung quittieren: --nda-ok " + " ".join(hits))
     else:
-        print("NDA-Scan: keine Treffer im Folientext und in den Notizen (Bilder nicht geprüft).")
+        print("NDA-Scan: keine offenen Treffer im Folientext und in den Notizen (Bilder nicht geprüft).")
+    if quitted:
+        print("NDA-Scan: quittiert (Text unverändert seit Prüfung): " + ", ".join(quitted))
+    changed = handover_changes()
+    if changed:
+        print("Übergaben geändert – register.yaml/deck.yaml prüfen, dann sha in register.yaml aktualisieren:")
+        for c in changed:
+            print("  " + c)
     if rep_name is None:
         print("Review: kein Bericht unter results/review/ – vor dem Präsentieren Rolle 5 (E8).")
     elif n_block:
@@ -696,8 +827,8 @@ def main():
     else:
         print(f"Review: keine Blocker in {rep_name}.")
 
-    if a.final and (n_pend or n_todo or hits or n_block):
-        sys.exit("--final: offene Folien, TODO, NDA-Treffer oder Blocker – keine Datei geschrieben.")
+    if a.final and (n_pend or n_todo or hits or n_block or changed):
+        sys.exit("--final: offene Folien, TODO, NDA-Treffer, Blocker oder geänderte Übergaben – keine Datei geschrieben.")
     out.parent.mkdir(parents=True, exist_ok=True)
     prs.save(out)
     print(f"\nGeschrieben: {out.relative_to(ROOT)}")
