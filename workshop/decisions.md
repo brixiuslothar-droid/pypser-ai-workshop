@@ -56,20 +56,40 @@ Baseline selbst):
 | | Entscheidung |
 |---|---|
 | CO₂-Obergrenze 2050 | **wie 2045: 0,05** relativ zu 1990 (`co2_budget.upper.2050: 0.05`) |
-| CO₂-Preis 2050 | **2.600 €/t** = 10 × CO₂-Preis 2045 (260 €/t) (`costs.emission_prices.co2.2050: 2600`) |
+| CO₂-Preis 2050 | **750 €/t** (`costs.emission_prices.co2.2050: 750`), zentraler Wert nach IPCC AR6; Literatur 250–1.250 €/t. Ersetzt den früheren Wert 2.600 €/t (10 × 2045), der keine Quelle hatte |
 | CO₂ 2025–2045 | unverändert wie in der Baseline |
-| Handel mit Nachbarländern | **in allen Planungsjahren** zugelassen |
-| Handelsgrenze | **Netto-Import pro Jahr ≤ heutiges Niveau**, gemessen als Jahresmenge (TWh/a) |
-| Zielwert | ca. 25 TWh/a (Deutschland 2024); Rolle 3 bestätigt den Wert mit Quelle (Energy-Charts/ENTSO-E) |
+| Handel mit Nachbarländern | **in allen Planungsjahren** zugelassen: AT, BE, CH, CZ, DK, FR, LU, NL, PL (`config/config.role3-neighbours.yaml`) |
+| Handelsgrenze je Grenze | heutige NTC (ENTSO-E/ENTSOG TYNDP 2024, Reference Grid), Kuppelleitungen nicht ausbaubar (`config/config.role3-reference.yaml`) |
+| Handelsgrenze pro Jahr | **Netto-Import DE ≤ 25 TWh/a** aus den neun Nachbarn, ohne Brasilien-Kabel (`role3.net_import_limit`, `config/config.role3-e3.yaml`) |
+| Quelle der 25 TWh | Energy-Charts, grenzüberschreitender Handel DE 2024, abgefragt 2026-11-27: Netto-Import 28,3 TWh insgesamt, 19,9 TWh aus den neun Modell-Nachbarn (NO, SE nicht im Modell). 25 TWh liegt in dieser Spanne und gilt als „heutiges Niveau“ (O2 geschlossen) |
 
-Umsetzung im Modell: Rolle 3. In allen Abbildungen sind die Ergebnisse für 2050
-getrennt gekennzeichnet.
+Umsetzung im Modell: Rolle 3 (`workshop/role3/handover.md`). In allen Abbildungen
+sind die Ergebnisse für 2050 getrennt gekennzeichnet.
+
+Folgen der Umsetzung, die jede Auswertung kennen muss:
+
+- **Zeitauflösung 4 h** statt 2 h in allen Läufen mit Nachbarn (Speicher). Läufe
+  mit Nachbarn sind deshalb nicht direkt mit der Baseline (2 h) vergleichbar;
+  `REF − BASE` ändert Handel, Cap 2050 **und** Zeitauflösung und ist nur
+  Einordnung, kein Vergleich nach E4.
+- Die CO₂-Obergrenze bis 2045 gilt **gemeinsam für alle zehn Länder**
+  (`co2_budget.relative`); Deutschland kann mit den Nachbarn ausgleichen.
+- **Lastabwurf** ist an AC-Knoten zu 100.000 €/MWh zugelassen. Jeder Lauf weist
+  ihn aus; mehr als ~0 ist ein Befund.
+- **Knotennamen** in Läufen mit Nachbarn haben andere Nummern als in der
+  Baseline. Busse nie fest eintragen.
 
 ## E4 Szenarien
 
-Jeder Vergleich ändert genau eine Sache. Alle Läufe stehen in einer
-`scenarios.yaml` (`run.scenarios`), mit eigenen run-Namen und gemeinsamen Inputs
-über `run.shared_resources`. Kein Lauf überschreibt einen anderen.
+Jeder Vergleich ändert genau eine Sache. Kein Lauf überschreibt einen anderen.
+
+**Umsetzung (geändert 2026-11-27):** Jeder Lauf ist eine Kette von Config-Dateien,
+die letzte setzt einen eigenen `run.name`. Die Eingangsdaten werden von
+`resources/de10-nb9-ref` kopiert (etwa 0,9 GB je Lauf), gelöste Netze nie.
+`scenarios.yaml` mit `run.shared_resources` fällt weg: Rolle 3 hat gezeigt, dass
+ein neuer Run-Name damit an fehlenden Kosten-Dateien scheitert. Die Ketten
+stehen in `workshop/analysis/runs.yaml`; dort ist auch festgehalten, welche
+Configs Rolle 3 schon geliefert hat und welche fehlen.
 
 | # | Lauf | Abgeleitet von | Einzige Änderung | Zweck |
 |---|---|---|---|---|
@@ -88,7 +108,9 @@ zusammen, beide gehören zur Kabeloption.
 `REF-ISL` ist nötig, weil die Baseline den harten Nullcap 2050 hat und sich damit
 in zwei Dingen von `CABLE-ISL` unterscheiden würde.
 
-Rechenzeit: 7 Läufe × 20–25 min, zusammen etwa 2,5–3 h, plus die Input-Builds.
+Rechenzeit: 7 Läufe × etwa 30 min (gemessen für `de10-nb9-ref`), zusammen
+etwa 3,5 h, plus das Kopieren der Eingangsdaten. Nur ein Solve gleichzeitig je
+Workspace (O7).
 
 Nicht gerechnet, weil die Zeit nicht reicht: harter Nullcap 2050, Kabelkosten
 150 %, andere Technologien oder Kosten in Brasilien.
@@ -249,12 +271,16 @@ ein NDA-Verstoß wiegt schwerer als jeder Modell- oder Auswertungsfehler.
 
 | # | Frage | Wer | Status |
 |---|---|---|---|
-| O1 | Lässt sich die Diskontrate je Carrier allein über die Config setzen (`costs.overwrites` oder `custom_costs.csv`)? | Rolle 4 prüft, Rolle 3 setzt um | offen |
-| O2 | Genauer Wert des Netto-Imports 2024 mit Quelle | Rolle 3 | offen |
+| O1 | Lässt sich die Diskontrate je Carrier allein über die Config setzen? | Rolle 3 | erledigt: `brazil_import.discount_rate.{generation,cable}` (10 % in `config.role3-cable.yaml`); Deutschland bleibt bei 7 % aus der Kostentabelle |
+| O2 | Genauer Wert des Netto-Imports 2024 mit Quelle | Rolle 3 | erledigt: Energy-Charts 2024, 19,9–28,3 TWh; 25 TWh/a bestätigt (E3) |
 | O3 | Ist ein Kabel bis 20 GW technisch machbar, mit wie vielen Bipolen? | Rolle 1 | offen |
-| O4 | Passen Handel mit den Nachbarn und 7 Läufe in Speicher und Rechenzeit des Tages? | Rolle 3 | offen |
-| O6 | Die vorhandenen Kabel-Configs (`config.brazil-import*.yaml`, Läufe `de10-br-*`) bauen auf der Baseline auf: Insel, harter Nullcap 2050. Sie erfüllen E3 nicht und taugen nur als Test, bis REF (Handel, weicher Cap) existiert. | Rolle 3 | offen |
+| O4 | Passen Handel mit den Nachbarn und 7 Läufe in Speicher und Rechenzeit des Tages? | Rolle 3 | teilweise: mit 4 h passt ein Solve (max. 6,9 GB 2045, ~30 min je Lauf); Speicher mit Kabel und Netto-Import-Grenze noch nicht gemessen; 7 Läufe ≈ 3,5 h |
+| O6 | Die vorhandenen Kabel-Configs (`config.brazil-import*.yaml`, Läufe `de10-br-*`) bauen auf der Baseline auf: Insel, harter Nullcap 2050. Sie erfüllen E3 nicht und taugen nur als Test. | Rolle 3 | erledigt: E3-Ketten `de10-ref` (`config.role3-e3.yaml`) und `de10-cable` (`config.role3-e3-cable.yaml`) geliefert, noch nicht gelöst |
 | O7 | Alle Rollen teilen sich einen Workspace mit 10 GB Speichergrenze. Ein Solve und eine Auswertung gleichzeitig haben am 2026-11-27 einen Solve (`de10-br-ext` 2045) abgebrochen (OOM). Regel: während eines Solves läuft nichts Speicherintensives; `evaluate.py` prüft das. | alle | Regel gilt |
+| O8 | E3-Configs von Rolle 3 setzen 2050 noch 2.600 €/t (`config.role3-reference.yaml`). Nach der Änderung von E3 muss die E3-Kette 750 €/t setzen, bevor `de10-ref` gelöst wird. | Rolle 3 | offen |
+| O9 | Configs für MV, CAPEX50, WACC7, REF-ISL, CABLE-ISL auf der E3-Kette fehlen. Vorschlag je eine kleine Datei nach `config.role3-e3-cable.yaml`, siehe `workshop/analysis/runs.yaml`. | Rolle 3 | offen |
+| O10 | Kabel und brasilianische Anlagen haben unendliche Lebensdauer; `add_brownfield` entfernt sie zwischen den Jahren, die Kapazität wird jedes Jahr neu optimiert (Rolle 3, `integration-status.md`). Die volle Annuität fällt jedes Jahr an, was für den Jahresvergleich konsistent ist, aber kein Bauplan. Beim ersten Kabellauf 2040 prüfen. | Rolle 3, Rolle 4 | offen |
+| O11 | Landepunkt DE: Wilhelmshaven liegt nur 0,5 km näher an DE0 5 als an DE0 9; `de10-cable` setzt Conneforde (eindeutig DE0 5). Rolle 1 entscheidet den Standort. | Rolle 1 | offen |
 | O5 | Schattenpreis von `p_nom_min` im MV-Lauf verfügbar? `data/custom_extra_functionality.py` macht Grenzen fester Kapazitäten zu Variablengrenzen; das Kabel ist ausbaubar und deshalb nicht betroffen. Prüfen. | Rolle 4 | offen |
 
 ## Änderungsprotokoll
@@ -267,3 +293,4 @@ ein NDA-Verstoß wiegt schwerer als jeder Modell- oder Auswertungsfehler.
 | 2026-11-27 | Datei von `decisions-role4.md` in `decisions.md` umbenannt; E6 Umsetzung (Pipeline, Ergebnisbericht, Skills) ergänzt; erste Auswertung der Baseline | Rolle 4 |
 | 2026-11-27 | Testauswertung `de10-br-import` (BRIMP − BASE); offene Punkte O6, O7 | Rolle 4 |
 | 2026-11-27 | Abschlusspräsentation: `workshop/presentation/` (Aufbau, Register, Builder) und Skill `presentation` | Rolle 4 |
+| 2026-11-27 | Übergabe Rolle 3 (`workshop/role3/handover.md`) übernommen: E3 CO₂-Preis 2050 auf 750 €/t (IPCC AR6), 25 TWh/a mit Quelle, NTC-Grenzen und Folgen (4 h, gemeinsame Grenze, Lastabwurf); E4 Config-Ketten statt `scenarios.yaml`; O1, O2, O6 erledigt, O8–O11 neu | Rolle 4 |
