@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: Contributors to PyPSA-Eur <https://github.com/pypsa/pypsa-eur>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# Workshop scenario: the model sizes the Brazil cable, 0 to 20 GW from 2035
+# (workshop/decisions E1), WACC 10 % real for Brazilian generation and the
+# cable (E2, the brazil_import defaults). Reference: the baseline de10-myopic.
+#
+#   pixi run snakemake results/de10-br-ext/networks/solved_2050.nc -c4 \
+#     --configfile config/config.workshop.yaml config/config.brazil-import-ext.yaml \
+#     --allowed-rules process_cost_data build_brazil_import_profile compose_network solve_network
+
+run:
+  name: de10-br-ext
+
+brazil_import:
+  enable: true
+  extendable: true
+  p_nom: 0              # minimum in the first cable year
+  p_nom_max: 20000      # MW, E1
