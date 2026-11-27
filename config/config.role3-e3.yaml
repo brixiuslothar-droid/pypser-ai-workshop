@@ -5,8 +5,8 @@
 # Role 3: the REF run of decisions.md (E3, E4): the neighbours reference
 # (config.role3-reference.yaml, NTC limits) plus
 #   - an annual net-import limit for Germany (role3.net_import_limit), and
-#   - the soft CO2 cap in 2050, as in 2045 (co2_budget.upper.2050: 0.05),
-#     on top of the 2,600 EUR/t price the reference already sets.
+#   - the soft CO2 cap in 2050, as in 2045 (co2_budget.upper.2050: 0.05), and
+#   - a 2050 CO2 price of 750 EUR/t instead of the reference's 2,600 EUR/t (E3).
 # Own layer so that de10-nb9-ref keeps the definition it was solved with.
 #
 #   pixi run snakemake results/de10-ref/networks/solved_2050.nc -c4 \
@@ -39,3 +39,10 @@ role3:
 co2_budget:
   upper:
     2050: 0.05       # E3: as in 2045
+
+costs:
+  emission_prices:
+    co2:
+      2050: 750      # E3 (changed 2026-11-27): 750 EUR/t, IPCC AR6 WGIII median for 1.5 C
+                     # pathways, literature 250-1,250 EUR/t (workshop/role3/neighbours.md).
+                     # Replaces the 2,600 EUR/t of config.role3-reference.yaml, which had no source.

@@ -102,11 +102,7 @@ Config `config/config.role3-cable.yaml`, geladen nach den drei Referenz-Configs.
   - Selbst bei 100 % Auslastung kostet die Übertragung etwa 555 €/MWh. Mit dem Standortprofil (≈ 27 % Kapazitätsfaktor) sind es etwa 2.000 €/MWh.
   - → E5: Der Lauf `MV` (Kabel auf 0,1 GW erzwungen) misst den Abstand zum Break-even.
 
-## Angleichung an decisions.md E3 (ab 14:15)
+## Stand 14:25: E3-Referenz `de10-ref` rechnet
 
-Die Referenz-Config folgt jetzt E3 statt der früheren Absprache in Rolle 3:
-- 2050 gilt die CO₂-Grenze 0,05 **und** ein CO₂-Preis von 2.600 €/t.
-- Der Nettoimport DE ist auf ≤ 25 TWh/a begrenzt (`role3.net_import_limit`, ohne Brasilien-Kabel). Die Quelle für 25 TWh fehlt noch (O2).
-- Die NTC-Grenzen bleiben zusätzlich aktiv.
-
-Die Ergebnisse vor der Anpassung liegen unter `results/de10-nb9-ref-v1` und `results/de10-nb9-cable-v1`.
+- `de10-ref` (Configs: neighbours + reference + e3) läuft seit 14:25. Er setzt E3 um: Nettoimport ≤ 25 TWh/a, CO₂-Grenze 0,05 und 2.600 €/t in 2050.
+- `de10-nb9-ref` und `de10-nb9-cable` (nur 2025–2035) bleiben unverändert als NTC-Variante bestehen.
