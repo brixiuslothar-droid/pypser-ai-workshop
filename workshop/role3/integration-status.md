@@ -357,3 +357,16 @@ above). I labelled it exploratory in `handover.md`.
   (`generation: investment`), `rules/compose.smk` (`profile_file`),
   `config/config.role3-cable.yaml`, and the edits to `neighbours.md` and the
   figures.
+
+### Update 13:25: pushed
+
+The held-back work is now in the group repo: `generation: investment` mode and
+`profile_file` (`scripts/add_brazil_import.py`, `rules/compose.smk`),
+`config/config.role3-cable.yaml`, reference results in `neighbours.md` and the
+refreshed comparison figures. Checks before pushing: both files compile, the
+default `import` mode still adds the price-based generator and no investment
+generators (toy test), confidential check clean on every commit and on the
+pushed range. The investment mode itself is not re-tested by me; its only
+solved year is 2035 in `results/de10-nb9-cable-v1` (no cable built).
+The unresolved item from 13:20 stays: a solve of `de10-nb9-ref` without the E3
+limit is running in this workspace.

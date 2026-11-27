@@ -45,7 +45,7 @@ pixi run snakemake results/de10-ref/networks/solved_2050.nc -c4 \
 
 - Neue Config: `config/config.role3-e3.yaml`, neuer Code: `add_net_import_limit` in `data/role3_constraints.py`. Die Grenze zählt Leitungen und DC-Links zwischen DE und den Nachbarn, **nicht** das Brasilien-Kabel (BR-Bus hat `country = "BR"`). Im Spielzeugnetz getestet (Grenze greift, Kabel zählt nicht, Leitungsrichtung egal). Im vollen Modell **noch nicht gelöst**: unklar, ob 25 TWh in allen Jahren lösbar ist und was es kostet (Lastabwurf ist im Netz zugelassen).
 - **Nicht kopieren:** gelöste Netze von `de10-nb9-ref`. Die Grenze ändert jedes Jahr ab 2025. Nur die Eingangsdaten (`resources/`) werden wiederverwendet.
-- Kabellauf auf dieser Referenz: `config/config.role3-cable.yaml` (liegt noch nicht im Repo, siehe `integration-status.md`) plus `config/config.role3-e3-cable.yaml` für den Run-Namen `de10-cable`. Ein Kabellauf auf der NTC-Referenz (`de10-nb9-cable`) ist **explorativ** und nicht der CABLE-Lauf von E4.
+- Kabellauf auf dieser Referenz: `config/config.role3-cable.yaml` plus `config/config.role3-e3-cable.yaml` für den Run-Namen `de10-cable`. Ein Kabellauf auf der NTC-Referenz (`de10-nb9-cable`) ist **explorativ** und nicht der CABLE-Lauf von E4.
 - Die 25 TWh: Energy-Charts (Abfrage 27.11.2026, Kreuzflussdaten 2024, Grenzen von DE): Nettoimport insgesamt 28,3 TWh, davon 19,9 TWh aus den neun Modell-Nachbarn (Norwegen und Schweden sind nicht im Modell). 25 TWh liegt in dieser Spanne. Ob ein Jahreswert so gemessen wird, wie E3 ihn meint, entscheidet Rolle 4.
 
 ## Rolle 1 und 2 (Kabel, Brasilien)
