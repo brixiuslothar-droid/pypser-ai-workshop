@@ -54,6 +54,8 @@ config/scenarios.yaml
 data/gas_network/scigrid-gas/
 data/costs_*.csv
 !/data/custom_costs.csv
+!/data/custom_extra_functionality.py
+!/data/role3_constraints.py
 
 dask-worker-space/
 publications.jrc.ec.europa.eu/
@@ -100,3 +102,9 @@ doc/img/intro-workflow.svg
 # pixi environments
 .pixi/*
 !.pixi/config.toml
+
+# Confidential workshop documents - never commit (see .claude/skills/confidential-inputs)
+/workshop/inputs/
+
+# Brazil workshop data: some sources (GADM, WDPA) must not be redistributed
+/data-brazil

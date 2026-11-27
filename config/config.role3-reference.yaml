@@ -1,0 +1,80 @@
+# SPDX-FileCopyrightText: Contributors to PyPSA-Eur <https://github.com/pypsa/pypsa-eur>
+#
+# SPDX-License-Identifier: CC0-1.0
+#
+# Role 3: proposed group reference. Germany with neighbours (load after
+# config.role3-neighbours.yaml) plus
+#   1. limits on trade with the neighbours (switches under `role3:`), and
+#   2. a CO2 price instead of the zero cap in 2050.
+#
+#   pixi run snakemake results/de10-nb9-ref/networks/solved_2050.nc -c4 \
+#     --configfile config/config.workshop.yaml config/config.role3-neighbours.yaml \
+#                  config/config.role3-reference.yaml
+#
+# The inputs are the same as for de10-nb9. To skip the 15-minute rebuild, copy
+# them once and run only the last three rules:
+#   mkdir -p resources/de10-nb9-ref && cp -a resources/de10-nb9/. resources/de10-nb9-ref/ \
+#     && rm -f resources/de10-nb9-ref/networks/composed_*.nc
+#   ... --allowed-rules process_cost_data compose_network solve_network
+#
+# The trade limits are read in data/role3_constraints.py, which Snakemake does
+# not track: after changing anything under `role3:` add --forcerun solve_network.
+# Background and results: workshop/role3/neighbours.md.
+
+run:
+  name: de10-nb9-ref
+
+# --- 1. Trade limits -------------------------------------------------------
+role3:
+  crossborder:
+    # Cross-border lines and DC links keep today's capacity. Without this the
+    # model expands DE-DK from 10 to 24 GW and DE-CH from 14 to 20 GW by 2030.
+    freeze_expansion: true
+    ntc:
+      enable: true
+      country: DE
+      # GW, [export from DE, import into DE]. Source: ENTSO-E/ENTSOG TYNDP 2024
+      # Scenarios, "Electricity and Hydrogen Reference Grid & Investment
+      # Candidates" (2023-11-03), sheet "1. Elec Ref Grid" (CC BY 4.0).
+      # DK = DKE1 + DKW1; PL = PL00I (export) / PL00E (import);
+      # LU = LUG1 only (DE and LU share one bidding zone, so this is loose).
+      values:
+        AT: [7.5, 7.5]
+        BE: [1.0, 1.0]
+        CH: [4.4, 4.2]
+        CZ: [2.5, 2.6]
+        DK: [4.1, 4.1]
+        FR: [4.8, 4.8]
+        LU: [2.4, 2.4]
+        NL: [5.0, 5.0]
+        PL: [2.0, 3.0]
+      # Multiplier per horizon on the reference-grid values. 1.0 = today's
+      # exchange capacity in every year (conservative: TYNDP plans more).
+      # Role 4 can vary this, e.g. {2035: 1.3, 2040: 1.5, ...}.
+      scale: 1.0
+  min_self_generation:
+    # Each country covers at least `level` of its annual demand itself. Off by
+    # default: in a 2030 test it pushed the German price down to 57 EUR/MWh
+    # (its shadow price works like a production subsidy). See neighbours.md.
+    enable: false
+    level: 0.9
+    countries: []           # empty = all countries
+
+# --- 2. 2050: CO2 price instead of the zero cap ----------------------------
+# The cap stays as in the baseline up to 2045 (now shared by all ten
+# countries); in 2050 it is replaced by a price of 10 x the 2045 price
+# (260 EUR/t x 10 = 2,600 EUR/t), a group decision (role 3).
+# NO PUBLISHED SOURCE supports 2,600 EUR/t; it is about 2x the highest value
+# found and still acts almost like the zero cap. Published 2050 values:
+#   IEA NZE, advanced economies: 250 USD2022/t (GEC Model Documentation 2023, Tab. 2.4)
+#   IPCC AR6 WGIII Ch. 3, C1 (1.5 C) median 630 (IQR 430-990) USD2015/t, ~750 EUR2025/t
+#   UBA Methodenkonvention 4.0 climate cost: 485 (1 % PRTP) / 1,240 (0 %) EUR2025/t
+#   DAC incl. storage as upper bound: ~230-835 USD/t (Sievert et al., Joule 2024)
+# Sensitivity with 750 EUR/t: config/config.role3-co2-750.yaml.
+co2_budget:
+  upper:
+    2050: null
+costs:
+  emission_prices:
+    co2:
+      2050: 2600
