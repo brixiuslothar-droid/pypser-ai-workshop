@@ -60,7 +60,9 @@ B="uv run --no-project --with python-pptx --with pandas --with pyyaml --with mat
 5. **Build.** `$B --set key=value ...` with the answers (stores them and
    builds), or `$B` if nothing was asked.
 6. **Read the report** the builder prints and tell the person, briefly:
-   - slides "ausstehend" and which runs or files they wait for;
+   - slides with placeholders (`▢`, state "Platzhalter") and which runs or
+     files they wait for; with `ausstehend=platzhalter` every slide keeps its
+     full layout and missing values show where they belong;
    - `TODO`s grouped by owning role (column "Rolle"), so each role knows its gap;
    - "Layout" warnings (table too long: split it or shorten text);
    - NDA scan hits (see below), review blockers.
