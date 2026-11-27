@@ -1,0 +1,57 @@
+### Baseline (BASE, `de10-myopic`)
+
+Stand 2026-11-27. Befunde von Hand, Zahlen aus den Tabellen unten.
+
+- **Die Baseline taugt nicht als Vergleichsfall für das Kabel.** 2050 legt die
+  CO2-Obergrenze 24.354 EUR/t auf den CO2-Preis, der höchste Strompreis liegt bei
+  2.959 EUR/MWh (76 h über 1.000 EUR/MWh). Jede saubere Stromquelle sähe dagegen
+  wertvoll aus. Deshalb vergleicht die Studie mit REF (E3, E4), nicht mit BASE.
+- **Schon 2035 und 2040 gibt es Preisspitzen** über 1.000 EUR/MWh (32 bzw. 42 h).
+  Ursache ist die Insellage: Knappheit, die Handel decken würde, fällt auf Speicher
+  und Reservekraftwerke. Ein Kabel bekäme hier einen Wert, der mit Handel (REF)
+  kleiner ausfallen dürfte.
+- **2045 ist die Obergrenze bereits bindend** (488 EUR/t zusätzlich, effektiv 748 EUR/t).
+  Das Ergebnis 2045 ist damit ebenfalls teilweise cap-getrieben; E3 entschärft nur 2050.
+- **Speicher wachsen stark:** Kapitalkosten der Speicher von 7 (2040) auf
+  36 Mrd EUR/a (2050), davon 72 TWh Wasserstoffspeicher 2050. Das ist der Kostenblock,
+  den ein Kabel oder Handel am ehesten ersetzt.
+- **Abregelung** von Wind, Solar und Laufwasser steigt auf 159 TWh (2045) und
+  107 TWh (2050): Ein Kabel nach Deutschland konkurriert mit billigem Überschussstrom
+  in vielen Stunden; sein Wert liegt in den knappen Stunden.
+- **Verteilung:** Verbraucher zahlen 49 (2025) bis 89 Mrd EUR/a (2050). Die
+  Erzeuger fossiler Anlagen verlieren bis 2035 deutlich (Bestand wird nicht mehr
+  gedeckt), Wind und Wasser gewinnen ab 2045.
+- **Solver:** 2045 endet "imprecise" (laut BASELINE.md nutzbar); Spitzenspeicher
+  6,7 GB von 8 GB, also wenig Luft für mehr Nachbarländer (O4).
+
+### Test: fester 2-GW-Kabel auf der Baseline (BRIMP − BASE, `de10-br-import`)
+
+Stand 2026-11-27. Kein Studienergebnis: BRIMP baut auf BASE (Insel, harter
+Nullcap 2050) und gehört nicht zu E4. Er testet Pipeline und Regeln.
+
+- **Ein festes 2-GW-Kabel rechnet sich hier in keinem Jahr.** Die Systemkosten
+  steigen um 3,9 bis 5,3 Mrd EUR/a (Mittel 2035–2045: +4,8). Das Kabel kostet
+  2,6–3,0 Tsd. EUR/kW/a Annuität bei 10 % WACC, verdient aber nur 0,35–0,57 Tsd.
+  EUR/kW/a Engpasserlös: Die Erlöse decken 12–21 % der Kosten.
+- **Treiber sind die Kosten der Leitung:** rund 9.500 km (Großkreis × 1,25),
+  78,5 % Wirkungsgrad. Das Kabel kostet 2035 6,0 Mrd EUR/a; Deutschland spart dafür
+  nur 1,2 Mrd EUR/a an eigenen Kosten.
+- **Die Auslastung fällt von 65 % (2035) auf 34 % (2045)**, weil Deutschland
+  selbst immer mehr billigen Überschussstrom hat (Stunden mit Preis < 1 EUR/MWh).
+  Der Engpasserlös pro kW steigt trotzdem, weil die wenigen knappen Stunden teurer
+  werden.
+- **2050 verzerrt nicht einmal zugunsten des Kabels:** Der Schattenpreis der
+  Obergrenze sinkt nur um 243 von 24.354 EUR/t; die 2 GW bewegen den Nullcap kaum.
+  Das Jahr ist trotzdem gekennzeichnet und in der Zusammenfassung ausgelassen.
+- **Gewinner und Verlierer** (Mittel 2035–2045): Verbraucher DE +0,5 Mrd EUR/a
+  durch etwas niedrigere Preise; der Kabelbetreiber −4,9; der Staat −0,4 (weniger
+  CO2-Erlöse). Die Erzeuger in BR stehen bei 0, weil der Importpreis im Modell
+  gleich ihren Kosten ist (LCOE, `brazil_import.price`).
+- **Abgleich:** Systemkosten, Kabelannuität, Engpasserlös, Lieferung, Auslastung
+  und Preis stimmen in allen Jahren mit `workshop/cba/cba_brazil_import.py`
+  überein (Abweichung < 0,001); Kabelannuität, Lieferung und Engpasserlös 2040
+  direkt aus dem Netz nachgerechnet.
+- **Was das für die Studie heißt:** Für die Kapazitätsausbau-Läufe (E1) ist zu
+  erwarten, dass das Modell das Kabel nicht baut. Der Abstand zum Break-even
+  liegt hier bei rund 2,1–2,7 Tsd. EUR/kW/a; MV und CAPEX50 (E5) messen ihn mit
+  Handel genauer.

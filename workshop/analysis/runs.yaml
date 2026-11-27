@@ -6,58 +6,90 @@
 # A run is evaluated once results/<run_name>/networks/solved_<year>.nc exist;
 # runs without results are listed as "planned" in the report.
 #
-# run_name must match the run name in config/scenarios.yaml (role 3 sets it up).
-# configs: the config files the run is solved with, in the order Snakemake gets
-# them; the pipeline reads CO2 price and cap from them (on top of config.default.yaml).
+# A run is a chain of config files (E4, changed 2026-11-27): the last file sets
+# its own run.name; inputs are copied from resources/de10-nb9-ref (role 3,
+# workshop/role3/handover.md). configs = the chain in the order Snakemake gets
+# it; the pipeline reads CO2 price and cap from it (on top of config.default.yaml).
+# missing: config files the run still needs (open point O9, role 3).
 
 horizons: [2025, 2030, 2035, 2040, 2045, 2050]
 
+chains:
+  nb9: &nb9 [config/config.workshop.yaml, config/config.role3-neighbours.yaml,
+             config/config.role3-reference.yaml]
+  e3: &e3 [config/config.workshop.yaml, config/config.role3-neighbours.yaml,
+           config/config.role3-reference.yaml, config/config.role3-e3.yaml]
+  e3cable: &e3cable [config/config.workshop.yaml, config/config.role3-neighbours.yaml,
+                     config/config.role3-reference.yaml, config/config.role3-e3.yaml,
+                     config/config.role3-cable.yaml, config/config.role3-e3-cable.yaml]
+
 runs:
-  BASE:
-    run_name: de10-myopic
-    configs: [config/config.workshop.yaml]
-    description: Workshop baseline, Germany as an island, hard zero CO2 cap in 2050
+  # --- study runs (E4) -------------------------------------------------------
   REF:
     run_name: de10-ref
-    parent: BASE
-    configs: [config/config.workshop.yaml]   # + scenario entry in config/scenarios.yaml
-    description: Trade with neighbours, soft CO2 cap 2050, no cable
+    configs: *e3
+    description: "Neighbours (NTC, 4 h), net import <= 25 TWh/a, cap 2050 = 0.05, no cable"
   CABLE:
     run_name: de10-cable
     parent: REF
-    configs: [config/config.workshop.yaml]
-    description: REF + Brazil cable extendable from 2035, WACC per E2 (main run)
+    configs: *e3cable
+    description: "REF + Brazil cable extendable 0-20 GW from 2035, BR generation by investment, WACC 10 % (main run)"
   MV:
     run_name: de10-mv
     parent: CABLE
-    configs: [config/config.workshop.yaml]
+    configs: *e3cable
+    missing: ["config with run.name de10-mv and brazil_import p_nom = p_nom_max = 100 (MW)"]
     description: CABLE with the cable forced to 0.1 GW (marginal value)
   CAPEX50:
     run_name: de10-capex50
     parent: CABLE
-    configs: [config/config.workshop.yaml]
+    configs: *e3cable
+    missing: ["config with run.name de10-capex50 and brazil_import.cost_factor: 0.5"]
     description: CABLE with 50 % cable investment cost
   WACC7:
     run_name: de10-wacc7
     parent: CABLE
-    configs: [config/config.workshop.yaml]
+    configs: *e3cable
+    missing: ["config with run.name de10-wacc7 and brazil_import.discount_rate {generation: 0.07, cable: 0.07}"]
     description: CABLE with 7 % WACC for Brazil and the cable
   REF-ISL:
     run_name: de10-ref-isl
     parent: REF
-    configs: [config/config.workshop.yaml]
+    configs: *e3
+    missing: ["config with run.name de10-ref-isl and countries [DE] on the E3 chain (own inputs, 2 h?) - to agree with role 3"]
     description: REF without trade
   CABLE-ISL:
     run_name: de10-cable-isl
     parent: CABLE
-    configs: [config/config.workshop.yaml]
+    configs: *e3cable
+    missing: ["as REF-ISL, on the cable chain"]
     description: CABLE without trade
 
-# Differences "run - reference" the report shows (E4).
+  # --- context, not E4 comparisons ----------------------------------------------
+  BASE:
+    run_name: de10-myopic
+    configs: [config/config.workshop.yaml]
+    description: "Workshop baseline: Germany as an island, 2 h, hard zero CO2 cap in 2050"
+  NB9REF:
+    run_name: de10-nb9-ref
+    parent: BASE
+    configs: *nb9
+    description: "Role 3 reference before E3: neighbours (NTC, 4 h), no annual import limit, no cap 2050, 2,600 EUR/t"
+  BRIMP:
+    run_name: de10-br-import
+    parent: BASE
+    configs: [config/config.workshop.yaml, config/config.brazil-import.yaml]
+    description: "Test run: BASE + fixed 2 GW Brazil cable from 2035 (CBA of a given cable)"
+
+# Differences "run - reference" the report shows.
 comparisons:
+  # study (E4)
   - [CABLE, REF]
   - [MV, REF]
   - [CAPEX50, REF]
   - [WACC7, REF]
   - [CABLE-ISL, REF-ISL]
-  - [REF, BASE]
+  # context: what E3 changes (several things at once, not an E4 comparison)
+  - [REF, NB9REF]
+  - [NB9REF, BASE]   # neighbours + 4 h + 2050 rules at once
+  - [BRIMP, BASE]    # pipeline test; island + hard 2050 cap
