@@ -103,9 +103,6 @@ doc/img/intro-workflow.svg
 .pixi/*
 !.pixi/config.toml
 
-# Workshop inputs of other roles; the shortlist holds personal contact data
-workshop/inputs/site_shortlist.csv
-data-brazil
 # Confidential workshop documents - never commit (see .claude/skills/confidential-inputs)
 /workshop/inputs/
 

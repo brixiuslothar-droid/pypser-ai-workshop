@@ -17,7 +17,7 @@ import atlite
 
 OUT = "results/brazil-potential/"
 MIN_MW, N_CLASSES, CORR, CLIP = 100, 3, 0.8855, 0.01
-cells = pd.read_csv(OUT + "lcoe_cells.csv").query("year == 2030 and rate == 'wacc' and north and p_nom_max_mw >= @MIN_MW")
+cells = pd.read_csv(OUT + "lcoe_cells.csv").query("year == 2030 and rate == 'r07' and north and p_nom_max_mw >= @MIN_MW")
 cutout = atlite.Cutout("data-brazil/weather/brazil-2013-era5.nc", chunks={"time": 744})
 x0, x1, y0, y1 = cells.lon.min() - 0.2, cells.lon.max() + 0.2, cells.lat.min() - 0.2, cells.lat.max() + 0.2
 sub = cutout.sel(x=slice(x0, x1), y=slice(y0, y1))

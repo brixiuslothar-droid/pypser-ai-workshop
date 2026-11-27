@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: Contributors to PyPSA-Eur <https://github.com/pypsa/pypsa-eur>
 # SPDX-License-Identifier: MIT
-"""Map of the landing point candidates: cost of the cheapest 9.25 TWh a year delivered at each point (workshop style)."""
+"""Map of the landing point candidates: cost of the cheapest 10 TWh a year delivered at each point (workshop style)."""
 import sys
 from pathlib import Path
 import geopandas as gpd
@@ -28,7 +28,7 @@ for ax, col, title, vmax in [(axes[0], "avg_all", "All technologies", 45), (axes
                 arrowprops=dict(arrowstyle="-", color="#222222", lw=0.5))
     ax.set_xlim(-53, -33); ax.set_ylim(-9, 6); ax.set_aspect("equal"); st.map_axes(ax)
     ax.set_title(title, loc="left", fontsize=9)
-    st.colorbar(fig, sc, ax.inset_axes([0.05, -0.1, 0.6, 0.03]), "Cost of the cheapest 9.25 TWh a year at the point, EUR/MWh", fmt="%d")
-fig.suptitle("Landing point candidates on the northern coast of Brazil, 2030, 7.6 % WACC", x=0.02, ha="left", fontweight="bold", fontsize=11)
+    st.colorbar(fig, sc, ax.inset_axes([0.05, -0.1, 0.6, 0.03]), "Cost of the cheapest 10 TWh a year at the point, EUR/MWh", fmt="%d")
+fig.suptitle("Landing point candidates on the northern coast of Brazil, 2030, 7 % discount rate", x=0.02, ha="left", fontweight="bold", fontsize=11)
 fig.savefig(OUT / "landing_point_map.png", dpi=300); fig.savefig(OUT / "landing_point_map.pdf")
 print("written landing_point_map")

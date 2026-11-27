@@ -4,16 +4,16 @@
 
 capital_cost [EUR/MW/a] = (annuity(lifetime, r) + FOM) x investment     (process_cost_data.py)
 LCOE = capital_cost / (8760 h x capacity factor) + marginal_cost
-Two discount rates: 7 % (the baseline's rate for Germany) and the WACC of the Brazilian generation tranche in
-workshop/inputs/financing_term_sheet.md: 62 % debt at 2.635 % + 312 bps, 34 % tax shield, 38 % equity at 13.85 %
-(country risk premium included) = 7.62 %. The rate is applied to the plant, station and connection alike.
+Two discount rates: 7 % (the baseline's rate for Germany, costs.discount rate in config.default.yaml) and 10 %.
+The 10 % is an assumption for a higher cost of capital in Brazil, a sensitivity without a source. The rate is applied
+to the plant, station and connection alike. No value from the confidential workshop inputs is used.
 Offshore adds station + connection as in attach_wind_and_solar: station + 1.25 x (distance x submarine
   + landfall x underground); AC (within 30 km of the coast, landfall 20 km), DC (beyond, 30 km), floating (40 km).
 Tables: resources/de10-myopic/costs_<year>_processed.csv (what the model reads). Marginal cost as in the model
 (custom_costs.csv sets 0.015 EUR/MWh for wind, replacing the VOM); lcoe_with_vom adds the table's VOM instead.
-Not included: interest during construction (3 years, term sheet), grid connection onshore (the model has none),
+Not included: interest during construction, grid connection onshore (the model has none),
 distance to the cable landing point, transmission, exchange rate risk.
-Output: lcoe_cells.csv (long: year, rate), lcoe_summary.csv and the supply curve of 2030 at the WACC.
+Output: lcoe_cells.csv (long: year, rate), lcoe_summary.csv and the supply curve of 2030 at 7 %.
 """
 import sys
 from pathlib import Path
@@ -30,9 +30,7 @@ OUT = Path("results/brazil-potential")
 H, LENGTH_FACTOR = 8760, 1.25
 LANDFALL = {"offwind-ac": 20.0, "offwind-dc": 30.0, "offwind-float": 40.0}  # config.default.yaml
 DENSITY = {"onwind": 3.0, "solar": 5.1, "solar-hsat": 4.43, "offwind-ac": 2.0, "offwind-dc": 2.0, "offwind-float": 2.0}
-g, base, margin, tax, eq = 0.62, 0.02635, 0.0312, 0.34, 0.1385
-WACC = g * (base + margin) * (1 - tax) + (1 - g) * eq
-RATES = {"r07": 0.07, "wacc": WACC}
+RATES = {"r07": 0.07, "r10": 0.10}  # 7 % baseline; 10 % assumed sensitivity
 YEARS = [2025, 2030, 2035, 2040, 2045, 2050]
 
 
@@ -99,7 +97,6 @@ for year in YEARS:
 df = pd.concat(out, ignore_index=True)
 assert df.lcoe_eur_mwh.notna().all()
 df.to_csv(OUT / "lcoe_cells.csv", index=False)
-print(f"WACC of the Brazilian generation tranche: {100 * WACC:.3f} %")
 
 # ---- summary --------------------------------------------------------------------
 order = ["onwind", "solar", "solar-hsat", "offwind-ac", "offwind-dc", "offwind-float"]
@@ -123,17 +120,17 @@ summ.to_csv(OUT / "lcoe_summary.csv", index=False)
 
 def table(col):
     t = summ.pivot_table(index=["rate", "carrier"], columns="year", values=col)
-    return t.reindex(pd.MultiIndex.from_product([["r07", "wacc"], order])).round(1).to_string()
+    return t.reindex(pd.MultiIndex.from_product([["r07", "r10"], order])).round(1).to_string()
 
 
 print("\nMINIMUM LCOE in the north (cells >= 100 MW), EUR/MWh"); print(table("min"))
 print("\nCAPACITY-WEIGHTED MEDIAN LCOE in the north, EUR/MWh"); print(table("p50_by_GW"))
 print("\nGW BELOW 40 EUR/MWh in the north"); print(table("GW_below_40"))
 m = summ.pivot_table(index=["year", "carrier"], columns="rate", values="min")
-print("\nEffect of the WACC (7.62 %) against 7 %: minimum LCOE, % change")
-print(((m["wacc"] / m["r07"] - 1) * 100).unstack("year").reindex(order).round(1).to_string())
+print("\nEffect of 10 % against 7 %: minimum LCOE, % change")
+print(((m["r10"] / m["r07"] - 1) * 100).unstack("year").reindex(order).round(1).to_string())
 
-# ---- supply curve: north, 2030, WACC ---------------------------------------------------
+# ---- supply curve: north, 2030, 7 % ---------------------------------------------------
 st.use()
 fig, ax = plt.subplots(figsize=(7.2, 4.2))
 col = {"onwind": st.color("onwind"), "solar": st.color("solar"), "solar-hsat": st.color("solar"),
@@ -141,7 +138,7 @@ col = {"onwind": st.color("onwind"), "solar": st.color("solar"), "solar-hsat": s
 nm = {"onwind": "Onshore wind", "solar": "Solar PV, fixed", "solar-hsat": "Solar PV, tracking",
       "offwind-ac": "Offshore wind, AC", "offwind-dc": "Offshore wind, DC", "offwind-float": "Offshore wind, floating"}
 ends = []
-sel = df[df.north & (df.year == 2030) & (df.rate == "wacc")]
+sel = df[df.north & (df.year == 2030) & (df.rate == "r07")]
 for car in order:
     d = sel[sel.carrier == car].sort_values("lcoe_eur_mwh")
     if d.empty:
@@ -156,6 +153,6 @@ for i in range(1, len(ends)):
 for x, y, n_ in ends:
     ax.text(x, y, n_, fontsize=7.5, color="#222222", va="center", clip_on=False)
 ax.set_xlabel("Cumulative installable capacity, GW (cheapest cells first)", fontsize=8)
-ax.set_title("LCOE against installable capacity, northern coast of Brazil, 2030, 7.6 % WACC, EUR/MWh", loc="left", fontsize=9)
+ax.set_title("LCOE against installable capacity, northern coast of Brazil, 2030, 7 % discount rate, EUR/MWh", loc="left", fontsize=9)
 fig.subplots_adjust(right=0.78, bottom=0.14, top=0.9)
 fig.savefig(OUT / "lcoe_supply_curve_north.png", dpi=300); fig.savefig(OUT / "lcoe_supply_curve_north.pdf")
