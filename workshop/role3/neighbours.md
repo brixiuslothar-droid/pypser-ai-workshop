@@ -115,14 +115,53 @@ Nettoimport nach Nachbarland (TWh, + = Import nach DE):
 
   → Sensitivität mit 750 €/t vorbereitet: `config/config.role3-co2-750.yaml`. Es wird nur 2050 neu gerechnet. **Vorschlag an Rolle 4:** 750 €/t als zentralen Wert, 250 und 1.250 €/t als Bandbreite.
 
-### Referenz `de10-nb9-ref`: erste Ergebnisse
+### Referenz `de10-nb9-ref`: Ergebnisse (alle sechs Jahre gelöst)
 
-| | 2025 | 2030 |
-|---|---|---|
-| Preis DE (€/MWh), freier Handel → NTC | 96 → 96 | 71 → 79 |
-| Nettoimport DE (TWh) | 29 → 18 | 183 → 90 |
-| Max. Import (GW) | 20 → 15 | 47 → 30 |
-| Wind an Land DE (GW) | 64 → 64 | 71 → 82 |
-| Spitzenspeicher (GB) / Solverzeit (s) | 4,2 / 100 | 6,1 / 203 |
+Werte: Baseline (Insel) → Nachbarn mit freiem Handel (`de10-nb9`) → Referenz mit NTC (`de10-nb9-ref`).
+2050 hat die Referenz einen CO₂-Preis von 2.600 €/t statt der Nullgrenze.
 
-2030 entspricht der Nettoimport 16 % der Nachfrage. Die Grenze AT ist am stärksten belastet, die NTC-Summe der Importe liegt bei 34,6 GW.
+| | 2025 | 2030 | 2035 | 2040 | 2045 | 2050 |
+|---|---|---|---|---|---|---|
+| Preis DE (€/MWh) | 96 → 96 → 96 | 87 → 71 → 79 | 91 → 85 → 90 | 93 → 87 → 89 | 113 → 100 → 107 | 117 → 114 → 112 |
+| Stunden > 300 €/MWh | 0 → 0 → 0 | 0 → 0 → 0 | 52 → 40 → 68 | 52 → 48 → 40 | 2.040 → 468 → 952 | 1.498 → 1.116 → 1.296 |
+| Stunden < 1 €/MWh | 360 → 0 → 0 | 1.980 → 460 → 464 | 2.292 → 732 → 724 | 3.088 → 992 → 1.016 | 4.486 → 3.304 → 3.704 | 2.882 → 2.308 → 2.400 |
+| Nettoimport DE (TWh) | 0 → 29 → 18 | 0 → 183 → 90 | 0 → 221 → 98 | 0 → 238 → 94 | 0 → 218 → 93 | 0 → 286 → 112 |
+| Anteil Import an Nachfrage | – → 6 % → 4 % | – → 33 % → 16 % | – → 36 % → 16 % | – → 36 % → 14 % | – → 31 % → 13 % | – → 37 % → 15 % |
+| Max. Import (GW) | – → 20 → 15 | – → 47 → 30 | – → 50 → 29 | – → 54 → 31 | – → 54 → 33 | – → 63 → 34 |
+| CO₂ DE (Mt) | 161 → 133 → 145 | 64 → 21 → 32 | 43 → 20 → 25 | 34 → 19 → 23 | 17 → 13 → 16 | 0 → 0 → 0,7 |
+| Schattenpreis CO₂-Grenze (€/t) | 0 → 0 → 0 | 0 → 0 → 0 | 0 → 0 → 0 | 43 → 0 → 0 | 488 → 266 → 342 | 24.354 → 30.852 → – (Preis 2.600) |
+| Batterie DE (GWh) | 0 → 0 → 0 | 20 → 0 → 0 | 155 → 48 → 108 | 391 → 139 → 234 | 607 → 245 → 374 | 834 → 329 → 449 |
+| H₂-Speicher DE (TWh) | 0 | 0 | 0 | 0 | 13 → 0 → 0 | 72 → 38 → 55 |
+| Wind an Land DE (GW) | 64 | 90 → 71 → 82 | 79 → 67 → 79 | 72 → 66 → 71 | 115 → 65 → 84 | 141 → 68 → 116 |
+| PV fest DE (GW) | 90 | 91 → 90 → 91 | 113 → 100 → 123 | 227 → 162 → 193 | 337 → 221 → 271 | 411 → 247 → 310 |
+| OCGT DE (GW) | 6 | 5 | 14 → 16 → 17 | 23 → 33 → 32 | 22 → 32 → 32 | 21 → 31 → 30 |
+
+Rechenaufwand der Referenz (Spitzenspeicher GB / Solverzeit s / Status):
+2025 4,2 / 100 / optimal · 2030 6,2 / 203 / optimal · 2035 6,2 / 414 / *imprecise* (Toleranz knapp verfehlt, wie Baseline 2050) · 2040 6,1 / 216 / optimal · 2045 6,7 / 261 / optimal · 2050 6,4 / 233 / optimal.
+Ein voller Lauf dauert etwa 30 Minuten. Lastabwurf gab es in keinem Jahr.
+
+Nettoimport nach Nachbarland in der Referenz (TWh, + = Import nach DE):
+
+| | 2025 | 2030 | 2035 | 2040 | 2045 | 2050 |
+|---|---|---|---|---|---|---|
+| AT | −6 | 31 | 34 | 35 | 34 | 36 |
+| CH | 26 | 22 | 20 | 16 | 19 | 29 |
+| DK | 17 | 23 | 17 | 15 | 16 | 19 |
+| FR | 13 | 13 | 13 | 10 | 8 | 17 |
+| NL | −12 | −3 | 4 | 8 | 9 | 12 |
+| übrige (BE, CZ, LU, PL) | −19 | 3 | 11 | 10 | 6 | −1 |
+
+**Bewertung der Referenz:**
+- **Der Import ist halbiert** und liegt jetzt bei 13–16 % der Nachfrage statt 31–37 %.
+  - Zum Vergleich: 2024 lag der Nettoimport bei etwa 5 % der Nachfrage. Der Wert ist nicht belegt.
+  - Höhere Importe sind für 2030+ plausibel, weil Kohle wegfällt und die Nachbarn Überschüsse haben. 15 % ist aber eher die Obergrenze.
+- Wind an Land in DE erholt sich (2050: 116 GW). PV und Batterien liegen zwischen Baseline und freiem Handel.
+- **Bis 2045 liegen die Ergebnisse zwischen Insel und freiem Handel**, wie erwartet. Die Preisspitzen (2045: 952 h > 300 €/MWh) sind deutlich weniger als in der Baseline (2.040 h), aber mehr als bei freiem Handel.
+- **AT ist die größte Importquelle** (≈35 TWh/a, NTC 7,5 GW fast dauerhaft ausgelastet). Dahinter steckt viel PV-Zubau in AT im Modell.
+  - Den PV-Zubau in AT und CH hat das Modell ohne nationale Ausbaugrenzen. Er bleibt eine Schwäche.
+- **2050 mit 2.600 €/t:**
+  - Gas fällt fast ganz weg (0,7 Mt CO₂ in DE).
+  - Ausgeglichen wird mit 55 TWh H₂-Speicher und 73 GW Brennstoffzellen.
+  - Der Preis liegt bei 112 €/MWh. Der Median der Stundenpreise ist 29 €/MWh, das 99%-Quantil 1.173 €/MWh, und 1.296 Stunden liegen über 300 €/MWh.
+  - Damit wirkt der Preis tatsächlich fast wie die Nullgrenze. Die Sensitivität mit 750 €/t zeigt, wie stark 2050 davon abhängt.
+- Abbildungen: `workshop/role3/figures/compare_*.png` (Baseline, freier Handel, NTC).
