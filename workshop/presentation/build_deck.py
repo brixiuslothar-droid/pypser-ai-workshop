@@ -247,14 +247,37 @@ def resolve(token, data):
     raise ValueError(f"unbekannter Platzhalter {{{{{token}}}}}")
 
 
+PH = "▢"  # marks a placeholder for missing content on a slide
+
+
+def marker(token):
+    """Short visible placeholder for a value that cannot be filled yet: what it waits for."""
+    parts = token.split("|")
+    kind = parts[0].strip()
+    if kind in ("m", "share"):
+        return f"{PH} {parts[1]}"
+    if kind == "c":
+        return f"{PH} {parts[1]}−{parts[2]}"
+    if kind in ("md", "csv", "cfg", "src") and len(parts) > 1:
+        return f"{PH} {Path(parts[1]).name}"
+    return PH
+
+
 def fill(text, data, problems):
     def sub(mo):
         try:
             return resolve(mo.group(1), data)
-        except Exception as e:  # collected, slide becomes "ausstehend"
+        except PermissionError:
+            raise
+        except Exception as e:  # collected; the slide keeps its layout and shows a placeholder
             problems.append(str(e))
-            return "n/v"
+            return marker(mo.group(1))
     return re.sub(r"\{\{(.*?)\}\}", sub, str(text))
+
+
+def is_open(txt):
+    """Text that is still a placeholder or a TODO: drawn grey and italic."""
+    return str(txt).startswith("TODO") or PH in str(txt)
 
 
 # --------------------------------------------------------------------------- settings and questions
@@ -423,7 +446,7 @@ def bullets(slide, x, y, w, h, items, font, size=SIZE["body"]):
         mark = p.add_run()                       # flat square as bullet, as in legend_squares
         mark.text = "■  "
         mark.font.size, mark.font.color.rgb, mark.font.name = Pt(size * 0.55), rgb(st.NEUTRAL), font
-        todo = item.startswith("TODO")
+        todo = is_open(item)
         r = p.add_run()
         r.text = item
         r.font.size, r.font.name = Pt(size), font
@@ -497,7 +520,7 @@ def table(slide, x, y, w, header, rows, font, size=SIZE["small"] + 1):
         est += max(row_h, Pt(size) * 1.25 * lines + Inches(0.08))
     if y + est > BOTTOM:
         OVERFLOW.append(f"Tabelle zu lang (ca. {est / 914400:.1f} in)")
-    numeric = [all(re.fullmatch(r"[−+\d.,% ]+|n/v|", str(r[j])) for r in rows) for j in range(nc)]
+    numeric = [all(re.fullmatch(r"[−+\d.,% ]+|n/v|" + PH + r".*", str(r[j])) for r in rows) for j in range(nc)]
     for i, row in enumerate([header, *rows]):
         for j, val in enumerate(row):
             cell = tbl.cell(i, j)
@@ -508,7 +531,7 @@ def table(slide, x, y, w, header, rows, font, size=SIZE["small"] + 1):
             p.alignment = PP_ALIGN.RIGHT if numeric[j] and j > 0 else PP_ALIGN.LEFT
             r = p.add_run()
             r.text = str(val)
-            todo = str(val).startswith("TODO")
+            todo = is_open(val)
             r.font.size, r.font.name, r.font.bold = Pt(size), font, i == 0
             r.font.color.rgb = rgb(LABEL if i == 0 else (TICK if todo else INK))
             r.font.italic = todo
@@ -527,8 +550,11 @@ def frame(prs, s, page, font, data, problems):
             "D": "D  Wie belastbar das ist", "Anhang": "Anhang"}.get(s.get("part"), "")
     if part:
         text(slide, MX, Inches(0.25), CW, Inches(0.25), part.upper(), SIZE["footer"], TICK, font=font)
-    text(slide, MX, Inches(0.5), CW, Inches(0.7), fill(s.get("title", ""), data, problems), SIZE["title"], INK,
-         bold=True, font=font)
+    title = fill(s.get("title", ""), data, problems)
+    box = text(slide, MX, Inches(0.5), CW, Inches(0.7), title, SIZE["title"], TICK if is_open(title) else INK,
+               bold=True, font=font)
+    if is_open(title):
+        box.text_frame.paragraphs[0].runs[0].font.italic = True
     if s.get("subtitle"):
         text(slide, MX, Inches(1.2), CW, Inches(0.35), fill(s["subtitle"], data, problems), SIZE["subtitle"], TICK,
              font=font)
@@ -540,6 +566,18 @@ def frame(prs, s, page, font, data, problems):
     text(slide, W - MX - Inches(0.6), Inches(7.02), Inches(0.6), Inches(0.3), str(page), SIZE["footer"], FAINT,
          align=PP_ALIGN.RIGHT, font=font)
     return slide
+
+
+def figure_placeholder(slide, x, y, w, h, name, reasons, font):
+    """Grey area where a figure will go, with its file name and what it waits for."""
+    box = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, x, y, w, h)
+    box.fill.solid()
+    box.fill.fore_color.rgb = rgb(st.LAND)
+    box.line.fill.background()
+    box.shadow.inherit = False
+    lines = [f"{PH} Abbildung folgt", name] + [f"– {r}" for r in dict.fromkeys(reasons)]
+    text(slide, x + Inches(0.3), y + Inches(0.3), w - Inches(0.6), h - Inches(0.6), lines, SIZE["small"], TICK,
+         font=font, space_after=4)
 
 
 def pending(slide, reasons, font):
@@ -596,14 +634,16 @@ def build_body(slide, s, font, data, problems):
         fig = ROOT / s["figure"]
         if INPUTS.resolve() in fig.resolve().parents:
             raise PermissionError("Abbildung aus workshop/inputs/ (E7)")
-        if not fig.exists():
-            problems.append(f"Abbildung fehlt: {s['figure']}")
-            return
-        if items:
-            picture(slide, fig, MX, TOP, Inches(7.7), BOTTOM - TOP)
-            bullets(slide, MX + Inches(8.0), TOP, CW - Inches(8.0), BOTTOM - TOP, items, font, SIZE["small"] + 2)
+        fw = Inches(7.7) if items else CW
+        missing_runs = [r for r in s.get("requires", []) if data.run_state(r) != "fertig"]
+        if not fig.exists() or missing_runs:
+            why = [f"Lauf {r} fehlt" for r in missing_runs] or [f"Datei fehlt: {s['figure']}"]
+            problems.extend(why)
+            figure_placeholder(slide, MX, TOP, fw, BOTTOM - TOP, s["figure"], why, font)
         else:
-            picture(slide, fig, MX, TOP, CW, BOTTOM - TOP)
+            picture(slide, fig, MX, TOP, fw, BOTTOM - TOP)
+        if items:
+            bullets(slide, MX + Inches(8.0), TOP, CW - Inches(8.0), BOTTOM - TOP, items, font, SIZE["small"] + 2)
     elif lay == "table":
         t = s["table"]
         if t.get("auto") == "status":
@@ -626,8 +666,10 @@ def build_body(slide, s, font, data, problems):
             x = MX + int(cw * i)
             col = st.GROUPS.get(k.get("group", "Other"), st.NEUTRAL)
             square(slide, x, TOP + Inches(0.75), Inches(0.2), col)
+            val = fill(k["value"], data, problems)
             text(slide, x + Inches(0.35), TOP + Inches(0.3), int(cw) - Inches(0.4), Inches(1.0),
-                 fill(k["value"], data, problems), SIZE["kpi"], INK, bold=True, font=font)
+                 val, SIZE["kpi"] if not is_open(val) else SIZE["title"], TICK if is_open(val) else INK,
+                 bold=True, font=font)
             text(slide, x + Inches(0.35), TOP + Inches(1.4), int(cw) - Inches(0.4), Inches(0.5),
                  fill(k["label"], data, problems), SIZE["subtitle"], TICK, font=font)
         if items:
@@ -764,7 +806,10 @@ def main():
             slide = build_section(prs, s, font, data, problems)
         else:
             slide = frame(prs, s, page, font, data, problems)
-            if problems:          # runs missing: no numbers on this slide
+            if eff.get("ausstehend") == "platzhalter":
+                # full layout; every value that is missing shows as a placeholder where it belongs
+                build_body(slide, s, font, data, problems)
+            elif problems:        # runs missing: grey box instead of the slide body
                 pending(slide, problems, font)
             else:
                 build_body(slide, s, font, data, problems)
@@ -788,9 +833,11 @@ def main():
         slide.notes_slide.notes_text_frame.text = "\n".join(n for n in notes if n)
         txt = slide_text(slide)
         texts[s["id"]] = txt
-        report.append((page, s["id"], s.get("owner", ""),
-                       "ausstehend" if problems else ("Layout" if problems_layout else "ok"),
-                       txt.count("TODO"), "; ".join(dict.fromkeys(problems + problems_layout))))
+        n_ph = txt.count(PH)
+        state = ("Platzhalter" if n_ph or eff.get("ausstehend") == "platzhalter" else "ausstehend") if problems \
+            else ("Layout" if problems_layout else "ok")
+        report.append((page, s["id"], s.get("owner", ""), state,
+                       txt.count("TODO"), "; ".join(dict.fromkeys(problems + problems_layout)), n_ph))
 
     out = (a.out or OUT / f"praesentation-{date.today().isoformat()}.pptx").resolve()
     hits = nda_scan(texts)
@@ -811,12 +858,13 @@ def main():
         hits = {k: v for k, v in hits.items() if k not in quitted}
     rep_name, n_block = blockers()
 
-    print(f"{'#':>3}  {'Folie':22s} {'Rolle':6s} {'Stand':10s} TODO  Grund")
-    for p, sid, own, state, todo, why in report:
-        print(f"{p:>3}  {sid:22s} {str(own):6s} {state:10s} {todo:>4}  {why[:90]}")
-    n_pend = sum(r[3] == "ausstehend" for r in report)
+    print(f"{'#':>3}  {'Folie':22s} {'Rolle':6s} {'Stand':11s} TODO  {PH:>3}  Grund")
+    for p, sid, own, state, todo, why, nph in report:
+        print(f"{p:>3}  {sid:22s} {str(own):6s} {state:11s} {todo:>4}  {nph:>3}  {why[:80]}")
+    n_pend = sum(r[3] in ("ausstehend", "Platzhalter") for r in report)
     n_todo = sum(r[4] for r in report)
-    print(f"\n{len(report)} Folien, {n_pend} ausstehend, {n_todo} TODO.")
+    n_ph = sum(r[6] for r in report)
+    print(f"\n{len(report)} Folien, {n_pend} mit fehlenden Inhalten ({n_ph} Platzhalter {PH}), {n_todo} TODO.")
     if hits is None:
         print("NDA-Scan: workshop/inputs/ nicht vorhanden, nicht geprüft.")
     elif hits:

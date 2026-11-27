@@ -49,11 +49,12 @@ fragen:
     wenn: immer
 
   - key: ausstehend
-    frage: "Einige Läufe sind noch nicht fertig. Sollen ihre Folien als graue Platzhalter 'ausstehend' erscheinen oder weggelassen werden?"
+    frage: "Einige Läufe sind noch nicht fertig. Wie sollen ihre Folien erscheinen?"
     optionen:
-      - {label: "zeigen (Entwurf)", wert: zeigen, beschreibung: "Platzhalter mit Grund; gut für die Abstimmung in der Gruppe"}
+      - {label: "Folien mit Platzhaltern", wert: platzhalter, beschreibung: "volles Layout (Titel, Tabellen, Kennzahlen, Abbildungsflächen); fehlende Werte als ▢ mit dem Lauf, auf den sie warten"}
+      - {label: "graue Fläche", wert: zeigen, beschreibung: "Folienkörper als graue Fläche mit Grund"}
       - {label: "weglassen", wert: weglassen, beschreibung: "nur Folien mit fertigen Ergebnissen; für einen Zwischenstand"}
-    default: zeigen
+    default: platzhalter
     wenn: ausstehende_folien
     neu_fragen_wenn: laeufe
 

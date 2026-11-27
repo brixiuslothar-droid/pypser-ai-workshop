@@ -71,7 +71,7 @@ relevant ist:
 |---|---|---|---|
 | `gruppe` – Name auf der Titelfolie | noch nie beantwortet | – | leer |
 | `umfang` – voll (≈ 20 min) oder kurz (≈ 10 min, ohne optionale Folien) | noch nie beantwortet | – | voll |
-| `ausstehend` – Folien fehlender Läufe zeigen oder weglassen | ein benötigter Lauf ist nicht fertig | sich die Menge fertiger Läufe ändert | zeigen |
+| `ausstehend` – Folien fehlender Läufe: mit Platzhaltern, als graue Fläche oder weglassen | ein benötigter Lauf ist nicht fertig | sich die Menge fertiger Läufe ändert | platzhalter |
 | `testlaeufe` – Testläufe (z. B. BRIMP) im Anhang | ein fertiger Lauf gehört nicht zu E4 | sich die Menge fertiger Läufe ändert | anhang |
 | `nda_hinweis` – qualitativer NDA-Satz | `workshop/inputs/` existiert | – | weglassen |
 | `schrift` – Libre Franklin oder Arial | noch nie beantwortet | – | Libre Franklin |
@@ -112,6 +112,23 @@ mitkommen:
 
 Fehlt eine Datei, baut der Builder trotzdem; betroffene Folien erscheinen als
 "ausstehend" mit dem Namen der fehlenden Datei. `uv` muss installiert sein.
+
+### Folien mit Platzhaltern
+
+Mit `ausstehend=platzhalter` (Default) baut der Builder **jede Folie mit ihrem
+vollen Layout**, auch wenn Läufe fehlen: Titel, Untertitel, Tabellen mit allen
+Zeilen, Kennzahlen, Aufzählungen, Quelle. Was fehlt, steht dort, wo es hingehört:
+
+| Fehlt | erscheint als |
+|---|---|
+| ein Wert aus einem Lauf | `▢ CABLE` (Lauf), `▢ CABLE−REF` (Vergleich) – grau, kursiv |
+| ein Wert aus einer Übergabe | `▢ <Dateiname>` |
+| eine Abbildung | graue Fläche „▢ Abbildung folgt“ mit Dateiname und Grund |
+| eine Aussage | `TODO Rolle n: …` – grau, kursiv, auch im Titel |
+
+Sobald ein Lauf fertig und ausgewertet ist, füllt der nächste Build die
+Platzhalter ohne Änderung an `deck.yaml`. Die Spalte `▢` im Bericht zählt die
+Platzhalter je Folie; `--final` bricht ab, solange einer übrig ist.
 
 ### Was der Builder ausgibt
 
