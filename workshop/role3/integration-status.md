@@ -370,3 +370,12 @@ pushed range. The investment mode itself is not re-tested by me; its only
 solved year is 2035 in `results/de10-nb9-cable-v1` (no cable built).
 The unresolved item from 13:20 stays: a solve of `de10-nb9-ref` without the E3
 limit is running in this workspace.
+
+### Update 14:10: reference run done, hand-off written
+
+- `de10-ref` solved for all six years, all optimal, peak memory 6.5 GB (2045). 2050 was re-solved with the E3 price of 750 EUR/t (O8); the first 2050 result at 2,600 EUR/t is kept as `results/de10-ref-p2600`.
+- Import limit works in the full model: net import of DE is 24.7 to 24.9 TWh from 2030, no load shedding in any year. Against `de10-nb9-ref` the total system cost differs by at most 0.4 bn EUR/a in 2030 to 2045.
+- Exporter `workshop/role3/export_handoff.py` and the hand-off folders `workshop/role3/handoff/de10-ref` and `.../de10-nb9-ref` (about 170 KB each). Checked against role 4's `evaluate.py` for the REF run: system cost and German price agree.
+- Caveat: `evaluate.py` reads solved networks, not the hand-off CSVs. The networks (169 MB for the run) are not in git. How they reach role 4 depends on whether role 4 has the same filesystem; I could not find role 4's `de10-br-*` runs on this disk, so presumably not.
+- The exporter first refused to run because `pgrep -f solve_network.py` matched my own shell command; it now looks for the real solver process only.
+- Next: `de10-cable`.

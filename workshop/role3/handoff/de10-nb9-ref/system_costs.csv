@@ -1,0 +1,1031 @@
+year,component,country,carrier,capex_eur_a,opex_eur_a
+2025,Generator,AT,Combined-Cycle Gas,5.80692e+08,1.35049e+09
+2025,Generator,AT,Onshore Wind,5.4557e+08,61218.4
+2025,Generator,AT,Run of River,9.37258e+08,113221
+2025,Generator,AT,Solar,4.93535e+08,186903
+2025,Generator,AT,biomass,4.90212e+07,2.31036e+07
+2025,Generator,AT,oil,8.64225e+06,0.62382
+2025,Generator,AT,waste,1.50256e+08,1.09107
+2025,Generator,BE,Combined-Cycle Gas,8.38213e+08,1.4638e+09
+2025,Generator,BE,Offshore Wind (AC),7.51019e+08,262769
+2025,Generator,BE,Onshore Wind,4.51005e+08,209807
+2025,Generator,BE,Run of River,2.28816e+07,2816.82
+2025,Generator,BE,Solar,5.6835e+08,187638
+2025,Generator,BE,biomass,4.19651e+07,1.9734e+07
+2025,Generator,BE,nuclear,3.71472e+09,7.37545e+08
+2025,Generator,BE,oil,6.61894e+06,0.62242
+2025,Generator,BE,waste,3.58905e+08,1.30297
+2025,Generator,CH,Combined-Cycle Gas,1.24831e+07,2.26829e+07
+2025,Generator,CH,Onshore Wind,1.03286e+07,213.438
+2025,Generator,CH,Run of River,1.52307e+09,99170.2
+2025,Generator,CH,Solar,4.50935e+08,187189
+2025,Generator,CH,biomass,2.1911e+07,8.16479e+06
+2025,Generator,CH,nuclear,2.8069e+09,3.51152e+08
+2025,Generator,CH,waste,2.59589e+08,0.77592
+2025,Generator,CZ,Combined-Cycle Gas,2.17191e+08,4.97764e+08
+2025,Generator,CZ,Onshore Wind,4.34177e+07,11610.1
+2025,Generator,CZ,Run of River,1.5741e+07,1581.8
+2025,Generator,CZ,Solar,2.4237e+08,80791
+2025,Generator,CZ,biomass,1.11412e+07,5.25337e+06
+2025,Generator,CZ,coal,2.70925e+08,3.47304e+08
+2025,Generator,CZ,lignite,3.76311e+09,1.29762e+07
+2025,Generator,CZ,nuclear,3.77639e+09,8.6095e+08
+2025,Generator,CZ,waste,3.68922e+07,1.24057
+2025,Generator,DE,Combined-Cycle Gas,3.88936e+09,1.35012e+09
+2025,Generator,DE,Offshore Wind (AC),3.05702e+09,1.00302e+06
+2025,Generator,DE,Onshore Wind,8.62214e+09,2.73562e+06
+2025,Generator,DE,Open-Cycle Gas,3.44948e+08,9.09892
+2025,Generator,DE,Run of River,1.57076e+09,206874
+2025,Generator,DE,Solar,5.23497e+09,1.71381e+06
+2025,Generator,DE,biomass,2.97841e+09,1.38461e+09
+2025,Generator,DE,coal,8.62889e+09,1.21875e+10
+2025,Generator,DE,lignite,8.24946e+09,2.33829e+09
+2025,Generator,DE,oil,2.88974e+08,6.57454
+2025,Generator,DE,waste,3.82074e+09,6.16492e+08
+2025,Generator,DK,Combined-Cycle Gas,1.48483e+08,2.32724e+08
+2025,Generator,DK,Offshore Wind (AC),9.43071e+08,321184
+2025,Generator,DK,Onshore Wind,6.55272e+08,433691
+2025,Generator,DK,Solar,2.29105e+08,77274.4
+2025,Generator,DK,biomass,6.61415e+08,2.80623e+08
+2025,Generator,DK,coal,3.03572e+08,2.72529e+08
+2025,Generator,DK,oil,6.40543e+06,153550
+2025,Generator,DK,waste,1.86904e+08,387933
+2025,Generator,FR,Combined-Cycle Gas,1.29035e+09,8.35993e+08
+2025,Generator,FR,Offshore Wind (AC),4.8602e+08,151337
+2025,Generator,FR,Onshore Wind,3.13352e+09,1.05393e+06
+2025,Generator,FR,Run of River,2.78856e+09,296363
+2025,Generator,FR,Solar,1.25418e+09,478808
+2025,Generator,FR,biomass,1.78719e+08,8.42674e+07
+2025,Generator,FR,coal,5.87217e+08,3.67473e+08
+2025,Generator,FR,lignite,4.14232e+08,1.33629
+2025,Generator,FR,nuclear,5.95752e+10,1.09175e+10
+2025,Generator,FR,oil,6.64945e+07,0.54308
+2025,Generator,FR,waste,2.54703e+08,0.81834
+2025,Generator,LU,Onshore Wind,2.20864e+07,8133.15
+2025,Generator,LU,Solar,2.94663e+07,9651.48
+2025,Generator,LU,biomass,1.03984e+06,485371
+2025,Generator,LU,waste,1.83239e+07,5.7095e+06
+2025,Generator,NL,Combined-Cycle Gas,1.79394e+09,4.37744e+07
+2025,Generator,NL,Offshore Wind (AC),1.57898e+09,541766
+2025,Generator,NL,Onshore Wind,9.47572e+08,503325
+2025,Generator,NL,Solar,1.40039e+09,460481
+2025,Generator,NL,biomass,3.25694e+08,1.50636e+08
+2025,Generator,NL,coal,1.99527e+09,2.34761e+09
+2025,Generator,NL,nuclear,4.67061e+08,7.44123e+07
+2025,Generator,NL,waste,8.50476e+08,2.0904e+07
+2025,Generator,PL,Combined-Cycle Gas,8.46779e+08,7.38686e+08
+2025,Generator,PL,Onshore Wind,1.36264e+09,520972
+2025,Generator,PL,Run of River,7.13751e+07,12461.9
+2025,Generator,PL,Solar,1.17744e+09,390059
+2025,Generator,PL,biomass,2.51791e+08,1.18723e+08
+2025,Generator,PL,coal,5.55355e+09,8.84473e+09
+2025,Generator,PL,lignite,3.4737e+09,1.88831
+2025,Generator,PL,waste,1.95455e+07,1.17858
+2025,Line,AT,AC,5.23837e+08,0
+2025,Line,BE,AC,2.8884e+08,0
+2025,Line,CH,AC,5.60222e+08,0
+2025,Line,CZ,AC,2.16432e+08,0
+2025,Line,DE,AC,3.25432e+09,0
+2025,Line,FR,AC,1.22546e+07,0
+2025,Link,BE,DC,6.59236e+07,32838.7
+2025,Link,DK,DC,2.56015e+08,25737.1
+2025,StorageUnit,AT,Pumped Hydro Storage,1.41988e+09,34814.4
+2025,StorageUnit,AT,Reservoir & Dam,1.44947e+09,248831
+2025,StorageUnit,BE,Pumped Hydro Storage,3.0344e+08,6355.67
+2025,StorageUnit,BE,Reservoir & Dam,2.95452e+06,628.325
+2025,StorageUnit,CH,Pumped Hydro Storage,1.01392e+09,10156
+2025,StorageUnit,CH,Reservoir & Dam,2.2434e+09,221641
+2025,StorageUnit,CZ,Pumped Hydro Storage,2.67946e+08,734.966
+2025,StorageUnit,CZ,Reservoir & Dam,1.44154e+08,20589.8
+2025,StorageUnit,DE,Pumped Hydro Storage,1.70783e+09,44127.1
+2025,StorageUnit,DE,Reservoir & Dam,9.33144e+07,17925.7
+2025,StorageUnit,FR,Pumped Hydro Storage,1.40956e+09,18719.9
+2025,StorageUnit,FR,Reservoir & Dam,1.99822e+09,349131
+2025,StorageUnit,LU,Pumped Hydro Storage,3.00192e+08,6941.22
+2025,StorageUnit,PL,Pumped Hydro Storage,4.34977e+08,862.963
+2025,StorageUnit,PL,Reservoir & Dam,3.79315e+07,10448.2
+2025,Generator,AT,load,0,0.44175
+2025,Generator,BE,load,0,0.44374
+2025,Generator,CH,load,0,0.44089
+2025,Generator,CZ,load,0,0.44109
+2025,Generator,DE,geothermal,0,2.26145e+06
+2025,Generator,DE,load,0,4.37787
+2025,Generator,DK,load,0,0.87113
+2025,Generator,FR,geothermal,0,143117
+2025,Generator,FR,load,0,0.41107
+2025,Generator,LU,load,0,0.37041
+2025,Generator,NL,load,0,0.44396
+2025,Generator,PL,load,0,0.45177
+2030,Generator,AT,Combined-Cycle Gas,4.8689e+08,9.95921e+08
+2030,Generator,AT,Onshore Wind,1.7184e+09,515496
+2030,Generator,AT,Open-Cycle Gas,0.11424,0.28035
+2030,Generator,AT,Run of River,9.37258e+08,97025.3
+2030,Generator,AT,Solar,9.50018e+08,468154
+2030,Generator,AT,biomass,4.90212e+07,1.91279e+07
+2030,Generator,AT,solar-hsat,1.73181e+09,834560
+2030,Generator,AT,waste,1.4573e+08,192909
+2030,Generator,BE,Combined-Cycle Gas,5.52103e+08,1.31942e+09
+2030,Generator,BE,Offshore Wind (AC),7.51019e+08,364435
+2030,Generator,BE,Offshore Wind (DC),0.86843,0.00027
+2030,Generator,BE,Offshore Wind (Floating),0.25989,3e-05
+2030,Generator,BE,Onshore Wind,9.05728e+08,527727
+2030,Generator,BE,Open-Cycle Gas,0.58164,0.5819
+2030,Generator,BE,Run of River,2.28816e+07,2858.31
+2030,Generator,BE,Solar,5.6835e+08,279490
+2030,Generator,BE,biomass,2.63675e+07,1.06041e+07
+2030,Generator,BE,nuclear,3.71472e+09,5.88008e+08
+2030,Generator,BE,oil,6.58834e+06,1.13731e+06
+2030,Generator,BE,solar-hsat,9.50482e+07,38688.7
+2030,Generator,BE,waste,2.56391e+08,1.69697e+06
+2030,Generator,CH,Combined-Cycle Gas,6.75213e+06,796830
+2030,Generator,CH,Onshore Wind,1.03286e+07,298.371
+2030,Generator,CH,Open-Cycle Gas,0.10405,0.13941
+2030,Generator,CH,Run of River,1.52307e+09,99637.1
+2030,Generator,CH,Solar,4.50935e+08,277046
+2030,Generator,CH,biomass,2.1911e+07,6.67067e+06
+2030,Generator,CH,nuclear,2.46227e+09,2.40827e+08
+2030,Generator,CH,solar-hsat,0.71086,0.00026
+2030,Generator,CH,waste,2.15041e+08,284658
+2030,Generator,CZ,Combined-Cycle Gas,1.88691e+08,6.16014e+08
+2030,Generator,CZ,Onshore Wind,9.05635e+08,318416
+2030,Generator,CZ,Open-Cycle Gas,0.12604,0.39949
+2030,Generator,CZ,Run of River,1.5741e+07,1732.96
+2030,Generator,CZ,Solar,2.4237e+08,117411
+2030,Generator,CZ,coal,1.96728e+08,1.48187e+07
+2030,Generator,CZ,lignite,3.30393e+09,6.70079e+06
+2030,Generator,CZ,nuclear,3.77639e+09,7.32414e+08
+2030,Generator,CZ,solar-hsat,2.93641e+07,11937
+2030,Generator,CZ,waste,8.886e+06,0.19952
+2030,Generator,DE,Combined-Cycle Gas,2.80885e+09,6.6965e+09
+2030,Generator,DE,Offshore Wind (AC),3.05702e+09,1.31394e+06
+2030,Generator,DE,Offshore Wind (DC),2.86867,0.0008
+2030,Generator,DE,Offshore Wind (Floating),0.81886,0.0001
+2030,Generator,DE,Onshore Wind,1.09809e+10,5.27414e+06
+2030,Generator,DE,Open-Cycle Gas,2.8512e+08,2.43723e+08
+2030,Generator,DE,Run of River,1.57076e+09,195578
+2030,Generator,DE,Solar,5.29117e+09,2.48361e+06
+2030,Generator,DE,biomass,2.9161e+09,1.10388e+09
+2030,Generator,DE,coal,7.16317e+09,1.14316e+09
+2030,Generator,DE,lignite,6.03056e+09,1.00923e+08
+2030,Generator,DE,oil,1.21699e+08,1.25851e+06
+2030,Generator,DE,solar-hsat,1.64897e+09,655386
+2030,Generator,DE,waste,1.94817e+09,3.58715e+07
+2030,Generator,DK,Combined-Cycle Gas,1.401e+08,3.71444e+08
+2030,Generator,DK,Offshore Wind (AC),9.26485e+08,370829
+2030,Generator,DK,Offshore Wind (DC),0.67286,0.00014
+2030,Generator,DK,Offshore Wind (Floating),0.47684,6e-05
+2030,Generator,DK,Onshore Wind,1.12595e+09,944650
+2030,Generator,DK,Open-Cycle Gas,11.306,8.23244
+2030,Generator,DK,Solar,2.29105e+08,111771
+2030,Generator,DK,biomass,4.91698e+08,1.31382e+08
+2030,Generator,DK,solar-hsat,5.44216,0.00179
+2030,Generator,DK,waste,1.35067e+08,155183
+2030,Generator,FR,Combined-Cycle Gas,1.17348e+09,7.45656e+08
+2030,Generator,FR,Offshore Wind (AC),4.8602e+08,212754
+2030,Generator,FR,Offshore Wind (DC),0.37277,9e-05
+2030,Generator,FR,Offshore Wind (Floating),0.26626,3e-05
+2030,Generator,FR,Onshore Wind,5.34416e+09,3.10724e+06
+2030,Generator,FR,Open-Cycle Gas,0.17462,0.19359
+2030,Generator,FR,Run of River,2.78856e+09,298954
+2030,Generator,FR,Solar,3.36588e+09,2.00989e+06
+2030,Generator,FR,biomass,1.53948e+08,6.88708e+07
+2030,Generator,FR,nuclear,5.95752e+10,8.7447e+09
+2030,Generator,FR,oil,4.85776e+06,525715
+2030,Generator,FR,solar-hsat,2.61191,0.00134
+2030,Generator,FR,waste,1.07224e+08,496781
+2030,Generator,LU,Combined-Cycle Gas,1.52087e+08,5.50818e+08
+2030,Generator,LU,Onshore Wind,9.98057e+07,41651.9
+2030,Generator,LU,Open-Cycle Gas,0.18721,0.72805
+2030,Generator,LU,Solar,2.94663e+07,11586.5
+2030,Generator,LU,biomass,1.03984e+06,396273
+2030,Generator,LU,solar-hsat,2.6595e+08,101282
+2030,Generator,LU,waste,1.7772e+07,188204
+2030,Generator,NL,Combined-Cycle Gas,1.00421e+09,1.01318e+09
+2030,Generator,NL,Offshore Wind (AC),1.57898e+09,719604
+2030,Generator,NL,Offshore Wind (DC),1.16814,0.00032
+2030,Generator,NL,Offshore Wind (Floating),0.28035,4e-05
+2030,Generator,NL,Onshore Wind,2.496e+09,1.74891e+06
+2030,Generator,NL,Open-Cycle Gas,4.71369e+07,2.82959e+07
+2030,Generator,NL,Solar,1.40039e+09,681700
+2030,Generator,NL,biomass,2.70731e+08,9.76733e+07
+2030,Generator,NL,nuclear,4.67061e+08,5.50302e+07
+2030,Generator,NL,solar-hsat,2.3343e+08,88911.7
+2030,Generator,NL,waste,8.886e+07,588136
+2030,Generator,PL,Combined-Cycle Gas,8.50074e+08,3.26549e+09
+2030,Generator,PL,Offshore Wind (AC),1.67836,0.00045
+2030,Generator,PL,Offshore Wind (DC),82.773,0.02362
+2030,Generator,PL,Offshore Wind (Floating),0.3473,5e-05
+2030,Generator,PL,Onshore Wind,4.7083e+09,2.05821e+06
+2030,Generator,PL,Open-Cycle Gas,0.19214,0.98719
+2030,Generator,PL,Run of River,7.13751e+07,10979.9
+2030,Generator,PL,Solar,1.33262e+09,590238
+2030,Generator,PL,biomass,7.16749e+07,2.66904e+07
+2030,Generator,PL,coal,3.95958e+09,1.03137e+09
+2030,Generator,PL,lignite,2.74529e+09,9.97954e+06
+2030,Generator,PL,solar-hsat,8.8404e+08,362904
+2030,Generator,PL,waste,1.89568e+07,0.23106
+2030,Line,AT,AC,5.23878e+08,0
+2030,Line,BE,AC,2.88872e+08,0
+2030,Line,CH,AC,5.60313e+08,0
+2030,Line,CZ,AC,2.16423e+08,0
+2030,Line,DE,AC,3.38372e+09,0
+2030,Line,FR,AC,1.2255e+07,0
+2030,Link,AT,H2 Electrolysis,0.19661,2e-05
+2030,Link,AT,H2 Fuel Cell,0.12407,2e-05
+2030,Link,AT,battery charger,1.42995,0.0013
+2030,Link,BE,DC,6.59227e+07,28964
+2030,Link,BE,H2 Electrolysis,0.2049,3e-05
+2030,Link,BE,H2 Fuel Cell,0.14305,2e-05
+2030,Link,BE,battery charger,1.72114,0.0013
+2030,Link,CH,H2 Electrolysis,0.2013,4e-05
+2030,Link,CH,H2 Fuel Cell,0.13211,2e-05
+2030,Link,CH,battery charger,0.33779,0.00038
+2030,Link,CZ,H2 Electrolysis,0.19081,2e-05
+2030,Link,CZ,H2 Fuel Cell,0.12205,1e-05
+2030,Link,CZ,battery charger,1.90514,0.00141
+2030,Link,DE,DC,1.14757e+07,8454.45
+2030,Link,DE,H2 Electrolysis,2.12658,0.00029
+2030,Link,DE,H2 Fuel Cell,1.266,0.00018
+2030,Link,DE,battery charger,9.33592,0.00909
+2030,Link,DK,DC,2.67984e+08,-14730.1
+2030,Link,DK,H2 Electrolysis,0.54871,0.0001
+2030,Link,DK,H2 Fuel Cell,0.3209,5e-05
+2030,Link,DK,battery charger,8.14379e+06,4327.28
+2030,Link,FR,H2 Electrolysis,0.19332,3e-05
+2030,Link,FR,H2 Fuel Cell,0.13764,2e-05
+2030,Link,FR,battery charger,0.35823,0.00039
+2030,Link,LU,H2 Electrolysis,0.22129,3e-05
+2030,Link,LU,H2 Fuel Cell,0.12894,2e-05
+2030,Link,LU,battery charger,1.666,0.00157
+2030,Link,NL,H2 Electrolysis,0.23058,3e-05
+2030,Link,NL,H2 Fuel Cell,0.151,2e-05
+2030,Link,NL,battery charger,1.2984e+08,57428.6
+2030,Link,PL,H2 Electrolysis,0.22133,3e-05
+2030,Link,PL,H2 Fuel Cell,0.12571,2e-05
+2030,Link,PL,battery charger,5.15319e+06,2635.95
+2030,StorageUnit,AT,Pumped Hydro Storage,1.41988e+09,140382
+2030,StorageUnit,AT,Reservoir & Dam,1.44947e+09,266921
+2030,StorageUnit,BE,Pumped Hydro Storage,3.0344e+08,11160.3
+2030,StorageUnit,BE,Reservoir & Dam,2.95452e+06,632.796
+2030,StorageUnit,CH,Pumped Hydro Storage,1.01392e+09,37778.7
+2030,StorageUnit,CH,Reservoir & Dam,2.2434e+09,230615
+2030,StorageUnit,CZ,Pumped Hydro Storage,2.67946e+08,5178.64
+2030,StorageUnit,CZ,Reservoir & Dam,1.44154e+08,20621.9
+2030,StorageUnit,DE,Pumped Hydro Storage,1.70783e+09,114420
+2030,StorageUnit,DE,Reservoir & Dam,9.33144e+07,19334.4
+2030,StorageUnit,FR,Pumped Hydro Storage,1.40956e+09,65730.6
+2030,StorageUnit,FR,Reservoir & Dam,1.99822e+09,352893
+2030,StorageUnit,LU,Pumped Hydro Storage,3.00192e+08,15166.9
+2030,StorageUnit,PL,Pumped Hydro Storage,4.34977e+08,31428.2
+2030,StorageUnit,PL,Reservoir & Dam,3.79315e+07,9583.52
+2030,Store,AT,Battery Storage,3.21657,0
+2030,Store,AT,Hydrogen Storage,0.19439,0
+2030,Store,BE,Battery Storage,3.67076,0
+2030,Store,BE,Hydrogen Storage,0.19369,0
+2030,Store,CH,Battery Storage,0.23271,0
+2030,Store,CH,Hydrogen Storage,0.20173,0
+2030,Store,CZ,Battery Storage,4.34875,0
+2030,Store,CZ,Hydrogen Storage,0.19438,0
+2030,Store,DE,Battery Storage,25.3446,0
+2030,Store,DE,Hydrogen Storage,1.93359,0
+2030,Store,DK,Battery Storage,2.85585e+07,0
+2030,Store,DK,Hydrogen Storage,0.38788,0
+2030,Store,FR,Battery Storage,0.56805,0
+2030,Store,FR,Hydrogen Storage,0.19813,0
+2030,Store,LU,Battery Storage,6.42019,0
+2030,Store,LU,Hydrogen Storage,0.19311,0
+2030,Store,NL,Battery Storage,2.76965e+08,0
+2030,Store,NL,Hydrogen Storage,0.19371,0
+2030,Store,PL,Battery Storage,1.09924e+07,0
+2030,Store,PL,Hydrogen Storage,0.19323,0
+2030,Generator,AT,load,0,0.0966
+2030,Generator,BE,load,0,0.0966
+2030,Generator,CH,load,0,0.09656
+2030,Generator,CZ,load,0,0.09661
+2030,Generator,DE,geothermal,0,3.17397e+06
+2030,Generator,DE,load,0,0.96603
+2030,Generator,DK,load,0,0.19317
+2030,Generator,FR,geothermal,0,221417
+2030,Generator,FR,load,0,0.09657
+2030,Generator,LU,load,0,0.09661
+2030,Generator,NL,load,0,0.09661
+2030,Generator,PL,load,0,0.09661
+2030,Link,AT,battery discharger,0,0.00115
+2030,Link,BE,battery discharger,0,0.00155
+2030,Link,CH,battery discharger,0,0.00042
+2030,Link,CZ,battery discharger,0,0.00144
+2030,Link,DE,battery discharger,0,0.00912
+2030,Link,DK,battery discharger,0,4746.14
+2030,Link,FR,battery discharger,0,0.0004
+2030,Link,LU,battery discharger,0,0.00165
+2030,Link,NL,battery discharger,0,57735.2
+2030,Link,PL,battery discharger,0,2389.61
+2035,Generator,AT,Combined-Cycle Gas,4.54365e+08,1.03041e+09
+2035,Generator,AT,Onshore Wind,1.61979e+09,695460
+2035,Generator,AT,Open-Cycle Gas,0.11277,0.08694
+2035,Generator,AT,Run of River,9.37258e+08,108437
+2035,Generator,AT,Solar,9.50018e+08,601292
+2035,Generator,AT,biomass,4.90212e+07,1.86444e+07
+2035,Generator,AT,solar-hsat,2.38874e+09,1.58533e+06
+2035,Generator,AT,waste,7.21523e+07,879014
+2035,Generator,BE,Combined-Cycle Gas,4.2999e+08,1.2524e+09
+2035,Generator,BE,Offshore Wind (AC),7.51019e+08,441501
+2035,Generator,BE,Onshore Wind,1.91385e+09,1.15889e+06
+2035,Generator,BE,Open-Cycle Gas,3.33928e+08,3.73028e+08
+2035,Generator,BE,Run of River,2.28816e+07,3173.74
+2035,Generator,BE,Solar,5.6835e+08,359280
+2035,Generator,BE,biomass,2.63675e+07,9.85952e+06
+2035,Generator,BE,nuclear,3.71472e+09,5.4696e+08
+2035,Generator,BE,oil,6.54689e+06,2.83542e+06
+2035,Generator,BE,solar-hsat,1.69147e+08,90874.1
+2035,Generator,BE,waste,2.13479e+08,3.90114e+06
+2035,Generator,CH,Combined-Cycle Gas,6.67649e+06,1.10117e+07
+2035,Generator,CH,Onshore Wind,1.03286e+07,376.206
+2035,Generator,CH,Open-Cycle Gas,0.10271,0.02445
+2035,Generator,CH,Run of River,1.52307e+09,103392
+2035,Generator,CH,Solar,6.08259e+08,427706
+2035,Generator,CH,biomass,2.1911e+07,6.56382e+06
+2035,Generator,CH,nuclear,2.11765e+09,2.14931e+08
+2035,Generator,CH,waste,1.84962e+08,1.44858e+06
+2035,Generator,CZ,Combined-Cycle Gas,1.26125e+08,3.64177e+08
+2035,Generator,CZ,Onshore Wind,1.45939e+09,638279
+2035,Generator,CZ,Open-Cycle Gas,0.12442,0.26519
+2035,Generator,CZ,Run of River,1.5741e+07,1617.61
+2035,Generator,CZ,Solar,3.78573e+08,205782
+2035,Generator,CZ,coal,5.72377e+07,5.02464e+06
+2035,Generator,CZ,nuclear,3.77639e+09,6.9412e+08
+2035,Generator,CZ,solar-hsat,2.93641e+07,17946.4
+2035,Generator,CZ,waste,8.58955e+06,134543
+2035,Generator,DE,Combined-Cycle Gas,2.36096e+09,5.84765e+09
+2035,Generator,DE,Offshore Wind (AC),3.05702e+09,1.63568e+06
+2035,Generator,DE,Offshore Wind (DC),5.375e+08,180802
+2035,Generator,DE,Onshore Wind,1.04611e+10,6.50807e+06
+2035,Generator,DE,Open-Cycle Gas,9.20572e+08,2.02737e+09
+2035,Generator,DE,Run of River,1.57076e+09,185597
+2035,Generator,DE,Solar,6.68965e+09,3.7226e+06
+2035,Generator,DE,biomass,2.73856e+09,1.00382e+09
+2035,Generator,DE,coal,4.4603e+08,3.10456e+07
+2035,Generator,DE,lignite,2.45765e+09,1.49586e+08
+2035,Generator,DE,oil,8.53244e+07,3.44722e+07
+2035,Generator,DE,solar-hsat,2.90168e+09,1.53713e+06
+2035,Generator,DE,waste,6.53312e+08,1.52771e+07
+2035,Generator,DK,Combined-Cycle Gas,1.23819e+07,3.61006e+07
+2035,Generator,DK,Offshore Wind (AC),8.025e+08,278308
+2035,Generator,DK,Onshore Wind,1.42159e+09,1.47528e+06
+2035,Generator,DK,Open-Cycle Gas,6.31703e+07,1.03375e+08
+2035,Generator,DK,Solar,2.29105e+08,130142
+2035,Generator,DK,biomass,1.6229e+08,3.91088e+07
+2035,Generator,DK,waste,1.30561e+08,2.38442e+06
+2035,Generator,FR,Combined-Cycle Gas,1.13292e+09,1.53782e+09
+2035,Generator,FR,Offshore Wind (AC),4.8602e+08,260146
+2035,Generator,FR,Onshore Wind,5.33746e+09,4.14318e+06
+2035,Generator,FR,Open-Cycle Gas,1.08632e+08,7.34927e+07
+2035,Generator,FR,Run of River,2.78856e+09,318085
+2035,Generator,FR,Solar,5.12668e+09,3.89598e+06
+2035,Generator,FR,biomass,1.53948e+08,6.56312e+07
+2035,Generator,FR,nuclear,5.95752e+10,8.29002e+09
+2035,Generator,FR,oil,4.8272e+06,1.99108e+06
+2035,Generator,FR,waste,4.4093e+07,767393
+2035,Generator,LU,Combined-Cycle Gas,2.71367e+08,9.58319e+08
+2035,Generator,LU,Onshore Wind,9.98057e+07,57684.5
+2035,Generator,LU,Open-Cycle Gas,0.1848,0.26189
+2035,Generator,LU,Solar,2.94663e+07,15417
+2035,Generator,LU,biomass,1.03984e+06,379932
+2035,Generator,LU,solar-hsat,2.6595e+08,151551
+2035,Generator,LU,waste,1.71791e+07,298984
+2035,Generator,NL,Combined-Cycle Gas,5.37142e+08,1.32517e+09
+2035,Generator,NL,Offshore Wind (AC),1.57898e+09,880247
+2035,Generator,NL,Onshore Wind,2.44323e+09,2.26114e+06
+2035,Generator,NL,Open-Cycle Gas,3.02381e+08,5.02094e+08
+2035,Generator,NL,Solar,1.99896e+09,1.12563e+06
+2035,Generator,NL,biomass,2.63303e+08,9.20852e+07
+2035,Generator,NL,solar-hsat,2.3343e+08,136092
+2035,Generator,NL,waste,8.58955e+07,1.54409e+06
+2035,Generator,PL,Combined-Cycle Gas,1.1252e+09,3.69743e+09
+2035,Generator,PL,Offshore Wind (DC),1.11311e+09,397278
+2035,Generator,PL,Onshore Wind,4.69354e+09,2.75555e+06
+2035,Generator,PL,Open-Cycle Gas,2.89145e+07,8.45754e+07
+2035,Generator,PL,Run of River,7.13751e+07,12512.7
+2035,Generator,PL,Solar,1.7507e+09,905588
+2035,Generator,PL,biomass,7.16749e+07,2.55083e+07
+2035,Generator,PL,coal,3.48684e+09,4.82096e+08
+2035,Generator,PL,lignite,2.74529e+09,9.58828e+07
+2035,Generator,PL,solar-hsat,8.8404e+08,550656
+2035,Generator,PL,waste,1.83244e+07,111621
+2035,Line,AT,AC,5.02922e+08,0
+2035,Line,BE,AC,2.773e+08,0
+2035,Line,CH,AC,5.37926e+08,0
+2035,Line,CZ,AC,2.078e+08,0
+2035,Line,DE,AC,3.27397e+09,0
+2035,Line,FR,AC,1.17672e+07,0
+2035,Link,AT,battery charger,1.01931e+08,94690.5
+2035,Link,BE,DC,6.20454e+07,20105.6
+2035,Link,BE,battery charger,2.25785e+07,18592.8
+2035,Link,CZ,battery charger,1.52321e+07,10980
+2035,Link,DE,DC,1.08803e+07,7429.65
+2035,Link,DE,battery charger,3.50076e+08,333419
+2035,Link,DK,DC,2.7643e+08,-26870.1
+2035,Link,DK,battery charger,2.03147e+07,15678.9
+2035,Link,FR,battery charger,6.86872e+07,44252.8
+2035,Link,LU,battery charger,5.27295e+06,4674.06
+2035,Link,NL,battery charger,1.2984e+08,156831
+2035,Link,PL,battery charger,8.98854e+07,70258.4
+2035,StorageUnit,AT,Pumped Hydro Storage,1.41988e+09,142552
+2035,StorageUnit,AT,Reservoir & Dam,1.44947e+09,245119
+2035,StorageUnit,BE,Pumped Hydro Storage,3.0344e+08,10385.5
+2035,StorageUnit,BE,Reservoir & Dam,2.95452e+06,643.884
+2035,StorageUnit,CH,Pumped Hydro Storage,1.01392e+09,56557.4
+2035,StorageUnit,CH,Reservoir & Dam,2.2434e+09,228882
+2035,StorageUnit,CZ,Pumped Hydro Storage,2.67946e+08,4079.66
+2035,StorageUnit,CZ,Reservoir & Dam,1.44154e+08,24984
+2035,StorageUnit,DE,Pumped Hydro Storage,1.70783e+09,97735.5
+2035,StorageUnit,DE,Reservoir & Dam,9.33144e+07,18593.2
+2035,StorageUnit,FR,Pumped Hydro Storage,1.40956e+09,94889.3
+2035,StorageUnit,FR,Reservoir & Dam,1.99822e+09,381711
+2035,StorageUnit,LU,Pumped Hydro Storage,3.00192e+08,15309
+2035,StorageUnit,PL,Pumped Hydro Storage,4.34977e+08,25672.2
+2035,StorageUnit,PL,Reservoir & Dam,3.79315e+07,10007.9
+2035,Store,AT,Battery Storage,3.91471e+08,0
+2035,Store,BE,Battery Storage,7.03237e+07,0
+2035,Store,CZ,Battery Storage,4.64753e+07,0
+2035,Store,DE,Battery Storage,1.40907e+09,0
+2035,Store,DK,Battery Storage,8.12516e+07,0
+2035,Store,FR,Battery Storage,1.43995e+08,0
+2035,Store,LU,Battery Storage,2.12239e+07,0
+2035,Store,NL,Battery Storage,4.23022e+08,0
+2035,Store,PL,Battery Storage,3.60162e+08,0
+2035,Generator,DE,geothermal,0,3.97772e+06
+2035,Generator,FR,geothermal,0,278606
+2035,Link,AT,battery discharger,0,100866
+2035,Link,BE,battery discharger,0,16314.2
+2035,Link,CZ,battery discharger,0,10824.4
+2035,Link,DE,battery discharger,0,303372
+2035,Link,DK,battery discharger,0,17055.6
+2035,Link,FR,battery discharger,0,38237.3
+2035,Link,LU,battery discharger,0,4690.66
+2035,Link,NL,battery discharger,0,155396
+2035,Link,PL,battery discharger,0,75197.2
+2040,Generator,AT,Combined-Cycle Gas,3.25123e+08,6.92342e+08
+2040,Generator,AT,Onshore Wind,1.5955e+09,860953
+2040,Generator,AT,Open-Cycle Gas,0.22613,0.22526
+2040,Generator,AT,Run of River,9.37258e+08,110003
+2040,Generator,AT,Solar,1.65376e+09,1.05238e+06
+2040,Generator,AT,biomass,3.62088e+07,1.17541e+07
+2040,Generator,AT,solar-hsat,2.38874e+09,2.10228e+06
+2040,Generator,AT,waste,6.96613e+07,759035
+2040,Generator,BE,Combined-Cycle Gas,3.64633e+08,9.86682e+08
+2040,Generator,BE,Offshore Wind (AC),6.85772e+08,477426
+2040,Generator,BE,Offshore Wind (DC),2.77467e+08,101793
+2040,Generator,BE,Offshore Wind (Floating),0.06813,1e-05
+2040,Generator,BE,Onshore Wind,1.93668e+09,1.48416e+06
+2040,Generator,BE,Open-Cycle Gas,5.05092e+08,6.36094e+08
+2040,Generator,BE,Run of River,2.28816e+07,2795.09
+2040,Generator,BE,Solar,1.30618e+09,767443
+2040,Generator,BE,biomass,2.63675e+07,9.02543e+06
+2040,Generator,BE,nuclear,1.97617e+09,2.64652e+08
+2040,Generator,BE,oil,6.50547e+06,1.51206e+06
+2040,Generator,BE,solar-hsat,1.69147e+08,124724
+2040,Generator,BE,waste,1.56351e+08,1.70361e+06
+2040,Generator,CH,Combined-Cycle Gas,6.60088e+06,1.21367e+07
+2040,Generator,CH,Onshore Wind,6.89035e+06,284.39
+2040,Generator,CH,Open-Cycle Gas,0.10139,0.11404
+2040,Generator,CH,Run of River,1.52307e+09,100582
+2040,Generator,CH,Solar,9.78382e+08,725890
+2040,Generator,CH,biomass,1.07698e+07,3.35301e+06
+2040,Generator,CH,nuclear,1.15632e+09,1.12771e+08
+2040,Generator,CH,solar-hsat,0.48679,0.00024
+2040,Generator,CH,waste,1.14444e+08,997588
+2040,Generator,CZ,Combined-Cycle Gas,3.35578e+08,9.44306e+08
+2040,Generator,CZ,Onshore Wind,1.99322e+09,1.00245e+06
+2040,Generator,CZ,Open-Cycle Gas,2.11085e+07,2.87842e+07
+2040,Generator,CZ,Run of River,1.5741e+07,1602.25
+2040,Generator,CZ,Solar,7.39685e+08,415736
+2040,Generator,CZ,coal,5.72377e+07,1.50377e+06
+2040,Generator,CZ,nuclear,1.96256e+09,3.23468e+08
+2040,Generator,CZ,solar-hsat,2.93641e+07,23575.2
+2040,Generator,CZ,waste,8.29301e+06,99397.5
+2040,Generator,DE,Combined-Cycle Gas,2.22549e+09,5.49673e+09
+2040,Generator,DE,Offshore Wind (AC),3.03046e+09,1.91022e+06
+2040,Generator,DE,Offshore Wind (DC),3.18073e+09,1.18634e+06
+2040,Generator,DE,Offshore Wind (Floating),0.22443,3e-05
+2040,Generator,DE,Onshore Wind,9.37735e+09,7.44569e+06
+2040,Generator,DE,Open-Cycle Gas,1.72643e+09,2.73794e+09
+2040,Generator,DE,Run of River,1.57076e+09,203291
+2040,Generator,DE,Solar,9.52488e+09,5.67789e+06
+2040,Generator,DE,biomass,1.92318e+09,6.4448e+08
+2040,Generator,DE,lignite,1.44366e+07,524723
+2040,Generator,DE,oil,4.73887e+07,1.18621e+07
+2040,Generator,DE,solar-hsat,2.90168e+09,2.09565e+06
+2040,Generator,DE,waste,2.01344e+08,2.53373e+06
+2040,Generator,DK,Combined-Cycle Gas,1.22416e+07,3.24242e+07
+2040,Generator,DK,Offshore Wind (AC),6.54906e+08,251131
+2040,Generator,DK,Offshore Wind (DC),0.19662,4e-05
+2040,Generator,DK,Offshore Wind (Floating),0.1233,2e-05
+2040,Generator,DK,Onshore Wind,1.62163e+09,1.9327e+06
+2040,Generator,DK,Open-Cycle Gas,7.61168e+07,9.31742e+07
+2040,Generator,DK,Solar,2.5944e+08,153884
+2040,Generator,DK,biomass,3.86228e+07,8.49424e+06
+2040,Generator,DK,solar-hsat,2.89992,0.00105
+2040,Generator,DK,waste,9.6199e+07,1.22891e+06
+2040,Generator,FR,Combined-Cycle Gas,9.90672e+08,1.52719e+09
+2040,Generator,FR,Offshore Wind (AC),4.8602e+08,308048
+2040,Generator,FR,Offshore Wind (DC),0.19721,6e-05
+2040,Generator,FR,Offshore Wind (Floating),0.08742,1e-05
+2040,Generator,FR,Onshore Wind,7.43058e+09,5.85889e+06
+2040,Generator,FR,Open-Cycle Gas,1.60399e+08,1.66412e+08
+2040,Generator,FR,Run of River,2.78856e+09,301255
+2040,Generator,FR,Solar,6.07631e+09,5.78909e+06
+2040,Generator,FR,biomass,1.04281e+08,4.18411e+07
+2040,Generator,FR,nuclear,5.70295e+10,6.93541e+09
+2040,Generator,FR,oil,4.79666e+06,1.44935e+06
+2040,Generator,FR,solar-hsat,5.82081e+08,398472
+2040,Generator,FR,waste,2.21147e+07,313252
+2040,Generator,LU,Combined-Cycle Gas,2.68294e+08,9.13708e+08
+2040,Generator,LU,Onshore Wind,1.59644e+08,97212.5
+2040,Generator,LU,Open-Cycle Gas,1.11387,1.08224
+2040,Generator,LU,Solar,2.94663e+07,18628.7
+2040,Generator,LU,solar-hsat,2.6595e+08,202173
+2040,Generator,NL,Combined-Cycle Gas,1.00464e+09,2.98424e+09
+2040,Generator,NL,Offshore Wind (AC),1.50328e+09,947964
+2040,Generator,NL,Offshore Wind (DC),0.95384,0.00028
+2040,Generator,NL,Offshore Wind (Floating),0.07303,1e-05
+2040,Generator,NL,Onshore Wind,2.77749e+09,2.96493e+06
+2040,Generator,NL,Open-Cycle Gas,2.98437e+08,4.04442e+08
+2040,Generator,NL,Solar,2.18667e+09,1.42447e+06
+2040,Generator,NL,biomass,2.26166e+08,7.30004e+07
+2040,Generator,NL,solar-hsat,2.3343e+08,182461
+2040,Generator,PL,Combined-Cycle Gas,1.1529e+09,3.5299e+09
+2040,Generator,PL,Offshore Wind (AC),0.36319,0.0001
+2040,Generator,PL,Offshore Wind (DC),1.11311e+09,539641
+2040,Generator,PL,Offshore Wind (Floating),0.08946,1e-05
+2040,Generator,PL,Onshore Wind,4.87455e+09,3.53912e+06
+2040,Generator,PL,Open-Cycle Gas,3.47713e+08,5.5799e+08
+2040,Generator,PL,Run of River,7.13751e+07,11281.4
+2040,Generator,PL,Solar,2.6257e+09,1.45006e+06
+2040,Generator,PL,biomass,7.16749e+07,2.35084e+07
+2040,Generator,PL,coal,1.38939e+09,4.99495e+07
+2040,Generator,PL,lignite,4.55782e+08,1.41637e+07
+2040,Generator,PL,solar-hsat,8.8404e+08,725529
+2040,Generator,PL,waste,1.76918e+07,212047
+2040,Line,AT,AC,4.75011e+08,0
+2040,Line,BE,AC,2.61952e+08,0
+2040,Line,CH,AC,5.08083e+08,0
+2040,Line,CZ,AC,1.96281e+08,0
+2040,Line,DE,AC,3.113e+09,0
+2040,Line,FR,AC,1.11158e+07,0
+2040,Link,AT,H2 Electrolysis,0.056,1e-05
+2040,Link,AT,H2 Fuel Cell,0.03856,1e-05
+2040,Link,AT,battery charger,1.94774e+08,252791
+2040,Link,BE,DC,5.9831e+07,3517.19
+2040,Link,BE,H2 Electrolysis,0.06655,1e-05
+2040,Link,BE,H2 Fuel Cell,0.04226,1e-05
+2040,Link,BE,battery charger,9.52871e+07,112774
+2040,Link,CH,H2 Electrolysis,0.05156,1e-05
+2040,Link,CH,H2 Fuel Cell,0.03833,1e-05
+2040,Link,CH,battery charger,0.34974,0.00052
+2040,Link,CZ,H2 Electrolysis,0.05755,1e-05
+2040,Link,CZ,H2 Fuel Cell,0.0383,1e-05
+2040,Link,CZ,battery charger,5.32659e+07,64606.8
+2040,Link,DE,DC,1.04446e+07,6139.12
+2040,Link,DE,H2 Electrolysis,0.67092,0.00012
+2040,Link,DE,H2 Fuel Cell,0.4191,8e-05
+2040,Link,DE,battery charger,6.69096e+08,873134
+2040,Link,DK,DC,2.77241e+08,-36631.3
+2040,Link,DK,H2 Electrolysis,0.22578,5e-05
+2040,Link,DK,H2 Fuel Cell,0.14107,3e-05
+2040,Link,DK,battery charger,4.55986e+07,37006.9
+2040,Link,FR,H2 Electrolysis,0.05195,1e-05
+2040,Link,FR,H2 Fuel Cell,0.0403,1e-05
+2040,Link,FR,battery charger,2.57342e+08,377120
+2040,Link,LU,H2 Electrolysis,0.06816,1e-05
+2040,Link,LU,H2 Fuel Cell,0.04264,1e-05
+2040,Link,LU,battery charger,1.729e+07,19798.2
+2040,Link,NL,H2 Electrolysis,0.07601,1e-05
+2040,Link,NL,H2 Fuel Cell,0.0447,1e-05
+2040,Link,NL,battery charger,9.254e+07,88786.6
+2040,Link,PL,H2 Electrolysis,0.07526,1e-05
+2040,Link,PL,H2 Fuel Cell,0.04259,1e-05
+2040,Link,PL,battery charger,2.20439e+08,204891
+2040,StorageUnit,AT,Pumped Hydro Storage,1.41988e+09,142828
+2040,StorageUnit,AT,Reservoir & Dam,1.44947e+09,285444
+2040,StorageUnit,BE,Pumped Hydro Storage,3.0344e+08,9359.19
+2040,StorageUnit,BE,Reservoir & Dam,2.95452e+06,624.351
+2040,StorageUnit,CH,Pumped Hydro Storage,1.01392e+09,83176.8
+2040,StorageUnit,CH,Reservoir & Dam,2.2434e+09,232894
+2040,StorageUnit,CZ,Pumped Hydro Storage,2.67946e+08,4005.65
+2040,StorageUnit,CZ,Reservoir & Dam,1.44154e+08,21619.9
+2040,StorageUnit,DE,Pumped Hydro Storage,1.70783e+09,95464.6
+2040,StorageUnit,DE,Reservoir & Dam,9.33144e+07,19444.7
+2040,StorageUnit,FR,Pumped Hydro Storage,1.40956e+09,83992.8
+2040,StorageUnit,FR,Reservoir & Dam,1.99822e+09,379574
+2040,StorageUnit,LU,Pumped Hydro Storage,3.00192e+08,13728.2
+2040,StorageUnit,PL,Pumped Hydro Storage,4.34977e+08,20121.2
+2040,StorageUnit,PL,Reservoir & Dam,3.79315e+07,10867.9
+2040,Store,AT,Battery Storage,7.12494e+08,0
+2040,Store,AT,Hydrogen Storage,0.05133,0
+2040,Store,BE,Battery Storage,3.78384e+08,0
+2040,Store,BE,Hydrogen Storage,0.04788,0
+2040,Store,CH,Battery Storage,1.14357,0
+2040,Store,CH,Hydrogen Storage,0.05202,0
+2040,Store,CZ,Battery Storage,2.10782e+08,0
+2040,Store,CZ,Hydrogen Storage,0.04928,0
+2040,Store,DE,Battery Storage,2.69089e+09,0
+2040,Store,DE,Hydrogen Storage,0.48883,0
+2040,Store,DK,Battery Storage,1.97248e+08,0
+2040,Store,DK,Hydrogen Storage,0.09881,0
+2040,Store,FR,Battery Storage,1.00459e+09,0
+2040,Store,FR,Hydrogen Storage,0.05054,0
+2040,Store,LU,Battery Storage,6.95082e+07,0
+2040,Store,LU,Hydrogen Storage,0.04763,0
+2040,Store,NL,Battery Storage,5.09556e+08,0
+2040,Store,NL,Hydrogen Storage,0.04792,0
+2040,Store,PL,Battery Storage,8.92307e+08,0
+2040,Store,PL,Hydrogen Storage,0.04785,0
+2040,Generator,AT,load,0,0.02315
+2040,Generator,BE,load,0,0.02316
+2040,Generator,CH,load,0,0.02316
+2040,Generator,CZ,load,0,0.02315
+2040,Generator,DE,geothermal,0,2.94534e+06
+2040,Generator,DE,load,0,0.23159
+2040,Generator,DK,load,0,0.04631
+2040,Generator,FR,load,0,0.02312
+2040,Generator,LU,load,0,0.02315
+2040,Generator,NL,load,0,0.02316
+2040,Generator,PL,load,0,0.02314
+2040,Link,AT,battery discharger,0,238445
+2040,Link,BE,battery discharger,0,98841.2
+2040,Link,CH,battery discharger,0,0.00047
+2040,Link,CZ,battery discharger,0,55513.1
+2040,Link,DE,battery discharger,0,756148
+2040,Link,DK,battery discharger,0,34273.1
+2040,Link,FR,battery discharger,0,306176
+2040,Link,LU,battery discharger,0,18154.3
+2040,Link,NL,battery discharger,0,85386.1
+2040,Link,PL,battery discharger,0,189078
+2045,Generator,AT,Combined-Cycle Gas,1.33352e+08,2.18073e+08
+2045,Generator,AT,Onshore Wind,1.40767e+09,859893
+2045,Generator,AT,Open-Cycle Gas,0.6195,0.67375
+2045,Generator,AT,Run of River,9.37258e+08,97723
+2045,Generator,AT,Solar,2.85601e+09,1.80792e+06
+2045,Generator,AT,biomass,3.62088e+07,7.15847e+06
+2045,Generator,AT,solar-hsat,2.38874e+09,1.81186e+06
+2045,Generator,AT,waste,6.71709e+07,872508
+2045,Generator,BE,Combined-Cycle Gas,6.32158e+08,1.04447e+09
+2045,Generator,BE,Offshore Wind (AC),5.14603e+08,321578
+2045,Generator,BE,Offshore Wind (DC),2.77467e+08,140544
+2045,Generator,BE,Offshore Wind (Floating),0.98093,0.00015
+2045,Generator,BE,Onshore Wind,1.9246e+09,1.58676e+06
+2045,Generator,BE,Open-Cycle Gas,4.98419e+08,4.27138e+08
+2045,Generator,BE,Run of River,2.28816e+07,2752.7
+2045,Generator,BE,Solar,2.01235e+09,1.17134e+06
+2045,Generator,BE,nuclear,1.97617e+09,1.79392e+08
+2045,Generator,BE,oil,6.46406e+06,2.15124e+06
+2045,Generator,BE,solar-hsat,1.69147e+08,119007
+2045,Generator,BE,waste,1.50761e+08,2.34995e+06
+2045,Generator,CH,Combined-Cycle Gas,0.875,1.38225
+2045,Generator,CH,Onshore Wind,4.82737e+06,181.497
+2045,Generator,CH,Open-Cycle Gas,0.51329,0.55084
+2045,Generator,CH,Run of River,1.52307e+09,109917
+2045,Generator,CH,Solar,1.58107e+09,1.09456e+06
+2045,Generator,CH,biomass,1.07698e+07,1.68815e+06
+2045,Generator,CH,solar-hsat,5.27857,0.0021
+2045,Generator,CH,waste,1.10352e+08,1.14672e+06
+2045,Generator,CZ,Combined-Cycle Gas,3.5535e+08,6.10275e+08
+2045,Generator,CZ,Onshore Wind,2.69785e+09,1.36689e+06
+2045,Generator,CZ,Open-Cycle Gas,2.08297e+07,2.24979e+07
+2045,Generator,CZ,Run of River,1.5741e+07,1573.28
+2045,Generator,CZ,Solar,9.75206e+08,599525
+2045,Generator,CZ,coal,5.72377e+07,1.74404e+06
+2045,Generator,CZ,nuclear,1.96256e+09,2.04481e+08
+2045,Generator,CZ,solar-hsat,2.93641e+07,19445.7
+2045,Generator,DE,Combined-Cycle Gas,2.3632e+09,4.37557e+09
+2045,Generator,DE,Offshore Wind (AC),1.96692e+09,1.05917e+06
+2045,Generator,DE,Offshore Wind (DC),7.57691e+09,3.28272e+06
+2045,Generator,DE,Offshore Wind (Floating),3.63403,0.00055
+2045,Generator,DE,Onshore Wind,1.06887e+10,7.53616e+06
+2045,Generator,DE,Open-Cycle Gas,1.6787e+09,1.87014e+09
+2045,Generator,DE,Run of River,1.57076e+09,200404
+2045,Generator,DE,Solar,1.25267e+10,7.04276e+06
+2045,Generator,DE,biomass,9.46202e+08,1.85464e+08
+2045,Generator,DE,lignite,1.3648e+07,465627
+2045,Generator,DE,oil,1.4491e+07,5.27059e+06
+2045,Generator,DE,solar-hsat,3.1782e+09,2.15442e+06
+2045,Generator,DE,waste,1.67614e+08,2.39174e+06
+2045,Generator,DK,Combined-Cycle Gas,6.16933e+06,1.04986e+07
+2045,Generator,DK,Offshore Wind (AC),5.21025e+08,137594
+2045,Generator,DK,Offshore Wind (DC),3.00974,0.00065
+2045,Generator,DK,Offshore Wind (Floating),1.66974,0.00025
+2045,Generator,DK,Onshore Wind,2.01682e+09,2.19398e+06
+2045,Generator,DK,Open-Cycle Gas,7.51113e+07,7.16234e+07
+2045,Generator,DK,Solar,2.98514e+08,137466
+2045,Generator,DK,biomass,3.86228e+07,5.35072e+06
+2045,Generator,DK,solar-hsat,9.88518,0.00295
+2045,Generator,FR,Combined-Cycle Gas,8.50819e+08,1.1212e+09
+2045,Generator,FR,Offshore Wind (AC),4.82434e+08,258582
+2045,Generator,FR,Offshore Wind (DC),6.25667,0.00167
+2045,Generator,FR,Offshore Wind (Floating),1.64358,0.00029
+2045,Generator,FR,Onshore Wind,1.33328e+10,8.87296e+06
+2045,Generator,FR,Open-Cycle Gas,4.3425e+08,4.98084e+08
+2045,Generator,FR,Run of River,2.78856e+09,334499
+2045,Generator,FR,Solar,7.29593e+09,5.94469e+06
+2045,Generator,FR,biomass,8.21848e+07,1.98781e+07
+2045,Generator,FR,nuclear,3.72361e+10,2.62408e+09
+2045,Generator,FR,oil,2.48236e+06,1.01678e+06
+2045,Generator,FR,solar-hsat,4.03168e+09,2.97356e+06
+2045,Generator,LU,Combined-Cycle Gas,2.6522e+08,5.43192e+08
+2045,Generator,LU,Onshore Wind,1.92518e+08,114917
+2045,Generator,LU,Open-Cycle Gas,2.14753,2.05431
+2045,Generator,LU,Solar,2.92372e+07,12484
+2045,Generator,LU,solar-hsat,2.6595e+08,178252
+2045,Generator,NL,Combined-Cycle Gas,8.36475e+08,1.56119e+09
+2045,Generator,NL,Offshore Wind (AC),1.46044e+09,621095
+2045,Generator,NL,Offshore Wind (DC),3.57449e+09,1.36394e+06
+2045,Generator,NL,Offshore Wind (Floating),0.94708,0.00014
+2045,Generator,NL,Onshore Wind,2.67668e+09,2.75174e+06
+2045,Generator,NL,Open-Cycle Gas,2.94495e+08,2.40972e+08
+2045,Generator,NL,Solar,2.93317e+09,1.56172e+06
+2045,Generator,NL,biomass,1.85686e+08,3.30356e+07
+2045,Generator,NL,solar-hsat,2.3343e+08,152631
+2045,Generator,PL,Combined-Cycle Gas,1.17803e+09,2.25194e+09
+2045,Generator,PL,Offshore Wind (AC),1.22672e+09,456004
+2045,Generator,PL,Offshore Wind (DC),1.91241e+09,931896
+2045,Generator,PL,Offshore Wind (Floating),1.54261,0.00026
+2045,Generator,PL,Onshore Wind,5.14317e+09,3.40257e+06
+2045,Generator,PL,Open-Cycle Gas,3.4312e+08,3.69947e+08
+2045,Generator,PL,Run of River,7.13751e+07,11706.5
+2045,Generator,PL,Solar,3.72917e+09,1.99428e+06
+2045,Generator,PL,biomass,3.26808e+07,6.11003e+06
+2045,Generator,PL,coal,1.28001e+09,4.03513e+07
+2045,Generator,PL,lignite,4.55782e+08,1.64966e+07
+2045,Generator,PL,solar-hsat,8.8404e+08,554750
+2045,Generator,PL,waste,1.70593e+07,243749
+2045,Line,AT,AC,4.54097e+08,0
+2045,Line,BE,AC,2.50395e+08,0
+2045,Line,CH,AC,4.85653e+08,0
+2045,Line,CZ,AC,1.87607e+08,0
+2045,Line,DE,AC,3.01982e+09,0
+2045,Line,FR,AC,1.06246e+07,0
+2045,Link,AT,H2 Electrolysis,1.314,0.00035
+2045,Link,AT,H2 Fuel Cell,1.1748,0.00025
+2045,Link,AT,battery charger,3.04908e+08,318577
+2045,Link,BE,DC,5.77538e+07,-22062
+2045,Link,BE,H2 Electrolysis,3.11926,0.00084
+2045,Link,BE,H2 Fuel Cell,2.68899,0.0006
+2045,Link,BE,battery charger,1.47963e+08,160779
+2045,Link,CH,H2 Electrolysis,1.03799,0.00033
+2045,Link,CH,H2 Fuel Cell,0.9236,0.00019
+2045,Link,CH,battery charger,5.99621e+07,68647.1
+2045,Link,CZ,H2 Electrolysis,2.16934,0.00053
+2045,Link,CZ,H2 Fuel Cell,1.73818,0.00036
+2045,Link,CZ,battery charger,7.2903e+07,82403.3
+2045,Link,DE,DC,1.52721e+08,88332.1
+2045,Link,DE,H2 Electrolysis,58.867,0.01777
+2045,Link,DE,H2 Fuel Cell,47.2836,0.01113
+2045,Link,DE,battery charger,8.23534e+08,922093
+2045,Link,DK,DC,2.66329e+08,-70877.1
+2045,Link,DK,H2 Electrolysis,3.32676e+07,10704.6
+2045,Link,DK,H2 Fuel Cell,3.68618e+07,6833.85
+2045,Link,DK,battery charger,6.84903e+07,55291.3
+2045,Link,FR,H2 Electrolysis,1.31315,0.00038
+2045,Link,FR,H2 Fuel Cell,1.34213,0.00023
+2045,Link,FR,battery charger,7.90955e+08,1.06552e+06
+2045,Link,LU,H2 Electrolysis,4.45554,0.00126
+2045,Link,LU,H2 Fuel Cell,3.51261,0.0008
+2045,Link,LU,battery charger,1.96119e+07,19915.7
+2045,Link,NL,H2 Electrolysis,10.1451,0.00298
+2045,Link,NL,H2 Fuel Cell,8.94811,0.00214
+2045,Link,NL,battery charger,2.06377e+08,154163
+2045,Link,PL,H2 Electrolysis,9.11962,0.00234
+2045,Link,PL,H2 Fuel Cell,7.61537,0.00183
+2045,Link,PL,battery charger,2.89072e+08,250508
+2045,StorageUnit,AT,Pumped Hydro Storage,1.41988e+09,134346
+2045,StorageUnit,AT,Reservoir & Dam,1.44947e+09,247160
+2045,StorageUnit,BE,Pumped Hydro Storage,3.0344e+08,7291.37
+2045,StorageUnit,BE,Reservoir & Dam,2.95452e+06,544.858
+2045,StorageUnit,CH,Pumped Hydro Storage,1.01392e+09,61432.2
+2045,StorageUnit,CH,Reservoir & Dam,2.2434e+09,222367
+2045,StorageUnit,CZ,Pumped Hydro Storage,2.67946e+08,3660.8
+2045,StorageUnit,CZ,Reservoir & Dam,1.44154e+08,22828.1
+2045,StorageUnit,DE,Pumped Hydro Storage,1.70783e+09,75156.3
+2045,StorageUnit,DE,Reservoir & Dam,9.33144e+07,18153.1
+2045,StorageUnit,FR,Pumped Hydro Storage,1.40956e+09,72233.1
+2045,StorageUnit,FR,Reservoir & Dam,1.99822e+09,335578
+2045,StorageUnit,LU,Pumped Hydro Storage,3.00192e+08,9417.16
+2045,StorageUnit,PL,Pumped Hydro Storage,4.34977e+08,14912
+2045,StorageUnit,PL,Reservoir & Dam,3.79315e+07,9511.51
+2045,Store,AT,Battery Storage,1.06285e+09,0
+2045,Store,AT,Hydrogen Storage,1.53659,0
+2045,Store,BE,Battery Storage,6.51805e+08,0
+2045,Store,BE,Hydrogen Storage,2.56048,0
+2045,Store,CH,Battery Storage,2.475e+08,0
+2045,Store,CH,Hydrogen Storage,1.24577,0
+2045,Store,CZ,Battery Storage,3.20435e+08,0
+2045,Store,CZ,Hydrogen Storage,2.01559,0
+2045,Store,DE,Battery Storage,3.96717e+09,0
+2045,Store,DE,Hydrogen Storage,51.377,0
+2045,Store,DK,Battery Storage,5.58071e+08,0
+2045,Store,DK,Hydrogen Storage,1.91248e+07,0
+2045,Store,FR,Battery Storage,3.50682e+09,0
+2045,Store,FR,Hydrogen Storage,1.42061,0
+2045,Store,LU,Battery Storage,8.93457e+07,0
+2045,Store,LU,Hydrogen Storage,3.32936,0
+2045,Store,NL,Battery Storage,1.08735e+09,0
+2045,Store,NL,Hydrogen Storage,7.26021,0
+2045,Store,PL,Battery Storage,1.34104e+09,0
+2045,Store,PL,Hydrogen Storage,6.5389,0
+2045,Generator,AT,load,0,0.30615
+2045,Generator,BE,load,0,0.30751
+2045,Generator,CH,load,0,0.30815
+2045,Generator,CZ,load,0,0.30711
+2045,Generator,DE,geothermal,0,788985
+2045,Generator,DE,load,0,3.07443
+2045,Generator,DK,load,0,0.61663
+2045,Generator,FR,load,0,0.30225
+2045,Generator,LU,load,0,0.30583
+2045,Generator,NL,load,0,0.30853
+2045,Generator,PL,load,0,0.305
+2045,Link,AT,battery discharger,0,280250
+2045,Link,BE,battery discharger,0,136768
+2045,Link,CH,battery discharger,0,69046
+2045,Link,CZ,battery discharger,0,68315.7
+2045,Link,DE,battery discharger,0,817727
+2045,Link,DK,battery discharger,0,61340.6
+2045,Link,FR,battery discharger,0,962720
+2045,Link,LU,battery discharger,0,18778.5
+2045,Link,NL,battery discharger,0,150315
+2045,Link,PL,battery discharger,0,219697
+2050,Generator,AT,Combined-Cycle Gas,4.69065e+06,4.18195e+06
+2050,Generator,AT,Onshore Wind,1.31361e+09,991063
+2050,Generator,AT,Run of River,9.37258e+08,101909
+2050,Generator,AT,Solar,3.27637e+09,2.74445e+06
+2050,Generator,AT,biomass,2.39535e+07,4.81499e+06
+2050,Generator,AT,solar-hsat,2.70129e+09,2.14371e+06
+2050,Generator,AT,waste,1.33468e+07,0.47704
+2050,Generator,BE,Combined-Cycle Gas,4.83177e+08,4.38253e+08
+2050,Generator,BE,Offshore Wind (AC),2.36991e+08,96014.5
+2050,Generator,BE,Offshore Wind (DC),2.77467e+08,177784
+2050,Generator,BE,Offshore Wind (Floating),2.69271,0.0005
+2050,Generator,BE,Onshore Wind,1.90877e+09,1.84238e+06
+2050,Generator,BE,Run of River,2.28816e+07,2832.37
+2050,Generator,BE,Solar,2.91302e+09,1.97568e+06
+2050,Generator,BE,oil,6.42262e+06,0.50919
+2050,Generator,BE,solar-hsat,1.69147e+08,128885
+2050,Generator,BE,waste,1.45172e+08,0.50371
+2050,Generator,CH,Onshore Wind,1.71915e+06,49.6931
+2050,Generator,CH,Run of River,1.52307e+09,92143.3
+2050,Generator,CH,Solar,2.26697e+09,1.22624e+06
+2050,Generator,CH,biomass,1.07698e+07,1.36122e+06
+2050,Generator,CH,solar-hsat,6.94864,0.00278
+2050,Generator,CH,waste,1.06261e+08,0.49411
+2050,Generator,CZ,Onshore Wind,3.28517e+09,1.89627e+06
+2050,Generator,CZ,Run of River,1.5741e+07,1573.98
+2050,Generator,CZ,Solar,9.79097e+08,841709
+2050,Generator,CZ,coal,5.72377e+07,0.50284
+2050,Generator,CZ,nuclear,1.96256e+09,2.3095e+08
+2050,Generator,CZ,solar-hsat,2.93641e+07,28767.7
+2050,Generator,DE,Combined-Cycle Gas,1.4128e+09,1.46172e+09
+2050,Generator,DE,Offshore Wind (AC),1.28201e+09,634524
+2050,Generator,DE,Offshore Wind (DC),7.57691e+09,4.34568e+06
+2050,Generator,DE,Offshore Wind (Floating),7.04985,0.0012
+2050,Generator,DE,Onshore Wind,1.42991e+10,1.06968e+07
+2050,Generator,DE,Open-Cycle Gas,1.58071e+09,5.00057e+08
+2050,Generator,DE,Run of River,1.57076e+09,199148
+2050,Generator,DE,Solar,1.36287e+10,1.06749e+07
+2050,Generator,DE,biomass,4.49231e+08,1.24499e+08
+2050,Generator,DE,lignite,1.15959e+07,2.37928
+2050,Generator,DE,oil,35516.8,1.39683
+2050,Generator,DE,solar-hsat,3.1782e+09,2.77801e+06
+2050,Generator,DE,waste,6.33181e+07,2.39847
+2050,Generator,DK,Combined-Cycle Gas,6.09785e+06,6.1864e+06
+2050,Generator,DK,Offshore Wind (AC),3.75889e+08,177165
+2050,Generator,DK,Offshore Wind (DC),5.04454,0.0012
+2050,Generator,DK,Offshore Wind (Floating),2.91663,0.00047
+2050,Generator,DK,Onshore Wind,2.29294e+09,3.20734e+06
+2050,Generator,DK,Solar,2.98514e+08,246882
+2050,Generator,DK,solar-hsat,7.31477,0.00259
+2050,Generator,FR,Combined-Cycle Gas,4.0696e+08,3.9172e+08
+2050,Generator,FR,Offshore Wind (AC),4.82434e+08,216600
+2050,Generator,FR,Offshore Wind (DC),26.7996,0.00735
+2050,Generator,FR,Offshore Wind (Floating),4.12591,0.00075
+2050,Generator,FR,Onshore Wind,1.81698e+10,1.12687e+07
+2050,Generator,FR,Run of River,2.78856e+09,279098
+2050,Generator,FR,Solar,1.39981e+10,8.84784e+06
+2050,Generator,FR,biomass,1.11412e+07,1.54961e+06
+2050,Generator,FR,nuclear,1.46068e+10,7.74201e+08
+2050,Generator,FR,solar-hsat,4.03168e+09,3.83246e+06
+2050,Generator,LU,Onshore Wind,2.67279e+08,179863
+2050,Generator,LU,Solar,2.92372e+07,26924.1
+2050,Generator,LU,solar-hsat,2.6595e+08,300234
+2050,Generator,NL,Combined-Cycle Gas,6.58155e+08,6.74732e+08
+2050,Generator,NL,Offshore Wind (AC),7.6232e+08,478067
+2050,Generator,NL,Offshore Wind (DC),6.73606e+09,3.16079e+06
+2050,Generator,NL,Offshore Wind (Floating),1.62191,0.00025
+2050,Generator,NL,Onshore Wind,2.55733e+09,3.32877e+06
+2050,Generator,NL,Solar,2.93125e+09,2.24286e+06
+2050,Generator,NL,biomass,1.85686e+08,4.89786e+07
+2050,Generator,NL,solar-hsat,2.3343e+08,225137
+2050,Generator,PL,Combined-Cycle Gas,1.15389e+09,9.90094e+08
+2050,Generator,PL,Offshore Wind (AC),1.46031e+09,717283
+2050,Generator,PL,Offshore Wind (DC),1.91241e+09,1.21613e+06
+2050,Generator,PL,Offshore Wind (Floating),2.87648,0.00056
+2050,Generator,PL,Onshore Wind,6.53756e+09,5.18959e+06
+2050,Generator,PL,Run of River,7.13751e+07,12065.3
+2050,Generator,PL,Solar,3.72917e+09,3.11106e+06
+2050,Generator,PL,coal,4.23983e+07,0.49846
+2050,Generator,PL,solar-hsat,8.8404e+08,974794
+2050,Generator,PL,waste,1.64268e+07,0.48118
+2050,Line,AT,AC,4.33172e+08,0
+2050,Line,BE,AC,2.38849e+08,0
+2050,Line,CH,AC,4.63302e+08,0
+2050,Line,CZ,AC,1.78998e+08,0
+2050,Line,DE,AC,2.88829e+09,0
+2050,Line,FR,AC,1.01361e+07,0
+2050,Link,AT,H2 Electrolysis,3.70402,0.00138
+2050,Link,AT,H2 Fuel Cell,6.53825,0.00086
+2050,Link,AT,battery charger,3.60446e+08,461607
+2050,Link,BE,DC,5.55397e+07,10182.7
+2050,Link,BE,H2 Electrolysis,6.46457e+08,195640
+2050,Link,BE,H2 Fuel Cell,1.8105e+09,154320
+2050,Link,BE,battery charger,1.62129e+08,290140
+2050,Link,CH,H2 Electrolysis,2.0194,0.00067
+2050,Link,CH,H2 Fuel Cell,2.38247,0.00044
+2050,Link,CH,battery charger,1.42219e+08,128013
+2050,Link,CZ,H2 Electrolysis,2.02946e+08,64317.4
+2050,Link,CZ,H2 Fuel Cell,5.5391e+08,45069.7
+2050,Link,CZ,battery charger,7.16956e+07,109444
+2050,Link,DE,DC,6.96141e+08,418160
+2050,Link,DE,H2 Electrolysis,3.53994e+09,1.08136e+06
+2050,Link,DE,H2 Fuel Cell,7.46314e+09,787445
+2050,Link,DE,battery charger,8.00462e+08,1.46948e+06
+2050,Link,DK,DC,2.54727e+08,-50383.5
+2050,Link,DK,H2 Electrolysis,4.79431e+08,159380
+2050,Link,DK,H2 Fuel Cell,7.93208e+08,98518.8
+2050,Link,DK,battery charger,6.75328e+07,95768.3
+2050,Link,FR,H2 Electrolysis,1.17175e+09,514880
+2050,Link,FR,H2 Fuel Cell,4.17271e+09,329359
+2050,Link,FR,battery charger,1.23743e+09,2.12112e+06
+2050,Link,LU,H2 Electrolysis,1.23663e+08,33562.3
+2050,Link,LU,H2 Fuel Cell,3.32825e+08,23873
+2050,Link,LU,battery charger,2.80617e+07,40903.1
+2050,Link,NL,H2 Electrolysis,1.15703e+09,373492
+2050,Link,NL,H2 Fuel Cell,1.73326e+09,255021
+2050,Link,NL,battery charger,1.66501e+08,230303
+2050,Link,PL,H2 Electrolysis,1.44543e+09,442028
+2050,Link,PL,H2 Fuel Cell,2.7727e+09,326598
+2050,Link,PL,battery charger,2.5877e+08,387301
+2050,StorageUnit,AT,Pumped Hydro Storage,1.41988e+09,133238
+2050,StorageUnit,AT,Reservoir & Dam,1.44947e+09,260694
+2050,StorageUnit,BE,Pumped Hydro Storage,3.0344e+08,8382.03
+2050,StorageUnit,BE,Reservoir & Dam,2.95452e+06,655.581
+2050,StorageUnit,CH,Pumped Hydro Storage,1.01392e+09,53092.7
+2050,StorageUnit,CH,Reservoir & Dam,2.2434e+09,234445
+2050,StorageUnit,CZ,Pumped Hydro Storage,2.67946e+08,3716.12
+2050,StorageUnit,CZ,Reservoir & Dam,1.44154e+08,23800.2
+2050,StorageUnit,DE,Pumped Hydro Storage,1.70783e+09,83147.1
+2050,StorageUnit,DE,Reservoir & Dam,9.33144e+07,18591.1
+2050,StorageUnit,FR,Pumped Hydro Storage,1.40956e+09,87221.3
+2050,StorageUnit,FR,Reservoir & Dam,1.99822e+09,315976
+2050,StorageUnit,LU,Pumped Hydro Storage,3.00192e+08,7660.19
+2050,StorageUnit,PL,Pumped Hydro Storage,4.34977e+08,15618.4
+2050,StorageUnit,PL,Reservoir & Dam,3.79315e+07,11168.6
+2050,Store,AT,Battery Storage,1.44198e+09,0
+2050,Store,AT,Hydrogen Storage,7.19898,0
+2050,Store,BE,Battery Storage,8.71852e+08,0
+2050,Store,BE,Hydrogen Storage,1.41305e+09,0
+2050,Store,CH,Battery Storage,6.1475e+08,0
+2050,Store,CH,Hydrogen Storage,2.90769,0
+2050,Store,CZ,Battery Storage,3.74091e+08,0
+2050,Store,CZ,Hydrogen Storage,4.1169e+08,0
+2050,Store,DE,Battery Storage,4.57127e+09,0
+2050,Store,DE,Hydrogen Storage,6.22247e+09,1e-05
+2050,Store,DK,Battery Storage,7.55544e+08,0
+2050,Store,DK,Hydrogen Storage,4.47673e+08,0
+2050,Store,FR,Battery Storage,6.21484e+09,0
+2050,Store,FR,Hydrogen Storage,3.06973e+09,0
+2050,Store,LU,Battery Storage,2.34028e+08,0
+2050,Store,LU,Hydrogen Storage,1.26931e+08,0
+2050,Store,NL,Battery Storage,1.08735e+09,0
+2050,Store,NL,Hydrogen Storage,1.35466e+09,0
+2050,Store,PL,Battery Storage,1.77987e+09,0
+2050,Store,PL,Hydrogen Storage,2.1658e+09,0
+2050,Generator,AT,load,0,0.59053
+2050,Generator,BE,load,0,0.59888
+2050,Generator,CH,load,0,0.60397
+2050,Generator,CZ,load,0,0.59377
+2050,Generator,DE,geothermal,0,2.44618e+06
+2050,Generator,DE,load,0,6.00283
+2050,Generator,DK,load,0,1.20787
+2050,Generator,FR,load,0,0.56907
+2050,Generator,LU,load,0,0.58825
+2050,Generator,NL,load,0,0.60324
+2050,Generator,PL,load,0,0.58981
+2050,Link,AT,battery discharger,0,378336
+2050,Link,BE,battery discharger,0,209511
+2050,Link,CH,battery discharger,0,102566
+2050,Link,CZ,battery discharger,0,93644.5
+2050,Link,DE,battery discharger,0,1.28009e+06
+2050,Link,DK,battery discharger,0,98965.5
+2050,Link,FR,battery discharger,0,1.76442e+06
+2050,Link,LU,battery discharger,0,41547
+2050,Link,NL,battery discharger,0,211741
+2050,Link,PL,battery discharger,0,333505

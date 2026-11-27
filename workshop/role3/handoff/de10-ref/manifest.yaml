@@ -1,0 +1,47 @@
+run: de10-ref
+git_commit: 2a6c00c1
+horizons:
+- 2025
+- 2030
+- 2035
+- 2040
+- 2045
+- 2050
+configs:
+- config/config.workshop.yaml
+- config/config.role3-neighbours.yaml
+- config/config.role3-reference.yaml
+- config/config.role3-e3.yaml
+solver:
+  2025:
+    status: Optimal
+    solve_min: 2.11
+    peak_gb: 4.0
+  2030:
+    status: Optimal
+    solve_min: 3.43
+    peak_gb: 5.91
+  2035:
+    status: Optimal
+    solve_min: 4.15
+    peak_gb: 5.92
+  2040:
+    status: Optimal
+    solve_min: 3.68
+    peak_gb: 5.98
+  2045:
+    status: Optimal
+    solve_min: 4.58
+    peak_gb: 6.53
+  2050:
+    status: Optimal
+    solve_min: 4.44
+    peak_gb: 6.46
+definitions:
+  system_cost: capex + opex of n.statistics over all active assets, EUR/a (the solver
+    objective counts extendable assets only and is smaller)
+  trade: net flow at the sending end (p0) of AC lines, DC links and the cable, TWh/a;
+    same quantity the role3.net_import_limit constrains
+  germany: all AC buses with country == DE
+  time: 4 h steps, weather year 2013; flows and energies are annual sums
+contains_unit_level_data: false

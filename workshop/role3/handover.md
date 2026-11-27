@@ -25,14 +25,14 @@ pixi run snakemake results/de10-nb9-ref/networks/solved_2050.nc -c4 \
 - Eigene Varianten: als zusätzliche Config **nach** diesen drei Dateien laden und einen eigenen `run.name` setzen.
   - Damit die Eingangsdaten nicht neu gebaut werden müssen, `resources/de10-nb9-ref` kopieren (siehe Kopf von `config/config.role3-co2-750.yaml`).
 
-## Neu: Referenz nach `decisions.md` E3 (`de10-ref`), noch nicht gerechnet
+## Referenz nach `decisions.md` E3 (`de10-ref`): gerechnet, alle sechs Jahre optimal
 
 `de10-nb9-ref` bleibt, wie es gelöst wurde (nur NTC-Grenzen, 2050 nur CO₂-Preis). E3 verlangt aber zusätzlich:
 
 | E3 | `de10-nb9-ref` | `de10-ref` (neu) |
 |---|---|---|
 | Nettoimport DE pro Jahr ≤ heutiges Niveau (ca. 25 TWh/a) | nicht begrenzt, 90–112 TWh/a ab 2030 | `role3.net_import_limit.twh: 25` |
-| Weiche CO₂-Grenze 2050 wie 2045 (0,05) | keine Grenze, nur Preis 2.600 €/t | `co2_budget.upper.2050: 0.05` plus Preis |
+| Weiche CO₂-Grenze 2050 wie 2045 (0,05) und CO₂-Preis 2050 | keine Grenze, Preis 2.600 €/t | `co2_budget.upper.2050: 0.05`, Preis **750 €/t** (E3 geändert, O8 erledigt) |
 
 ```bash
 mkdir -p resources/de10-ref results/de10-ref/networks
@@ -43,7 +43,7 @@ pixi run snakemake results/de10-ref/networks/solved_2050.nc -c4 \
   --allowed-rules process_cost_data compose_network solve_network
 ```
 
-- Neue Config: `config/config.role3-e3.yaml`, neuer Code: `add_net_import_limit` in `data/role3_constraints.py`. Die Grenze zählt Leitungen und DC-Links zwischen DE und den Nachbarn, **nicht** das Brasilien-Kabel (BR-Bus hat `country = "BR"`). Im Spielzeugnetz getestet (Grenze greift, Kabel zählt nicht, Leitungsrichtung egal). Im vollen Modell **noch nicht gelöst**: unklar, ob 25 TWh in allen Jahren lösbar ist und was es kostet (Lastabwurf ist im Netz zugelassen).
+- Neue Config: `config/config.role3-e3.yaml`, neuer Code: `add_net_import_limit` in `data/role3_constraints.py`. Die Grenze zählt Leitungen und DC-Links zwischen DE und den Nachbarn, **nicht** das Brasilien-Kabel (BR-Bus hat `country = "BR"`). Im Spielzeugnetz getestet (Grenze greift, Kabel zählt nicht, Leitungsrichtung egal). Im vollen Modell **gelöst**: unklar, ob 25 TWh in allen Jahren lösbar ist und was es kostet (Lastabwurf ist im Netz zugelassen).
 - **Nicht kopieren:** gelöste Netze von `de10-nb9-ref`. Die Grenze ändert jedes Jahr ab 2025. Nur die Eingangsdaten (`resources/`) werden wiederverwendet.
 - Kabellauf auf dieser Referenz: `config/config.role3-cable.yaml` plus `config/config.role3-e3-cable.yaml` für den Run-Namen `de10-cable`. Ein Kabellauf auf der NTC-Referenz (`de10-nb9-cable`) ist **explorativ** und nicht der CABLE-Lauf von E4.
 - Die 25 TWh: Energy-Charts (Abfrage 27.11.2026, Kreuzflussdaten 2024, Grenzen von DE): Nettoimport insgesamt 28,3 TWh, davon 19,9 TWh aus den neun Modell-Nachbarn (Norwegen und Schweden sind nicht im Modell). 25 TWh liegt in dieser Spanne. Ob ein Jahreswert so gemessen wird, wie E3 ihn meint, entscheidet Rolle 4.
@@ -104,5 +104,15 @@ Config `config/config.role3-cable.yaml`, geladen nach den drei Referenz-Configs.
 
 ## Stand 14:25: E3-Referenz `de10-ref` rechnet
 
-- `de10-ref` (Configs: neighbours + reference + e3) läuft seit 14:25. Er setzt E3 um: Nettoimport ≤ 25 TWh/a, CO₂-Grenze 0,05 und 2.600 €/t in 2050.
+- `de10-ref` (Configs: neighbours + reference + e3) ist gerechnet und setzt E3 um: Nettoimport ≤ 25 TWh/a, CO₂-Grenze 0,05 und 750 €/t in 2050.
 - `de10-nb9-ref` und `de10-nb9-cable` (nur 2025–2035) bleiben unverändert als NTC-Variante bestehen.
+
+## Übergabe an Rolle 4: Ergebnisse von `de10-ref`
+
+Ordner `workshop/role3/handoff/<run>/` (im Repo, je Lauf etwa 170 KB, immer dieselben Dateien, erzeugt von `workshop/role3/export_handoff.py`). Beschreibung: `workshop/role3/handoff/README.md`. Enthalten sind `de10-ref` (REF nach E3) und `de10-nb9-ref` (vor E3, für den Effekt der Importgrenze).
+
+- Die gelösten Netze (30 MB je Jahr) liegen **nicht** im Repo, nur in `results/<run>/networks/` dieses Workspaces. `workshop/analysis/evaluate.py` liest Netze, nicht diese CSVs. Rolle 4 braucht daher entweder die Netze in ihrem Workspace oder rechnet `de10-ref` mit der Kette aus `runs.yaml` selbst (etwa 30 min).
+- Prüfung: Systemkosten und Strompreis DE aus dem Export stimmen mit `evaluate.py` (Lauf REF) überein; Energiebilanz je Jahr null.
+- **2050 mit 750 statt 2.600 €/t:** `de10-ref` 2050 wurde mit der neuen Config neu gelöst. Systemkosten 234,5 Mrd. €/a gegenüber 246,3 Mrd. €/a in `de10-nb9-ref` (2.600 €/t, ohne Cap). Das alte 2050-Netz mit 2.600 €/t liegt als `results/de10-ref-p2600/networks/solved_2050.nc` (nur 2050, nicht im Repo).
+- Gegenüber `de10-nb9-ref` ändert die Importgrenze die Systemkosten 2030–2045 um höchstens 0,4 Mrd. €/a (0,2 %) und den DE-Preis um weniger als 2 €/MWh. Der Effekt auf die Kabelbewertung kommt also von den Flüssen, nicht von den Gesamtkosten.
+- Offen in `decisions.md`: O9 (Configs für MV, CAPEX50, WACC7, REF-ISL, CABLE-ISL) und O10 (Übertrag des Kabels zwischen den Jahren).

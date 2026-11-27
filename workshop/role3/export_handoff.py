@@ -209,7 +209,11 @@ def main():
     ap.add_argument("--years", nargs="*", type=int, default=YEARS)
     a = ap.parse_args()
 
-    busy = subprocess.run(["pgrep", "-f", "solve_network.py"], capture_output=True, text=True).stdout.split()
+    # only a real solver process counts: its command line is the Snakemake script
+    # .snakemake/scripts/<tmp>.solve_network.py (pgrep -f would also match a shell
+    # whose command line merely contains that text)
+    ps = subprocess.run(["ps", "-eo", "args"], capture_output=True, text=True).stdout.splitlines()
+    busy = [l for l in ps if ".snakemake/scripts/" in l and "solve_network" in l and "grep" not in l]
     if busy:
         sys.exit("A solve is running (solve_network.py). Wait for it: a network needs about 1 GB.")
 
