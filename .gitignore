@@ -100,3 +100,7 @@ doc/img/intro-workflow.svg
 # pixi environments
 .pixi/*
 !.pixi/config.toml
+
+# Workshop inputs of other roles; the shortlist holds personal contact data
+workshop/inputs/site_shortlist.csv
+data-brazil

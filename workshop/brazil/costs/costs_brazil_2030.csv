@@ -1,0 +1,71 @@
+technology,parameter,value,unit,source,further description,currency_year
+Brazil HVAC overhead,FOM,1.5,%,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil HVAC overhead,investment,750.0,EUR/MW/km,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil HVAC overhead,lifetime,40.0,years,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil HVDC inverter pair,FOM,1.5,%/year,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2011.0
+Brazil HVDC inverter pair,investment,640.0,EUR/kW,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil HVDC inverter pair,lifetime,40.0,years,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil HVDC overhead,FOM,1.5,%/year,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil HVDC overhead,investment,600.0,EUR/MW/km,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil HVDC overhead,lifetime,40.0,years,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil offwind,FOM,2.3185,%/year,"European value of the same year (Danish Energy Agency, inputs/technology_data_for_el_and_dh.xlsx), unchanged","21 Offshore turbines:  Fixed O&M [EUR/MW_e/y, 2020]",2020.0
+Brazil offwind,VOM,0.0267,EUR/MWhel,"European value of the same year (RES costs made up to fix curtailment order), unchanged", from old pypsa cost assumptions,2025.0
+Brazil offwind,investment,2114.991,"EUR/kW_e, 2020","European value of the same year (Danish Energy Agency, inputs/technology_data_for_el_and_dh.xlsx), unchanged","21 Offshore turbines:  Nominal investment [MEUR/MW_e, 2020] grid connection costs subtracted from investment costs",2025.0
+Brazil offwind,lifetime,30.0,years,"European value of the same year (Danish Energy Agency, inputs/technology_data_for_el_and_dh.xlsx), unchanged",21 Offshore turbines:  Technical lifetime [years],2020.0
+Brazil offwind-ac-connection-submarine,FOM,2.5,%/year,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil offwind-ac-connection-submarine,investment,4510.0,EUR/MW/km,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil offwind-ac-connection-submarine,lifetime,40.0,years,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil offwind-ac-connection-underground,FOM,2.5,%/year,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil offwind-ac-connection-underground,investment,4510.0,EUR/MW/km,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil offwind-ac-connection-underground,lifetime,40.0,years,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil offwind-ac-station,FOM,1.5,%/year,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil offwind-ac-station,investment,850.0,EUR/kWel,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil offwind-ac-station,lifetime,40.0,years,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil offwind-dc-connection-submarine,FOM,2.5,%/year,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil offwind-dc-connection-submarine,investment,3220.0,EUR/MW/km,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil offwind-dc-connection-submarine,lifetime,40.0,years,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil offwind-dc-connection-underground,FOM,2.5,%/year,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil offwind-dc-connection-underground,investment,4070.0,EUR/MW/km,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil offwind-dc-connection-underground,lifetime,40.0,years,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil offwind-dc-station,FOM,1.5,%/year,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil offwind-dc-station,investment,1070.0,EUR/kWel,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil offwind-dc-station,lifetime,40.0,years,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil offwind-float,FOM,1.15,%/year,"European value of the same year (https://doi.org/10.1016/j.adapen.2021.100067), unchanged",,2020.0
+Brazil offwind-float,investment,2954.7363,EUR/kWel,"European value of the same year (https://doi.org/10.1016/j.adapen.2021.100067), unchanged",,2025.0
+Brazil offwind-float,lifetime,20.0,years,"European value of the same year (C. Maienza 2020 A life cycle cost model for floating offshore wind farms), unchanged",,2020.0
+Brazil offwind-float-connection-submarine,FOM,2.5,%/year,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil offwind-float-connection-submarine,investment,3220.0,EUR/MW/km,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil offwind-float-connection-submarine,lifetime,40.0,years,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil offwind-float-connection-underground,FOM,2.5,%/year,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil offwind-float-connection-underground,investment,4070.0,EUR/MW/km,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil offwind-float-connection-underground,lifetime,40.0,years,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil offwind-float-station,FOM,1.5,%/year,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil offwind-float-station,investment,1070.0,EUR/kWel,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil offwind-float-station,lifetime,40.0,years,"European value of the same year (Danish Energy Agency, Technology Data for Energy Transport (July 2025), https://), unchanged",,2025.0
+Brazil onwind,FOM,1.2167,%/year,"European value of the same year (Danish Energy Agency, inputs/technology_data_for_el_and_dh.xlsx), unchanged",20 Onshore turbines:  Fixed O&M,2015.0
+Brazil onwind,VOM,1.8033,EUR/MWh,"European value of the same year (Danish Energy Agency, inputs/technology_data_for_el_and_dh.xlsx), unchanged",20 Onshore turbines:  Variable O&M,2025.0
+Brazil onwind,investment,1383.3059,EUR/kW,"European value of the same year (Danish Energy Agency, inputs/technology_data_for_el_and_dh.xlsx), unchanged",20 Onshore turbines:  Nominal investment ,2025.0
+Brazil onwind,lifetime,30.0,years,"European value of the same year (Danish Energy Agency, inputs/technology_data_for_el_and_dh.xlsx), unchanged",20 Onshore turbines:  Technical lifetime,2015.0
+Brazil solar,FOM,2.4757,%/year,"European value of the same year (Danish Energy Agency, inputs/technology_data_for_el_and_dh.xlsx), unchanged",22 Utility-scale PV:  Fixed O&M [2020-EUR/MW_e/y],2020.0
+Brazil solar,investment,482.4785,EUR/kW_e,"European value of the same year (Danish Energy Agency, inputs/technology_data_for_el_and_dh.xlsx), unchanged",22 Utility-scale PV:  Nominal investment [2020-MEUR/MW_e],2025.0
+Brazil solar,lifetime,40.0,years,"European value of the same year (Danish Energy Agency, inputs/technology_data_for_el_and_dh.xlsx), unchanged",22 Utility-scale PV:  Technical lifetime [years],2020.0
+Brazil solar-hsat,FOM,2.2884,%/year,"European value of the same year (Danish Energy Agency, inputs/technology_data_for_el_and_dh.xlsx), unchanged",22 Utility-scale PV tracker:  Fixed O&M [2020-EUR/MW_e/y],2020.0
+Brazil solar-hsat,investment,571.4213,EUR/kW_e,"European value of the same year (Danish Energy Agency, inputs/technology_data_for_el_and_dh.xlsx), unchanged",22 Utility-scale PV tracker:  Nominal investment [2020-MEUR/MW_e],2025.0
+Brazil solar-hsat,lifetime,40.0,years,"European value of the same year (Danish Energy Agency, inputs/technology_data_for_el_and_dh.xlsx), unchanged",22 Utility-scale PV tracker:  Technical lifetime [years],2020.0
+Brazil HVAC overhead,discount rate,0.07618,per unit,"WACC of the Brazilian generation tranche, financing_term_sheet.md (draft 4)","62 % debt 2.635 % + 312 bps, 34 % tax, 38 % equity 13.85 % incl. 4.25 % country risk premium",
+Brazil HVDC inverter pair,discount rate,0.07618,per unit,"WACC of the Brazilian generation tranche, financing_term_sheet.md (draft 4)","62 % debt 2.635 % + 312 bps, 34 % tax, 38 % equity 13.85 % incl. 4.25 % country risk premium",
+Brazil HVDC overhead,discount rate,0.07618,per unit,"WACC of the Brazilian generation tranche, financing_term_sheet.md (draft 4)","62 % debt 2.635 % + 312 bps, 34 % tax, 38 % equity 13.85 % incl. 4.25 % country risk premium",
+Brazil offwind,discount rate,0.07618,per unit,"WACC of the Brazilian generation tranche, financing_term_sheet.md (draft 4)","62 % debt 2.635 % + 312 bps, 34 % tax, 38 % equity 13.85 % incl. 4.25 % country risk premium",
+Brazil offwind-ac-connection-submarine,discount rate,0.07618,per unit,"WACC of the Brazilian generation tranche, financing_term_sheet.md (draft 4)","62 % debt 2.635 % + 312 bps, 34 % tax, 38 % equity 13.85 % incl. 4.25 % country risk premium",
+Brazil offwind-ac-connection-underground,discount rate,0.07618,per unit,"WACC of the Brazilian generation tranche, financing_term_sheet.md (draft 4)","62 % debt 2.635 % + 312 bps, 34 % tax, 38 % equity 13.85 % incl. 4.25 % country risk premium",
+Brazil offwind-ac-station,discount rate,0.07618,per unit,"WACC of the Brazilian generation tranche, financing_term_sheet.md (draft 4)","62 % debt 2.635 % + 312 bps, 34 % tax, 38 % equity 13.85 % incl. 4.25 % country risk premium",
+Brazil offwind-dc-connection-submarine,discount rate,0.07618,per unit,"WACC of the Brazilian generation tranche, financing_term_sheet.md (draft 4)","62 % debt 2.635 % + 312 bps, 34 % tax, 38 % equity 13.85 % incl. 4.25 % country risk premium",
+Brazil offwind-dc-connection-underground,discount rate,0.07618,per unit,"WACC of the Brazilian generation tranche, financing_term_sheet.md (draft 4)","62 % debt 2.635 % + 312 bps, 34 % tax, 38 % equity 13.85 % incl. 4.25 % country risk premium",
+Brazil offwind-dc-station,discount rate,0.07618,per unit,"WACC of the Brazilian generation tranche, financing_term_sheet.md (draft 4)","62 % debt 2.635 % + 312 bps, 34 % tax, 38 % equity 13.85 % incl. 4.25 % country risk premium",
+Brazil offwind-float,discount rate,0.07618,per unit,"WACC of the Brazilian generation tranche, financing_term_sheet.md (draft 4)","62 % debt 2.635 % + 312 bps, 34 % tax, 38 % equity 13.85 % incl. 4.25 % country risk premium",
+Brazil offwind-float-connection-submarine,discount rate,0.07618,per unit,"WACC of the Brazilian generation tranche, financing_term_sheet.md (draft 4)","62 % debt 2.635 % + 312 bps, 34 % tax, 38 % equity 13.85 % incl. 4.25 % country risk premium",
+Brazil offwind-float-connection-underground,discount rate,0.07618,per unit,"WACC of the Brazilian generation tranche, financing_term_sheet.md (draft 4)","62 % debt 2.635 % + 312 bps, 34 % tax, 38 % equity 13.85 % incl. 4.25 % country risk premium",
+Brazil offwind-float-station,discount rate,0.07618,per unit,"WACC of the Brazilian generation tranche, financing_term_sheet.md (draft 4)","62 % debt 2.635 % + 312 bps, 34 % tax, 38 % equity 13.85 % incl. 4.25 % country risk premium",
+Brazil onwind,discount rate,0.07618,per unit,"WACC of the Brazilian generation tranche, financing_term_sheet.md (draft 4)","62 % debt 2.635 % + 312 bps, 34 % tax, 38 % equity 13.85 % incl. 4.25 % country risk premium",
+Brazil solar,discount rate,0.07618,per unit,"WACC of the Brazilian generation tranche, financing_term_sheet.md (draft 4)","62 % debt 2.635 % + 312 bps, 34 % tax, 38 % equity 13.85 % incl. 4.25 % country risk premium",
+Brazil solar-hsat,discount rate,0.07618,per unit,"WACC of the Brazilian generation tranche, financing_term_sheet.md (draft 4)","62 % debt 2.635 % + 312 bps, 34 % tax, 38 % equity 13.85 % incl. 4.25 % country risk premium",
