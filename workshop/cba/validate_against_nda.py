@@ -73,6 +73,8 @@ if __name__ == "__main__":
     ap.add_argument("--horizon", type=int, default=2035)
     ap.add_argument("--rate", type=float, default=0.10,
                     help="public WACC to compare with (decisions.md E2: cable 10%%)")
+    ap.add_argument("--route", type=Path, default=Path("results/cable-route/summary.csv"),
+                    help="km per depth class per route variant (workshop/cable/route.py)")
     a = ap.parse_args()
 
     costs = pd.read_csv(a.costs / f"costs_{a.horizon}_processed.csv", index_col=0)
@@ -87,6 +89,24 @@ if __name__ == "__main__":
     print("Cable investment per MW and km, by depth class:")
     for cls, v in cable_cost_per_mw_km(design).items():
         print(f"  {cls:8s} {band(v / pub_cable)}")
+
+    if a.route.exists():
+        routes = pd.read_csv(a.route, index_col=0)
+        per_km = cable_cost_per_mw_km(design)
+        p_mw = float(design["system"]["rated_power_mw"])
+        inst = design["installation"]
+        print("Whole subsea cable along the route (classes weighted by km, landfalls and"
+              " deep-water qualification included):")
+        for variant, r in routes.iterrows():
+            km = {c: r[f"{c}_km"] for c in ["shelf", "slope", "deep", "abyssal"]}
+            km["abyssal"] += r.get("hadal_km", 0.0)       # below 6,000 m: no class, counted as abyssal
+            km["shelf"] += r.get("on_land_or_above_sea_km", 0.0)  # landfall zones
+            length = sum(km.values())
+            nda = sum(per_km[c] * v for c, v in km.items())
+            nda += 2 * inst["landfall_cost_eur"] / p_mw
+            if km["abyssal"] > 0:
+                nda += inst["deep_water_qualification_eur"] / p_mw
+            print(f"  {variant:10s} {band(nda / (pub_cable * length))}")
 
     conv = 2 * design["converter_stations"]["cost_eur_per_station"] / design["system"]["rated_power_mw"]
     print(f"Converter pair per MW:   {band(conv / pub_conv)}")
