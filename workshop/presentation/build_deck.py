@@ -171,6 +171,18 @@ def resolve(token, data):
         if d.empty:
             raise LookupError(f"keine Kennzahl {run} {yrs} {key}")
         return fmt(d.value.mean(), int(dec))
+    if kind == "share":
+        # ratio of two metrics in percent: {{share|RUN|JAHRE|Sektion/Zähler|Sektion/Nenner|DEZ}}
+        _, run, yrs, num, den, dec = parts
+        vals = []
+        for key in (num, den):
+            sec, met = key.split("/", 1)
+            d = data.m[(data.m.run == run) & (data.m.section == sec) & (data.m.metric == met)]
+            d = d[years(yrs)(d.horizon)]
+            if d.empty:
+                raise LookupError(f"keine Kennzahl {run} {yrs} {key}")
+            vals.append(d.value.mean())
+        return fmt(100 * vals[0] / vals[1], int(dec)) + " %"
     if kind == "c":
         _, run, ref, yrs, key, dec = parts
         sec, met = key.split("/", 1)
