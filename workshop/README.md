@@ -31,13 +31,22 @@ Each person in a group takes one role.
 | 2 Brazil renewable potential | Where in Brazil, and with which renewables, is power for the cable best produced? | the network composition step | [roles/2-brazil.md](roles/2-brazil.md) |
 | 3 PyPSA-Eur setup | Is the German system the cable connects to modelled well enough to judge it? | the whole workflow | [roles/3-pypsa-eur.md](roles/3-pypsa-eur.md) |
 | 4 Economic analysis | How is the study designed, and what is the cable worth? | config and postprocessing | [roles/4-economics.md](roles/4-economics.md) |
+| 5 Review | Does the study hold up against its binding decisions — workflow, evaluation, NDA? | the whole workflow, read-only | [roles/5-review.md](roles/5-review.md) |
 
 Roles 1, 2 and 3 change the model in one shared place, the step that composes
 the network (`scripts/compose_network.py`). Role 4 does not change model code:
-it sets the study design in config files and compares the solved runs.
+it sets the study design in config files and compares the solved runs. Role 5
+changes nothing: it checks the work of roles 1–4 against the binding decisions
+and reports, before the group presents.
 
 The role files set guardrails, not a plan. They say what each role is
 responsible for and whom it depends on. How you get there is up to you.
+
+Role 5 runs three reviews — workflow (R1), evaluation (R2) and NDA (R3). Their
+rules are E8 in [decisions.md](decisions.md); the checklists are in
+[review/checklists.md](review/checklists.md); the agent workflow is
+`.claude/skills/review/SKILL.md`. Because role 5 builds no result, it has no
+conflict of interest and reviews every role's output, role 4's included.
 
 ## General instructions
 

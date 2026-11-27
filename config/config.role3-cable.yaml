@@ -1,0 +1,50 @@
+# SPDX-FileCopyrightText: Contributors to PyPSA-Eur <https://github.com/pypsa/pypsa-eur>
+#
+# SPDX-License-Identifier: CC0-1.0
+#
+# Role 3: Brazil-Germany interconnector on top of the reference with
+# neighbours (decisions.md E1, E2, E4 run CABLE). The model sizes the cable
+# (0-20 GW, from 2035) and the renewable generation behind it in Brazil.
+#
+#   pixi run snakemake results/de10-nb9-cable/networks/solved_2050.nc -c4 \
+#     --configfile config/config.workshop.yaml config/config.role3-neighbours.yaml \
+#       config/config.role3-reference.yaml config/config.role3-cable.yaml \
+#     --allowed-rules process_cost_data compose_network solve_network \
+#       build_brazil_import_profile
+#
+# Reuse the reference's inputs and 2025-2030 results (no cable before 2035):
+#   mkdir -p resources/de10-nb9-cable results/de10-nb9-cable/networks
+#   cp -a resources/de10-nb9-ref/. resources/de10-nb9-cable/
+#   rm -f resources/de10-nb9-cable/networks/composed_20{35,40,45,50}.nc
+#   cp results/de10-nb9-ref/networks/solved_20{25,30}.nc results/de10-nb9-cable/networks/
+#
+# Code: scripts/add_brazil_import.py (generation: investment).
+
+run:
+  name: de10-nb9-cable
+
+brazil_import:
+  enable: true
+  # Brazilian renewables are generators whose capacity the model optimises,
+  # instead of a price-based import (role 3).
+  generation: investment
+  mix:                       # technologies at the export site (keys = profile columns)
+    onwind: 0.7              # shares only matter for the built-in profile's "mix" column
+    solar: 0.3
+  # Role 2 delivers the site profile: hourly CSV, index = time (UTC), columns
+  # onwind, solar (capacity factor 0-1). Empty = profile built from the
+  # Brazilian cutout for `region` (default: around Pecem, Ceara).
+  profile_file:
+  generation_p_nom_max: {}   # MW per technology, e.g. {onwind: 40000}; empty = no limit (role 2)
+  capex_factor:              # Brazilian investment relative to the cost table (role 2)
+    onwind: 1.0
+    solar: 1.0
+  # Cable (E1): extendable 0-20 GW, first year 2035.
+  extendable: true
+  p_nom: 0
+  p_nom_max: 20000
+  build_year: 2035
+  cost_factor: 1.0
+  discount_rate:             # E2: 10 % real for Brazilian generation and the cable
+    generation: 0.10
+    cable: 0.10

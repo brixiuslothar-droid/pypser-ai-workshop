@@ -1,0 +1,18 @@
+# SPDX-FileCopyrightText: Contributors to PyPSA-Eur <https://github.com/pypsa/pypsa-eur>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# Workshop scenario: the baseline plus imports from a Brazilian export site over
+# a fixed 2 GW HVDC cable from 2035 (cost-benefit analysis of a given cable).
+# Layer it on the workshop config; all brazil_import settings and their sources
+# are in config.default.yaml. Differs from the baseline in brazil_import only.
+#
+#   pixi run snakemake results/de10-br-import/networks/solved_2050.nc -c4 \
+#     --configfile config/config.workshop.yaml config/config.brazil-import.yaml \
+#     --allowed-rules process_cost_data build_brazil_import_profile compose_network solve_network
+
+run:
+  name: de10-br-import
+
+brazil_import:
+  enable: true
