@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: Contributors to PyPSA-Eur <https://github.com/pypsa/pypsa-eur>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# Sensitivity "MV" to de10-br-ext (workshop/decisions E4 run 3, E5): the cable
+# is forced to 0.1 GW from 2035 (p_nom_min = p_nom_max), to measure the value
+# of the first MW of cable against its annual cost. Layer it after
+# config.brazil-import-ext.yaml.
+#
+#   pixi run snakemake results/de10-br-mv/networks/solved_2050.nc -c4 \
+#     --configfile config/config.workshop.yaml config/config.brazil-import-ext.yaml \
+#       config/config.brazil-import-mv.yaml \
+#     --allowed-rules process_cost_data build_brazil_import_profile compose_network solve_network
+
+run:
+  name: de10-br-mv
+
+brazil_import:
+  p_nom: 100        # MW, minimum ...
+  p_nom_max: 100    # ... and maximum: the cable is fixed at 0.1 GW but stays extendable
