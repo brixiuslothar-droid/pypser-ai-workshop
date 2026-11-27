@@ -175,9 +175,13 @@ def get_compose_inputs(w):
         else:
             raise ValueError(f"Invalid foresight type: {foresight}")
 
+    if cfg["brazil_import"]["enable"]:
+        inputs["brazil_import_profile"] = resources("brazil_import_profile.csv")
+
     # imported by compose_network.py; listed so code changes trigger reruns
     inputs["code_dependencies"] = code_dependencies(
         "scripts/compose_network.py",
+        "scripts/add_brazil_import.py",
         "scripts/add_electricity.py",
         "scripts/add_existing_baseyear.py",
         "scripts/add_brownfield.py",
@@ -258,7 +262,25 @@ rule compose_network:
         adjustments=config_provider("adjustments"),
         nice_names=config_provider("plotting", "nice_names"),
         tech_colors=config_provider("plotting", "tech_colors"),
+        brazil_import=config_provider("brazil_import"),
     message:
         "Composing network for horizon {wildcards.horizon}"
     script:
         scripts("compose_network.py")
+
+
+rule build_brazil_import_profile:
+    input:
+        code_dependencies=code_dependencies("scripts/build_brazil_import_profile.py"),
+        cutout=config_provider("brazil_import", "cutout"),
+    output:
+        resources("brazil_import_profile.csv"),
+    log:
+        logs("build_brazil_import_profile.log"),
+    threads: 1
+    resources:
+        mem_mb=4000,
+    params:
+        brazil_import=config_provider("brazil_import"),
+    script:
+        scripts("build_brazil_import_profile.py")

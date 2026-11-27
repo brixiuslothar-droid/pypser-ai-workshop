@@ -17,6 +17,7 @@ from scripts._helpers import (
     sanitize_custom_columns,
     set_scenario_config,
 )
+from scripts.add_brazil_import import add_brazil_import
 from scripts.add_brownfield import adjust_renewable_capacity_limits
 from scripts.add_brownfield import main as apply_brownfield
 from scripts.add_electricity import main as add_electricity_components
@@ -121,6 +122,17 @@ if __name__ == "__main__":
     if foresight == "myopic" and not is_first_horizon:
         apply_brownfield(
             n, n_previous, inputs, params, costs, current_horizon, renewable_carriers
+        )
+
+    if params.brazil_import["enable"]:
+        add_brazil_import(
+            n,
+            inputs.brazil_import_profile,
+            params.brazil_import,
+            costs,
+            params.sector["transmission_efficiency"]["DC"],
+            current_horizon,
+            n_previous,
         )
 
     if foresight == "perfect":
