@@ -6,7 +6,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Ergebnisse der Studie: Kabel Brasilien–Deutschland
 
-Erzeugt von `workshop/analysis/evaluate.py` am 2026-11-27 14:01, Commit e0cb56cb. Nicht von Hand ändern: Die Datei wird bei jedem Lauf neu geschrieben. Befunde und Deutung stehen in `workshop/results/notes.md` und werden unten eingebunden.
+Erzeugt von `workshop/analysis/evaluate.py` am 2026-11-27 14:21, Commit aa487760. Nicht von Hand ändern: Die Datei wird bei jedem Lauf neu geschrieben. Befunde und Deutung stehen in `workshop/results/notes.md` und werden unten eingebunden.
 
 Studiendesign, Parameter und Szenarien: `workshop/decisions.md`. Nur öffentliche Modellergebnisse; keine Daten aus `workshop/inputs/` (E7).
 
@@ -22,18 +22,18 @@ Studiendesign, Parameter und Szenarien: `workshop/decisions.md`. Nur öffentlich
 
 ## 1. Status der Läufe
 
-| Lauf | Run-Name | Status | Jahre | Solver | Spitzenspeicher (GB) | Beschreibung |
-|---|---|---|---|---|---|---|
-| REF | `de10-ref` | geplant | – | – | – | Neighbours (NTC, 4 h), net import <= 25 TWh/a, cap 2050 = 0.05, no cable |
-| CABLE | `de10-cable` | geplant | – | – | – | REF + Brazil cable extendable 0-20 GW from 2035, BR generation by investment, WACC 10 % (main run) |
-| MV | `de10-mv` | geplant | – | – | – | CABLE with the cable forced to 0.1 GW (marginal value) — **fehlt:** config with run.name de10-mv and brazil_import p_nom = p_nom_max = 100 (MW) |
-| CAPEX50 | `de10-capex50` | geplant | – | – | – | CABLE with 50 % cable investment cost — **fehlt:** config with run.name de10-capex50 and brazil_import.cost_factor: 0.5 |
-| WACC7 | `de10-wacc7` | geplant | – | – | – | CABLE with 7 % WACC for Brazil and the cable — **fehlt:** config with run.name de10-wacc7 and brazil_import.discount_rate {generation: 0.07, cable: 0.07} |
-| REF-ISL | `de10-ref-isl` | geplant | – | – | – | REF without trade — **fehlt:** config with run.name de10-ref-isl and countries [DE] on the E3 chain (own inputs, 2 h?) - to agree with role 3 |
-| CABLE-ISL | `de10-cable-isl` | geplant | – | – | – | CABLE without trade — **fehlt:** as REF-ISL, on the cable chain |
-| BASE | `de10-myopic` | fertig | 2025, 2030, 2035, 2040, 2045, 2050 | Imprecise, Optimal | 6.7 | Workshop baseline: Germany as an island, 2 h, hard zero CO2 cap in 2050 |
-| NB9REF | `de10-nb9-ref` | geplant | – | – | – | Role 3 reference before E3: neighbours (NTC, 4 h), no annual import limit, no cap 2050, 2,600 EUR/t |
-| BRIMP | `de10-br-import` | fertig | 2025, 2030, 2035, 2040, 2045, 2050 | Optimal | 6.6 | Test run: BASE + fixed 2 GW Brazil cable from 2035 (CBA of a given cable) |
+| Lauf | Run-Name | Status | Jahre | Solver | Spitzenspeicher (GB) | Quelle | Beschreibung |
+|---|---|---|---|---|---|---|---|
+| REF | `de10-ref` | fertig | 2025, 2030, 2035, 2040, 2045, 2050 | Optimal | 6.5 | Handoff `workshop/role3/handoff/de10-ref` | Neighbours (NTC, 4 h), net import <= 25 TWh/a, cap 2050 = 0.05 and 750 EUR/t, no cable |
+| CABLE | `de10-cable` | geplant | – | – | – | – | REF + Brazil cable extendable 0-20 GW from 2035, BR generation by investment, WACC 10 % (main run) |
+| MV | `de10-mv` | geplant | – | – | – | – | CABLE with the cable forced to 0.1 GW (marginal value) — **fehlt:** config with run.name de10-mv and brazil_import p_nom = p_nom_max = 100 (MW) |
+| CAPEX50 | `de10-capex50` | geplant | – | – | – | – | CABLE with 50 % cable investment cost — **fehlt:** config with run.name de10-capex50 and brazil_import.cost_factor: 0.5 |
+| WACC7 | `de10-wacc7` | geplant | – | – | – | – | CABLE with 7 % WACC for Brazil and the cable — **fehlt:** config with run.name de10-wacc7 and brazil_import.discount_rate {generation: 0.07, cable: 0.07} |
+| REF-ISL | `de10-ref-isl` | geplant | – | – | – | – | REF without trade — **fehlt:** config with run.name de10-ref-isl and countries [DE] on the E3 chain (own inputs, 2 h?) - to agree with role 3 |
+| CABLE-ISL | `de10-cable-isl` | geplant | – | – | – | – | CABLE without trade — **fehlt:** as REF-ISL, on the cable chain |
+| BASE | `de10-myopic` | fertig | 2025, 2030, 2035, 2040, 2045, 2050 | Imprecise, Optimal | 6.7 | gelöste Netze | Workshop baseline: Germany as an island, 2 h, hard zero CO2 cap in 2050 |
+| NB9REF | `de10-nb9-ref` | fertig | 2025, 2030, 2035, 2040, 2045, 2050 | Imprecise, Optimal | 6.6 | Handoff `workshop/role3/handoff/de10-nb9-ref` | Role 3 reference before E3: neighbours (NTC, 4 h), no annual import limit, no cap 2050, 2,600 EUR/t |
+| BRIMP | `de10-br-import` | fertig | 2025, 2030, 2035, 2040, 2045, 2050 | Optimal | 6.6 | gelöste Netze | Test run: BASE + fixed 2 GW Brazil cable from 2035 (CBA of a given cable) |
 
 ## 2. Befunde
 
@@ -112,21 +112,85 @@ Vergleich mit/ohne Kabel. Von Rolle 5 noch nicht geprüft.
 - **Speicher:** Die Netzanalyse brachte den Workspace auf 10,0 von 10 GB.
   Nur ohne laufenden Solve und nur auf Anforderung rechnen (O7).
 
+### Referenz nach E3 (REF, `de10-ref`), aus der Übergabe von Rolle 3
+
+Stand 2026-11-27. Gelesen aus `workshop/role3/handoff/de10-ref/` (die gelösten
+Netze liegen nicht in diesem Workspace). Systemkosten und DE-Preis hat Rolle 3
+gegen `evaluate.py` geprüft; die Energiebilanz DE geht je Jahr auf (Rest < 0,001 TWh).
+
+- **Die Importgrenze von E3 hält:** Netto-Import DE 24,7–24,9 TWh/a ab 2030
+  (2025: 18 TWh). Ohne Grenze (NB9REF) wären es 90–112 TWh/a. Lastabwurf in
+  keinem Jahr. Alle sechs Jahre optimal, Spitzenspeicher 6,5 GB.
+- **Die Grenze kostet wenig:** Systemkosten 2030–2045 nur +0,03 bis +0,35 Mrd
+  EUR/a gegenüber NB9REF, DE-Preis ±2 EUR/MWh. Die Grenze verschiebt Flüsse,
+  nicht Kosten. Für das Kabel heißt das: Es konkurriert mit ~25 TWh Import aus
+  den Nachbarn, nicht mit ~100 TWh.
+- **2050 ist nicht mehr cap-getrieben:** CO2-Preis 750 EUR/t, Schattenpreis der
+  Obergrenze 0. DE-Preis 107 EUR/MWh, höchster Preis 1.600 EUR/MWh,
+  1.040 Stunden über 300 EUR/MWh, 11,7 Mt CO2 in DE. 2050 kann damit in die
+  Kernaussage, bleibt aber in Abbildungen gekennzeichnet (E3).
+- **2045 bleibt bindend:** Die gemeinsame Obergrenze der zehn Länder kostet
+  343 EUR/t zusätzlich (effektiv 603 EUR/t). Unter der Schwelle von 1.000 EUR/t,
+  aber spürbar.
+- **Preisspitzen bleiben:** 980 h (2045) und 1.040 h (2050) über 300 EUR/MWh.
+  Das sind die Stunden, in denen ein Kabel Wert schaffen kann.
+- **Vergleichbarkeit:** REF rechnet mit 4-h-Schritten und zehn Ländern;
+  Systemkosten (~215–235 Mrd EUR/a) gelten für alle zehn Länder. Nur
+  Differenzen zwischen Läufen mit derselben Kette sind aussagekräftig
+  (CABLE − REF). REF − BASE wird deshalb nicht gezeigt.
+
 ## 3. Auffälligkeiten
 
 Automatisch geprüft (Schwellen in `evaluate.py`).
 
 - BASE 2045: Solverstatus **Imprecise** (BASELINE.md: imprecise ist nutzbar)
-- BRIMP 2035: Höchster Strompreis 1,040 EUR/MWh
-- BRIMP 2040: Höchster Strompreis 1,319 EUR/MWh
-- BRIMP 2050: Höchster Strompreis 2,929 EUR/MWh
-- BRIMP 2050: Die CO2-Obergrenze kostet 24,111 EUR/t zusätzlich: Ergebnis ist cap-getrieben (README, E3)
+- NB9REF 2035: Solverstatus **Imprecise** (BASELINE.md: imprecise ist nutzbar)
 - BASE 2035: Höchster Strompreis 1,040 EUR/MWh
 - BASE 2040: Höchster Strompreis 1,427 EUR/MWh
 - BASE 2050: Höchster Strompreis 2,959 EUR/MWh
 - BASE 2050: Die CO2-Obergrenze kostet 24,354 EUR/t zusätzlich: Ergebnis ist cap-getrieben (README, E3)
+- NB9REF 2030: Netto-Import 89.8 TWh über der Grenze von E3 (25 TWh/a); nur zulässig in Läufen ohne E3-Grenze
+- NB9REF 2035: Netto-Import 97.9 TWh über der Grenze von E3 (25 TWh/a); nur zulässig in Läufen ohne E3-Grenze
+- NB9REF 2040: Netto-Import 93.8 TWh über der Grenze von E3 (25 TWh/a); nur zulässig in Läufen ohne E3-Grenze
+- NB9REF 2045: Netto-Import 92.8 TWh über der Grenze von E3 (25 TWh/a); nur zulässig in Läufen ohne E3-Grenze
+- NB9REF 2050: Netto-Import 111.8 TWh über der Grenze von E3 (25 TWh/a); nur zulässig in Läufen ohne E3-Grenze
+- BRIMP 2035: Höchster Strompreis 1,040 EUR/MWh
+- BRIMP 2040: Höchster Strompreis 1,319 EUR/MWh
+- BRIMP 2050: Höchster Strompreis 2,929 EUR/MWh
+- BRIMP 2050: Die CO2-Obergrenze kostet 24,111 EUR/t zusätzlich: Ergebnis ist cap-getrieben (README, E3)
 
 ## 4. Vergleiche
+
+### REF − NB9REF
+
+- **REF**: Neighbours (NTC, 4 h), net import <= 25 TWh/a, cap 2050 = 0.05 and 750 EUR/t, no cable
+- **NB9REF**: Role 3 reference before E3: neighbours (NTC, 4 h), no annual import limit, no cap 2050, 2,600 EUR/t
+
+| Zusammenfassung | Δ Systemkosten, Mittel (Mrd EUR/a) | Δ Systemkosten, Summe der Jahre (Mrd EUR/a) |
+|---|---|---|
+| alle Jahre | -1.81 | -10.88 |
+
+Negativ = der Lauf ist billiger als die Referenz. Jedes Jahr ist ein Stichjahr (ein Jahr Betrieb), kein Barwert.
+
+| Differenz | 2025 | 2030 | 2035 | 2040 | 2045 | 2050 |
+|---|---|---|---|---|---|---|
+| CO2: CO2-Preis (Config) (EUR/t) | +0.00 | +0.00 | +0.00 | +0.00 | +0.00 | -1,850.00 |
+| CO2: CO2-Preis effektiv (EUR/t) | +0.00 | +0.00 | +0.00 | +0.00 | +0.70 | -1,850.00 |
+| CO2: Emissionen (Mt) | +0.00 | +5.78 | +4.20 | +5.18 | +1.09 | +10.99 |
+| CO2: Schattenpreis der Obergrenze (EUR/t) | +0.00 | +0.00 | +0.00 | +0.00 | +0.70 | +0.00 |
+| Handel: Netto-Import (TWh) | +0.00 | -65.08 | -73.17 | -68.90 | -68.07 | -86.99 |
+| Preise: Strompreis Maximum (lastgewichtetes Mittel DE) (EUR/MWh) | +0.00 | +6.53 | +62.29 | +6.21 | +2.20 | +348.13 |
+| Preise: Strompreis lastgewichtet (EUR/MWh) | +0.00 | +1.71 | +0.30 | -0.17 | -0.08 | -4.89 |
+| Preise: Stunden mit Preis < 1 EUR/MWh (h) | +0.00 | -384.00 | -508.00 | -576.00 | +0.00 | -1,052.00 |
+| Preise: Stunden mit Preis > 300 EUR/MWh (h) | +0.00 | +0.00 | +0.00 | +0.00 | +28.00 | -256.00 |
+| Systemkosten: Systemkosten gesamt (Mrd EUR/a) | -0.00 | +0.35 | +0.32 | +0.19 | +0.03 | -11.77 |
+| Systemkosten: davon Betriebskosten (Mrd EUR/a) | -0.00 | +0.01 | -0.18 | -0.17 | -0.01 | +21.20 |
+| Systemkosten: davon CO2-Preis (Transfer an den Staat) (Mrd EUR/a) | +0.00 | +0.13 | -0.10 | -0.11 | +0.00 | +17.69 |
+| Systemkosten: davon Kapitalkosten (Mrd EUR/a) | +0.00 | +0.35 | +0.50 | +0.36 | +0.03 | -32.97 |
+| Versorgung: Lastabwurf DE (GWh) | +0.00 | +0.00 | +0.00 | +0.00 | +0.00 | +0.00 |
+| Versorgung: Lastabwurf alle Länder (GWh) | +0.00 | +0.00 | +0.00 | +0.00 | +0.00 | +0.00 |
+
+![REF − NB9REF](figures/diff_REF_vs_NB9REF.png)
 
 ### BRIMP − BASE
 
@@ -157,8 +221,6 @@ Negativ = der Lauf ist billiger als die Referenz. Jedes Jahr ist ein Stichjahr (
 | Akteure: Staat DE (CO2) (Mrd EUR/a) | -0.00 | -0.00 | -0.32 | -0.72 | -0.16 | +0.00 |
 | Akteure: Summe aller Akteure (Mrd EUR/a) | +0.00 | -0.00 | -5.62 | -4.90 | -4.23 | -3.85 |
 | Akteure: Verbraucher DE (Mrd EUR/a) | +0.00 | -0.00 | +0.03 | +0.96 | +0.41 | +0.13 |
-| Akteure: Erzeuger BR (Mrd EUR/a) |  |  | +0.00 | +0.00 | +0.00 | +0.00 |
-| Akteure: Kabelbetreiber (Mrd EUR/a) |  |  | -5.31 | -4.97 | -4.35 | -4.16 |
 | CO2: CO2-Preis (Config) (EUR/t) | +0.00 | +0.00 | +0.00 | +0.00 | +0.00 | +0.00 |
 | CO2: CO2-Preis effektiv (EUR/t) | +0.00 | +0.00 | +0.00 | -21.23 | -9.36 | -243.48 |
 | CO2: Emissionen (Mt) | -0.00 | -0.00 | -1.84 | -0.00 | +0.00 | +0.00 |
@@ -196,6 +258,121 @@ Negativ = der Lauf ist billiger als die Referenz. Jedes Jahr ist ein Stichjahr (
 ![BRIMP − BASE](figures/diff_BRIMP_vs_BASE.png)
 
 ## 5. Ergebnisse je Lauf
+
+### REF: Neighbours (NTC, 4 h), net import <= 25 TWh/a, cap 2050 = 0.05 and 750 EUR/t, no cable
+
+![Electricity generation in Germany (TWh)](figures/REF_erzeugung.png)
+
+![Generation and storage discharge capacity in Germany (GW)](figures/REF_kapazitaet.png)
+
+![Annual system cost (billion EUR)](figures/REF_systemkosten.png)
+
+![Electricity prices (EUR/MWh)](figures/REF_preise.png)
+
+![CO2 emissions and price](figures/REF_co2.png)
+
+#### Nachfrage
+
+| Nachfrage | 2025 | 2030 | 2035 | 2040 | 2045 | 2050 |
+|---|---|---|---|---|---|---|
+| Stromnachfrage (TWh) | 509.2 | 560.1 | 611.0 | 661.9 | 712.8 | 763.7 |
+
+#### Preise
+
+| Preise | 2025 | 2030 | 2035 | 2040 | 2045 | 2050 |
+|---|---|---|---|---|---|---|
+| Strompreis lastgewichtet (EUR/MWh) | 96 | 81 | 90 | 89 | 107 | 107 |
+| Strompreis Maximum (lastgewichtetes Mittel DE) (EUR/MWh) | 121 | 240 | 1,230 | 1,435 | 920 | 1,600 |
+| Stunden mit Preis > 300 EUR/MWh (h) | 0 | 0 | 68 | 40 | 980 | 1,040 |
+| Stunden mit Preis < 1 EUR/MWh (h) | 0 | 80 | 216 | 440 | 3,704 | 1,348 |
+
+#### Erzeugung
+
+| Erzeugung | 2025 | 2030 | 2035 | 2040 | 2045 | 2050 |
+|---|---|---|---|---|---|---|
+| Lignite (TWh) | 21.9 | 0.8 | 0.7 | 0.0 | 0.0 | 0.0 |
+| Coal (TWh) | 130.6 | 10.1 | 0.2 |  |  |  |
+| Gas (TWh) | 11.9 | 76.7 | 73.3 | 71.8 | 44.3 | 32.1 |
+| Oil (TWh) | 0.0 | 0.0 | 0.1 | 0.0 | 0.0 | 0.0 |
+| Biomass (TWh) | 74.4 | 55.6 | 50.9 | 32.8 | 9.4 | 4.3 |
+| Hydro (TWh) | 21.6 | 21.6 | 21.6 | 21.6 | 21.6 | 21.6 |
+| Offshore wind (TWh) | 39.3 | 39.0 | 62.1 | 92.6 | 131.5 | 128.3 |
+| Onshore wind (TWh) | 109.6 | 189.7 | 179.2 | 165.7 | 186.6 | 248.9 |
+| Solar (TWh) | 85.8 | 149.0 | 207.7 | 263.3 | 308.3 | 345.8 |
+| Other (TWh) | 0.2 | 0.2 | 0.2 | 0.1 | 0.0 | 0.0 |
+| Storage (TWh) |  | 0.0 | 37.7 | 65.1 | 84.6 | 111.9 |
+
+#### Versorgung
+
+| Versorgung | 2025 | 2030 | 2035 | 2040 | 2045 | 2050 |
+|---|---|---|---|---|---|---|
+| Lastabwurf DE (GWh) | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |
+| Lastabwurf alle Länder (GWh) | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |
+
+#### Kapazität
+
+| Kapazität | 2025 | 2030 | 2035 | 2040 | 2045 | 2050 |
+|---|---|---|---|---|---|---|
+| Lignite (GW) | 19.5 | 14.2 | 5.8 | 0.0 | 0.0 | 0.0 |
+| Coal (GW) | 20.4 | 16.9 | 1.1 |  |  |  |
+| Gas (GW) | 36.9 | 28.0 | 37.8 | 53.8 | 53.0 | 66.2 |
+| Oil (GW) | 5.7 | 2.4 | 1.7 | 0.9 | 0.3 | 0.0 |
+| Biomass (GW) | 11.1 | 9.5 | 7.9 | 5.4 | 2.7 | 1.3 |
+| Hydro (GW) | 4.4 | 4.4 | 4.4 | 4.4 | 4.4 | 4.4 |
+| Offshore wind (GW) | 9.2 | 9.2 | 13.8 | 19.8 | 27.6 | 26.0 |
+| Onshore wind (GW) | 63.6 | 87.2 | 79.2 | 71.3 | 83.9 | 108.9 |
+| Solar (GW) | 89.8 | 145.9 | 202.2 | 263.7 | 328.6 | 363.5 |
+| Storage (GW) | 7.4 | 7.4 | 24.1 | 40.0 | 55.6 | 72.0 |
+| Other (GW) | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |
+
+#### Speicher
+
+| Speicher | 2025 | 2030 | 2035 | 2040 | 2045 | 2050 |
+|---|---|---|---|---|---|---|
+| Batteriespeicher Energie (GWh) | 0.0 | 0.0 | 128.8 | 250.5 | 370.8 | 420.4 |
+| Wasserstoffspeicher Energie (TWh) | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 15.0 |
+
+#### CO2
+
+| CO2 | 2025 | 2030 | 2035 | 2040 | 2045 | 2050 |
+|---|---|---|---|---|---|---|
+| Emissionen (Mt) | 144.7 | 37.7 | 29.3 | 27.8 | 16.8 | 11.7 |
+| CO2-Preis (Config) (EUR/t) | 80.0 | 130.0 | 175.0 | 220.0 | 260.0 | 750.0 |
+| Schattenpreis der Obergrenze (EUR/t) | 0.0 | 0.0 | 0.0 | 0.0 | 343.0 | 0.0 |
+| CO2-Preis effektiv (EUR/t) | 80.0 | 130.0 | 175.0 | 220.0 | 603.0 | 750.0 |
+
+#### Systemkosten
+
+| Systemkosten | 2025 | 2030 | 2035 | 2040 | 2045 | 2050 |
+|---|---|---|---|---|---|---|
+| Systemkosten gesamt (Mrd EUR/a) | 232.0 | 218.0 | 214.7 | 216.1 | 218.9 | 234.5 |
+| davon Kapitalkosten (Mrd EUR/a) | 183.0 | 187.9 | 183.8 | 185.9 | 200.2 | 207.6 |
+| davon Betriebskosten (Mrd EUR/a) | 48.9 | 30.1 | 30.9 | 30.2 | 18.6 | 27.0 |
+| davon CO2-Preis (Transfer an den Staat) (Mrd EUR/a) | 22.0 | 9.1 | 10.9 | 13.1 | 10.0 | 21.9 |
+
+#### Systemkosten nach Gruppe
+
+| Systemkosten nach Gruppe | 2025 | 2030 | 2035 | 2040 | 2045 | 2050 |
+|---|---|---|---|---|---|---|
+| Biomass (Mrd EUR/a) | 13.2 | 8.5 | 6.2 | 4.0 | 2.1 | 1.2 |
+| Coal (Mrd EUR/a) | 41.7 | 13.7 | 4.5 | 1.5 | 1.4 | 0.1 |
+| Gas (Mrd EUR/a) | 16.5 | 23.4 | 27.2 | 31.3 | 25.1 | 37.5 |
+| Grid (Mrd EUR/a) | 5.2 | 5.3 | 5.1 | 4.9 | 4.9 | 5.1 |
+| Hydro (Mrd EUR/a) | 12.9 | 12.9 | 12.9 | 12.9 | 12.9 | 12.9 |
+| Lignite (Mrd EUR/a) | 18.3 | 12.2 | 5.4 | 0.5 | 0.5 | 0.0 |
+| Nuclear (Mrd EUR/a) | 83.3 | 80.3 | 78.9 | 69.8 | 44.2 | 17.5 |
+| Offshore wind (Mrd EUR/a) | 6.8 | 6.8 | 9.5 | 11.5 | 19.6 | 20.4 |
+| Oil (Mrd EUR/a) | 0.4 | 0.1 | 0.1 | 0.1 | 0.0 | 0.0 |
+| Onshore wind (Mrd EUR/a) | 15.8 | 28.3 | 28.9 | 31.5 | 39.9 | 48.4 |
+| Other (Mrd EUR/a) | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |
+| Solar (Mrd EUR/a) | 11.1 | 19.2 | 25.3 | 33.0 | 45.6 | 53.4 |
+| Storage (Mrd EUR/a) | 6.9 | 7.3 | 10.4 | 15.1 | 22.6 | 37.9 |
+
+#### Handel
+
+| Handel | 2025 | 2030 | 2035 | 2040 | 2045 | 2050 |
+|---|---|---|---|---|---|---|
+| Netto-Import (TWh) | 18.2 | 24.7 | 24.8 | 24.9 | 24.7 | 24.8 |
 
 ### BASE: Workshop baseline: Germany as an island, 2 h, hard zero CO2 cap in 2050
 
@@ -339,6 +516,121 @@ Negativ = der Lauf ist billiger als die Referenz. Jedes Jahr ist ein Stichjahr (
 | Woche max. Last: überlastete Leitungsstunden (%) | 18.4 |
 | Woche max. Last: Leitungen über 2x Grenze (Anzahl) | 84.0 |
 | Woche max. Last: Redispatch (abregeln) (GWh/Woche) | 2,836.9 |
+
+### NB9REF: Role 3 reference before E3: neighbours (NTC, 4 h), no annual import limit, no cap 2050, 2,600 EUR/t
+
+![Electricity generation in Germany (TWh)](figures/NB9REF_erzeugung.png)
+
+![Generation and storage discharge capacity in Germany (GW)](figures/NB9REF_kapazitaet.png)
+
+![Annual system cost (billion EUR)](figures/NB9REF_systemkosten.png)
+
+![Electricity prices (EUR/MWh)](figures/NB9REF_preise.png)
+
+![CO2 emissions and price](figures/NB9REF_co2.png)
+
+#### Nachfrage
+
+| Nachfrage | 2025 | 2030 | 2035 | 2040 | 2045 | 2050 |
+|---|---|---|---|---|---|---|
+| Stromnachfrage (TWh) | 509.2 | 560.1 | 611.0 | 661.9 | 712.8 | 763.7 |
+
+#### Preise
+
+| Preise | 2025 | 2030 | 2035 | 2040 | 2045 | 2050 |
+|---|---|---|---|---|---|---|
+| Strompreis lastgewichtet (EUR/MWh) | 96 | 79 | 90 | 89 | 107 | 112 |
+| Strompreis Maximum (lastgewichtetes Mittel DE) (EUR/MWh) | 121 | 234 | 1,167 | 1,429 | 917 | 1,252 |
+| Stunden mit Preis > 300 EUR/MWh (h) | 0 | 0 | 68 | 40 | 952 | 1,296 |
+| Stunden mit Preis < 1 EUR/MWh (h) | 0 | 464 | 724 | 1,016 | 3,704 | 2,400 |
+
+#### Erzeugung
+
+| Erzeugung | 2025 | 2030 | 2035 | 2040 | 2045 | 2050 |
+|---|---|---|---|---|---|---|
+| Lignite (TWh) | 21.9 | 0.6 | 0.7 | 0.0 | 0.0 | 0.0 |
+| Coal (TWh) | 130.6 | 8.6 | 0.2 |  |  |  |
+| Gas (TWh) | 11.9 | 64.9 | 62.2 | 57.9 | 41.4 | 1.9 |
+| Oil (TWh) | 0.0 | 0.0 | 0.1 | 0.0 | 0.0 | 0.0 |
+| Biomass (TWh) | 74.4 | 55.0 | 50.2 | 32.2 | 9.3 | 6.2 |
+| Hydro (TWh) | 21.6 | 21.6 | 21.6 | 21.6 | 21.6 | 21.6 |
+| Offshore wind (TWh) | 39.3 | 36.9 | 43.5 | 80.1 | 126.7 | 127.0 |
+| Onshore wind (TWh) | 109.6 | 174.4 | 173.0 | 158.6 | 167.5 | 253.9 |
+| Solar (TWh) | 85.8 | 116.5 | 170.5 | 228.1 | 266.4 | 327.1 |
+| Other (TWh) | 0.2 | 0.2 | 0.2 | 0.1 | 0.0 | 0.0 |
+| Storage (TWh) |  | 0.0 | 30.7 | 60.2 | 76.1 | 137.9 |
+
+#### Versorgung
+
+| Versorgung | 2025 | 2030 | 2035 | 2040 | 2045 | 2050 |
+|---|---|---|---|---|---|---|
+| Lastabwurf DE (GWh) | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |
+| Lastabwurf alle Länder (GWh) | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |
+
+#### Kapazität
+
+| Kapazität | 2025 | 2030 | 2035 | 2040 | 2045 | 2050 |
+|---|---|---|---|---|---|---|
+| Lignite (GW) | 19.5 | 14.2 | 5.8 | 0.0 | 0.0 | 0.0 |
+| Coal (GW) | 20.4 | 16.9 | 1.1 |  |  |  |
+| Gas (GW) | 36.9 | 28.0 | 36.3 | 50.6 | 51.5 | 42.2 |
+| Oil (GW) | 5.7 | 2.4 | 1.7 | 0.9 | 0.3 | 0.0 |
+| Biomass (GW) | 11.1 | 9.5 | 7.9 | 5.4 | 2.7 | 1.3 |
+| Hydro (GW) | 4.4 | 4.4 | 4.4 | 4.4 | 4.4 | 4.4 |
+| Offshore wind (GW) | 9.2 | 9.2 | 10.7 | 18.1 | 27.6 | 26.0 |
+| Onshore wind (GW) | 63.6 | 82.3 | 79.2 | 71.3 | 84.2 | 116.4 |
+| Solar (GW) | 89.8 | 120.5 | 176.1 | 246.2 | 330.8 | 369.9 |
+| Storage (GW) | 7.4 | 7.4 | 21.4 | 37.9 | 56.1 | 137.1 |
+| Other (GW) | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |
+
+#### Speicher
+
+| Speicher | 2025 | 2030 | 2035 | 2040 | 2045 | 2050 |
+|---|---|---|---|---|---|---|
+| Batteriespeicher Energie (GWh) | 0.0 | 0.0 | 107.7 | 234.3 | 374.5 | 449.2 |
+| Wasserstoffspeicher Energie (TWh) | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 55.3 |
+
+#### CO2
+
+| CO2 | 2025 | 2030 | 2035 | 2040 | 2045 | 2050 |
+|---|---|---|---|---|---|---|
+| Emissionen (Mt) | 144.7 | 32.0 | 25.1 | 22.6 | 15.7 | 0.7 |
+| CO2-Preis (Config) (EUR/t) | 80.0 | 130.0 | 175.0 | 220.0 | 260.0 | 2,600.0 |
+| Schattenpreis der Obergrenze (EUR/t) | 0.0 | 0.0 | 0.0 | 0.0 | 342.3 | 0.0 |
+| CO2-Preis effektiv (EUR/t) | 80.0 | 130.0 | 175.0 | 220.0 | 602.3 | 2,600.0 |
+
+#### Systemkosten
+
+| Systemkosten | 2025 | 2030 | 2035 | 2040 | 2045 | 2050 |
+|---|---|---|---|---|---|---|
+| Systemkosten gesamt (Mrd EUR/a) | 232.0 | 217.6 | 214.4 | 215.9 | 218.8 | 246.3 |
+| davon Kapitalkosten (Mrd EUR/a) | 183.0 | 187.6 | 183.3 | 185.6 | 200.2 | 240.5 |
+| davon Betriebskosten (Mrd EUR/a) | 48.9 | 30.1 | 31.1 | 30.3 | 18.7 | 5.8 |
+| davon CO2-Preis (Transfer an den Staat) (Mrd EUR/a) | 22.0 | 9.0 | 11.0 | 13.2 | 10.0 | 4.3 |
+
+#### Systemkosten nach Gruppe
+
+| Systemkosten nach Gruppe | 2025 | 2030 | 2035 | 2040 | 2045 | 2050 |
+|---|---|---|---|---|---|---|
+| Biomass (Mrd EUR/a) | 13.2 | 8.4 | 6.2 | 3.9 | 2.1 | 1.2 |
+| Coal (Mrd EUR/a) | 41.7 | 13.5 | 4.5 | 1.5 | 1.4 | 0.1 |
+| Gas (Mrd EUR/a) | 16.5 | 23.5 | 27.4 | 31.6 | 25.2 | 10.2 |
+| Grid (Mrd EUR/a) | 5.2 | 5.3 | 5.2 | 4.9 | 4.9 | 5.2 |
+| Hydro (Mrd EUR/a) | 12.9 | 12.9 | 12.9 | 12.9 | 12.9 | 12.9 |
+| Lignite (Mrd EUR/a) | 18.3 | 12.2 | 5.4 | 0.5 | 0.5 | 0.0 |
+| Nuclear (Mrd EUR/a) | 83.3 | 80.4 | 78.9 | 69.8 | 44.2 | 17.6 |
+| Offshore wind (Mrd EUR/a) | 6.8 | 6.8 | 8.3 | 10.9 | 19.5 | 21.1 |
+| Oil (Mrd EUR/a) | 0.4 | 0.1 | 0.1 | 0.1 | 0.0 | 0.0 |
+| Onshore wind (Mrd EUR/a) | 15.8 | 28.3 | 29.5 | 31.8 | 40.1 | 50.7 |
+| Other (Mrd EUR/a) | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |
+| Solar (Mrd EUR/a) | 11.1 | 18.8 | 25.2 | 32.9 | 45.4 | 55.6 |
+| Storage (Mrd EUR/a) | 6.9 | 7.3 | 10.6 | 15.2 | 22.6 | 71.7 |
+
+#### Handel
+
+| Handel | 2025 | 2030 | 2035 | 2040 | 2045 | 2050 |
+|---|---|---|---|---|---|---|
+| Netto-Import (TWh) | 18.2 | 89.8 | 97.9 | 93.8 | 92.8 | 111.8 |
 
 ### BRIMP: Test run: BASE + fixed 2 GW Brazil cable from 2035 (CBA of a given cable)
 
@@ -514,6 +806,7 @@ Negativ = der Lauf ist billiger als die Referenz. Jedes Jahr ist ein Stichjahr (
 - **Netto-Import**: Fluss über grenzüberschreitende Leitungen nach Deutschland, ohne das Kabel.
 - **Kabel**: Link mit Carrier „Brazil HVDC“. Engpasserlös = Σ (Preis DE × Lieferung − Preis BR × Einspeisung); Abstand zum Break-even = Engpasserlös pro kW − Annuität pro kW (E5).
 - **Akteure** (E6): je Akteur Erlöse − Kapitalkosten − Betriebskosten. Verbraucher: −Zahlungen. Emittenten zahlen den CO2-Preis und den Schattenpreis der Obergrenze an den Staat (als ob Zertifikate versteigert würden). CO2-Zahlungen sind Transfers zwischen Akteuren: Die Summe aller Akteure = −(Systemkosten − CO2-Preis-Zahlungen). In Differenzen zweier Läufe ist das der Wohlfahrtsgewinn ohne CO2-Bewertung; die Emissionsänderung steht getrennt unter CO2.
+- **Quelle Handoff**: Läufe, deren gelöste Netze nicht in diesem Workspace liegen, werden aus den CSVs von Rolle 3 gelesen (`workshop/role3/handoff/<run>/`, `export_handoff.py`). Gleiche Definitionen wie oben, mit drei Abweichungen: Netto-Import an der Sendeseite (wie die Importgrenze ihn zählt); Höchstpreis = Maximum des lastgewichteten DE-Preises statt des höchsten Knotenpreises; Spitzenstunden > 300 statt > 1.000 EUR/MWh. Erzeugung = positive Netto-Einspeisung je Technologie. Nicht verfügbar: Akteure, Abregelung, Brutto-Handel.
 - **Lastabwurf**: in Läufen mit Nachbarn zu 100.000 EUR/MWh zugelassen (E3); zählt als Kosten der Verbraucher, nicht als Erzeugung.
 - **Netz** (Rolle 6, `workshop/network/`, nur auf Anforderung mit `--grid`): Marktergebnis auf das vereinfachte deutsche Netz (470 Knoten) verteilt, DC-Lastfluss in drei Stresswochen, Redispatch über PTDF. **Rekonstruktion**: absolute Werte sind eine Größenordnung, belastbar ist der Vergleich mit/ohne Kabel. Heutige Leitungskapazitäten, kein N-1. Von Rolle 5 noch nicht geprüft.
 

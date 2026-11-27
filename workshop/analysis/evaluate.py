@@ -295,6 +295,95 @@ def metrics(n: pypsa.Network, year: int, cfg: dict) -> list[tuple]:
     return out
 
 
+# --------------------------------------------------------------------------- hand-off (role 3)
+
+
+def handoff_metrics(folder: Path, cfg: dict) -> tuple[list[tuple], list[dict]]:
+    """
+    Metrics of a run from role 3's hand-off CSVs (workshop/role3/handoff/<run>/), used when the
+    solved networks are not in this workspace. Same section and metric names as metrics() where the
+    definition is the same; where it differs, the metric name says so. Not available from the
+    hand-off: actors (no revenues), curtailment, gross trade, nodal price maximum.
+    """
+    rd = lambda f: pd.read_csv(folder / f) if (folder / f).exists() else pd.DataFrame()  # noqa: E731
+    man = yaml.safe_load((folder / "manifest.yaml").read_text())
+    pr, sc, eb, cap, co2, tr, cab = (rd(f"{x}.csv") for x in
+                                     ("prices_de", "system_costs", "energy_balance", "capacities", "co2",
+                                      "trade", "cable"))
+    rows, status = [], []
+    for y in man["horizons"]:
+        out = []
+        add = lambda s_, m_, u, v: out.append((s_, m_, u, float(v)))  # noqa: E731
+        p = pr[pr.year == y].iloc[0]
+        add("Nachfrage", "Stromnachfrage", "TWh", p.demand_twh)
+        add("Preise", "Strompreis lastgewichtet", "EUR/MWh", p.price_loadweighted)
+        add("Preise", "Strompreis Maximum (lastgewichtetes Mittel DE)", "EUR/MWh", p.price_max)
+        add("Preise", "Stunden mit Preis > 300 EUR/MWh", "h", p.hours_gt_300)
+        add("Preise", "Stunden mit Preis < 1 EUR/MWh", "h", p.hours_lt_1)
+
+        e = eb[(eb.year == y) & (eb.country == HOME)]
+        sup = e[e.component.isin(["Generator", "StorageUnit", "Link"]) & (e.TWh > 0)
+                & ~e.carrier.isin(["AC", "DC", SHED])]
+        for g, v in st.by_group(sup.groupby("carrier").TWh.sum()).items():
+            add("Erzeugung", g, "TWh", v)
+        shed = e[e.carrier == SHED].TWh.sum()
+        add("Versorgung", "Lastabwurf DE", "GWh", shed * 1e3)
+        add("Versorgung", "Lastabwurf alle Länder", "GWh", eb[(eb.year == y) & (eb.carrier == SHED)].TWh.sum() * 1e3)
+
+        c = cap[(cap.year == y) & (cap.country == HOME)]
+        gen_cap = c[c.component.isin(["Generator", "StorageUnit"]) & (c.carrier != SHED)]
+        dis = c[(c.component == "Link") & c.carrier.isin(["battery discharger", "H2 Fuel Cell"])]
+        for g, v in st.by_group(pd.concat([gen_cap, dis]).groupby("carrier").capacity_mw_or_mwh.sum()).items():
+            add("Kapazität", g, "GW", v / 1e3)
+        stores = c[c.component == "Store"].set_index("carrier").capacity_mw_or_mwh
+        add("Speicher", "Batteriespeicher Energie", "GWh", stores.get("Battery Storage", 0) / 1e3)
+        add("Speicher", "Wasserstoffspeicher Energie", "TWh", stores.get("Hydrogen Storage", 0) / 1e6)
+
+        k = co2[(co2.year == y)]
+        kd = k[k.country == HOME]
+        shadow = float(k.cap_shadow_eur_t.iloc[0]) if len(k) else 0.0
+        shadow = 0.0 if not np.isfinite(shadow) or abs(shadow) < 1e-6 else shadow
+        pco2 = float(k.co2_price_eur_t.iloc[0]) if len(k) else co2_price(cfg, y)
+        add("CO2", "Emissionen", "Mt", kd.emissions_mt.sum())
+        add("CO2", "CO2-Preis (Config)", "EUR/t", pco2)
+        add("CO2", "Schattenpreis der Obergrenze", "EUR/t", shadow)
+        add("CO2", "CO2-Preis effektiv", "EUR/t", pco2 + shadow)
+
+        cost = sc[sc.year == y]
+        add("Systemkosten", "Systemkosten gesamt", "Mrd EUR/a", (cost.capex_eur_a.sum() + cost.opex_eur_a.sum()) / 1e9)
+        add("Systemkosten", "davon Kapitalkosten", "Mrd EUR/a", cost.capex_eur_a.sum() / 1e9)
+        add("Systemkosten", "davon Betriebskosten", "Mrd EUR/a", cost.opex_eur_a.sum() / 1e9)
+        add("Systemkosten", "davon CO2-Preis (Transfer an den Staat)", "Mrd EUR/a",
+            k.emissions_mt.sum() * 1e6 * pco2 / 1e9)
+        cg = cost.assign(v=cost.capex_eur_a + cost.opex_eur_a)
+        cg["g"] = np.where(cg.carrier.isin(["AC", "DC"]), "Grid",
+                           np.where(cg.carrier.str.lower().str.contains(CABLE_TAG), "Brazil cable",
+                                    cg.carrier.map(st.group)))
+        for g_, v in cg.groupby("g").v.sum().items():
+            add("Systemkosten nach Gruppe", g_, "Mrd EUR/a", v / 1e9)
+
+        t = tr[tr.year == y]
+        t = t[(t.country_a == HOME) ^ (t.country_b == HOME)]
+        t = t[~t.country_a.isin(["BR"]) & ~t.country_b.isin(["BR"])]
+        net_imp = (t.loc[t.country_b == HOME, "net_flow_a_to_b_twh"].sum()
+                   - t.loc[t.country_a == HOME, "net_flow_a_to_b_twh"].sum())
+        add("Handel", "Netto-Import", "TWh", net_imp)
+
+        if not cab.empty and (cab.year == y).any():
+            cb = cab[cab.year == y]
+            pn = cb.p_nom_opt_mw.sum()
+            add("Kabel", "Kapazität", "GW", pn / 1e3)
+            add("Kabel", "Lieferung nach DE", "TWh", cb.delivered_twh.sum())
+            add("Kabel", "Auslastung", "%", 100 * cb.utilisation.fillna(0).mean())
+            ccost = cost[cost.carrier.str.lower().str.contains(CABLE_TAG) & (cost.component == "Link")]
+            add("Kabel", "Annuität inkl. FOM", "Mrd EUR/a", ccost.capex_eur_a.sum() / 1e9)
+        rows += [(y, *o) for o in out]
+        sv = man.get("solver", {}).get(y, {})
+        status.append({"horizon": y, "status": sv.get("status", "n/a"), "solve_min": sv.get("solve_min", np.nan),
+                       "peak_gb": sv.get("peak_gb", np.nan)})
+    return rows, status
+
+
 # --------------------------------------------------------------------------- figures
 
 FIG_YEARS = None
@@ -346,7 +435,8 @@ def run_figures(m: pd.DataFrame, run: str, out: Path) -> list[tuple[str, str]]:
     st.line(axs[0], years, p["Strompreis lastgewichtet"], st.TEXT, values=True)
     axs[0].set_title("Load-weighted price, EUR/MWh", loc="left")
     axs[0].set_ylim(0, p["Strompreis lastgewichtet"].max() * 1.25)
-    st.bars(axs[1], years, p["Strompreis Maximum"].values, color=st.NEUTRAL, width=3.1)
+    pmax = p["Strompreis Maximum"] if "Strompreis Maximum" in p else p["Strompreis Maximum (lastgewichtetes Mittel DE)"]
+    st.bars(axs[1], years, pmax.values, color=st.NEUTRAL, width=3.1)
     axs[1].set_title("Highest price, EUR/MWh", loc="left")
     for ax in axs:
         ax.set_xticks(years)
@@ -386,7 +476,11 @@ def comparison_figures(cmp: pd.DataFrame, m: pd.DataFrame, out: Path) -> dict:
         ac = d[d.section == "Akteure"].pivot_table(index="metric", columns="horizon", values="value")
         ac = ac.drop(index="Summe aller Akteure", errors="ignore")
 
-        fig, axs = plt.subplots(1, 2, figsize=(7.6, 3.2), width_ratios=[1, 1.4])
+        if ac.empty:  # actors not available for one of the runs (hand-off): one panel only
+            fig, ax0 = plt.subplots(figsize=(5.6, 3.4))
+            axs = [ax0]
+        else:
+            fig, axs = plt.subplots(1, 2, figsize=(7.6, 3.2), width_ratios=[1, 1.4])
         bars = st.bars(axs[0], years, sc.reindex(years).values, color=col, width=3.1, fmt="{:+,.2f}")
         for b, y in zip(bars, years):
             if y in flagged:
@@ -397,6 +491,10 @@ def comparison_figures(cmp: pd.DataFrame, m: pd.DataFrame, out: Path) -> dict:
         if flagged:
             axs[0].annotate("light: CO2 cap > 1,000 EUR/t (E3)", (0, -0.16), xycoords="axes fraction",
                             fontsize=7, color=st.FAINT)
+        if ac.empty:
+            fig.suptitle(f"{run} minus {ref}", x=0.01, ha="left", fontweight="bold", fontsize=9)
+            figs[(run, ref)] = [(f"{run} − {ref}", save(fig, out, f"diff_{run}_vs_{ref}"))]
+            continue
         tot = ac[kept].mean(axis=1).sort_values() if kept else ac.mean(axis=1).sort_values()
         axs[1].barh(range(len(tot)), tot.values, height=0.6, lw=0,
                     color=[st.GROUPS["Brazil cable"] if ("Kabel" in i or "BR" in i) else st.NEUTRAL
@@ -545,7 +643,9 @@ def git_rev() -> str:
         return "n/a"
 
 
-def report(spec: dict, m: pd.DataFrame, cmp: pd.DataFrame, status: pd.DataFrame, figs: dict, out: Path):
+def report(spec: dict, m: pd.DataFrame, cmp: pd.DataFrame, status: pd.DataFrame, figs: dict, out: Path,
+           source: dict | None = None):
+    source = source or {}
     L = []
     L += ["<!--", "SPDX-FileCopyrightText: Contributors to PyPSA-Eur <https://github.com/pypsa/pypsa-eur>", "",
           "SPDX-License-Identifier: CC-BY-4.0", "-->", "",
@@ -570,6 +670,7 @@ def report(spec: dict, m: pd.DataFrame, cmp: pd.DataFrame, status: pd.DataFrame,
                      "Jahre": ", ".join(map(str, done)) or "–",
                      "Solver": ", ".join(sorted(set(st_.status))) or "–",
                      "Spitzenspeicher (GB)": f"{st_.peak_gb.max():.1f}" if len(st_) and st_.peak_gb.notna().any() else "–",
+                     "Quelle": source.get(name, "–"),
                      "Beschreibung": r.get("description", "")
                      + (f" — **fehlt:** {'; '.join(r['missing'])}" if r.get("missing") and not done else "")})
     L += [md_table(pd.DataFrame(rows).set_index("Lauf")), ""]
@@ -638,6 +739,12 @@ def report(spec: dict, m: pd.DataFrame, cmp: pd.DataFrame, status: pd.DataFrame,
           "Zertifikate versteigert würden). CO2-Zahlungen sind Transfers zwischen Akteuren: Die Summe aller "
           "Akteure = −(Systemkosten − CO2-Preis-Zahlungen). In Differenzen zweier Läufe ist das der "
           "Wohlfahrtsgewinn ohne CO2-Bewertung; die Emissionsänderung steht getrennt unter CO2.",
+          "- **Quelle Handoff**: Läufe, deren gelöste Netze nicht in diesem Workspace liegen, werden aus den "
+          "CSVs von Rolle 3 gelesen (`workshop/role3/handoff/<run>/`, `export_handoff.py`). Gleiche Definitionen "
+          "wie oben, mit drei Abweichungen: Netto-Import an der Sendeseite (wie die Importgrenze ihn zählt); "
+          "Höchstpreis = Maximum des lastgewichteten DE-Preises statt des höchsten Knotenpreises; Spitzenstunden "
+          "> 300 statt > 1.000 EUR/MWh. Erzeugung = positive Netto-Einspeisung je Technologie. Nicht verfügbar: "
+          "Akteure, Abregelung, Brutto-Handel.",
           "- **Lastabwurf**: in Läufen mit Nachbarn zu 100.000 EUR/MWh zugelassen (E3); zählt als Kosten der "
           "Verbraucher, nicht als Erzeugung.",
           "- **Netz** (Rolle 6, `workshop/network/`, nur auf Anforderung mit `--grid`): Marktergebnis auf das "
@@ -686,15 +793,25 @@ def main():
     a.out.mkdir(parents=True, exist_ok=True)
     st.use()
 
-    rows, status = [], []
+    rows, status, source = [], [], {}
     for name, r in spec["runs"].items():
         if a.runs and name not in a.runs:
             continue
         cfg = run_config(r)
+        nets = [y for y in spec["horizons"]
+                if (ROOT / "results" / r["run_name"] / "networks" / f"solved_{y}.nc").exists()]
+        if not nets and r.get("handoff") and (ROOT / r["handoff"] / "manifest.yaml").exists():
+            print(f"{name}: from hand-off {r['handoff']} (no solved networks here)", flush=True)
+            hr, hs = handoff_metrics(ROOT / r["handoff"], cfg)
+            rows += [(name, *t) for t in hr]
+            status += [{"run": name, **x} for x in hs]
+            source[name] = f"Handoff `{r['handoff']}`"
+            continue
         for y in spec["horizons"]:
             f = ROOT / "results" / r["run_name"] / "networks" / f"solved_{y}.nc"
             if not f.exists():
                 continue
+            source[name] = "gelöste Netze"
             print(f"{name} {y}", flush=True)
             n = pypsa.Network(f)
             rows += [(name, y, *t) for t in metrics(n, y, cfg)]
@@ -725,8 +842,11 @@ def main():
             continue
         j = x.merge(y_, on=["horizon", "section", "metric", "unit"], how="outer", suffixes=("", "_ref"))
         j = j[j.horizon.isin(set(x.horizon) & set(y_.horizon))]
-        # grid metrics exist only where --grid was run: compare only where both runs have them
-        j = j[~((j.section == "Netz") & (j.value.isna() | j.value_ref.isna()))]
+        # A metric missing on one side is 0 only for technology groups and the cable (absent = none).
+        # Elsewhere it means "not measured" (grid only with --grid; actors, curtailment and gross
+        # trade not in role 3's hand-off; differently defined metrics): compare only where both exist.
+        zero_ok = j.section.isin(["Erzeugung", "Kapazität", "Systemkosten nach Gruppe", "Kabel", "Speicher"])
+        j = j[zero_ok | (j.value.notna() & j.value_ref.notna())]
         j["value"] = j.value.fillna(0) - j.value_ref.fillna(0)
         j["run"], j["reference"] = run, ref
         cmp.append(j[["run", "reference", "horizon", "section", "metric", "unit", "value"]])
@@ -742,7 +862,11 @@ def main():
         figs[("run", name)] = run_figures(m, name, a.out / "figures")
     for (run, ref), lst in comparison_figures(cmp, m, a.out / "figures").items():
         figs[("cmp", run, ref)] = lst
-    report(spec, m, cmp, status, figs, a.out)
+    if a.runs and (a.out / "sources.csv").exists():
+        old = pd.read_csv(a.out / "sources.csv")
+        source = {**dict(zip(old.run, old.source)), **source}
+    pd.DataFrame({"run": list(source), "source": list(source.values())}).to_csv(a.out / "sources.csv", index=False)
+    report(spec, m, cmp, status, figs, a.out, source)
     print(f"written: {a.out / 'RESULTS.md'}")
 
 

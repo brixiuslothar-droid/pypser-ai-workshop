@@ -72,3 +72,30 @@ Vergleich mit/ohne Kabel. Von Rolle 5 noch nicht geprüft.
   informieren.
 - **Speicher:** Die Netzanalyse brachte den Workspace auf 10,0 von 10 GB.
   Nur ohne laufenden Solve und nur auf Anforderung rechnen (O7).
+
+### Referenz nach E3 (REF, `de10-ref`), aus der Übergabe von Rolle 3
+
+Stand 2026-11-27. Gelesen aus `workshop/role3/handoff/de10-ref/` (die gelösten
+Netze liegen nicht in diesem Workspace). Systemkosten und DE-Preis hat Rolle 3
+gegen `evaluate.py` geprüft; die Energiebilanz DE geht je Jahr auf (Rest < 0,001 TWh).
+
+- **Die Importgrenze von E3 hält:** Netto-Import DE 24,7–24,9 TWh/a ab 2030
+  (2025: 18 TWh). Ohne Grenze (NB9REF) wären es 90–112 TWh/a. Lastabwurf in
+  keinem Jahr. Alle sechs Jahre optimal, Spitzenspeicher 6,5 GB.
+- **Die Grenze kostet wenig:** Systemkosten 2030–2045 nur +0,03 bis +0,35 Mrd
+  EUR/a gegenüber NB9REF, DE-Preis ±2 EUR/MWh. Die Grenze verschiebt Flüsse,
+  nicht Kosten. Für das Kabel heißt das: Es konkurriert mit ~25 TWh Import aus
+  den Nachbarn, nicht mit ~100 TWh.
+- **2050 ist nicht mehr cap-getrieben:** CO2-Preis 750 EUR/t, Schattenpreis der
+  Obergrenze 0. DE-Preis 107 EUR/MWh, höchster Preis 1.600 EUR/MWh,
+  1.040 Stunden über 300 EUR/MWh, 11,7 Mt CO2 in DE. 2050 kann damit in die
+  Kernaussage, bleibt aber in Abbildungen gekennzeichnet (E3).
+- **2045 bleibt bindend:** Die gemeinsame Obergrenze der zehn Länder kostet
+  343 EUR/t zusätzlich (effektiv 603 EUR/t). Unter der Schwelle von 1.000 EUR/t,
+  aber spürbar.
+- **Preisspitzen bleiben:** 980 h (2045) und 1.040 h (2050) über 300 EUR/MWh.
+  Das sind die Stunden, in denen ein Kabel Wert schaffen kann.
+- **Vergleichbarkeit:** REF rechnet mit 4-h-Schritten und zehn Ländern;
+  Systemkosten (~215–235 Mrd EUR/a) gelten für alle zehn Länder. Nur
+  Differenzen zwischen Läufen mit derselben Kette sind aussagekräftig
+  (CABLE − REF). REF − BASE wird deshalb nicht gezeigt.

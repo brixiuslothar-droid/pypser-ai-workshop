@@ -1,458 +1,315 @@
 run,horizon,section,metric,unit,value
-BRIMP,2025,Nachfrage,Stromnachfrage,TWh,509.158931233078
-BRIMP,2025,Preise,Strompreis lastgewichtet,EUR/MWh,96.32129183933802
-BRIMP,2025,Preise,Strompreis Mittel,EUR/MWh,94.84771585715016
-BRIMP,2025,Preise,Strompreis Maximum,EUR/MWh,129.6488814395001
-BRIMP,2025,Preise,Stunden mit Preis > 1000 EUR/MWh,h,0.0
-BRIMP,2025,Preise,Stunden mit Preis < 1 EUR/MWh,h,364.0
-BRIMP,2025,Erzeugung,Lignite,TWh,32.37592493347
-BRIMP,2025,Erzeugung,Coal,TWh,130.69387070147
-BRIMP,2025,Erzeugung,Gas,TWh,21.40045595938
-BRIMP,2025,Erzeugung,Oil,TWh,1.5051000000000004e-07
-BRIMP,2025,Erzeugung,Biomass,TWh,73.72904464833
-BRIMP,2025,Erzeugung,Hydro,TWh,21.64125977516
-BRIMP,2025,Erzeugung,Offshore wind,TWh,38.28057577748
-BRIMP,2025,Erzeugung,Onshore wind,TWh,108.00489310602
-BRIMP,2025,Erzeugung,Solar,TWh,85.80039288946999
-BRIMP,2025,Erzeugung,Storage,TWh,4.29761489815
-BRIMP,2025,Erzeugung,Other,TWh,0.22591781933
-BRIMP,2025,Kapazität,Lignite,GW,19.457035
-BRIMP,2025,Kapazität,Coal,GW,20.351945
-BRIMP,2025,Kapazität,Gas,GW,36.895872053
-BRIMP,2025,Kapazität,Oil,GW,5.684345986
-BRIMP,2025,Kapazität,Biomass,GW,11.147660833
-BRIMP,2025,Kapazität,Hydro,GW,4.416356859
-BRIMP,2025,Kapazität,Offshore wind,GW,9.215
-BRIMP,2025,Kapazität,Onshore wind,GW,63.57366591586259
-BRIMP,2025,Kapazität,Solar,GW,89.80457223537856
-BRIMP,2025,Kapazität,Storage,GW,7.361719999999999
-BRIMP,2025,Kapazität,Other,GW,0.0269
-BRIMP,2025,Speicher,Batteriespeicher Energie,GWh,0.0
-BRIMP,2025,Speicher,Wasserstoffspeicher Energie,TWh,0.0
-BRIMP,2025,Erzeugung,"Abregelung Wind, Solar, Laufwasser",TWh,3.036386591092356
-BRIMP,2025,CO2,Emissionen,Mt,161.24640578195374
-BRIMP,2025,CO2,Obergrenze,Mt,219.31635139488
-BRIMP,2025,CO2,CO2-Preis (Config),EUR/t,80.0
-BRIMP,2025,CO2,Schattenpreis der Obergrenze,EUR/t,0.0
-BRIMP,2025,CO2,CO2-Preis effektiv,EUR/t,80.0
-BRIMP,2025,Systemkosten,Systemkosten gesamt,Mrd EUR/a,71.12149904650971
-BRIMP,2025,Systemkosten,davon Kapitalkosten,Mrd EUR/a,50.8245413336816
-BRIMP,2025,Systemkosten,davon Betriebskosten,Mrd EUR/a,20.29695771282812
-BRIMP,2025,Systemkosten,davon CO2-Preis (Transfer an den Staat),Mrd EUR/a,12.899712462556302
-BRIMP,2025,Systemkosten nach Gruppe,Biomass,Mrd EUR/a,9.02639289938529
-BRIMP,2025,Systemkosten nach Gruppe,Coal,Mrd EUR/a,20.803369435391968
-BRIMP,2025,Systemkosten nach Gruppe,Gas,Mrd EUR/a,6.66595248652744
-BRIMP,2025,Systemkosten nach Gruppe,Grid,Mrd EUR/a,2.35040123609661
-BRIMP,2025,Systemkosten nach Gruppe,Hydro,Mrd EUR/a,1.66428939052737
-BRIMP,2025,Systemkosten nach Gruppe,Lignite,Mrd EUR/a,11.705255028934731
-BRIMP,2025,Systemkosten nach Gruppe,Offshore wind,Mrd EUR/a,3.0453051138622205
-BRIMP,2025,Systemkosten nach Gruppe,Oil,Mrd EUR/a,0.28897363594734
-BRIMP,2025,Systemkosten nach Gruppe,Onshore wind,Mrd EUR/a,8.62482931871191
-BRIMP,2025,Systemkosten nach Gruppe,Other,Mrd EUR/a,0.00217110717398
-BRIMP,2025,Systemkosten nach Gruppe,Solar,Mrd EUR/a,5.23668661295014
-BRIMP,2025,Systemkosten nach Gruppe,Storage,Mrd EUR/a,1.7078727810007
-BRIMP,2025,Handel,Netto-Import,TWh,0.0
-BRIMP,2025,Handel,Import brutto,TWh,0.0
-BRIMP,2025,Handel,Export brutto,TWh,0.0
-BRIMP,2025,Akteure,Erzeuger DE: Biomass,Mrd EUR/a,-1.4477518661434203
-BRIMP,2025,Akteure,Erzeuger DE: Coal,Mrd EUR/a,-6.66823363537404
-BRIMP,2025,Akteure,Erzeuger DE: Gas,Mrd EUR/a,-4.1640137748818695
-BRIMP,2025,Akteure,Erzeuger DE: Hydro,Mrd EUR/a,0.4272801096562699
-BRIMP,2025,Akteure,Erzeuger DE: Lignite,Mrd EUR/a,-8.12459868054914
-BRIMP,2025,Akteure,Erzeuger DE: Offshore wind,Mrd EUR/a,0.31377497547091
-BRIMP,2025,Akteure,Erzeuger DE: Oil,Mrd EUR/a,-0.2889736209865899
-BRIMP,2025,Akteure,Erzeuger DE: Onshore wind,Mrd EUR/a,-0.23688163974066
-BRIMP,2025,Akteure,Erzeuger DE: Other,Mrd EUR/a,0.02057683818201
-BRIMP,2025,Akteure,Erzeuger DE: Solar,Mrd EUR/a,1.55976873959453
-BRIMP,2025,Akteure,Erzeuger DE: Storage,Mrd EUR/a,-1.42340987112688
-BRIMP,2025,Akteure,Netz DE,Mrd EUR/a,-2.04618952256776
-BRIMP,2025,Akteure,Verbraucher DE,Mrd EUR/a,-49.04284600790675
-BRIMP,2025,Akteure,Staat DE (CO2),Mrd EUR/a,12.899712462556302
-BRIMP,2025,Akteure,Summe aller Akteure,Mrd EUR/a,-58.22178549381709
-BRIMP,2030,Nachfrage,Stromnachfrage,TWh,560.0748243563859
-BRIMP,2030,Preise,Strompreis lastgewichtet,EUR/MWh,86.61210590895601
-BRIMP,2030,Preise,Strompreis Mittel,EUR/MWh,85.47711043274172
-BRIMP,2030,Preise,Strompreis Maximum,EUR/MWh,176.6840623017286
-BRIMP,2030,Preise,Stunden mit Preis > 1000 EUR/MWh,h,0.0
-BRIMP,2030,Preise,Stunden mit Preis < 1 EUR/MWh,h,2154.0
-BRIMP,2030,Erzeugung,Lignite,TWh,1.46637433157
-BRIMP,2030,Erzeugung,Coal,TWh,25.83200211182
-BRIMP,2030,Erzeugung,Gas,TWh,108.27157991197
-BRIMP,2030,Erzeugung,Oil,TWh,6.97e-09
-BRIMP,2030,Erzeugung,Biomass,TWh,51.09632240005
-BRIMP,2030,Erzeugung,Hydro,TWh,21.64126128223
-BRIMP,2030,Erzeugung,Offshore wind,TWh,33.07112548213
-BRIMP,2030,Erzeugung,Onshore wind,TWh,180.91783995981
-BRIMP,2030,Erzeugung,Solar,TWh,142.22179642854
-BRIMP,2030,Erzeugung,Storage,TWh,16.31099758274
-BRIMP,2030,Erzeugung,Other,TWh,0.1815212048
-BRIMP,2030,Kapazität,Lignite,GW,14.223575
-BRIMP,2030,Kapazität,Coal,GW,16.89493
-BRIMP,2030,Kapazität,Gas,GW,28.364955278386137
-BRIMP,2030,Kapazität,Oil,GW,2.4050371260000003
-BRIMP,2030,Kapazität,Biomass,GW,9.496507833
-BRIMP,2030,Kapazität,Hydro,GW,4.416356859
-BRIMP,2030,Kapazität,Offshore wind,GW,9.612099688009089
-BRIMP,2030,Kapazität,Onshore wind,GW,90.43788290624197
-BRIMP,2030,Kapazität,Solar,GW,145.12431883577736
-BRIMP,2030,Kapazität,Storage,GW,10.62744838192318
-BRIMP,2030,Kapazität,Other,GW,0.0269
-BRIMP,2030,Speicher,Batteriespeicher Energie,GWh,19.734162330115637
-BRIMP,2030,Speicher,Wasserstoffspeicher Energie,TWh,9.177167414119246e-09
-BRIMP,2030,Erzeugung,"Abregelung Wind, Solar, Laufwasser",TWh,34.13674458545539
-BRIMP,2030,CO2,Emissionen,Mt,63.97987996272944
-BRIMP,2030,CO2,Obergrenze,Mt,152.30302180200002
-BRIMP,2030,CO2,CO2-Preis (Config),EUR/t,130.0
-BRIMP,2030,CO2,Schattenpreis der Obergrenze,EUR/t,0.0
-BRIMP,2030,CO2,CO2-Preis effektiv,EUR/t,130.0
-BRIMP,2030,Systemkosten,Systemkosten gesamt,Mrd EUR/a,67.54140560891283
-BRIMP,2030,Systemkosten,davon Kapitalkosten,Mrd EUR/a,51.07464420148597
-BRIMP,2030,Systemkosten,davon Betriebskosten,Mrd EUR/a,16.466761407426862
-BRIMP,2030,Systemkosten,davon CO2-Preis (Transfer an den Staat),Mrd EUR/a,8.317384395154825
-BRIMP,2030,Systemkosten nach Gruppe,Biomass,Mrd EUR/a,5.98105283427954
-BRIMP,2030,Systemkosten nach Gruppe,Coal,Mrd EUR/a,10.61475545593598
-BRIMP,2030,Systemkosten nach Gruppe,Gas,Mrd EUR/a,14.785984174973011
-BRIMP,2030,Systemkosten nach Gruppe,Grid,Mrd EUR/a,2.42341051359252
-BRIMP,2030,Systemkosten nach Gruppe,Hydro,Mrd EUR/a,1.66429752024336
-BRIMP,2030,Systemkosten nach Gruppe,Lignite,Mrd EUR/a,6.2634530782774505
-BRIMP,2030,Systemkosten nach Gruppe,Offshore wind,Mrd EUR/a,3.19876358084369
-BRIMP,2030,Systemkosten nach Gruppe,Oil,Mrd EUR/a,0.12169894804177
-BRIMP,2030,Systemkosten nach Gruppe,Onshore wind,Mrd EUR/a,12.029840226132851
-BRIMP,2030,Systemkosten nach Gruppe,Other,Mrd EUR/a,0.00283348227404
-BRIMP,2030,Systemkosten nach Gruppe,Solar,Mrd EUR/a,8.32392378452796
-BRIMP,2030,Systemkosten nach Gruppe,Storage,Mrd EUR/a,2.13139200979066
-BRIMP,2030,Handel,Netto-Import,TWh,0.0
-BRIMP,2030,Handel,Import brutto,TWh,0.0
-BRIMP,2030,Handel,Export brutto,TWh,0.0
-BRIMP,2030,Akteure,Erzeuger DE: Biomass,Mrd EUR/a,-0.0555531783840599
-BRIMP,2030,Akteure,Erzeuger DE: Coal,Mrd EUR/a,-6.88693313337784
-BRIMP,2030,Akteure,Erzeuger DE: Gas,Mrd EUR/a,-0.7899745398581198
-BRIMP,2030,Akteure,Erzeuger DE: Hydro,Mrd EUR/a,0.2388602945609399
-BRIMP,2030,Akteure,Erzeuger DE: Lignite,Mrd EUR/a,-6.022154774161411
-BRIMP,2030,Akteure,Erzeuger DE: Offshore wind,Mrd EUR/a,-0.3983737985542901
-BRIMP,2030,Akteure,Erzeuger DE: Oil,Mrd EUR/a,-0.12169894731149
-BRIMP,2030,Akteure,Erzeuger DE: Onshore wind,Mrd EUR/a,-0.90414310138998
-BRIMP,2030,Akteure,Erzeuger DE: Other,Mrd EUR/a,0.0174867924406699
-BRIMP,2030,Akteure,Erzeuger DE: Solar,Mrd EUR/a,-1.46530828879275
-BRIMP,2030,Akteure,Erzeuger DE: Storage,Mrd EUR/a,-0.7590007685861
-BRIMP,2030,Akteure,Netz DE,Mrd EUR/a,-1.8853521612058095
-BRIMP,2030,Akteure,Verbraucher DE,Mrd EUR/a,-48.50926000409523
-BRIMP,2030,Akteure,Staat DE (CO2),Mrd EUR/a,8.317384395154827
-BRIMP,2030,Akteure,Summe aller Akteure,Mrd EUR/a,-59.22402121356065
-BRIMP,2035,Nachfrage,Stromnachfrage,TWh,610.9907174796937
-BRIMP,2035,Preise,Strompreis lastgewichtet,EUR/MWh,91.39676927052128
-BRIMP,2035,Preise,Strompreis Mittel,EUR/MWh,88.83206037910313
-BRIMP,2035,Preise,Strompreis Maximum,EUR/MWh,1040.4983492095218
-BRIMP,2035,Preise,Stunden mit Preis > 1000 EUR/MWh,h,32.0
-BRIMP,2035,Preise,Stunden mit Preis < 1 EUR/MWh,h,2374.0
-BRIMP,2035,Erzeugung,Lignite,TWh,0.7275776738099999
-BRIMP,2035,Erzeugung,Coal,TWh,0.1559626221899999
-BRIMP,2035,Erzeugung,Gas,TWh,108.47468991042
-BRIMP,2035,Erzeugung,Oil,TWh,0.1196422188899999
-BRIMP,2035,Erzeugung,Biomass,TWh,45.539017588490005
-BRIMP,2035,Erzeugung,Hydro,TWh,21.640805408210003
-BRIMP,2035,Erzeugung,Offshore wind,TWh,77.35037678508
-BRIMP,2035,Erzeugung,Onshore wind,TWh,165.55139324845
-BRIMP,2035,Erzeugung,Solar,TWh,188.46521426393
-BRIMP,2035,Erzeugung,Storage,TWh,44.822739493330005
-BRIMP,2035,Erzeugung,Other,TWh,0.1627814585499999
-BRIMP,2035,Kapazität,Lignite,GW,5.796575
-BRIMP,2035,Kapazität,Coal,GW,1.052
-BRIMP,2035,Kapazität,Gas,GW,43.87484123366419
-BRIMP,2035,Kapazität,Oil,GW,1.6968725260000002
-BRIMP,2035,Kapazität,Biomass,GW,7.944603333000001
-BRIMP,2035,Kapazität,Hydro,GW,4.416356859
-BRIMP,2035,Kapazität,Offshore wind,GW,18.049786916659315
-BRIMP,2035,Kapazität,Onshore wind,GW,79.21390499035891
-BRIMP,2035,Kapazität,Solar,GW,195.7258977481232
-BRIMP,2035,Kapazität,Storage,GW,26.332701047838903
-BRIMP,2035,Kapazität,Other,GW,0.0269
-BRIMP,2035,Speicher,Batteriespeicher Energie,GWh,152.05122946257327
-BRIMP,2035,Speicher,Wasserstoffspeicher Energie,TWh,1.1976313807385631e-08
-BRIMP,2035,Erzeugung,"Abregelung Wind, Solar, Laufwasser",TWh,39.58201337035722
-BRIMP,2035,CO2,Emissionen,Mt,40.985519084579714
-BRIMP,2035,CO2,Obergrenze,Mt,84.61278989
-BRIMP,2035,CO2,CO2-Preis (Config),EUR/t,175.0
-BRIMP,2035,CO2,Schattenpreis der Obergrenze,EUR/t,0.0
-BRIMP,2035,CO2,CO2-Preis effektiv,EUR/t,175.0
-BRIMP,2035,Systemkosten,Systemkosten gesamt,Mrd EUR/a,67.33496300752566
-BRIMP,2035,Systemkosten,davon Kapitalkosten,Mrd EUR/a,52.59578232707245
-BRIMP,2035,Systemkosten,davon Betriebskosten,Mrd EUR/a,14.739180680453211
-BRIMP,2035,Systemkosten,davon CO2-Preis (Transfer an den Staat),Mrd EUR/a,7.172465839801449
-BRIMP,2035,Systemkosten nach Gruppe,Biomass,Mrd EUR/a,4.31684662961499
-BRIMP,2035,Systemkosten nach Gruppe,Brazil cable,Mrd EUR/a,6.481508503107981
-BRIMP,2035,Systemkosten nach Gruppe,Coal,Mrd EUR/a,0.47712929758966
-BRIMP,2035,Systemkosten nach Gruppe,Gas,Mrd EUR/a,17.48908950272314
-BRIMP,2035,Systemkosten nach Gruppe,Grid,Mrd EUR/a,2.32663955738998
-BRIMP,2035,Systemkosten nach Gruppe,Hydro,Mrd EUR/a,1.66428823761444
-BRIMP,2035,Systemkosten nach Gruppe,Lignite,Mrd EUR/a,2.605074420005709
-BRIMP,2035,Systemkosten nach Gruppe,Offshore wind,Mrd EUR/a,6.310670087147261
-BRIMP,2035,Systemkosten nach Gruppe,Oil,Mrd EUR/a,0.11615336786742
-BRIMP,2035,Systemkosten nach Gruppe,Onshore wind,Mrd EUR/a,10.4983591905324
-BRIMP,2035,Systemkosten nach Gruppe,Other,Mrd EUR/a,0.00341997520126
-BRIMP,2035,Systemkosten nach Gruppe,Solar,Mrd EUR/a,10.783174284527192
-BRIMP,2035,Systemkosten nach Gruppe,Storage,Mrd EUR/a,4.26260995420423
-BRIMP,2035,Handel,Netto-Import,TWh,0.0
-BRIMP,2035,Handel,Import brutto,TWh,0.0
-BRIMP,2035,Handel,Export brutto,TWh,0.0
-BRIMP,2035,Kabel,Kapazität,GW,2.0
-BRIMP,2035,Kabel,Erzeugung BR Kapazität,GW,2.0
-BRIMP,2035,Kabel,Erzeugung BR,TWh,11.379510627689973
-BRIMP,2035,Kabel,Lieferung nach DE,TWh,8.933546388714662
-BRIMP,2035,Kabel,Auslastung,%,64.95154467859572
-BRIMP,2035,Kabel,Engpasserlös,Mrd EUR/a,0.6958334064848599
-BRIMP,2035,Kabel,Annuität inkl. FOM,Mrd EUR/a,6.001161476114799
-BRIMP,2035,Kabel,Engpasserlös pro kW,EUR/kW/a,347.91670324243
-BRIMP,2035,Kabel,Annuität pro kW,EUR/kW/a,3000.5807380573992
-BRIMP,2035,Kabel,Abstand zum Break-even pro kW,EUR/kW/a,-2652.664034814969
-BRIMP,2035,Akteure,Erzeuger BR,Mrd EUR/a,0.0
-BRIMP,2035,Akteure,Erzeuger DE: Biomass,Mrd EUR/a,1.40083679293052
-BRIMP,2035,Akteure,Erzeuger DE: Coal,Mrd EUR/a,-0.39877399054618
-BRIMP,2035,Akteure,Erzeuger DE: Gas,Mrd EUR/a,-0.2942789033195207
-BRIMP,2035,Akteure,Erzeuger DE: Hydro,Mrd EUR/a,0.32652929361669
-BRIMP,2035,Akteure,Erzeuger DE: Lignite,Mrd EUR/a,-2.1998501197331994
-BRIMP,2035,Akteure,Erzeuger DE: Offshore wind,Mrd EUR/a,-0.4262846486395297
-BRIMP,2035,Akteure,Erzeuger DE: Oil,Mrd EUR/a,-0.01762504955276
-BRIMP,2035,Akteure,Erzeuger DE: Onshore wind,Mrd EUR/a,-0.3344581394635499
-BRIMP,2035,Akteure,Erzeuger DE: Other,Mrd EUR/a,0.01749506459125
-BRIMP,2035,Akteure,Erzeuger DE: Solar,Mrd EUR/a,-1.72261205501921
-BRIMP,2035,Akteure,Erzeuger DE: Storage,Mrd EUR/a,-0.8021000482248599
-BRIMP,2035,Akteure,Kabelbetreiber,Mrd EUR/a,-5.305433753443091
-BRIMP,2035,Akteure,Netz DE,Mrd EUR/a,-1.73582981843774
-BRIMP,2035,Akteure,Verbraucher DE,Mrd EUR/a,-55.84257763192183
-BRIMP,2035,Akteure,Staat DE (CO2),Mrd EUR/a,7.17246583980145
-BRIMP,2035,Akteure,Summe aller Akteure,Mrd EUR/a,-60.162497167361565
-BRIMP,2040,Nachfrage,Stromnachfrage,TWh,661.9066106030014
-BRIMP,2040,Preise,Strompreis lastgewichtet,EUR/MWh,91.88814189048638
-BRIMP,2040,Preise,Strompreis Mittel,EUR/MWh,88.24434126820007
-BRIMP,2040,Preise,Strompreis Maximum,EUR/MWh,1319.493599437977
-BRIMP,2040,Preise,Stunden mit Preis > 1000 EUR/MWh,h,42.0
-BRIMP,2040,Preise,Stunden mit Preis < 1 EUR/MWh,h,3100.0
-BRIMP,2040,Erzeugung,Lignite,TWh,0.00177060692
-BRIMP,2040,Erzeugung,Gas,TWh,92.40039403541
-BRIMP,2040,Erzeugung,Oil,TWh,0.04931866409
-BRIMP,2040,Erzeugung,Biomass,TWh,28.45117473116
-BRIMP,2040,Erzeugung,Hydro,TWh,21.64107630184
-BRIMP,2040,Erzeugung,Offshore wind,TWh,101.02188866565
-BRIMP,2040,Erzeugung,Onshore wind,TWh,150.97105097771998
-BRIMP,2040,Erzeugung,Solar,TWh,267.74944153649
-BRIMP,2040,Erzeugung,Storage,TWh,87.52421938641
-BRIMP,2040,Erzeugung,Other,TWh,0.09425920632
-BRIMP,2040,Kapazität,Lignite,GW,0.03405
-BRIMP,2040,Kapazität,Gas,GW,53.253460665452366
-BRIMP,2040,Kapazität,Oil,GW,0.948435646
-BRIMP,2040,Kapazität,Biomass,GW,5.360664375000001
-BRIMP,2040,Kapazität,Hydro,GW,4.416356859
-BRIMP,2040,Kapazität,Offshore wind,GW,22.767605221059448
-BRIMP,2040,Kapazität,Onshore wind,GW,71.49907837512039
-BRIMP,2040,Kapazität,Solar,GW,301.4901494489274
-BRIMP,2040,Kapazität,Storage,GW,52.80787059966719
-BRIMP,2040,Kapazität,Other,GW,0.0184
-BRIMP,2040,Speicher,Batteriespeicher Energie,GWh,370.1037775962401
-BRIMP,2040,Speicher,Wasserstoffspeicher Energie,TWh,3.3823491576917335e-08
-BRIMP,2040,Erzeugung,"Abregelung Wind, Solar, Laufwasser",TWh,69.44848029693821
-BRIMP,2040,CO2,Emissionen,Mt,33.84511595715817
-BRIMP,2040,CO2,Obergrenze,Mt,33.845115956
-BRIMP,2040,CO2,CO2-Preis (Config),EUR/t,220.0
-BRIMP,2040,CO2,Schattenpreis der Obergrenze,EUR/t,21.363112141688312
-BRIMP,2040,CO2,CO2-Preis effektiv,EUR/t,241.3631121416883
-BRIMP,2040,Systemkosten,Systemkosten gesamt,Mrd EUR/a,69.40361666966831
-BRIMP,2040,Systemkosten,davon Kapitalkosten,Mrd EUR/a,56.03728749910856
-BRIMP,2040,Systemkosten,davon Betriebskosten,Mrd EUR/a,13.366329170559736
-BRIMP,2040,Systemkosten,davon CO2-Preis (Transfer an den Staat),Mrd EUR/a,7.445925510574797
-BRIMP,2040,Systemkosten nach Gruppe,Biomass,Mrd EUR/a,2.6959738201837795
-BRIMP,2040,Systemkosten nach Gruppe,Brazil cable,Mrd EUR/a,6.124704323451001
-BRIMP,2040,Systemkosten nach Gruppe,Gas,Mrd EUR/a,17.19751316180999
-BRIMP,2040,Systemkosten nach Gruppe,Grid,Mrd EUR/a,2.19880435324609
-BRIMP,2040,Systemkosten nach Gruppe,Hydro,Mrd EUR/a,1.6642961538447298
-BRIMP,2040,Systemkosten nach Gruppe,Lignite,Mrd EUR/a,0.01490225086342
-BRIMP,2040,Systemkosten nach Gruppe,Offshore wind,Mrd EUR/a,7.9821601567811005
-BRIMP,2040,Systemkosten nach Gruppe,Oil,Mrd EUR/a,0.06170766278891
-BRIMP,2040,Systemkosten nach Gruppe,Onshore wind,Mrd EUR/a,9.440122637426189
-BRIMP,2040,Systemkosten nach Gruppe,Other,Mrd EUR/a,0.0024893629932399
-BRIMP,2040,Systemkosten nach Gruppe,Solar,Mrd EUR/a,15.06294659190535
-BRIMP,2040,Systemkosten nach Gruppe,Storage,Mrd EUR/a,6.9579961943745
-BRIMP,2040,Handel,Netto-Import,TWh,0.0
-BRIMP,2040,Handel,Import brutto,TWh,0.0
-BRIMP,2040,Handel,Export brutto,TWh,0.0
-BRIMP,2040,Kabel,Kapazität,GW,2.0
-BRIMP,2040,Kabel,Erzeugung BR Kapazität,GW,2.0
-BRIMP,2040,Kabel,Erzeugung BR,TWh,9.74214110102451
-BRIMP,2040,Kabel,Lieferung nach DE,TWh,7.648120582587264
-BRIMP,2040,Kabel,Auslastung,%,55.60582820219469
-BRIMP,2040,Kabel,Engpasserlös,Mrd EUR/a,0.76594296270674
-BRIMP,2040,Kabel,Annuität inkl. FOM,Mrd EUR/a,5.730873991372195
-BRIMP,2040,Kabel,Engpasserlös pro kW,EUR/kW/a,382.97148135337
-BRIMP,2040,Kabel,Annuität pro kW,EUR/kW/a,2865.4369956860974
-BRIMP,2040,Kabel,Abstand zum Break-even pro kW,EUR/kW/a,-2482.465514332728
-BRIMP,2040,Akteure,Erzeuger BR,Mrd EUR/a,0.0
-BRIMP,2040,Akteure,Erzeuger DE: Biomass,Mrd EUR/a,1.2722224256569543
-BRIMP,2040,Akteure,Erzeuger DE: Gas,Mrd EUR/a,-0.2669703677135595
-BRIMP,2040,Akteure,Erzeuger DE: Hydro,Mrd EUR/a,0.28930147862626
-BRIMP,2040,Akteure,Erzeuger DE: Lignite,Mrd EUR/a,-0.0128216699988546
-BRIMP,2040,Akteure,Erzeuger DE: Offshore wind,Mrd EUR/a,-0.5559353438559501
-BRIMP,2040,Akteure,Erzeuger DE: Oil,Mrd EUR/a,-0.0033900343386654
-BRIMP,2040,Akteure,Erzeuger DE: Onshore wind,Mrd EUR/a,0.28411314217408
-BRIMP,2040,Akteure,Erzeuger DE: Other,Mrd EUR/a,0.011362677358631
-BRIMP,2040,Akteure,Erzeuger DE: Solar,Mrd EUR/a,-2.53954226828609
-BRIMP,2040,Akteure,Erzeuger DE: Storage,Mrd EUR/a,-1.40477212354945
-BRIMP,2040,Akteure,Kabelbetreiber,Mrd EUR/a,-4.96502197119493
-BRIMP,2040,Akteure,Netz DE,Mrd EUR/a,-1.4138310665824498
-BRIMP,2040,Akteure,Verbraucher DE,Mrd EUR/a,-60.821368553339525
-BRIMP,2040,Akteure,Staat DE (CO2),Mrd EUR/a,8.168962518216013
-BRIMP,2040,Akteure,Summe aller Akteure,Mrd EUR/a,-61.957691156827536
-BRIMP,2045,Nachfrage,Stromnachfrage,TWh,712.8225037263093
-BRIMP,2045,Preise,Strompreis lastgewichtet,EUR/MWh,112.40120943902474
-BRIMP,2045,Preise,Strompreis Mittel,EUR/MWh,105.48483087501116
-BRIMP,2045,Preise,Strompreis Maximum,EUR/MWh,431.270693531506
-BRIMP,2045,Preise,Stunden mit Preis > 1000 EUR/MWh,h,0.0
-BRIMP,2045,Preise,Stunden mit Preis < 1 EUR/MWh,h,4674.0
-BRIMP,2045,Erzeugung,Lignite,TWh,1e-11
-BRIMP,2045,Erzeugung,Gas,TWh,46.48036398592
-BRIMP,2045,Erzeugung,Oil,TWh,1e-10
-BRIMP,2045,Erzeugung,Biomass,TWh,8.234639230139999
-BRIMP,2045,Erzeugung,Hydro,TWh,21.64096524038
-BRIMP,2045,Erzeugung,Offshore wind,TWh,122.09890746502002
-BRIMP,2045,Erzeugung,Onshore wind,TWh,214.62099519299
-BRIMP,2045,Erzeugung,Solar,TWh,332.66515392917995
-BRIMP,2045,Erzeugung,Storage,TWh,131.83349205013
-BRIMP,2045,Erzeugung,Other,TWh,0.02380799996
-BRIMP,2045,Kapazität,Lignite,GW,0.0321899999999999
-BRIMP,2045,Kapazität,Gas,GW,49.732450865492766
-BRIMP,2045,Kapazität,Oil,GW,0.2918790599999999
-BRIMP,2045,Kapazität,Biomass,GW,2.705055718
-BRIMP,2045,Kapazität,Hydro,GW,4.416356859
-BRIMP,2045,Kapazität,Offshore wind,GW,27.685992799911453
-BRIMP,2045,Kapazität,Onshore wind,GW,112.86623862687604
-BRIMP,2045,Kapazität,Solar,GW,418.9142656319293
-BRIMP,2045,Kapazität,Storage,GW,81.677928612171
-BRIMP,2045,Kapazität,Other,GW,0.008
-BRIMP,2045,Speicher,Batteriespeicher Energie,GWh,582.9039766744875
-BRIMP,2045,Speicher,Wasserstoffspeicher Energie,TWh,10.651097857835184
-BRIMP,2045,Erzeugung,"Abregelung Wind, Solar, Laufwasser",TWh,153.12526029219438
-BRIMP,2045,CO2,Emissionen,Mt,16.922557978163827
-BRIMP,2045,CO2,Obergrenze,Mt,16.922557978
-BRIMP,2045,CO2,CO2-Preis (Config),EUR/t,260.0
-BRIMP,2045,CO2,Schattenpreis der Obergrenze,EUR/t,478.8561618441535
-BRIMP,2045,CO2,CO2-Preis effektiv,EUR/t,738.8561618441535
-BRIMP,2045,Systemkosten,Systemkosten gesamt,Mrd EUR/a,78.33065678126741
-BRIMP,2045,Systemkosten,davon Kapitalkosten,Mrd EUR/a,71.16096222343292
-BRIMP,2045,Systemkosten,davon Betriebskosten,Mrd EUR/a,7.1696945578344815
-BRIMP,2045,Systemkosten,davon CO2-Preis (Transfer an den Staat),Mrd EUR/a,4.399865074322594
-BRIMP,2045,Systemkosten nach Gruppe,Biomass,Mrd EUR/a,1.27842494733179
-BRIMP,2045,Systemkosten nach Gruppe,Brazil cable,Mrd EUR/a,5.7136513587826405
-BRIMP,2045,Systemkosten nach Gruppe,Gas,Mrd EUR/a,11.13332782654561
-BRIMP,2045,Systemkosten nach Gruppe,Grid,Mrd EUR/a,2.20077968246181
-BRIMP,2045,Systemkosten nach Gruppe,Hydro,Mrd EUR/a,1.66429981796259
-BRIMP,2045,Systemkosten nach Gruppe,Lignite,Mrd EUR/a,0.01364802327672
-BRIMP,2045,Systemkosten nach Gruppe,Offshore wind,Mrd EUR/a,9.72653294265629
-BRIMP,2045,Systemkosten nach Gruppe,Oil,Mrd EUR/a,0.01449096531074
-BRIMP,2045,Systemkosten nach Gruppe,Onshore wind,Mrd EUR/a,14.16633732124377
-BRIMP,2045,Systemkosten nach Gruppe,Other,Mrd EUR/a,0.0007430410978
-BRIMP,2045,Systemkosten nach Gruppe,Solar,Mrd EUR/a,19.60272979490299
-BRIMP,2045,Systemkosten nach Gruppe,Storage,Mrd EUR/a,12.81569105969466
-BRIMP,2045,Handel,Netto-Import,TWh,0.0
-BRIMP,2045,Handel,Import brutto,TWh,0.0
-BRIMP,2045,Handel,Export brutto,TWh,0.0
-BRIMP,2045,Kabel,Kapazität,GW,2.0
-BRIMP,2045,Kabel,Erzeugung BR Kapazität,GW,2.0
-BRIMP,2045,Kabel,Erzeugung BR,TWh,5.973996681383607
-BRIMP,2045,Kabel,Lieferung nach DE,TWh,4.68991841787152
-BRIMP,2045,Kabel,Auslastung,%,34.09815457410735
-BRIMP,2045,Kabel,Engpasserlös,Mrd EUR/a,1.13039972439075
-BRIMP,2045,Kabel,Annuität inkl. FOM,Mrd EUR/a,5.479452026684633
-BRIMP,2045,Kabel,Engpasserlös pro kW,EUR/kW/a,565.1998621953749
-BRIMP,2045,Kabel,Annuität pro kW,EUR/kW/a,2739.726013342317
-BRIMP,2045,Kabel,Abstand zum Break-even pro kW,EUR/kW/a,-2174.5261511469416
-BRIMP,2045,Akteure,Erzeuger BR,Mrd EUR/a,0.0
-BRIMP,2045,Akteure,Erzeuger DE: Biomass,Mrd EUR/a,1.0387556479226068
-BRIMP,2045,Akteure,Erzeuger DE: Gas,Mrd EUR/a,-2.240094865363538
-BRIMP,2045,Akteure,Erzeuger DE: Hydro,Mrd EUR/a,0.6410001100324701
-BRIMP,2045,Akteure,Erzeuger DE: Lignite,Mrd EUR/a,-0.0136480232878705
-BRIMP,2045,Akteure,Erzeuger DE: Offshore wind,Mrd EUR/a,1.29846482471409
-BRIMP,2045,Akteure,Erzeuger DE: Oil,Mrd EUR/a,-0.0144909653237009
-BRIMP,2045,Akteure,Erzeuger DE: Onshore wind,Mrd EUR/a,1.66120214348434
-BRIMP,2045,Akteure,Erzeuger DE: Other,Mrd EUR/a,0.0053199483768148
-BRIMP,2045,Akteure,Erzeuger DE: Solar,Mrd EUR/a,-2.33612712944096
-BRIMP,2045,Akteure,Erzeuger DE: Storage,Mrd EUR/a,-1.81866971866014
-BRIMP,2045,Akteure,Kabelbetreiber,Mrd EUR/a,-4.34911708888226
-BRIMP,2045,Akteure,Netz DE,Mrd EUR/a,-0.18461129252703
-BRIMP,2045,Akteure,Verbraucher DE,Mrd EUR/a,-80.12211153419089
-BRIMP,2045,Akteure,Staat DE (CO2),Mrd EUR/a,12.503336236331284
-BRIMP,2045,Akteure,Summe aller Akteure,Mrd EUR/a,-73.93079170681479
-BRIMP,2050,Nachfrage,Stromnachfrage,TWh,763.7383968496171
-BRIMP,2050,Preise,Strompreis lastgewichtet,EUR/MWh,116.69118792749848
-BRIMP,2050,Preise,Strompreis Mittel,EUR/MWh,107.30288644902652
-BRIMP,2050,Preise,Strompreis Maximum,EUR/MWh,2929.318425497672
-BRIMP,2050,Preise,Stunden mit Preis > 1000 EUR/MWh,h,136.0
-BRIMP,2050,Preise,Stunden mit Preis < 1 EUR/MWh,h,3398.0
-BRIMP,2050,Erzeugung,Biomass,TWh,6.74976981712
-BRIMP,2050,Erzeugung,Hydro,TWh,21.6409519822
-BRIMP,2050,Erzeugung,Offshore wind,TWh,123.61850769095
-BRIMP,2050,Erzeugung,Onshore wind,TWh,294.83342516575004
-BRIMP,2050,Erzeugung,Solar,TWh,427.32310444921006
-BRIMP,2050,Erzeugung,Storage,TWh,217.55892950222
-BRIMP,2050,Kapazität,Lignite,GW,0.02735
-BRIMP,2050,Kapazität,Gas,GW,40.42044133649276
-BRIMP,2050,Kapazität,Oil,GW,0.0007199999999999
-BRIMP,2050,Kapazität,Biomass,GW,1.27132322
-BRIMP,2050,Kapazität,Hydro,GW,4.416356859
-BRIMP,2050,Kapazität,Offshore wind,GW,26.03629004700795
-BRIMP,2050,Kapazität,Onshore wind,GW,138.53681366415512
-BRIMP,2050,Kapazität,Solar,GW,493.2185182483152
-BRIMP,2050,Kapazität,Storage,GW,155.43815738874068
-BRIMP,2050,Kapazität,Other,GW,0.008
-BRIMP,2050,Speicher,Batteriespeicher Energie,GWh,827.8201160171378
-BRIMP,2050,Speicher,Wasserstoffspeicher Energie,TWh,69.60881664808416
-BRIMP,2050,Erzeugung,"Abregelung Wind, Solar, Laufwasser",TWh,105.296469542909
-BRIMP,2050,CO2,Emissionen,Mt,0.0
-BRIMP,2050,CO2,Obergrenze,Mt,0.0
-BRIMP,2050,CO2,CO2-Preis (Config),EUR/t,300.0
-BRIMP,2050,CO2,Schattenpreis der Obergrenze,EUR/t,24110.872097296862
-BRIMP,2050,CO2,CO2-Preis effektiv,EUR/t,24410.872097296862
-BRIMP,2050,Systemkosten,Systemkosten gesamt,Mrd EUR/a,97.15842370933017
-BRIMP,2050,Systemkosten,davon Kapitalkosten,Mrd EUR/a,96.75443571959592
-BRIMP,2050,Systemkosten,davon Betriebskosten,Mrd EUR/a,0.4039879897342199
-BRIMP,2050,Systemkosten,davon CO2-Preis (Transfer an den Staat),Mrd EUR/a,0.0
-BRIMP,2050,Systemkosten nach Gruppe,Biomass,Mrd EUR/a,0.64747654672295
-BRIMP,2050,Systemkosten nach Gruppe,Brazil cable,Mrd EUR/a,5.43630903759015
-BRIMP,2050,Systemkosten nach Gruppe,Gas,Mrd EUR/a,3.33920369126891
-BRIMP,2050,Systemkosten nach Gruppe,Grid,Mrd EUR/a,2.61973303093785
-BRIMP,2050,Systemkosten nach Gruppe,Hydro,Mrd EUR/a,1.66428675465492
-BRIMP,2050,Systemkosten nach Gruppe,Lignite,Mrd EUR/a,0.0115959439694499
-BRIMP,2050,Systemkosten nach Gruppe,Offshore wind,Mrd EUR/a,9.03133780148645
-BRIMP,2050,Systemkosten nach Gruppe,Oil,Mrd EUR/a,3.551678735e-05
-BRIMP,2050,Systemkosten nach Gruppe,Onshore wind,Mrd EUR/a,16.99992512798116
-BRIMP,2050,Systemkosten nach Gruppe,Solar,Mrd EUR/a,22.00885935962824
-BRIMP,2050,Systemkosten nach Gruppe,Storage,Mrd EUR/a,35.39966089830272
-BRIMP,2050,Handel,Netto-Import,TWh,0.0
-BRIMP,2050,Handel,Import brutto,TWh,0.0
-BRIMP,2050,Handel,Export brutto,TWh,0.0
-BRIMP,2050,Kabel,Kapazität,GW,2.0
-BRIMP,2050,Kabel,Erzeugung BR Kapazität,GW,2.0
-BRIMP,2050,Kabel,Erzeugung BR,TWh,5.874538022452043
-BRIMP,2050,Kabel,Lieferung nach DE,TWh,4.611837859542199
-BRIMP,2050,Kabel,Auslastung,%,33.53046816468061
-BRIMP,2050,Kabel,Engpasserlös,Mrd EUR/a,1.05077837195302
-BRIMP,2050,Kabel,Annuität inkl. FOM,Mrd EUR/a,5.208944358579587
-BRIMP,2050,Kabel,Engpasserlös pro kW,EUR/kW/a,525.3891859765099
-BRIMP,2050,Kabel,Annuität pro kW,EUR/kW/a,2604.472179289793
-BRIMP,2050,Kabel,Abstand zum Break-even pro kW,EUR/kW/a,-2079.082993313284
-BRIMP,2050,Akteure,Erzeuger BR,Mrd EUR/a,0.0
-BRIMP,2050,Akteure,Erzeuger DE: Biomass,Mrd EUR/a,0.47800316762737
-BRIMP,2050,Akteure,Erzeuger DE: Gas,Mrd EUR/a,-3.33920369126891
-BRIMP,2050,Akteure,Erzeuger DE: Hydro,Mrd EUR/a,0.8202792586149701
-BRIMP,2050,Akteure,Erzeuger DE: Lignite,Mrd EUR/a,-0.0115959439694499
-BRIMP,2050,Akteure,Erzeuger DE: Offshore wind,Mrd EUR/a,1.28564476161401
-BRIMP,2050,Akteure,Erzeuger DE: Oil,Mrd EUR/a,-3.551678735e-05
-BRIMP,2050,Akteure,Erzeuger DE: Onshore wind,Mrd EUR/a,2.07922804385304
-BRIMP,2050,Akteure,Erzeuger DE: Solar,Mrd EUR/a,-2.4341004827337
-BRIMP,2050,Akteure,Erzeuger DE: Storage,Mrd EUR/a,-2.88047757158699
-BRIMP,2050,Akteure,Kabelbetreiber,Mrd EUR/a,-4.15822894894801
-BRIMP,2050,Akteure,Netz DE,Mrd EUR/a,0.1236040084800099
-BRIMP,2050,Akteure,Verbraucher DE,Mrd EUR/a,-89.12154079422507
-BRIMP,2050,Akteure,Staat DE (CO2),Mrd EUR/a,0.0
-BRIMP,2050,Akteure,Summe aller Akteure,Mrd EUR/a,-97.15842370933008
+REF,2025,Nachfrage,Stromnachfrage,TWh,509.159
+REF,2025,Preise,Strompreis lastgewichtet,EUR/MWh,96.4746
+REF,2025,Preise,Strompreis Maximum (lastgewichtetes Mittel DE),EUR/MWh,120.611
+REF,2025,Preise,Stunden mit Preis > 300 EUR/MWh,h,0.0
+REF,2025,Preise,Stunden mit Preis < 1 EUR/MWh,h,0.0
+REF,2025,Erzeugung,Lignite,TWh,21.9428
+REF,2025,Erzeugung,Coal,TWh,130.579
+REF,2025,Erzeugung,Gas,TWh,11.85760004282
+REF,2025,Erzeugung,Oil,TWh,2.514e-08
+REF,2025,Erzeugung,Biomass,TWh,74.43855
+REF,2025,Erzeugung,Hydro,TWh,21.64557
+REF,2025,Erzeugung,Offshore wind,TWh,39.2854
+REF,2025,Erzeugung,Onshore wind,TWh,109.649
+REF,2025,Erzeugung,Solar,TWh,85.7563
+REF,2025,Erzeugung,Other,TWh,0.235335
+REF,2025,Versorgung,Lastabwurf DE,GWh,4e-08
+REF,2025,Versorgung,Lastabwurf alle Länder,GWh,5e-08
+REF,2025,Kapazität,Lignite,GW,19.457
+REF,2025,Kapazität,Coal,GW,20.3519
+REF,2025,Kapazität,Gas,GW,36.89584
+REF,2025,Kapazität,Oil,GW,5.68435
+REF,2025,Kapazität,Biomass,GW,11.14766
+REF,2025,Kapazität,Hydro,GW,4.416358
+REF,2025,Kapazität,Offshore wind,GW,9.215
+REF,2025,Kapazität,Onshore wind,GW,63.573699999999995
+REF,2025,Kapazität,Solar,GW,89.80460000000001
+REF,2025,Kapazität,Storage,GW,7.36172
+REF,2025,Kapazität,Other,GW,0.0269
+REF,2025,Speicher,Batteriespeicher Energie,GWh,0.0
+REF,2025,Speicher,Wasserstoffspeicher Energie,TWh,0.0
+REF,2025,CO2,Emissionen,Mt,144.676
+REF,2025,CO2,CO2-Preis (Config),EUR/t,80.0
+REF,2025,CO2,Schattenpreis der Obergrenze,EUR/t,0.0
+REF,2025,CO2,CO2-Preis effektiv,EUR/t,80.0
+REF,2025,Systemkosten,Systemkosten gesamt,Mrd EUR/a,231.95332680822136
+REF,2025,Systemkosten,davon Kapitalkosten,Mrd EUR/a,183.02229548
+REF,2025,Systemkosten,davon Betriebskosten,Mrd EUR/a,48.93103132822137
+REF,2025,Systemkosten,davon CO2-Preis (Transfer an den Staat),Mrd EUR/a,21.980585919999996
+REF,2025,Systemkosten nach Gruppe,Biomass,Mrd EUR/a,13.19653580754578
+REF,2025,Systemkosten nach Gruppe,Coal,Mrd EUR/a,41.70657
+REF,2025,Systemkosten nach Gruppe,Gas,Mrd EUR/a,16.49847340654895
+REF,2025,Systemkosten nach Gruppe,Grid,Mrd EUR/a,5.1779027757
+REF,2025,Systemkosten nach Gruppe,Hydro,Mrd EUR/a,12.900691803745001
+REF,2025,Systemkosten nach Gruppe,Lignite,Mrd EUR/a,18.251768202361543
+REF,2025,Systemkosten nach Gruppe,Nuclear,Mrd EUR/a,83.2818303
+REF,2025,Systemkosten nach Gruppe,Offshore wind,Mrd EUR/a,6.818396596
+REF,2025,Systemkosten nach Gruppe,Oil,Mrd EUR/a,0.37728867602685
+REF,2025,Systemkosten nach Gruppe,Onshore wind,Mrd EUR/a,15.799090655088
+REF,2025,Systemkosten nach Gruppe,Other,Mrd EUR/a,0.0024045739462599997
+REF,2025,Systemkosten nach Gruppe,Solar,Mrd EUR/a,11.084506299040001
+REF,2025,Systemkosten nach Gruppe,Storage,Mrd EUR/a,6.857867712219
+REF,2025,Handel,Netto-Import,TWh,18.2103
+REF,2030,Nachfrage,Stromnachfrage,TWh,560.075
+REF,2030,Preise,Strompreis lastgewichtet,EUR/MWh,80.9099
+REF,2030,Preise,Strompreis Maximum (lastgewichtetes Mittel DE),EUR/MWh,240.322
+REF,2030,Preise,Stunden mit Preis > 300 EUR/MWh,h,0.0
+REF,2030,Preise,Stunden mit Preis < 1 EUR/MWh,h,80.0
+REF,2030,Erzeugung,Lignite,TWh,0.788185
+REF,2030,Erzeugung,Coal,TWh,10.0729
+REF,2030,Erzeugung,Gas,TWh,76.69178
+REF,2030,Erzeugung,Oil,TWh,0.00640863
+REF,2030,Erzeugung,Biomass,TWh,55.647198
+REF,2030,Erzeugung,Hydro,TWh,21.59927
+REF,2030,Erzeugung,Offshore wind,TWh,38.96620004825
+REF,2030,Erzeugung,Onshore wind,TWh,189.693
+REF,2030,Erzeugung,Solar,TWh,149.036
+REF,2030,Erzeugung,Storage,TWh,9.4899e-07
+REF,2030,Erzeugung,Other,TWh,0.210783
+REF,2030,Versorgung,Lastabwurf DE,GWh,1e-08
+REF,2030,Versorgung,Lastabwurf alle Länder,GWh,1e-08
+REF,2030,Kapazität,Lignite,GW,14.223600000000001
+REF,2030,Kapazität,Coal,GW,16.8949
+REF,2030,Kapazität,Gas,GW,28.04031
+REF,2030,Kapazität,Oil,GW,2.40504
+REF,2030,Kapazität,Biomass,GW,9.49651
+REF,2030,Kapazität,Hydro,GW,4.416358
+REF,2030,Kapazität,Offshore wind,GW,9.215000009999999
+REF,2030,Kapazität,Onshore wind,GW,87.1869
+REF,2030,Kapazität,Solar,GW,145.86090000000002
+REF,2030,Kapazität,Storage,GW,7.36172035
+REF,2030,Kapazität,Other,GW,0.0269
+REF,2030,Speicher,Batteriespeicher Energie,GWh,1.59e-06
+REF,2030,Speicher,Wasserstoffspeicher Energie,TWh,1.137e-08
+REF,2030,CO2,Emissionen,Mt,37.74
+REF,2030,CO2,CO2-Preis (Config),EUR/t,130.0
+REF,2030,CO2,Schattenpreis der Obergrenze,EUR/t,0.0
+REF,2030,CO2,CO2-Preis effektiv,EUR/t,130.0
+REF,2030,Systemkosten,Systemkosten gesamt,Mrd EUR/a,217.96810306850756
+REF,2030,Systemkosten,davon Kapitalkosten,Mrd EUR/a,187.90537716755165
+REF,2030,Systemkosten,davon Betriebskosten,Mrd EUR/a,30.062725900955922
+REF,2030,Systemkosten,davon CO2-Preis (Transfer an den Staat),Mrd EUR/a,9.1345999485
+REF,2030,Systemkosten nach Gruppe,Biomass,Mrd EUR/a,8.46362059316405
+REF,2030,Systemkosten nach Gruppe,Coal,Mrd EUR/a,13.7325584
+REF,2030,Systemkosten nach Gruppe,Gas,Mrd EUR/a,23.35423216943356
+REF,2030,Systemkosten nach Gruppe,Grid,Mrd EUR/a,5.30177323097763
+REF,2030,Systemkosten nach Gruppe,Hydro,Mrd EUR/a,12.900697855006001
+REF,2030,Systemkosten nach Gruppe,Lignite,Mrd EUR/a,12.22253748
+REF,2030,Systemkosten nach Gruppe,Nuclear,Mrd EUR/a,80.2823857
+REF,2030,Systemkosten nach Gruppe,Offshore wind,Mrd EUR/a,6.80248644905195
+REF,2030,Systemkosten nach Gruppe,Oil,Mrd EUR/a,0.136019277
+REF,2030,Systemkosten nach Gruppe,Onshore wind,Mrd EUR/a,28.336366369567003
+REF,2030,Systemkosten nach Gruppe,Other,Mrd EUR/a,0.0035116931318799997
+REF,2030,Systemkosten nach Gruppe,Solar,Mrd EUR/a,19.16675393324646
+REF,2030,Systemkosten nach Gruppe,Storage,Mrd EUR/a,7.26515991792903
+REF,2030,Handel,Netto-Import,TWh,24.741232599999996
+REF,2035,Nachfrage,Stromnachfrage,TWh,610.991
+REF,2035,Preise,Strompreis lastgewichtet,EUR/MWh,89.8953
+REF,2035,Preise,Strompreis Maximum (lastgewichtetes Mittel DE),EUR/MWh,1229.55
+REF,2035,Preise,Stunden mit Preis > 300 EUR/MWh,h,68.0
+REF,2035,Preise,Stunden mit Preis < 1 EUR/MWh,h,216.0
+REF,2035,Erzeugung,Lignite,TWh,0.695701
+REF,2035,Erzeugung,Coal,TWh,0.159904
+REF,2035,Erzeugung,Gas,TWh,73.2957
+REF,2035,Erzeugung,Oil,TWh,0.125969
+REF,2035,Erzeugung,Biomass,TWh,50.910707900000006
+REF,2035,Erzeugung,Hydro,TWh,21.61927
+REF,2035,Erzeugung,Offshore wind,TWh,62.14250000711
+REF,2035,Erzeugung,Onshore wind,TWh,179.165
+REF,2035,Erzeugung,Solar,TWh,207.66570000000002
+REF,2035,Erzeugung,Storage,TWh,37.72970001672
+REF,2035,Erzeugung,Other,TWh,0.19618
+REF,2035,Versorgung,Lastabwurf DE,GWh,1e-08
+REF,2035,Versorgung,Lastabwurf alle Länder,GWh,1e-08
+REF,2035,Kapazität,Lignite,GW,5.79657
+REF,2035,Kapazität,Coal,GW,1.052
+REF,2035,Kapazität,Gas,GW,37.8277
+REF,2035,Kapazität,Oil,GW,1.6968699999999999
+REF,2035,Kapazität,Biomass,GW,7.944602
+REF,2035,Kapazität,Hydro,GW,4.416358
+REF,2035,Kapazität,Offshore wind,GW,13.759799999999998
+REF,2035,Kapazität,Onshore wind,GW,79.2139
+REF,2035,Kapazität,Solar,GW,202.1671
+REF,2035,Kapazität,Storage,GW,24.12842002
+REF,2035,Kapazität,Other,GW,0.0269
+REF,2035,Speicher,Batteriespeicher Energie,GWh,128.768
+REF,2035,Speicher,Wasserstoffspeicher Energie,TWh,1.756e-08
+REF,2035,CO2,Emissionen,Mt,29.3384
+REF,2035,CO2,CO2-Preis (Config),EUR/t,175.0
+REF,2035,CO2,Schattenpreis der Obergrenze,EUR/t,0.0
+REF,2035,CO2,CO2-Preis effektiv,EUR/t,175.0
+REF,2035,Systemkosten,Systemkosten gesamt,Mrd EUR/a,214.69004399220762
+REF,2035,Systemkosten,davon Kapitalkosten,Mrd EUR/a,183.7652462157528
+REF,2035,Systemkosten,davon Betriebskosten,Mrd EUR/a,30.924797776454795
+REF,2035,Systemkosten,davon CO2-Preis (Transfer an den Staat),Mrd EUR/a,10.870873615
+REF,2035,Systemkosten nach Gruppe,Biomass,Mrd EUR/a,6.21924563
+REF,2035,Systemkosten nach Gruppe,Coal,Mrd EUR/a,4.51498891
+REF,2035,Systemkosten nach Gruppe,Gas,Mrd EUR/a,27.23480540198296
+REF,2035,Systemkosten nach Gruppe,Grid,Mrd EUR/a,5.141725998573341
+REF,2035,Systemkosten nach Gruppe,Hydro,Mrd EUR/a,12.900722038455
+REF,2035,Systemkosten nach Gruppe,Lignite,Mrd EUR/a,5.4291422
+REF,2035,Systemkosten nach Gruppe,Nuclear,Mrd EUR/a,78.918241
+REF,2035,Systemkosten nach Gruppe,Offshore wind,Mrd EUR/a,9.47431612012482
+REF,2035,Systemkosten nach Gruppe,Oil,Mrd EUR/a,0.13334398
+REF,2035,Systemkosten nach Gruppe,Onshore wind,Mrd EUR/a,28.927427476208
+REF,2035,Systemkosten nach Gruppe,Other,Mrd EUR/a,0.00440057078912
+REF,2035,Systemkosten nach Gruppe,Solar,Mrd EUR/a,25.34393059880519
+REF,2035,Systemkosten nach Gruppe,Storage,Mrd EUR/a,10.44775406726917
+REF,2035,Handel,Netto-Import,TWh,24.75509
+REF,2040,Nachfrage,Stromnachfrage,TWh,661.907
+REF,2040,Preise,Strompreis lastgewichtet,EUR/MWh,88.6111
+REF,2040,Preise,Strompreis Maximum (lastgewichtetes Mittel DE),EUR/MWh,1434.94
+REF,2040,Preise,Stunden mit Preis > 300 EUR/MWh,h,40.0
+REF,2040,Preise,Stunden mit Preis < 1 EUR/MWh,h,440.0
+REF,2040,Erzeugung,Lignite,TWh,0.00185481
+REF,2040,Erzeugung,Gas,TWh,71.7787
+REF,2040,Erzeugung,Oil,TWh,0.0379374
+REF,2040,Erzeugung,Biomass,TWh,32.75322365
+REF,2040,Erzeugung,Hydro,TWh,21.62317
+REF,2040,Erzeugung,Offshore wind,TWh,92.63360001026
+REF,2040,Erzeugung,Onshore wind,TWh,165.675
+REF,2040,Erzeugung,Solar,TWh,263.2527
+REF,2040,Erzeugung,Storage,TWh,65.05840003177
+REF,2040,Erzeugung,Other,TWh,0.115443
+REF,2040,Versorgung,Lastabwurf DE,GWh,2e-08
+REF,2040,Versorgung,Lastabwurf alle Länder,GWh,2e-08
+REF,2040,Kapazität,Lignite,GW,0.03405
+REF,2040,Kapazität,Gas,GW,53.7772
+REF,2040,Kapazität,Oil,GW,0.9484360000000001
+REF,2040,Kapazität,Biomass,GW,5.360661
+REF,2040,Kapazität,Hydro,GW,4.416358
+REF,2040,Kapazität,Offshore wind,GW,19.8066
+REF,2040,Kapazität,Onshore wind,GW,71.2944
+REF,2040,Kapazität,Solar,GW,263.7131
+REF,2040,Kapazität,Storage,GW,39.975920030000005
+REF,2040,Kapazität,Other,GW,0.0184
+REF,2040,Speicher,Batteriespeicher Energie,GWh,250.477
+REF,2040,Speicher,Wasserstoffspeicher Energie,TWh,2.814e-08
+REF,2040,CO2,Emissionen,Mt,27.7912
+REF,2040,CO2,CO2-Preis (Config),EUR/t,220.0
+REF,2040,CO2,Schattenpreis der Obergrenze,EUR/t,0.0
+REF,2040,CO2,CO2-Preis effektiv,EUR/t,220.0
+REF,2040,Systemkosten,Systemkosten gesamt,Mrd EUR/a,216.10484249409276
+REF,2040,Systemkosten,davon Kapitalkosten,Mrd EUR/a,185.92390802658042
+REF,2040,Systemkosten,davon Betriebskosten,Mrd EUR/a,30.180934467512355
+REF,2040,Systemkosten,davon CO2-Preis (Transfer an den Staat),Mrd EUR/a,13.068348304
+REF,2040,Systemkosten nach Gruppe,Biomass,Mrd EUR/a,3.9562298216999996
+REF,2040,Systemkosten nach Gruppe,Coal,Mrd EUR/a,1.49344628
+REF,2040,Systemkosten nach Gruppe,Gas,Mrd EUR/a,31.284272412870962
+REF,2040,Systemkosten nach Gruppe,Grid,Mrd EUR/a,4.91894462986115
+REF,2040,Systemkosten nach Gruppe,Hydro,Mrd EUR/a,12.900728589732001
+REF,2040,Systemkosten nach Gruppe,Lignite,Mrd EUR/a,0.484853261
+REF,2040,Systemkosten nach Gruppe,Nuclear,Mrd EUR/a,69.764488
+REF,2040,Systemkosten nach Gruppe,Offshore wind,Mrd EUR/a,11.54090330547974
+REF,2040,Systemkosten nach Gruppe,Oil,Mrd EUR/a,0.07266685
+REF,2040,Systemkosten nach Gruppe,Onshore wind,Mrd EUR/a,31.540260408564
+REF,2040,Systemkosten nach Gruppe,Other,Mrd EUR/a,0.00304887408145
+REF,2040,Systemkosten nach Gruppe,Solar,Mrd EUR/a,33.03744244572898
+REF,2040,Systemkosten nach Gruppe,Storage,Mrd EUR/a,15.10755761507448
+REF,2040,Handel,Netto-Import,TWh,24.86242
+REF,2045,Nachfrage,Stromnachfrage,TWh,712.823
+REF,2045,Preise,Strompreis lastgewichtet,EUR/MWh,106.795
+REF,2045,Preise,Strompreis Maximum (lastgewichtetes Mittel DE),EUR/MWh,919.616
+REF,2045,Preise,Stunden mit Preis > 300 EUR/MWh,h,980.0
+REF,2045,Preise,Stunden mit Preis < 1 EUR/MWh,h,3704.0
+REF,2045,Erzeugung,Lignite,TWh,0.0014988
+REF,2045,Erzeugung,Gas,TWh,44.285399999999996
+REF,2045,Erzeugung,Oil,TWh,0.0159269
+REF,2045,Erzeugung,Biomass,TWh,9.37073521
+REF,2045,Erzeugung,Hydro,TWh,21.59386
+REF,2045,Erzeugung,Offshore wind,TWh,131.46120003598
+REF,2045,Erzeugung,Onshore wind,TWh,186.637
+REF,2045,Erzeugung,Solar,TWh,308.3179
+REF,2045,Erzeugung,Storage,TWh,84.55080093423
+REF,2045,Erzeugung,Other,TWh,0.024992
+REF,2045,Versorgung,Lastabwurf DE,GWh,5.0000000000000004e-08
+REF,2045,Versorgung,Lastabwurf alle Länder,GWh,1.3999999999999998e-07
+REF,2045,Kapazität,Lignite,GW,0.032189999999999996
+REF,2045,Kapazität,Gas,GW,53.0135
+REF,2045,Kapazität,Oil,GW,0.291879
+REF,2045,Kapazität,Biomass,GW,2.705056
+REF,2045,Kapazität,Hydro,GW,4.416358
+REF,2045,Kapazität,Offshore wind,GW,27.62140002
+REF,2045,Kapazität,Onshore wind,GW,83.9302
+REF,2045,Kapazität,Solar,GW,328.6292
+REF,2045,Kapazität,Storage,GW,55.63872068
+REF,2045,Kapazität,Other,GW,0.008
+REF,2045,Speicher,Batteriespeicher Energie,GWh,370.767
+REF,2045,Speicher,Wasserstoffspeicher Energie,TWh,6.559700000000001e-07
+REF,2045,CO2,Emissionen,Mt,16.8085
+REF,2045,CO2,CO2-Preis (Config),EUR/t,260.0
+REF,2045,CO2,Schattenpreis der Obergrenze,EUR/t,343.025
+REF,2045,CO2,CO2-Preis effektiv,EUR/t,603.025
+REF,2045,Systemkosten,Systemkosten gesamt,Mrd EUR/a,218.860341451231
+REF,2045,Systemkosten,davon Kapitalkosten,Mrd EUR/a,200.212934665611
+REF,2045,Systemkosten,davon Betriebskosten,Mrd EUR/a,18.647406785620003
+REF,2045,Systemkosten,davon CO2-Preis (Transfer an den Staat),Mrd EUR/a,10.022395923799998
+REF,2045,Systemkosten nach Gruppe,Biomass,Mrd EUR/a,2.112682797
+REF,2045,Systemkosten nach Gruppe,Coal,Mrd EUR/a,1.37856434
+REF,2045,Systemkosten nach Gruppe,Gas,Mrd EUR/a,25.10487498525134
+REF,2045,Systemkosten nach Gruppe,Grid,Mrd EUR/a,4.9198856131
+REF,2045,Systemkosten nach Gruppe,Hydro,Mrd EUR/a,12.900728658305999
+REF,2045,Systemkosten nach Gruppe,Lignite,Mrd EUR/a,0.486146466
+REF,2045,Systemkosten nach Gruppe,Nuclear,Mrd EUR/a,44.173943
+REF,2045,Systemkosten nach Gruppe,Offshore wind,Mrd EUR/a,19.649844570670798
+REF,2045,Systemkosten nach Gruppe,Oil,Mrd EUR/a,0.03166608
+REF,2045,Systemkosten nach Gruppe,Onshore wind,Mrd EUR/a,39.907622245167
+REF,2045,Systemkosten nach Gruppe,Other,Mrd EUR/a,0.00078000621916
+REF,2045,Systemkosten nach Gruppe,Solar,Mrd EUR/a,45.596537799222446
+REF,2045,Systemkosten nach Gruppe,Storage,Mrd EUR/a,22.59706489029428
+REF,2045,Handel,Netto-Import,TWh,24.73021
+REF,2050,Nachfrage,Stromnachfrage,TWh,763.738
+REF,2050,Preise,Strompreis lastgewichtet,EUR/MWh,107.169
+REF,2050,Preise,Strompreis Maximum (lastgewichtetes Mittel DE),EUR/MWh,1600.47
+REF,2050,Preise,Stunden mit Preis > 300 EUR/MWh,h,1040.0
+REF,2050,Preise,Stunden mit Preis < 1 EUR/MWh,h,1348.0
+REF,2050,Erzeugung,Lignite,TWh,0.0013052
+REF,2050,Erzeugung,Gas,TWh,32.142630000000004
+REF,2050,Erzeugung,Oil,TWh,3.1202e-05
+REF,2050,Erzeugung,Biomass,TWh,4.26785692
+REF,2050,Erzeugung,Hydro,TWh,21.61067
+REF,2050,Erzeugung,Offshore wind,TWh,128.3160000476
+REF,2050,Erzeugung,Onshore wind,TWh,248.946
+REF,2050,Erzeugung,Solar,TWh,345.7977
+REF,2050,Erzeugung,Storage,TWh,111.9188
+REF,2050,Erzeugung,Other,TWh,0.021504
+REF,2050,Versorgung,Lastabwurf DE,GWh,6e-08
+REF,2050,Versorgung,Lastabwurf alle Länder,GWh,1.4999999999999997e-07
+REF,2050,Kapazität,Lignite,GW,0.027350000000000003
+REF,2050,Kapazität,Gas,GW,66.24080000000001
+REF,2050,Kapazität,Oil,GW,0.0007199999999999999
+REF,2050,Kapazität,Biomass,GW,1.2713230000000002
+REF,2050,Kapazität,Hydro,GW,4.416358
+REF,2050,Kapazität,Offshore wind,GW,26.03626002
+REF,2050,Kapazität,Onshore wind,GW,108.853
+REF,2050,Kapazität,Solar,GW,363.48920000000004
+REF,2050,Kapazität,Storage,GW,71.98051999999998
+REF,2050,Kapazität,Other,GW,0.008
+REF,2050,Speicher,Batteriespeicher Energie,GWh,420.371
+REF,2050,Speicher,Wasserstoffspeicher Energie,TWh,14.9563
+REF,2050,CO2,Emissionen,Mt,11.7103
+REF,2050,CO2,CO2-Preis (Config),EUR/t,750.0
+REF,2050,CO2,Schattenpreis der Obergrenze,EUR/t,0.0
+REF,2050,CO2,CO2-Preis effektiv,EUR/t,750.0
+REF,2050,Systemkosten,Systemkosten gesamt,Mrd EUR/a,234.51966457553118
+REF,2050,Systemkosten,davon Kapitalkosten,Mrd EUR/a,207.5520386355125
+REF,2050,Systemkosten,davon Betriebskosten,Mrd EUR/a,26.96762594001866
+REF,2050,Systemkosten,davon CO2-Preis (Transfer an den Staat),Mrd EUR/a,21.94098417
+REF,2050,Systemkosten nach Gruppe,Biomass,Mrd EUR/a,1.16533303
+REF,2050,Systemkosten nach Gruppe,Coal,Mrd EUR/a,0.1085696
+REF,2050,Systemkosten nach Gruppe,Gas,Mrd EUR/a,37.49181109
+REF,2050,Systemkosten nach Gruppe,Grid,Mrd EUR/a,5.09360707156
+REF,2050,Systemkosten nach Gruppe,Hydro,Mrd EUR/a,12.900624841295
+REF,2050,Systemkosten nach Gruppe,Lignite,Mrd EUR/a,0.01263221
+REF,2050,Systemkosten nach Gruppe,Nuclear,Mrd EUR/a,17.546472
+REF,2050,Systemkosten nach Gruppe,Offshore wind,Mrd EUR/a,20.43347379239343
+REF,2050,Systemkosten nach Gruppe,Oil,Mrd EUR/a,0.0121097501
+REF,2050,Systemkosten nach Gruppe,Onshore wind,Mrd EUR/a,48.4400566600357
+REF,2050,Systemkosten nach Gruppe,Other,Mrd EUR/a,0.00193559143977
+REF,2050,Systemkosten nach Gruppe,Solar,Mrd EUR/a,53.37324595776043
+REF,2050,Systemkosten nach Gruppe,Storage,Mrd EUR/a,37.939792980946834
+REF,2050,Handel,Netto-Import,TWh,24.839333999999997
 BASE,2025,Nachfrage,Stromnachfrage,TWh,509.158931233078
 BASE,2025,Preise,Strompreis lastgewichtet,EUR/MWh,96.32129418792644
 BASE,2025,Preise,Strompreis Mittel,EUR/MWh,94.84771837147267
@@ -853,6 +710,771 @@ BASE,2050,Akteure,Netz DE,Mrd EUR/a,0.13207310072322995
 BASE,2050,Akteure,Verbraucher DE,Mrd EUR/a,-89.25216475892616
 BASE,2050,Akteure,Staat DE (CO2),Mrd EUR/a,0.0
 BASE,2050,Akteure,Summe aller Akteure,Mrd EUR/a,-93.30533538477701
+NB9REF,2025,Nachfrage,Stromnachfrage,TWh,509.159
+NB9REF,2025,Preise,Strompreis lastgewichtet,EUR/MWh,96.4746
+NB9REF,2025,Preise,Strompreis Maximum (lastgewichtetes Mittel DE),EUR/MWh,120.611
+NB9REF,2025,Preise,Stunden mit Preis > 300 EUR/MWh,h,0.0
+NB9REF,2025,Preise,Stunden mit Preis < 1 EUR/MWh,h,0.0
+NB9REF,2025,Erzeugung,Lignite,TWh,21.9428
+NB9REF,2025,Erzeugung,Coal,TWh,130.579
+NB9REF,2025,Erzeugung,Gas,TWh,11.85760005949
+NB9REF,2025,Erzeugung,Oil,TWh,3.488e-08
+NB9REF,2025,Erzeugung,Biomass,TWh,74.43855
+NB9REF,2025,Erzeugung,Hydro,TWh,21.64557
+NB9REF,2025,Erzeugung,Offshore wind,TWh,39.2904
+NB9REF,2025,Erzeugung,Onshore wind,TWh,109.646
+NB9REF,2025,Erzeugung,Solar,TWh,85.7563
+NB9REF,2025,Erzeugung,Other,TWh,0.235335
+NB9REF,2025,Versorgung,Lastabwurf DE,GWh,4e-08
+NB9REF,2025,Versorgung,Lastabwurf alle Länder,GWh,5e-08
+NB9REF,2025,Kapazität,Lignite,GW,19.457
+NB9REF,2025,Kapazität,Coal,GW,20.3519
+NB9REF,2025,Kapazität,Gas,GW,36.89584
+NB9REF,2025,Kapazität,Oil,GW,5.68435
+NB9REF,2025,Kapazität,Biomass,GW,11.14766
+NB9REF,2025,Kapazität,Hydro,GW,4.416358
+NB9REF,2025,Kapazität,Offshore wind,GW,9.215
+NB9REF,2025,Kapazität,Onshore wind,GW,63.573699999999995
+NB9REF,2025,Kapazität,Solar,GW,89.80460000000001
+NB9REF,2025,Kapazität,Storage,GW,7.36172
+NB9REF,2025,Kapazität,Other,GW,0.0269
+NB9REF,2025,Speicher,Batteriespeicher Energie,GWh,0.0
+NB9REF,2025,Speicher,Wasserstoffspeicher Energie,TWh,0.0
+NB9REF,2025,CO2,Emissionen,Mt,144.676
+NB9REF,2025,CO2,CO2-Preis (Config),EUR/t,80.0
+NB9REF,2025,CO2,Schattenpreis der Obergrenze,EUR/t,0.0
+NB9REF,2025,CO2,CO2-Preis effektiv,EUR/t,80.0
+NB9REF,2025,Systemkosten,Systemkosten gesamt,Mrd EUR/a,231.9533275695205
+NB9REF,2025,Systemkosten,davon Kapitalkosten,Mrd EUR/a,183.02229548
+NB9REF,2025,Systemkosten,davon Betriebskosten,Mrd EUR/a,48.93103208952051
+NB9REF,2025,Systemkosten,davon CO2-Preis (Transfer an den Staat),Mrd EUR/a,21.980585912
+NB9REF,2025,Systemkosten nach Gruppe,Biomass,Mrd EUR/a,13.19653591040745
+NB9REF,2025,Systemkosten nach Gruppe,Coal,Mrd EUR/a,41.70657
+NB9REF,2025,Systemkosten nach Gruppe,Gas,Mrd EUR/a,16.49847340909892
+NB9REF,2025,Systemkosten nach Gruppe,Grid,Mrd EUR/a,5.1779027758
+NB9REF,2025,Systemkosten nach Gruppe,Hydro,Mrd EUR/a,12.900691803745001
+NB9REF,2025,Systemkosten nach Gruppe,Lignite,Mrd EUR/a,18.2517682032246
+NB9REF,2025,Systemkosten nach Gruppe,Nuclear,Mrd EUR/a,83.2818303
+NB9REF,2025,Systemkosten nach Gruppe,Offshore wind,Mrd EUR/a,6.818390076
+NB9REF,2025,Systemkosten nach Gruppe,Oil,Mrd EUR/a,0.37728867836386
+NB9REF,2025,Systemkosten nach Gruppe,Onshore wind,Mrd EUR/a,15.799090220087999
+NB9REF,2025,Systemkosten nach Gruppe,Other,Mrd EUR/a,0.00240457569368
+NB9REF,2025,Systemkosten nach Gruppe,Solar,Mrd EUR/a,11.084513904880001
+NB9REF,2025,Systemkosten nach Gruppe,Storage,Mrd EUR/a,6.857867712219
+NB9REF,2025,Handel,Netto-Import,TWh,18.208000000000002
+NB9REF,2030,Nachfrage,Stromnachfrage,TWh,560.075
+NB9REF,2030,Preise,Strompreis lastgewichtet,EUR/MWh,79.2038
+NB9REF,2030,Preise,Strompreis Maximum (lastgewichtetes Mittel DE),EUR/MWh,233.789
+NB9REF,2030,Preise,Stunden mit Preis > 300 EUR/MWh,h,0.0
+NB9REF,2030,Preise,Stunden mit Preis < 1 EUR/MWh,h,464.0
+NB9REF,2030,Erzeugung,Lignite,TWh,0.630342
+NB9REF,2030,Erzeugung,Coal,TWh,8.62753
+NB9REF,2030,Erzeugung,Gas,TWh,64.91104
+NB9REF,2030,Erzeugung,Oil,TWh,0.00551553
+NB9REF,2030,Erzeugung,Biomass,TWh,55.033478
+NB9REF,2030,Erzeugung,Hydro,TWh,21.55907
+NB9REF,2030,Erzeugung,Offshore wind,TWh,36.874200035440005
+NB9REF,2030,Erzeugung,Onshore wind,TWh,174.36
+NB9REF,2030,Erzeugung,Solar,TWh,116.4949
+NB9REF,2030,Erzeugung,Storage,TWh,8.8884e-07
+NB9REF,2030,Erzeugung,Other,TWh,0.203326
+NB9REF,2030,Versorgung,Lastabwurf DE,GWh,1e-08
+NB9REF,2030,Versorgung,Lastabwurf alle Länder,GWh,1e-08
+NB9REF,2030,Kapazität,Lignite,GW,14.223600000000001
+NB9REF,2030,Kapazität,Coal,GW,16.8949
+NB9REF,2030,Kapazität,Gas,GW,28.04031
+NB9REF,2030,Kapazität,Oil,GW,2.40504
+NB9REF,2030,Kapazität,Biomass,GW,9.49651
+NB9REF,2030,Kapazität,Hydro,GW,4.416358
+NB9REF,2030,Kapazität,Offshore wind,GW,9.215000009999999
+NB9REF,2030,Kapazität,Onshore wind,GW,82.304
+NB9REF,2030,Kapazität,Solar,GW,120.4505
+NB9REF,2030,Kapazität,Storage,GW,7.361720320000001
+NB9REF,2030,Kapazität,Other,GW,0.0269
+NB9REF,2030,Speicher,Batteriespeicher Energie,GWh,1.5599999999999999e-06
+NB9REF,2030,Speicher,Wasserstoffspeicher Energie,TWh,1.0319999999999999e-08
+NB9REF,2030,CO2,Emissionen,Mt,31.9575
+NB9REF,2030,CO2,CO2-Preis (Config),EUR/t,130.0
+NB9REF,2030,CO2,Schattenpreis der Obergrenze,EUR/t,0.0
+NB9REF,2030,CO2,CO2-Preis effektiv,EUR/t,130.0
+NB9REF,2030,Systemkosten,Systemkosten gesamt,Mrd EUR/a,217.61420696662265
+NB9REF,2030,Systemkosten,davon Kapitalkosten,Mrd EUR/a,187.55910685582913
+NB9REF,2030,Systemkosten,davon Betriebskosten,Mrd EUR/a,30.05510011079352
+NB9REF,2030,Systemkosten,davon CO2-Preis (Transfer an den Staat),Mrd EUR/a,9.004668634
+NB9REF,2030,Systemkosten nach Gruppe,Biomass,Mrd EUR/a,8.44935902443058
+NB9REF,2030,Systemkosten nach Gruppe,Coal,Mrd EUR/a,13.5088267
+NB9REF,2030,Systemkosten nach Gruppe,Gas,Mrd EUR/a,23.54275278432836
+NB9REF,2030,Systemkosten nach Gruppe,Grid,Mrd EUR/a,5.3308660883500005
+NB9REF,2030,Systemkosten nach Gruppe,Hydro,Mrd EUR/a,12.900697487186001
+NB9REF,2030,Systemkosten nach Gruppe,Lignite,Mrd EUR/a,12.19738333
+NB9REF,2030,Systemkosten nach Gruppe,Nuclear,Mrd EUR/a,80.3566202
+NB9REF,2030,Systemkosten nach Gruppe,Offshore wind,Mrd EUR/a,6.802505654877731
+NB9REF,2030,Systemkosten nach Gruppe,Oil,Mrd EUR/a,0.136066635
+NB9REF,2030,Systemkosten nach Gruppe,Onshore wind,Mrd EUR/a,28.309744039271
+NB9REF,2030,Systemkosten nach Gruppe,Other,Mrd EUR/a,0.00339538893197
+NB9REF,2030,Systemkosten nach Gruppe,Solar,Mrd EUR/a,18.75804117466832
+NB9REF,2030,Systemkosten nach Gruppe,Storage,Mrd EUR/a,7.31794845957871
+NB9REF,2030,Handel,Netto-Import,TWh,89.81891
+NB9REF,2035,Nachfrage,Stromnachfrage,TWh,610.991
+NB9REF,2035,Preise,Strompreis lastgewichtet,EUR/MWh,89.5946
+NB9REF,2035,Preise,Strompreis Maximum (lastgewichtetes Mittel DE),EUR/MWh,1167.26
+NB9REF,2035,Preise,Stunden mit Preis > 300 EUR/MWh,h,68.0
+NB9REF,2035,Preise,Stunden mit Preis < 1 EUR/MWh,h,724.0
+NB9REF,2035,Erzeugung,Lignite,TWh,0.738206
+NB9REF,2035,Erzeugung,Coal,TWh,0.155696
+NB9REF,2035,Erzeugung,Gas,TWh,62.15689999999999
+NB9REF,2035,Erzeugung,Oil,TWh,0.133784
+NB9REF,2035,Erzeugung,Biomass,TWh,50.1871811
+NB9REF,2035,Erzeugung,Hydro,TWh,21.60697
+NB9REF,2035,Erzeugung,Offshore wind,TWh,43.5195
+NB9REF,2035,Erzeugung,Onshore wind,TWh,173.042
+NB9REF,2035,Erzeugung,Solar,TWh,170.4952
+NB9REF,2035,Erzeugung,Storage,TWh,30.6786
+NB9REF,2035,Erzeugung,Other,TWh,0.189321
+NB9REF,2035,Versorgung,Lastabwurf DE,GWh,0.0
+NB9REF,2035,Versorgung,Lastabwurf alle Länder,GWh,0.0
+NB9REF,2035,Kapazität,Lignite,GW,5.79657
+NB9REF,2035,Kapazität,Coal,GW,1.052
+NB9REF,2035,Kapazität,Gas,GW,36.32860000000001
+NB9REF,2035,Kapazität,Oil,GW,1.6968699999999999
+NB9REF,2035,Kapazität,Biomass,GW,7.944602
+NB9REF,2035,Kapazität,Hydro,GW,4.416358
+NB9REF,2035,Kapazität,Offshore wind,GW,10.6881
+NB9REF,2035,Kapazität,Onshore wind,GW,79.2139
+NB9REF,2035,Kapazität,Solar,GW,176.1174
+NB9REF,2035,Kapazität,Storage,GW,21.39002
+NB9REF,2035,Kapazität,Other,GW,0.0269
+NB9REF,2035,Speicher,Batteriespeicher Energie,GWh,107.737
+NB9REF,2035,Speicher,Wasserstoffspeicher Energie,TWh,0.0
+NB9REF,2035,CO2,Emissionen,Mt,25.1421
+NB9REF,2035,CO2,CO2-Preis (Config),EUR/t,175.0
+NB9REF,2035,CO2,Schattenpreis der Obergrenze,EUR/t,0.0
+NB9REF,2035,CO2,CO2-Preis effektiv,EUR/t,175.0
+NB9REF,2035,Systemkosten,Systemkosten gesamt,Mrd EUR/a,214.37091006493316
+NB9REF,2035,Systemkosten,davon Kapitalkosten,Mrd EUR/a,183.2621287405247
+NB9REF,2035,Systemkosten,davon Betriebskosten,Mrd EUR/a,31.10878132440847
+NB9REF,2035,Systemkosten,davon CO2-Preis (Transfer an den Staat),Mrd EUR/a,10.97452566
+NB9REF,2035,Systemkosten nach Gruppe,Biomass,Mrd EUR/a,6.205011347
+NB9REF,2035,Systemkosten nach Gruppe,Coal,Mrd EUR/a,4.50827394
+NB9REF,2035,Systemkosten nach Gruppe,Gas,Mrd EUR/a,27.43914859116317
+NB9REF,2035,Systemkosten nach Gruppe,Grid,Mrd EUR/a,5.16104156515
+NB9REF,2035,Systemkosten nach Gruppe,Hydro,Mrd EUR/a,12.900732876034
+NB9REF,2035,Systemkosten nach Gruppe,Lignite,Mrd EUR/a,5.4484088
+NB9REF,2035,Systemkosten nach Gruppe,Nuclear,Mrd EUR/a,78.929991
+NB9REF,2035,Systemkosten nach Gruppe,Offshore wind,Mrd EUR/a,8.330222962
+NB9REF,2035,Systemkosten nach Gruppe,Oil,Mrd EUR/a,0.13599719
+NB9REF,2035,Systemkosten nach Gruppe,Onshore wind,Mrd EUR/a,29.479778209706
+NB9REF,2035,Systemkosten nach Gruppe,Other,Mrd EUR/a,0.004256326
+NB9REF,2035,Systemkosten nach Gruppe,Solar,Mrd EUR/a,25.2175713965
+NB9REF,2035,Systemkosten nach Gruppe,Storage,Mrd EUR/a,10.61047586138
+NB9REF,2035,Handel,Netto-Import,TWh,97.929417
+NB9REF,2040,Nachfrage,Stromnachfrage,TWh,661.907
+NB9REF,2040,Preise,Strompreis lastgewichtet,EUR/MWh,88.7769
+NB9REF,2040,Preise,Strompreis Maximum (lastgewichtetes Mittel DE),EUR/MWh,1428.73
+NB9REF,2040,Preise,Stunden mit Preis > 300 EUR/MWh,h,40.0
+NB9REF,2040,Preise,Stunden mit Preis < 1 EUR/MWh,h,1016.0
+NB9REF,2040,Erzeugung,Lignite,TWh,0.00208411
+NB9REF,2040,Erzeugung,Gas,TWh,57.9032
+NB9REF,2040,Erzeugung,Oil,TWh,0.0408565
+NB9REF,2040,Erzeugung,Biomass,TWh,32.23684772
+NB9REF,2040,Erzeugung,Hydro,TWh,21.59927
+NB9REF,2040,Erzeugung,Offshore wind,TWh,80.05860000129
+NB9REF,2040,Erzeugung,Onshore wind,TWh,158.614
+NB9REF,2040,Erzeugung,Solar,TWh,228.13049999999998
+NB9REF,2040,Erzeugung,Storage,TWh,60.15460000405
+NB9REF,2040,Erzeugung,Other,TWh,0.111523
+NB9REF,2040,Versorgung,Lastabwurf DE,GWh,0.0
+NB9REF,2040,Versorgung,Lastabwurf alle Länder,GWh,0.0
+NB9REF,2040,Kapazität,Lignite,GW,0.03405
+NB9REF,2040,Kapazität,Gas,GW,50.6171
+NB9REF,2040,Kapazität,Oil,GW,0.9484360000000001
+NB9REF,2040,Kapazität,Biomass,GW,5.360661
+NB9REF,2040,Kapazität,Hydro,GW,4.416358
+NB9REF,2040,Kapazität,Offshore wind,GW,18.08058
+NB9REF,2040,Kapazität,Onshore wind,GW,71.2944
+NB9REF,2040,Kapazität,Solar,GW,246.2284
+NB9REF,2040,Kapazität,Storage,GW,37.86882
+NB9REF,2040,Kapazität,Other,GW,0.0184
+NB9REF,2040,Speicher,Batteriespeicher Energie,GWh,234.295
+NB9REF,2040,Speicher,Wasserstoffspeicher Energie,TWh,3.48e-09
+NB9REF,2040,CO2,Emissionen,Mt,22.6092
+NB9REF,2040,CO2,CO2-Preis (Config),EUR/t,220.0
+NB9REF,2040,CO2,Schattenpreis der Obergrenze,EUR/t,0.0
+NB9REF,2040,CO2,CO2-Preis effektiv,EUR/t,220.0
+NB9REF,2040,Systemkosten,Systemkosten gesamt,Mrd EUR/a,215.91446688848666
+NB9REF,2040,Systemkosten,davon Kapitalkosten,Mrd EUR/a,185.56629660196774
+NB9REF,2040,Systemkosten,davon Betriebskosten,Mrd EUR/a,30.348170286518922
+NB9REF,2040,Systemkosten,davon CO2-Preis (Transfer an den Staat),Mrd EUR/a,13.178424776000002
+NB9REF,2040,Systemkosten nach Gruppe,Biomass,Mrd EUR/a,3.9466738595
+NB9REF,2040,Systemkosten nach Gruppe,Coal,Mrd EUR/a,1.49808097
+NB9REF,2040,Systemkosten nach Gruppe,Gas,Mrd EUR/a,31.56596408286293
+NB9REF,2040,Systemkosten nach Gruppe,Grid,Mrd EUR/a,4.91293242501
+NB9REF,2040,Systemkosten nach Gruppe,Hydro,Mrd EUR/a,12.900771398590999
+NB9REF,2040,Systemkosten nach Gruppe,Lignite,Mrd EUR/a,0.484907023
+NB9REF,2040,Systemkosten nach Gruppe,Nuclear,Mrd EUR/a,69.760851
+NB9REF,2040,Systemkosten nach Gruppe,Offshore wind,Mrd EUR/a,10.937467565377199
+NB9REF,2040,Systemkosten nach Gruppe,Oil,Mrd EUR/a,0.07351434
+NB9REF,2040,Systemkosten nach Gruppe,Onshore wind,Mrd EUR/a,31.79872073989
+NB9REF,2040,Systemkosten nach Gruppe,Other,Mrd EUR/a,0.00294534046309
+NB9REF,2040,Systemkosten nach Gruppe,Solar,Mrd EUR/a,32.858235739288006
+NB9REF,2040,Systemkosten nach Gruppe,Storage,Mrd EUR/a,15.173402404504419
+NB9REF,2040,Handel,Netto-Import,TWh,93.766253
+NB9REF,2045,Nachfrage,Stromnachfrage,TWh,712.823
+NB9REF,2045,Preise,Strompreis lastgewichtet,EUR/MWh,106.871
+NB9REF,2045,Preise,Strompreis Maximum (lastgewichtetes Mittel DE),EUR/MWh,917.416
+NB9REF,2045,Preise,Stunden mit Preis > 300 EUR/MWh,h,952.0
+NB9REF,2045,Preise,Stunden mit Preis < 1 EUR/MWh,h,3704.0
+NB9REF,2045,Erzeugung,Lignite,TWh,0.00155116
+NB9REF,2045,Erzeugung,Gas,TWh,41.3684
+NB9REF,2045,Erzeugung,Oil,TWh,0.0165877
+NB9REF,2045,Erzeugung,Biomass,TWh,9.28546468
+NB9REF,2045,Erzeugung,Hydro,TWh,21.59306
+NB9REF,2045,Erzeugung,Offshore wind,TWh,126.70480002146999
+NB9REF,2045,Erzeugung,Onshore wind,TWh,167.49
+NB9REF,2045,Erzeugung,Solar,TWh,266.3987
+NB9REF,2045,Erzeugung,Storage,TWh,76.08520057772
+NB9REF,2045,Erzeugung,Other,TWh,0.02528
+NB9REF,2045,Versorgung,Lastabwurf DE,GWh,3e-08
+NB9REF,2045,Versorgung,Lastabwurf alle Länder,GWh,4e-08
+NB9REF,2045,Kapazität,Lignite,GW,0.032189999999999996
+NB9REF,2045,Kapazität,Gas,GW,51.5235
+NB9REF,2045,Kapazität,Oil,GW,0.291879
+NB9REF,2045,Kapazität,Biomass,GW,2.705056
+NB9REF,2045,Kapazität,Hydro,GW,4.416358
+NB9REF,2045,Kapazität,Offshore wind,GW,27.621400010000002
+NB9REF,2045,Kapazität,Onshore wind,GW,84.1597
+NB9REF,2045,Kapazität,Solar,GW,330.80420000000004
+NB9REF,2045,Kapazität,Storage,GW,56.12122042
+NB9REF,2045,Kapazität,Other,GW,0.008
+NB9REF,2045,Speicher,Batteriespeicher Energie,GWh,374.473
+NB9REF,2045,Speicher,Wasserstoffspeicher Energie,TWh,4.0616000000000003e-07
+NB9REF,2045,CO2,Emissionen,Mt,15.7198
+NB9REF,2045,CO2,CO2-Preis (Config),EUR/t,260.0
+NB9REF,2045,CO2,Schattenpreis der Obergrenze,EUR/t,342.325
+NB9REF,2045,CO2,CO2-Preis effektiv,EUR/t,602.325
+NB9REF,2045,Systemkosten,Systemkosten gesamt,Mrd EUR/a,218.8333889317374
+NB9REF,2045,Systemkosten,davon Kapitalkosten,Mrd EUR/a,200.18017132305633
+NB9REF,2045,Systemkosten,davon Betriebskosten,Mrd EUR/a,18.65321760868106
+NB9REF,2045,Systemkosten,davon CO2-Preis (Transfer an den Staat),Mrd EUR/a,10.022394881199999
+NB9REF,2045,Systemkosten nach Gruppe,Biomass,Mrd EUR/a,2.111001937
+NB9REF,2045,Systemkosten nach Gruppe,Coal,Mrd EUR/a,1.37934304
+NB9REF,2045,Systemkosten nach Gruppe,Gas,Mrd EUR/a,25.20250923881647
+NB9REF,2045,Systemkosten nach Gruppe,Grid,Mrd EUR/a,4.884995793
+NB9REF,2045,Systemkosten nach Gruppe,Hydro,Mrd EUR/a,12.900704838048
+NB9REF,2045,Systemkosten nach Gruppe,Lignite,Mrd EUR/a,0.486392227
+NB9REF,2045,Systemkosten nach Gruppe,Nuclear,Mrd EUR/a,44.182783
+NB9REF,2045,Systemkosten nach Gruppe,Offshore wind,Mrd EUR/a,19.52199214268834
+NB9REF,2045,Systemkosten nach Gruppe,Oil,Mrd EUR/a,0.03187603
+NB9REF,2045,Systemkosten nach Gruppe,Onshore wind,Mrd EUR/a,40.114321421497
+NB9REF,2045,Systemkosten nach Gruppe,Other,Mrd EUR/a,0.00078899114159
+NB9REF,2045,Systemkosten nach Gruppe,Solar,Mrd EUR/a,45.44723898586881
+NB9REF,2045,Systemkosten nach Gruppe,Storage,Mrd EUR/a,22.569441286677208
+NB9REF,2045,Handel,Netto-Import,TWh,92.79748000000001
+NB9REF,2050,Nachfrage,Stromnachfrage,TWh,763.738
+NB9REF,2050,Preise,Strompreis lastgewichtet,EUR/MWh,112.059
+NB9REF,2050,Preise,Strompreis Maximum (lastgewichtetes Mittel DE),EUR/MWh,1252.34
+NB9REF,2050,Preise,Stunden mit Preis > 300 EUR/MWh,h,1296.0
+NB9REF,2050,Preise,Stunden mit Preis < 1 EUR/MWh,h,2400.0
+NB9REF,2050,Erzeugung,Lignite,TWh,7.8e-10
+NB9REF,2050,Erzeugung,Gas,TWh,1.935125
+NB9REF,2050,Erzeugung,Oil,TWh,6.9e-10
+NB9REF,2050,Erzeugung,Biomass,TWh,6.22808000077
+NB9REF,2050,Erzeugung,Hydro,TWh,21.63177
+NB9REF,2050,Erzeugung,Offshore wind,TWh,126.96360004807998
+NB9REF,2050,Erzeugung,Onshore wind,TWh,253.915
+NB9REF,2050,Erzeugung,Solar,TWh,327.1213
+NB9REF,2050,Erzeugung,Storage,TWh,137.9266
+NB9REF,2050,Erzeugung,Other,TWh,0.00784008
+NB9REF,2050,Versorgung,Lastabwurf DE,GWh,6e-08
+NB9REF,2050,Versorgung,Lastabwurf alle Länder,GWh,1.4999999999999997e-07
+NB9REF,2050,Kapazität,Lignite,GW,0.027350000000000003
+NB9REF,2050,Kapazität,Gas,GW,42.2115
+NB9REF,2050,Kapazität,Oil,GW,0.0007199999999999999
+NB9REF,2050,Kapazität,Biomass,GW,1.2713230000000002
+NB9REF,2050,Kapazität,Hydro,GW,4.416358
+NB9REF,2050,Kapazität,Offshore wind,GW,26.03626002
+NB9REF,2050,Kapazität,Onshore wind,GW,116.4
+NB9REF,2050,Kapazität,Solar,GW,369.91720000000004
+NB9REF,2050,Kapazität,Storage,GW,137.11962
+NB9REF,2050,Kapazität,Other,GW,0.008
+NB9REF,2050,Speicher,Batteriespeicher Energie,GWh,449.228
+NB9REF,2050,Speicher,Wasserstoffspeicher Energie,TWh,55.3381
+NB9REF,2050,CO2,Emissionen,Mt,0.719348
+NB9REF,2050,CO2,CO2-Preis (Config),EUR/t,2600.0
+NB9REF,2050,CO2,Schattenpreis der Obergrenze,EUR/t,0.0
+NB9REF,2050,CO2,CO2-Preis effektiv,EUR/t,2600.0
+NB9REF,2050,Systemkosten,Systemkosten gesamt,Mrd EUR/a,246.2911350816163
+NB9REF,2050,Systemkosten,davon Kapitalkosten,Mrd EUR/a,240.52616129894187
+NB9REF,2050,Systemkosten,davon Betriebskosten,Mrd EUR/a,5.76497378267444
+NB9REF,2050,Systemkosten,davon CO2-Preis (Transfer an den Staat),Mrd EUR/a,4.255166032986887
+NB9REF,2050,Systemkosten nach Gruppe,Biomass,Mrd EUR/a,1.20650962435451
+NB9REF,2050,Systemkosten nach Gruppe,Coal,Mrd EUR/a,0.0996360010013
+NB9REF,2050,Systemkosten nach Gruppe,Gas,Mrd EUR/a,10.17342485
+NB9REF,2050,Systemkosten nach Gruppe,Grid,Mrd EUR/a,5.2195327592
+NB9REF,2050,Systemkosten nach Gruppe,Hydro,Mrd EUR/a,12.900644220431
+NB9REF,2050,Systemkosten nach Gruppe,Lignite,Mrd EUR/a,0.011595902379280001
+NB9REF,2050,Systemkosten nach Gruppe,Nuclear,Mrd EUR/a,17.574511
+NB9REF,2050,Systemkosten nach Gruppe,Offshore wind,Mrd EUR/a,21.114021090639913
+NB9REF,2050,Systemkosten nach Gruppe,Oil,Mrd EUR/a,0.00645813870602
+NB9REF,2050,Systemkosten nach Gruppe,Onshore wind,Mrd EUR/a,50.6718789756931
+NB9REF,2050,Systemkosten nach Gruppe,Other,Mrd EUR/a,0.00244619194822
+NB9REF,2050,Systemkosten nach Gruppe,Solar,Mrd EUR/a,55.58587985706878
+NB9REF,2050,Systemkosten nach Gruppe,Storage,Mrd EUR/a,71.72459647019417
+NB9REF,2050,Handel,Netto-Import,TWh,111.829642
+BRIMP,2025,Nachfrage,Stromnachfrage,TWh,509.158931233078
+BRIMP,2025,Preise,Strompreis lastgewichtet,EUR/MWh,96.32129183933802
+BRIMP,2025,Preise,Strompreis Mittel,EUR/MWh,94.84771585715016
+BRIMP,2025,Preise,Strompreis Maximum,EUR/MWh,129.6488814395001
+BRIMP,2025,Preise,Stunden mit Preis > 1000 EUR/MWh,h,0.0
+BRIMP,2025,Preise,Stunden mit Preis < 1 EUR/MWh,h,364.0
+BRIMP,2025,Erzeugung,Lignite,TWh,32.37592493347
+BRIMP,2025,Erzeugung,Coal,TWh,130.69387070147
+BRIMP,2025,Erzeugung,Gas,TWh,21.400455959379997
+BRIMP,2025,Erzeugung,Oil,TWh,1.5051000000000002e-07
+BRIMP,2025,Erzeugung,Biomass,TWh,73.72904464833
+BRIMP,2025,Erzeugung,Hydro,TWh,21.641259775159998
+BRIMP,2025,Erzeugung,Offshore wind,TWh,38.280575777479996
+BRIMP,2025,Erzeugung,Onshore wind,TWh,108.00489310602
+BRIMP,2025,Erzeugung,Solar,TWh,85.80039288946999
+BRIMP,2025,Erzeugung,Storage,TWh,4.29761489815
+BRIMP,2025,Erzeugung,Other,TWh,0.22591781933
+BRIMP,2025,Kapazität,Lignite,GW,19.457034999999998
+BRIMP,2025,Kapazität,Coal,GW,20.351945
+BRIMP,2025,Kapazität,Gas,GW,36.895872053
+BRIMP,2025,Kapazität,Oil,GW,5.684345986
+BRIMP,2025,Kapazität,Biomass,GW,11.147660833
+BRIMP,2025,Kapazität,Hydro,GW,4.4163568589999995
+BRIMP,2025,Kapazität,Offshore wind,GW,9.215
+BRIMP,2025,Kapazität,Onshore wind,GW,63.57366591586259
+BRIMP,2025,Kapazität,Solar,GW,89.80457223537856
+BRIMP,2025,Kapazität,Storage,GW,7.361719999999999
+BRIMP,2025,Kapazität,Other,GW,0.026900000000000004
+BRIMP,2025,Speicher,Batteriespeicher Energie,GWh,0.0
+BRIMP,2025,Speicher,Wasserstoffspeicher Energie,TWh,0.0
+BRIMP,2025,Erzeugung,"Abregelung Wind, Solar, Laufwasser",TWh,3.0363865910923558
+BRIMP,2025,CO2,Emissionen,Mt,161.24640578195374
+BRIMP,2025,CO2,Obergrenze,Mt,219.31635139488
+BRIMP,2025,CO2,CO2-Preis (Config),EUR/t,80.0
+BRIMP,2025,CO2,Schattenpreis der Obergrenze,EUR/t,0.0
+BRIMP,2025,CO2,CO2-Preis effektiv,EUR/t,80.0
+BRIMP,2025,Systemkosten,Systemkosten gesamt,Mrd EUR/a,71.12149904650971
+BRIMP,2025,Systemkosten,davon Kapitalkosten,Mrd EUR/a,50.824541333681594
+BRIMP,2025,Systemkosten,davon Betriebskosten,Mrd EUR/a,20.296957712828117
+BRIMP,2025,Systemkosten,davon CO2-Preis (Transfer an den Staat),Mrd EUR/a,12.899712462556302
+BRIMP,2025,Systemkosten nach Gruppe,Biomass,Mrd EUR/a,9.02639289938529
+BRIMP,2025,Systemkosten nach Gruppe,Coal,Mrd EUR/a,20.803369435391968
+BRIMP,2025,Systemkosten nach Gruppe,Gas,Mrd EUR/a,6.66595248652744
+BRIMP,2025,Systemkosten nach Gruppe,Grid,Mrd EUR/a,2.35040123609661
+BRIMP,2025,Systemkosten nach Gruppe,Hydro,Mrd EUR/a,1.66428939052737
+BRIMP,2025,Systemkosten nach Gruppe,Lignite,Mrd EUR/a,11.705255028934731
+BRIMP,2025,Systemkosten nach Gruppe,Offshore wind,Mrd EUR/a,3.0453051138622205
+BRIMP,2025,Systemkosten nach Gruppe,Oil,Mrd EUR/a,0.28897363594734
+BRIMP,2025,Systemkosten nach Gruppe,Onshore wind,Mrd EUR/a,8.62482931871191
+BRIMP,2025,Systemkosten nach Gruppe,Other,Mrd EUR/a,0.00217110717398
+BRIMP,2025,Systemkosten nach Gruppe,Solar,Mrd EUR/a,5.23668661295014
+BRIMP,2025,Systemkosten nach Gruppe,Storage,Mrd EUR/a,1.7078727810007
+BRIMP,2025,Handel,Netto-Import,TWh,0.0
+BRIMP,2025,Handel,Import brutto,TWh,0.0
+BRIMP,2025,Handel,Export brutto,TWh,0.0
+BRIMP,2025,Akteure,Erzeuger DE: Biomass,Mrd EUR/a,-1.4477518661434203
+BRIMP,2025,Akteure,Erzeuger DE: Coal,Mrd EUR/a,-6.66823363537404
+BRIMP,2025,Akteure,Erzeuger DE: Gas,Mrd EUR/a,-4.1640137748818695
+BRIMP,2025,Akteure,Erzeuger DE: Hydro,Mrd EUR/a,0.42728010965626995
+BRIMP,2025,Akteure,Erzeuger DE: Lignite,Mrd EUR/a,-8.12459868054914
+BRIMP,2025,Akteure,Erzeuger DE: Offshore wind,Mrd EUR/a,0.31377497547091
+BRIMP,2025,Akteure,Erzeuger DE: Oil,Mrd EUR/a,-0.28897362098658996
+BRIMP,2025,Akteure,Erzeuger DE: Onshore wind,Mrd EUR/a,-0.23688163974066004
+BRIMP,2025,Akteure,Erzeuger DE: Other,Mrd EUR/a,0.02057683818201
+BRIMP,2025,Akteure,Erzeuger DE: Solar,Mrd EUR/a,1.55976873959453
+BRIMP,2025,Akteure,Erzeuger DE: Storage,Mrd EUR/a,-1.4234098711268799
+BRIMP,2025,Akteure,Netz DE,Mrd EUR/a,-2.04618952256776
+BRIMP,2025,Akteure,Verbraucher DE,Mrd EUR/a,-49.04284600790675
+BRIMP,2025,Akteure,Staat DE (CO2),Mrd EUR/a,12.899712462556302
+BRIMP,2025,Akteure,Summe aller Akteure,Mrd EUR/a,-58.221785493817094
+BRIMP,2030,Nachfrage,Stromnachfrage,TWh,560.0748243563859
+BRIMP,2030,Preise,Strompreis lastgewichtet,EUR/MWh,86.61210590895601
+BRIMP,2030,Preise,Strompreis Mittel,EUR/MWh,85.47711043274172
+BRIMP,2030,Preise,Strompreis Maximum,EUR/MWh,176.6840623017286
+BRIMP,2030,Preise,Stunden mit Preis > 1000 EUR/MWh,h,0.0
+BRIMP,2030,Preise,Stunden mit Preis < 1 EUR/MWh,h,2154.0
+BRIMP,2030,Erzeugung,Lignite,TWh,1.46637433157
+BRIMP,2030,Erzeugung,Coal,TWh,25.83200211182
+BRIMP,2030,Erzeugung,Gas,TWh,108.27157991197001
+BRIMP,2030,Erzeugung,Oil,TWh,6.97e-09
+BRIMP,2030,Erzeugung,Biomass,TWh,51.09632240005
+BRIMP,2030,Erzeugung,Hydro,TWh,21.64126128223
+BRIMP,2030,Erzeugung,Offshore wind,TWh,33.07112548213
+BRIMP,2030,Erzeugung,Onshore wind,TWh,180.91783995981
+BRIMP,2030,Erzeugung,Solar,TWh,142.22179642854
+BRIMP,2030,Erzeugung,Storage,TWh,16.31099758274
+BRIMP,2030,Erzeugung,Other,TWh,0.1815212048
+BRIMP,2030,Kapazität,Lignite,GW,14.223575
+BRIMP,2030,Kapazität,Coal,GW,16.89493
+BRIMP,2030,Kapazität,Gas,GW,28.364955278386137
+BRIMP,2030,Kapazität,Oil,GW,2.4050371260000003
+BRIMP,2030,Kapazität,Biomass,GW,9.496507832999999
+BRIMP,2030,Kapazität,Hydro,GW,4.4163568589999995
+BRIMP,2030,Kapazität,Offshore wind,GW,9.612099688009089
+BRIMP,2030,Kapazität,Onshore wind,GW,90.43788290624195
+BRIMP,2030,Kapazität,Solar,GW,145.12431883577736
+BRIMP,2030,Kapazität,Storage,GW,10.627448381923179
+BRIMP,2030,Kapazität,Other,GW,0.026900000000000004
+BRIMP,2030,Speicher,Batteriespeicher Energie,GWh,19.734162330115634
+BRIMP,2030,Speicher,Wasserstoffspeicher Energie,TWh,9.177167414119246e-09
+BRIMP,2030,Erzeugung,"Abregelung Wind, Solar, Laufwasser",TWh,34.13674458545539
+BRIMP,2030,CO2,Emissionen,Mt,63.979879962729434
+BRIMP,2030,CO2,Obergrenze,Mt,152.30302180200002
+BRIMP,2030,CO2,CO2-Preis (Config),EUR/t,130.0
+BRIMP,2030,CO2,Schattenpreis der Obergrenze,EUR/t,0.0
+BRIMP,2030,CO2,CO2-Preis effektiv,EUR/t,130.0
+BRIMP,2030,Systemkosten,Systemkosten gesamt,Mrd EUR/a,67.54140560891283
+BRIMP,2030,Systemkosten,davon Kapitalkosten,Mrd EUR/a,51.07464420148597
+BRIMP,2030,Systemkosten,davon Betriebskosten,Mrd EUR/a,16.466761407426862
+BRIMP,2030,Systemkosten,davon CO2-Preis (Transfer an den Staat),Mrd EUR/a,8.317384395154825
+BRIMP,2030,Systemkosten nach Gruppe,Biomass,Mrd EUR/a,5.98105283427954
+BRIMP,2030,Systemkosten nach Gruppe,Coal,Mrd EUR/a,10.61475545593598
+BRIMP,2030,Systemkosten nach Gruppe,Gas,Mrd EUR/a,14.785984174973011
+BRIMP,2030,Systemkosten nach Gruppe,Grid,Mrd EUR/a,2.4234105135925197
+BRIMP,2030,Systemkosten nach Gruppe,Hydro,Mrd EUR/a,1.66429752024336
+BRIMP,2030,Systemkosten nach Gruppe,Lignite,Mrd EUR/a,6.2634530782774505
+BRIMP,2030,Systemkosten nach Gruppe,Offshore wind,Mrd EUR/a,3.19876358084369
+BRIMP,2030,Systemkosten nach Gruppe,Oil,Mrd EUR/a,0.12169894804177
+BRIMP,2030,Systemkosten nach Gruppe,Onshore wind,Mrd EUR/a,12.029840226132851
+BRIMP,2030,Systemkosten nach Gruppe,Other,Mrd EUR/a,0.00283348227404
+BRIMP,2030,Systemkosten nach Gruppe,Solar,Mrd EUR/a,8.32392378452796
+BRIMP,2030,Systemkosten nach Gruppe,Storage,Mrd EUR/a,2.13139200979066
+BRIMP,2030,Handel,Netto-Import,TWh,0.0
+BRIMP,2030,Handel,Import brutto,TWh,0.0
+BRIMP,2030,Handel,Export brutto,TWh,0.0
+BRIMP,2030,Akteure,Erzeuger DE: Biomass,Mrd EUR/a,-0.05555317838405994
+BRIMP,2030,Akteure,Erzeuger DE: Coal,Mrd EUR/a,-6.88693313337784
+BRIMP,2030,Akteure,Erzeuger DE: Gas,Mrd EUR/a,-0.7899745398581198
+BRIMP,2030,Akteure,Erzeuger DE: Hydro,Mrd EUR/a,0.23886029456093996
+BRIMP,2030,Akteure,Erzeuger DE: Lignite,Mrd EUR/a,-6.022154774161411
+BRIMP,2030,Akteure,Erzeuger DE: Offshore wind,Mrd EUR/a,-0.3983737985542901
+BRIMP,2030,Akteure,Erzeuger DE: Oil,Mrd EUR/a,-0.12169894731149
+BRIMP,2030,Akteure,Erzeuger DE: Onshore wind,Mrd EUR/a,-0.9041431013899801
+BRIMP,2030,Akteure,Erzeuger DE: Other,Mrd EUR/a,0.017486792440669998
+BRIMP,2030,Akteure,Erzeuger DE: Solar,Mrd EUR/a,-1.46530828879275
+BRIMP,2030,Akteure,Erzeuger DE: Storage,Mrd EUR/a,-0.7590007685861
+BRIMP,2030,Akteure,Netz DE,Mrd EUR/a,-1.8853521612058097
+BRIMP,2030,Akteure,Verbraucher DE,Mrd EUR/a,-48.50926000409523
+BRIMP,2030,Akteure,Staat DE (CO2),Mrd EUR/a,8.317384395154827
+BRIMP,2030,Akteure,Summe aller Akteure,Mrd EUR/a,-59.22402121356065
+BRIMP,2035,Nachfrage,Stromnachfrage,TWh,610.9907174796937
+BRIMP,2035,Preise,Strompreis lastgewichtet,EUR/MWh,91.39676927052128
+BRIMP,2035,Preise,Strompreis Mittel,EUR/MWh,88.83206037910313
+BRIMP,2035,Preise,Strompreis Maximum,EUR/MWh,1040.4983492095218
+BRIMP,2035,Preise,Stunden mit Preis > 1000 EUR/MWh,h,32.0
+BRIMP,2035,Preise,Stunden mit Preis < 1 EUR/MWh,h,2374.0
+BRIMP,2035,Erzeugung,Lignite,TWh,0.7275776738099999
+BRIMP,2035,Erzeugung,Coal,TWh,0.15596262218999998
+BRIMP,2035,Erzeugung,Gas,TWh,108.47468991042
+BRIMP,2035,Erzeugung,Oil,TWh,0.11964221888999998
+BRIMP,2035,Erzeugung,Biomass,TWh,45.539017588490005
+BRIMP,2035,Erzeugung,Hydro,TWh,21.640805408210003
+BRIMP,2035,Erzeugung,Offshore wind,TWh,77.35037678508
+BRIMP,2035,Erzeugung,Onshore wind,TWh,165.55139324845
+BRIMP,2035,Erzeugung,Solar,TWh,188.46521426393002
+BRIMP,2035,Erzeugung,Storage,TWh,44.822739493330005
+BRIMP,2035,Erzeugung,Other,TWh,0.16278145854999998
+BRIMP,2035,Kapazität,Lignite,GW,5.796575
+BRIMP,2035,Kapazität,Coal,GW,1.052
+BRIMP,2035,Kapazität,Gas,GW,43.87484123366419
+BRIMP,2035,Kapazität,Oil,GW,1.6968725260000002
+BRIMP,2035,Kapazität,Biomass,GW,7.944603333000001
+BRIMP,2035,Kapazität,Hydro,GW,4.4163568589999995
+BRIMP,2035,Kapazität,Offshore wind,GW,18.049786916659315
+BRIMP,2035,Kapazität,Onshore wind,GW,79.21390499035891
+BRIMP,2035,Kapazität,Solar,GW,195.7258977481232
+BRIMP,2035,Kapazität,Storage,GW,26.332701047838906
+BRIMP,2035,Kapazität,Other,GW,0.026900000000000004
+BRIMP,2035,Speicher,Batteriespeicher Energie,GWh,152.05122946257327
+BRIMP,2035,Speicher,Wasserstoffspeicher Energie,TWh,1.197631380738563e-08
+BRIMP,2035,Erzeugung,"Abregelung Wind, Solar, Laufwasser",TWh,39.582013370357224
+BRIMP,2035,CO2,Emissionen,Mt,40.985519084579714
+BRIMP,2035,CO2,Obergrenze,Mt,84.61278989
+BRIMP,2035,CO2,CO2-Preis (Config),EUR/t,175.0
+BRIMP,2035,CO2,Schattenpreis der Obergrenze,EUR/t,0.0
+BRIMP,2035,CO2,CO2-Preis effektiv,EUR/t,175.0
+BRIMP,2035,Systemkosten,Systemkosten gesamt,Mrd EUR/a,67.33496300752566
+BRIMP,2035,Systemkosten,davon Kapitalkosten,Mrd EUR/a,52.59578232707245
+BRIMP,2035,Systemkosten,davon Betriebskosten,Mrd EUR/a,14.739180680453211
+BRIMP,2035,Systemkosten,davon CO2-Preis (Transfer an den Staat),Mrd EUR/a,7.172465839801449
+BRIMP,2035,Systemkosten nach Gruppe,Biomass,Mrd EUR/a,4.31684662961499
+BRIMP,2035,Systemkosten nach Gruppe,Brazil cable,Mrd EUR/a,6.481508503107981
+BRIMP,2035,Systemkosten nach Gruppe,Coal,Mrd EUR/a,0.47712929758966
+BRIMP,2035,Systemkosten nach Gruppe,Gas,Mrd EUR/a,17.48908950272314
+BRIMP,2035,Systemkosten nach Gruppe,Grid,Mrd EUR/a,2.3266395573899796
+BRIMP,2035,Systemkosten nach Gruppe,Hydro,Mrd EUR/a,1.66428823761444
+BRIMP,2035,Systemkosten nach Gruppe,Lignite,Mrd EUR/a,2.6050744200057094
+BRIMP,2035,Systemkosten nach Gruppe,Offshore wind,Mrd EUR/a,6.310670087147261
+BRIMP,2035,Systemkosten nach Gruppe,Oil,Mrd EUR/a,0.11615336786742
+BRIMP,2035,Systemkosten nach Gruppe,Onshore wind,Mrd EUR/a,10.4983591905324
+BRIMP,2035,Systemkosten nach Gruppe,Other,Mrd EUR/a,0.00341997520126
+BRIMP,2035,Systemkosten nach Gruppe,Solar,Mrd EUR/a,10.783174284527192
+BRIMP,2035,Systemkosten nach Gruppe,Storage,Mrd EUR/a,4.26260995420423
+BRIMP,2035,Handel,Netto-Import,TWh,0.0
+BRIMP,2035,Handel,Import brutto,TWh,0.0
+BRIMP,2035,Handel,Export brutto,TWh,0.0
+BRIMP,2035,Kabel,Kapazität,GW,2.0
+BRIMP,2035,Kabel,Erzeugung BR Kapazität,GW,2.0
+BRIMP,2035,Kabel,Erzeugung BR,TWh,11.379510627689973
+BRIMP,2035,Kabel,Lieferung nach DE,TWh,8.933546388714662
+BRIMP,2035,Kabel,Auslastung,%,64.95154467859572
+BRIMP,2035,Kabel,Engpasserlös,Mrd EUR/a,0.6958334064848599
+BRIMP,2035,Kabel,Annuität inkl. FOM,Mrd EUR/a,6.001161476114799
+BRIMP,2035,Kabel,Engpasserlös pro kW,EUR/kW/a,347.91670324243
+BRIMP,2035,Kabel,Annuität pro kW,EUR/kW/a,3000.5807380573992
+BRIMP,2035,Kabel,Abstand zum Break-even pro kW,EUR/kW/a,-2652.664034814969
+BRIMP,2035,Akteure,Erzeuger BR,Mrd EUR/a,0.0
+BRIMP,2035,Akteure,Erzeuger DE: Biomass,Mrd EUR/a,1.40083679293052
+BRIMP,2035,Akteure,Erzeuger DE: Coal,Mrd EUR/a,-0.39877399054618
+BRIMP,2035,Akteure,Erzeuger DE: Gas,Mrd EUR/a,-0.2942789033195207
+BRIMP,2035,Akteure,Erzeuger DE: Hydro,Mrd EUR/a,0.32652929361669003
+BRIMP,2035,Akteure,Erzeuger DE: Lignite,Mrd EUR/a,-2.1998501197331994
+BRIMP,2035,Akteure,Erzeuger DE: Offshore wind,Mrd EUR/a,-0.42628464863952975
+BRIMP,2035,Akteure,Erzeuger DE: Oil,Mrd EUR/a,-0.01762504955276
+BRIMP,2035,Akteure,Erzeuger DE: Onshore wind,Mrd EUR/a,-0.3344581394635499
+BRIMP,2035,Akteure,Erzeuger DE: Other,Mrd EUR/a,0.01749506459125
+BRIMP,2035,Akteure,Erzeuger DE: Solar,Mrd EUR/a,-1.7226120550192099
+BRIMP,2035,Akteure,Erzeuger DE: Storage,Mrd EUR/a,-0.8021000482248599
+BRIMP,2035,Akteure,Kabelbetreiber,Mrd EUR/a,-5.305433753443091
+BRIMP,2035,Akteure,Netz DE,Mrd EUR/a,-1.73582981843774
+BRIMP,2035,Akteure,Verbraucher DE,Mrd EUR/a,-55.84257763192183
+BRIMP,2035,Akteure,Staat DE (CO2),Mrd EUR/a,7.17246583980145
+BRIMP,2035,Akteure,Summe aller Akteure,Mrd EUR/a,-60.162497167361565
+BRIMP,2040,Nachfrage,Stromnachfrage,TWh,661.9066106030014
+BRIMP,2040,Preise,Strompreis lastgewichtet,EUR/MWh,91.88814189048638
+BRIMP,2040,Preise,Strompreis Mittel,EUR/MWh,88.24434126820007
+BRIMP,2040,Preise,Strompreis Maximum,EUR/MWh,1319.493599437977
+BRIMP,2040,Preise,Stunden mit Preis > 1000 EUR/MWh,h,42.0
+BRIMP,2040,Preise,Stunden mit Preis < 1 EUR/MWh,h,3100.0
+BRIMP,2040,Erzeugung,Lignite,TWh,0.00177060692
+BRIMP,2040,Erzeugung,Gas,TWh,92.40039403541
+BRIMP,2040,Erzeugung,Oil,TWh,0.04931866409
+BRIMP,2040,Erzeugung,Biomass,TWh,28.45117473116
+BRIMP,2040,Erzeugung,Hydro,TWh,21.641076301840002
+BRIMP,2040,Erzeugung,Offshore wind,TWh,101.02188866565
+BRIMP,2040,Erzeugung,Onshore wind,TWh,150.97105097771998
+BRIMP,2040,Erzeugung,Solar,TWh,267.74944153649
+BRIMP,2040,Erzeugung,Storage,TWh,87.52421938641
+BRIMP,2040,Erzeugung,Other,TWh,0.09425920632
+BRIMP,2040,Kapazität,Lignite,GW,0.03405
+BRIMP,2040,Kapazität,Gas,GW,53.253460665452366
+BRIMP,2040,Kapazität,Oil,GW,0.948435646
+BRIMP,2040,Kapazität,Biomass,GW,5.360664375000001
+BRIMP,2040,Kapazität,Hydro,GW,4.4163568589999995
+BRIMP,2040,Kapazität,Offshore wind,GW,22.767605221059448
+BRIMP,2040,Kapazität,Onshore wind,GW,71.49907837512039
+BRIMP,2040,Kapazität,Solar,GW,301.4901494489274
+BRIMP,2040,Kapazität,Storage,GW,52.80787059966719
+BRIMP,2040,Kapazität,Other,GW,0.0184
+BRIMP,2040,Speicher,Batteriespeicher Energie,GWh,370.1037775962401
+BRIMP,2040,Speicher,Wasserstoffspeicher Energie,TWh,3.382349157691733e-08
+BRIMP,2040,Erzeugung,"Abregelung Wind, Solar, Laufwasser",TWh,69.44848029693821
+BRIMP,2040,CO2,Emissionen,Mt,33.84511595715817
+BRIMP,2040,CO2,Obergrenze,Mt,33.845115956
+BRIMP,2040,CO2,CO2-Preis (Config),EUR/t,220.0
+BRIMP,2040,CO2,Schattenpreis der Obergrenze,EUR/t,21.363112141688312
+BRIMP,2040,CO2,CO2-Preis effektiv,EUR/t,241.3631121416883
+BRIMP,2040,Systemkosten,Systemkosten gesamt,Mrd EUR/a,69.40361666966831
+BRIMP,2040,Systemkosten,davon Kapitalkosten,Mrd EUR/a,56.03728749910856
+BRIMP,2040,Systemkosten,davon Betriebskosten,Mrd EUR/a,13.366329170559737
+BRIMP,2040,Systemkosten,davon CO2-Preis (Transfer an den Staat),Mrd EUR/a,7.4459255105747975
+BRIMP,2040,Systemkosten nach Gruppe,Biomass,Mrd EUR/a,2.6959738201837795
+BRIMP,2040,Systemkosten nach Gruppe,Brazil cable,Mrd EUR/a,6.124704323451001
+BRIMP,2040,Systemkosten nach Gruppe,Gas,Mrd EUR/a,17.19751316180999
+BRIMP,2040,Systemkosten nach Gruppe,Grid,Mrd EUR/a,2.19880435324609
+BRIMP,2040,Systemkosten nach Gruppe,Hydro,Mrd EUR/a,1.6642961538447298
+BRIMP,2040,Systemkosten nach Gruppe,Lignite,Mrd EUR/a,0.014902250863420001
+BRIMP,2040,Systemkosten nach Gruppe,Offshore wind,Mrd EUR/a,7.9821601567811005
+BRIMP,2040,Systemkosten nach Gruppe,Oil,Mrd EUR/a,0.06170766278891
+BRIMP,2040,Systemkosten nach Gruppe,Onshore wind,Mrd EUR/a,9.440122637426189
+BRIMP,2040,Systemkosten nach Gruppe,Other,Mrd EUR/a,0.0024893629932399995
+BRIMP,2040,Systemkosten nach Gruppe,Solar,Mrd EUR/a,15.06294659190535
+BRIMP,2040,Systemkosten nach Gruppe,Storage,Mrd EUR/a,6.9579961943745
+BRIMP,2040,Handel,Netto-Import,TWh,0.0
+BRIMP,2040,Handel,Import brutto,TWh,0.0
+BRIMP,2040,Handel,Export brutto,TWh,0.0
+BRIMP,2040,Kabel,Kapazität,GW,2.0
+BRIMP,2040,Kabel,Erzeugung BR Kapazität,GW,2.0
+BRIMP,2040,Kabel,Erzeugung BR,TWh,9.74214110102451
+BRIMP,2040,Kabel,Lieferung nach DE,TWh,7.648120582587264
+BRIMP,2040,Kabel,Auslastung,%,55.605828202194694
+BRIMP,2040,Kabel,Engpasserlös,Mrd EUR/a,0.76594296270674
+BRIMP,2040,Kabel,Annuität inkl. FOM,Mrd EUR/a,5.730873991372195
+BRIMP,2040,Kabel,Engpasserlös pro kW,EUR/kW/a,382.97148135337
+BRIMP,2040,Kabel,Annuität pro kW,EUR/kW/a,2865.4369956860974
+BRIMP,2040,Kabel,Abstand zum Break-even pro kW,EUR/kW/a,-2482.4655143327277
+BRIMP,2040,Akteure,Erzeuger BR,Mrd EUR/a,0.0
+BRIMP,2040,Akteure,Erzeuger DE: Biomass,Mrd EUR/a,1.2722224256569545
+BRIMP,2040,Akteure,Erzeuger DE: Gas,Mrd EUR/a,-0.2669703677135595
+BRIMP,2040,Akteure,Erzeuger DE: Hydro,Mrd EUR/a,0.28930147862626004
+BRIMP,2040,Akteure,Erzeuger DE: Lignite,Mrd EUR/a,-0.01282166999885469
+BRIMP,2040,Akteure,Erzeuger DE: Offshore wind,Mrd EUR/a,-0.5559353438559501
+BRIMP,2040,Akteure,Erzeuger DE: Oil,Mrd EUR/a,-0.0033900343386654183
+BRIMP,2040,Akteure,Erzeuger DE: Onshore wind,Mrd EUR/a,0.28411314217408007
+BRIMP,2040,Akteure,Erzeuger DE: Other,Mrd EUR/a,0.011362677358631038
+BRIMP,2040,Akteure,Erzeuger DE: Solar,Mrd EUR/a,-2.53954226828609
+BRIMP,2040,Akteure,Erzeuger DE: Storage,Mrd EUR/a,-1.4047721235494501
+BRIMP,2040,Akteure,Kabelbetreiber,Mrd EUR/a,-4.96502197119493
+BRIMP,2040,Akteure,Netz DE,Mrd EUR/a,-1.4138310665824498
+BRIMP,2040,Akteure,Verbraucher DE,Mrd EUR/a,-60.821368553339525
+BRIMP,2040,Akteure,Staat DE (CO2),Mrd EUR/a,8.168962518216013
+BRIMP,2040,Akteure,Summe aller Akteure,Mrd EUR/a,-61.957691156827536
+BRIMP,2045,Nachfrage,Stromnachfrage,TWh,712.8225037263093
+BRIMP,2045,Preise,Strompreis lastgewichtet,EUR/MWh,112.40120943902474
+BRIMP,2045,Preise,Strompreis Mittel,EUR/MWh,105.48483087501117
+BRIMP,2045,Preise,Strompreis Maximum,EUR/MWh,431.270693531506
+BRIMP,2045,Preise,Stunden mit Preis > 1000 EUR/MWh,h,0.0
+BRIMP,2045,Preise,Stunden mit Preis < 1 EUR/MWh,h,4674.0
+BRIMP,2045,Erzeugung,Lignite,TWh,1.0000000000000001e-11
+BRIMP,2045,Erzeugung,Gas,TWh,46.48036398592
+BRIMP,2045,Erzeugung,Oil,TWh,1e-10
+BRIMP,2045,Erzeugung,Biomass,TWh,8.234639230139999
+BRIMP,2045,Erzeugung,Hydro,TWh,21.640965240379998
+BRIMP,2045,Erzeugung,Offshore wind,TWh,122.09890746502002
+BRIMP,2045,Erzeugung,Onshore wind,TWh,214.62099519299
+BRIMP,2045,Erzeugung,Solar,TWh,332.66515392917995
+BRIMP,2045,Erzeugung,Storage,TWh,131.83349205013
+BRIMP,2045,Erzeugung,Other,TWh,0.02380799996
+BRIMP,2045,Kapazität,Lignite,GW,0.032189999999999996
+BRIMP,2045,Kapazität,Gas,GW,49.732450865492766
+BRIMP,2045,Kapazität,Oil,GW,0.29187905999999997
+BRIMP,2045,Kapazität,Biomass,GW,2.705055718
+BRIMP,2045,Kapazität,Hydro,GW,4.4163568589999995
+BRIMP,2045,Kapazität,Offshore wind,GW,27.685992799911453
+BRIMP,2045,Kapazität,Onshore wind,GW,112.86623862687603
+BRIMP,2045,Kapazität,Solar,GW,418.9142656319293
+BRIMP,2045,Kapazität,Storage,GW,81.677928612171
+BRIMP,2045,Kapazität,Other,GW,0.008
+BRIMP,2045,Speicher,Batteriespeicher Energie,GWh,582.9039766744875
+BRIMP,2045,Speicher,Wasserstoffspeicher Energie,TWh,10.651097857835184
+BRIMP,2045,Erzeugung,"Abregelung Wind, Solar, Laufwasser",TWh,153.12526029219438
+BRIMP,2045,CO2,Emissionen,Mt,16.922557978163827
+BRIMP,2045,CO2,Obergrenze,Mt,16.922557978
+BRIMP,2045,CO2,CO2-Preis (Config),EUR/t,260.0
+BRIMP,2045,CO2,Schattenpreis der Obergrenze,EUR/t,478.85616184415346
+BRIMP,2045,CO2,CO2-Preis effektiv,EUR/t,738.8561618441535
+BRIMP,2045,Systemkosten,Systemkosten gesamt,Mrd EUR/a,78.33065678126741
+BRIMP,2045,Systemkosten,davon Kapitalkosten,Mrd EUR/a,71.16096222343292
+BRIMP,2045,Systemkosten,davon Betriebskosten,Mrd EUR/a,7.1696945578344815
+BRIMP,2045,Systemkosten,davon CO2-Preis (Transfer an den Staat),Mrd EUR/a,4.399865074322594
+BRIMP,2045,Systemkosten nach Gruppe,Biomass,Mrd EUR/a,1.27842494733179
+BRIMP,2045,Systemkosten nach Gruppe,Brazil cable,Mrd EUR/a,5.7136513587826405
+BRIMP,2045,Systemkosten nach Gruppe,Gas,Mrd EUR/a,11.13332782654561
+BRIMP,2045,Systemkosten nach Gruppe,Grid,Mrd EUR/a,2.20077968246181
+BRIMP,2045,Systemkosten nach Gruppe,Hydro,Mrd EUR/a,1.66429981796259
+BRIMP,2045,Systemkosten nach Gruppe,Lignite,Mrd EUR/a,0.01364802327672
+BRIMP,2045,Systemkosten nach Gruppe,Offshore wind,Mrd EUR/a,9.72653294265629
+BRIMP,2045,Systemkosten nach Gruppe,Oil,Mrd EUR/a,0.01449096531074
+BRIMP,2045,Systemkosten nach Gruppe,Onshore wind,Mrd EUR/a,14.16633732124377
+BRIMP,2045,Systemkosten nach Gruppe,Other,Mrd EUR/a,0.0007430410978
+BRIMP,2045,Systemkosten nach Gruppe,Solar,Mrd EUR/a,19.60272979490299
+BRIMP,2045,Systemkosten nach Gruppe,Storage,Mrd EUR/a,12.815691059694661
+BRIMP,2045,Handel,Netto-Import,TWh,0.0
+BRIMP,2045,Handel,Import brutto,TWh,0.0
+BRIMP,2045,Handel,Export brutto,TWh,0.0
+BRIMP,2045,Kabel,Kapazität,GW,2.0
+BRIMP,2045,Kabel,Erzeugung BR Kapazität,GW,2.0
+BRIMP,2045,Kabel,Erzeugung BR,TWh,5.973996681383607
+BRIMP,2045,Kabel,Lieferung nach DE,TWh,4.68991841787152
+BRIMP,2045,Kabel,Auslastung,%,34.09815457410735
+BRIMP,2045,Kabel,Engpasserlös,Mrd EUR/a,1.13039972439075
+BRIMP,2045,Kabel,Annuität inkl. FOM,Mrd EUR/a,5.479452026684633
+BRIMP,2045,Kabel,Engpasserlös pro kW,EUR/kW/a,565.1998621953749
+BRIMP,2045,Kabel,Annuität pro kW,EUR/kW/a,2739.726013342317
+BRIMP,2045,Kabel,Abstand zum Break-even pro kW,EUR/kW/a,-2174.5261511469416
+BRIMP,2045,Akteure,Erzeuger BR,Mrd EUR/a,0.0
+BRIMP,2045,Akteure,Erzeuger DE: Biomass,Mrd EUR/a,1.0387556479226068
+BRIMP,2045,Akteure,Erzeuger DE: Gas,Mrd EUR/a,-2.2400948653635386
+BRIMP,2045,Akteure,Erzeuger DE: Hydro,Mrd EUR/a,0.6410001100324701
+BRIMP,2045,Akteure,Erzeuger DE: Lignite,Mrd EUR/a,-0.01364802328787051
+BRIMP,2045,Akteure,Erzeuger DE: Offshore wind,Mrd EUR/a,1.29846482471409
+BRIMP,2045,Akteure,Erzeuger DE: Oil,Mrd EUR/a,-0.014490965323700975
+BRIMP,2045,Akteure,Erzeuger DE: Onshore wind,Mrd EUR/a,1.66120214348434
+BRIMP,2045,Akteure,Erzeuger DE: Other,Mrd EUR/a,0.00531994837681484
+BRIMP,2045,Akteure,Erzeuger DE: Solar,Mrd EUR/a,-2.33612712944096
+BRIMP,2045,Akteure,Erzeuger DE: Storage,Mrd EUR/a,-1.81866971866014
+BRIMP,2045,Akteure,Kabelbetreiber,Mrd EUR/a,-4.34911708888226
+BRIMP,2045,Akteure,Netz DE,Mrd EUR/a,-0.18461129252703004
+BRIMP,2045,Akteure,Verbraucher DE,Mrd EUR/a,-80.12211153419089
+BRIMP,2045,Akteure,Staat DE (CO2),Mrd EUR/a,12.503336236331284
+BRIMP,2045,Akteure,Summe aller Akteure,Mrd EUR/a,-73.93079170681479
+BRIMP,2050,Nachfrage,Stromnachfrage,TWh,763.7383968496171
+BRIMP,2050,Preise,Strompreis lastgewichtet,EUR/MWh,116.69118792749848
+BRIMP,2050,Preise,Strompreis Mittel,EUR/MWh,107.30288644902653
+BRIMP,2050,Preise,Strompreis Maximum,EUR/MWh,2929.318425497672
+BRIMP,2050,Preise,Stunden mit Preis > 1000 EUR/MWh,h,136.0
+BRIMP,2050,Preise,Stunden mit Preis < 1 EUR/MWh,h,3398.0
+BRIMP,2050,Erzeugung,Biomass,TWh,6.74976981712
+BRIMP,2050,Erzeugung,Hydro,TWh,21.6409519822
+BRIMP,2050,Erzeugung,Offshore wind,TWh,123.61850769095
+BRIMP,2050,Erzeugung,Onshore wind,TWh,294.83342516575004
+BRIMP,2050,Erzeugung,Solar,TWh,427.32310444921006
+BRIMP,2050,Erzeugung,Storage,TWh,217.55892950222002
+BRIMP,2050,Kapazität,Lignite,GW,0.027350000000000003
+BRIMP,2050,Kapazität,Gas,GW,40.42044133649276
+BRIMP,2050,Kapazität,Oil,GW,0.0007199999999999999
+BRIMP,2050,Kapazität,Biomass,GW,1.27132322
+BRIMP,2050,Kapazität,Hydro,GW,4.4163568589999995
+BRIMP,2050,Kapazität,Offshore wind,GW,26.03629004700795
+BRIMP,2050,Kapazität,Onshore wind,GW,138.53681366415512
+BRIMP,2050,Kapazität,Solar,GW,493.2185182483152
+BRIMP,2050,Kapazität,Storage,GW,155.43815738874068
+BRIMP,2050,Kapazität,Other,GW,0.008
+BRIMP,2050,Speicher,Batteriespeicher Energie,GWh,827.8201160171378
+BRIMP,2050,Speicher,Wasserstoffspeicher Energie,TWh,69.60881664808416
+BRIMP,2050,Erzeugung,"Abregelung Wind, Solar, Laufwasser",TWh,105.29646954290901
+BRIMP,2050,CO2,Emissionen,Mt,0.0
+BRIMP,2050,CO2,Obergrenze,Mt,0.0
+BRIMP,2050,CO2,CO2-Preis (Config),EUR/t,300.0
+BRIMP,2050,CO2,Schattenpreis der Obergrenze,EUR/t,24110.872097296866
+BRIMP,2050,CO2,CO2-Preis effektiv,EUR/t,24410.872097296866
+BRIMP,2050,Systemkosten,Systemkosten gesamt,Mrd EUR/a,97.15842370933015
+BRIMP,2050,Systemkosten,davon Kapitalkosten,Mrd EUR/a,96.75443571959593
+BRIMP,2050,Systemkosten,davon Betriebskosten,Mrd EUR/a,0.40398798973421995
+BRIMP,2050,Systemkosten,davon CO2-Preis (Transfer an den Staat),Mrd EUR/a,0.0
+BRIMP,2050,Systemkosten nach Gruppe,Biomass,Mrd EUR/a,0.64747654672295
+BRIMP,2050,Systemkosten nach Gruppe,Brazil cable,Mrd EUR/a,5.43630903759015
+BRIMP,2050,Systemkosten nach Gruppe,Gas,Mrd EUR/a,3.33920369126891
+BRIMP,2050,Systemkosten nach Gruppe,Grid,Mrd EUR/a,2.61973303093785
+BRIMP,2050,Systemkosten nach Gruppe,Hydro,Mrd EUR/a,1.66428675465492
+BRIMP,2050,Systemkosten nach Gruppe,Lignite,Mrd EUR/a,0.011595943969449999
+BRIMP,2050,Systemkosten nach Gruppe,Offshore wind,Mrd EUR/a,9.03133780148645
+BRIMP,2050,Systemkosten nach Gruppe,Oil,Mrd EUR/a,3.551678735e-05
+BRIMP,2050,Systemkosten nach Gruppe,Onshore wind,Mrd EUR/a,16.99992512798116
+BRIMP,2050,Systemkosten nach Gruppe,Solar,Mrd EUR/a,22.00885935962824
+BRIMP,2050,Systemkosten nach Gruppe,Storage,Mrd EUR/a,35.39966089830272
+BRIMP,2050,Handel,Netto-Import,TWh,0.0
+BRIMP,2050,Handel,Import brutto,TWh,0.0
+BRIMP,2050,Handel,Export brutto,TWh,0.0
+BRIMP,2050,Kabel,Kapazität,GW,2.0
+BRIMP,2050,Kabel,Erzeugung BR Kapazität,GW,2.0
+BRIMP,2050,Kabel,Erzeugung BR,TWh,5.874538022452043
+BRIMP,2050,Kabel,Lieferung nach DE,TWh,4.611837859542199
+BRIMP,2050,Kabel,Auslastung,%,33.53046816468061
+BRIMP,2050,Kabel,Engpasserlös,Mrd EUR/a,1.05077837195302
+BRIMP,2050,Kabel,Annuität inkl. FOM,Mrd EUR/a,5.208944358579587
+BRIMP,2050,Kabel,Engpasserlös pro kW,EUR/kW/a,525.3891859765099
+BRIMP,2050,Kabel,Annuität pro kW,EUR/kW/a,2604.4721792897935
+BRIMP,2050,Kabel,Abstand zum Break-even pro kW,EUR/kW/a,-2079.0829933132836
+BRIMP,2050,Akteure,Erzeuger BR,Mrd EUR/a,0.0
+BRIMP,2050,Akteure,Erzeuger DE: Biomass,Mrd EUR/a,0.47800316762737
+BRIMP,2050,Akteure,Erzeuger DE: Gas,Mrd EUR/a,-3.33920369126891
+BRIMP,2050,Akteure,Erzeuger DE: Hydro,Mrd EUR/a,0.8202792586149701
+BRIMP,2050,Akteure,Erzeuger DE: Lignite,Mrd EUR/a,-0.011595943969449999
+BRIMP,2050,Akteure,Erzeuger DE: Offshore wind,Mrd EUR/a,1.28564476161401
+BRIMP,2050,Akteure,Erzeuger DE: Oil,Mrd EUR/a,-3.551678735e-05
+BRIMP,2050,Akteure,Erzeuger DE: Onshore wind,Mrd EUR/a,2.07922804385304
+BRIMP,2050,Akteure,Erzeuger DE: Solar,Mrd EUR/a,-2.4341004827337
+BRIMP,2050,Akteure,Erzeuger DE: Storage,Mrd EUR/a,-2.88047757158699
+BRIMP,2050,Akteure,Kabelbetreiber,Mrd EUR/a,-4.15822894894801
+BRIMP,2050,Akteure,Netz DE,Mrd EUR/a,0.12360400848000992
+BRIMP,2050,Akteure,Verbraucher DE,Mrd EUR/a,-89.12154079422507
+BRIMP,2050,Akteure,Staat DE (CO2),Mrd EUR/a,0.0
+BRIMP,2050,Akteure,Summe aller Akteure,Mrd EUR/a,-97.15842370933008
 BASE,2040,Netz,Woche max. Wind: überlastete Leitungsstunden,%,20.12348862529368
 BASE,2040,Netz,Woche max. Wind: Leitungen über 2x Grenze,Anzahl,66.0
 BASE,2040,Netz,Woche max. Wind: Redispatch (abregeln),GWh/Woche,2786.858166598975

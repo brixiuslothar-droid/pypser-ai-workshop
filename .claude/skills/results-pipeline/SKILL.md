@@ -47,6 +47,14 @@ all years. Results go to `workshop/results/grid.csv` and stay there until
 recomputed; comparisons show grid metrics only where both runs have them.
 `--runs` evaluates only some runs and keeps the others from the last full run.
 
+**Runs solved in another workspace** come as role 3's hand-off
+(`workshop/role3/handoff/<run>/`, written by `workshop/role3/export_handoff.py`).
+Give the run a `handoff:` path in `runs.yaml`; `evaluate.py` reads it when the
+solved networks are not here. Without networks there are no actors,
+curtailment or gross trade, and three metrics are defined slightly differently
+(see the definitions in `RESULTS.md`): compare such a run only with another
+hand-off run, or ask role 3 for the networks.
+
 **A run is evaluated when it is complete**, i.e. all horizons solved. A run
 whose last solve failed is listed as "teilweise"; do not report its numbers.
 
