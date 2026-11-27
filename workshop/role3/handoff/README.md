@@ -14,6 +14,7 @@ same files. About 170 KB per run; the solved networks (30 MB each) stay in
 |---|---|---|
 | `de10-ref` | **REF of decisions.md E4/E3**: neighbours with NTC limits, net import of DE at most 25 TWh/a, cap 2050 = 0.05 and 750 EUR/t | the comparison case for every cable run |
 | `de10-nb9-ref` | the reference before E3: NTC limits only, no annual import limit, 2050 at 2,600 EUR/t without cap | showing what the import limit does (E3 sensitivity) |
+| `de10-cable` | **CABLE of E4**: `de10-ref` plus the Brazil cable (0-20 GW from 2035, Brazilian generation by investment, WACC 10 %). Solved 2025-2050. The model builds **no cable** in any year (capacity ~1e-7 MW, i.e. zero). **2050 solver status is `Imprecise`**, not `Optimal`: treat 2050 with care. 2025 and 2030 have no solver log (`n/a`) because they are the reference's years. | the main run against `de10-ref` |
 
 Files per run: `manifest.yaml` (git commit, configs, solver status, run time, peak
 memory, definitions), `system_costs.csv`, `objective.csv`, `energy_balance.csv`,
