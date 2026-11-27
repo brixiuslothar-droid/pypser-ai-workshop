@@ -379,3 +379,13 @@ limit is running in this workspace.
 - Caveat: `evaluate.py` reads solved networks, not the hand-off CSVs. The networks (169 MB for the run) are not in git. How they reach role 4 depends on whether role 4 has the same filesystem; I could not find role 4's `de10-br-*` runs on this disk, so presumably not.
 - The exporter first refused to run because `pgrep -f solve_network.py` matched my own shell command; it now looks for the real solver process only.
 - Next: `de10-cable`.
+
+### Update 14:45: cable run `de10-cable` done
+
+- Solved 2035 to 2050 on top of `de10-ref` (2025, 2030 reused). All optimal except 2050 "imprecise" (gap 1.3e-8). Cable 0 MW and Brazilian generation 0 MW in every year; system cost identical to REF. Exported to `workshop/role3/handoff/de10-cable/`.
+- Pipeline test only: placeholder cable cost (European table entry), built-in Pecem profile, no potential caps. The cost check from 14:00 predicted this. A real answer needs role 1's cost range, role 2's profile and potentials, and the E4 runs `MV` and `CAPEX50`.
+- What I did in the workspace that others should know:
+  - Another agent had started the same cable run at about 14:11. Its profile job was killed by the memory limit, the run then sat idle (no child process, no CPU) and blocked the directory. I killed that process and restarted the run. The profile was copied from the earlier exploratory run (`de10-nb9-cable`) instead of being rebuilt.
+  - The previous `resources/de10-cable` folder was moved to `resources/de10-cable-stale-1115` (about 0.9 GB, can be deleted); `resources/de10-cable` is a fresh copy of the `de10-ref` inputs.
+  - One solve (2045) was killed by the memory limit (oom_kill 2 to 3) and restarted with `--rerun-incomplete`; cause not found.
+- Open: O9 (configs for `MV`, `CAPEX50`, `WACC7`, `REF-ISL`, `CABLE-ISL`), O10, role 1 cost range, role 2 profile and potentials.

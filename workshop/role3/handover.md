@@ -116,3 +116,16 @@ Ordner `workshop/role3/handoff/<run>/` (im Repo, je Lauf etwa 170 KB, immer dies
 - **2050 mit 750 statt 2.600 €/t:** `de10-ref` 2050 wurde mit der neuen Config neu gelöst. Systemkosten 234,5 Mrd. €/a gegenüber 246,3 Mrd. €/a in `de10-nb9-ref` (2.600 €/t, ohne Cap). Das alte 2050-Netz mit 2.600 €/t liegt als `results/de10-ref-p2600/networks/solved_2050.nc` (nur 2050, nicht im Repo).
 - Gegenüber `de10-nb9-ref` ändert die Importgrenze die Systemkosten 2030–2045 um höchstens 0,4 Mrd. €/a (0,2 %) und den DE-Preis um weniger als 2 €/MWh. Der Effekt auf die Kabelbewertung kommt also von den Flüssen, nicht von den Gesamtkosten.
 - Offen in `decisions.md`: O9 (Configs für MV, CAPEX50, WACC7, REF-ISL, CABLE-ISL) und O10 (Übertrag des Kabels zwischen den Jahren).
+
+## Kabellauf `de10-cable` (E4 CABLE): gerechnet, Kabel wird nicht gebaut
+
+Ketten wie in `runs.yaml` (`e3cable`), Ergebnisse in `workshop/role3/handoff/de10-cable/`.
+
+- **Ergebnis:** Kabel 0 MW und brasilianische Erzeugung 0 MW in 2035, 2040, 2045 und 2050. Zielfunktion und Systemkosten gleich REF (Differenz 0,0 Mio. €/a bei den Systemkosten; die Zielfunktion weicht um höchstens 0,5 Mio. €/a ab, das liegt im Rahmen der Solvertoleranz). Alle Netzflüsse, Preise und Handel sind daher gleich REF.
+- **Warum:** Die Kabelannuität liegt bei etwa 3,8 Mio. €/MW/a (9.532 km, Kostentabelle, 10 % WACC); selbst mit der billigsten Brasilien-Erzeugung ist die Lieferung weit über dem Strompreis in Deutschland (80–110 €/MWh).
+- **Vorbehalt, wichtig:** Das ist ein **Pipeline-Test, kein Befund über das Kabel.** Drei Platzhalter: (1) Kabelkosten aus dem europäischen Tabelleneintrag `HVDC submarine`, nicht von Rolle 1; (2) Standortprofil Pecém aus dem Wetterjahr 2013 (eingebauter Profilbau, nicht das Profil von Rolle 2); (3) keine Potenzialgrenzen der Brasilien-Erzeugung. Die Aussage "kein Kabel" gilt nur, solange die Kabelkosten so hoch sind. Der Break-even braucht `MV` und `CAPEX50` (E5).
+- **Rechenaufwand:** 2035 bis 2050 etwa 25 min reine Solverzeit, Spitze 6,8 GB (2050). 2050 endete mit Solverstatus "imprecise" (relative Lücke 1,3e-8, nutzbar, wie bei der Baseline 2050).
+- 2025 und 2030 sind aus `de10-ref` übernommen (Kabel erst ab 2035, sonst identisch).
+- **Landepunkt:** `de10-cable` setzt Conneforde; das Kabel hängt an DE0 5 (Weser-Ems).
+- **Speicher:** Während der Läufe wurde ein Solve (2045) vom Speicherlimit beendet und neu gestartet (Zähler `oom_kill` von 2 auf 3). Ursache nicht geklärt; es lief nur der Solve und leichte Abfragen. Regel O7 gilt weiter.
+- **Übertrag des Kabels (O10):** Da das Kabel überall 0 ist, zeigt dieser Lauf den Übertrag nicht. Das lässt sich erst mit einem Lauf prüfen, der ein Kabel baut (`MV`).
